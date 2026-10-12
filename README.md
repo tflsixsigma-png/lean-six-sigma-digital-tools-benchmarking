@@ -13,6 +13,15 @@ Reading notes for Module 3, Session 4 of the **International Certificate in Proj
 
 Open `index.html` for the landing page, or browse the published site once GitHub Pages is enabled.
 
+Both group activities are fillable in the page: the canvases are forms, answers persist in the browser as a group types, and a button exports the completed canvas as Markdown for the Execution Optimization Challenge. Everything runs client-side; nothing is transmitted.
+
+## Further reading
+
+| Text | Status |
+|---|---|
+| [Excelência Operacional: da Estratégia à Execução](https://atenaeditora.com.br/catalogo/ebook/excelencia-operacional-da-estrategia-a-execucao-operacoes-servicos-melhoria-continua-e-inteligencia-artificial) (Atena Editora, 2026) | Published, open access — the citable source of the VCAP framework |
+| [`book-chapter-7.html`](book-chapter-7.html) — *O que não se copia*, Ch. 7 | Manuscript in preparation; further reading, **not** a citable source |
+
 ## The argument
 
 One thesis runs across both sessions: operational efficiency is a consequence of strategic choice and of flow, not of utilisation — and the returns to assets and processes are proportional to a capability that cannot be purchased.
