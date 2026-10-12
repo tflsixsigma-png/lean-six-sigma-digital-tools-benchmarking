@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 2 — Reading Notes · Digital Tools &amp; Benchmarking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2342; --ink:#04121F; --gold:#B8820F; --gold-soft:#F2DFB4;
+  --paper:#FBFAF7; --card:#FFFFFF; --body:#101B25;
+  --line:#B5C3D3; --line-soft:#DFE6EE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:58px 0 46px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.8vw,46px);line-height:1.1;max-width:19ch;margin-bottom:16px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch;margin-bottom:28px}
+.budget{display:flex;flex-wrap:wrap;border-top:1px solid rgba(242,223,180,.35)}
+.budget div{padding:14px 24px 6px 0;border-right:1px solid rgba(242,223,180,.18)}
+.budget div:last-child{border-right:none}
+.budget .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+.budget .v{font-size:15.5px;color:#F3F7FB;margin-top:2px}
+
+.partbar{background:var(--navy);color:#fff;padding:22px 0}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;margin-top:4px}
+
+section{padding:38px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:22px;font-weight:600;margin:30px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+td.n{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
+
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:24px 20px;margin:22px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:30px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:9px;font-family:'JetBrains Mono',monospace}
+
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.puzzle{background:var(--navy);color:#E6EDF6;border-radius:10px;padding:26px 28px;margin:22px 0;border-left:6px solid var(--gold)}
+.puzzle h4{color:#fff;margin-top:0;font-size:20px}
+.puzzle p{color:#C8D6E6}
+.puzzle .q{margin-top:16px;padding-top:15px;border-top:1px solid rgba(242,223,180,.3);color:var(--gold-soft);font-size:16.5px}
+
+.puzzle strong,.eq strong,.cover strong,.partbar strong,.chain strong,footer strong,
+.house .roof strong,th strong{color:#FFFFFF}
+.puzzle em,.eq em,.cover em,.partbar em,footer em,.house .roof em{color:var(--gold-soft)}
+.puzzle .q strong{color:#FFFFFF}
+
+.bridge{background:#EAF1F8;border:1px solid #A9BFD8;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0}
+section:nth-of-type(even) .bridge{background:#EDF3F9}
+.bridge .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);display:block;margin-bottom:6px}
+.bridge p{font-size:16px;margin-bottom:8px}
+.bridge p:last-child{margin-bottom:0}
+
+.activity{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:24px 0}
+.activity .ah{background:var(--navy);color:#fff;padding:14px 20px}
+.activity .ah b{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}
+.activity .ah span{display:block;font-size:14px;color:#C2D3E6;margin-top:2px}
+.activity .ab{padding:18px 20px;background:var(--card)}
+section:nth-of-type(even) .activity .ab{background:var(--paper)}
+.worksheet{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:14px 0}
+.worksheet .wl{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dotted #B6C5D6;font-size:15.5px}
+.worksheet .wl:last-child{border-bottom:none}
+.worksheet .wl b{color:var(--navy);font-weight:700}
+.worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
+section:nth-of-type(even) .card{background:var(--paper)}
+.card h4{margin-top:0}
+.card p,.card li{font-size:15.5px}
+.card ul{margin-left:18px}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+ol.tight{margin:8px 0 14px 21px}
+ol.tight li{margin-bottom:8px}
+
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;font-family:'JetBrains Mono',monospace;font-size:14px}
+.chain span{background:var(--navy);color:#fff;padding:8px 13px;border-radius:5px;white-space:nowrap}
+.chain span.end{background:var(--gold);color:var(--ink);font-weight:700}
+.chain i{color:var(--navy);font-style:normal;font-weight:700}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+@media print{.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact} section{padding:20px 0}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>Digital Tools &amp; Benchmarking</h1>
+    <p class="sub">Integration of digital platforms and international best practices. Notes accompanying the afternoon session of 17 October. A bridge from the morning equations to digital execution, high reliability, and the question the whole day has been building towards.</p>
+    <div class="budget">
+      <div><span class="k">Session</span><div class="v">17 October · 14:00–17:00</div></div>
+      <div><span class="k">Preparation</span><div class="v">None required</div></div>
+      <div><span class="k">Faculty</span><div class="v">Prof. Dr. Thiago Lima</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">Most digital transformations automate the waste they were intended to remove. Platforms are licensed, dashboards are populated, yet decision latency grows and operational vulnerability remains unmeasured. These notes establish why.</p>
+    <p>In the morning session, we demonstrated that operational performance is governed by three fundamental equations: the Value Stick (<em>WTP &minus; SOC</em>), Economic Profit (<em>ROIC vs. WACC</em>), and the VCAP identity: <strong>V = C &times; (A + P)</strong>. This afternoon, we take those equations into the digital domain and test them against the uncompromising requirements of high-reliability systems and operational safety.</p>
+    <div class="note">
+      <span class="lbl">What to bring from the morning session</span>
+      <p style="margin-bottom:8px"><strong>The Value Case Canvas:</strong> The project appraised by your group in Part Nine of the morning notes. We will subject its architecture to digital failure-mode analysis and international benchmarking.</p>
+      <p style="margin-bottom:0"><strong>Your NUMMI hypothesis:</strong> The explanation of why GM could not replicate NUMMI despite 20 years of unrestricted access. The exact same mechanism explains why purchasing standard enterprise software does not build competitive advantage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1 THE PUZZLE -->
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>The digital puzzle</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="puzzle">
+      <h4>The Glass Cockpit &amp; The Latent Failure</h4>
+      <p><strong>The setting.</strong> Modern command centers, offshore platforms, hospital intensive care units, and aerospace operations possess orders of magnitude more computing power, automated telemetry, and real-time dashboards than their predecessors two decades ago.</p>
+      <p>Yet cross-industry investigations (Reason, 1997; Woods, 2010; Dekker, 2014) reveal a recurring paradox: <strong>digital systems frequently create new pathways to failure while hiding early warning indicators behind green status indicators.</strong> Teams drown in data while starving for actionable situational awareness.</p>
+      <div class="q">
+        More telemetry. More automated workflows. Faster networks.<br>
+        <strong>Why does automating an unstable process generate catastrophic failure faster, and why does dashboard green so often conceal operational red?</strong>
+      </div>
+    </div>
+    <p>The answer connects directly to the morning session: technology represents <em>Assets</em>. Unless coupled with operational <em>Capability</em> and safety-grade <em>Rules-in-Use</em>, digital platforms merely accelerate the propagation of defects.</p>
+  </div>
+</section>
+
+<!-- 2 DIGITAL WASTE & LITTLE'S LAW -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>Digital waste &amp; Little's Law in cyberspace</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">In physical manufacturing, waste is visible: pallets clog corridors, scrap piles up near machining centers. In digital and project environments, waste is silent, invisible, and stored in server memory.</p>
+
+    <h3>The translation of the eight wastes into digital systems</h3>
+    <table>
+      <tr><th style="width:170px">Waste</th><th>Physical Form (Morning)</th><th>Digital Platform Form (Afternoon)</th></tr>
+      <tr><td class="k">Overproduction</td><td>Batches ahead of demand</td><td>Automated reports no executive reads; unused software features; data exhaust stored without purpose.</td></tr>
+      <tr><td class="k">Waiting</td><td>Idle operators, parts in queue</td><td>Approval lag in workflow engines; decision latency behind unread notifications and ticket queues.</td></tr>
+      <tr><td class="k">Transport</td><td>Forklift transit</td><td>Information handoffs across disconnected platforms (APIs broken, data re-exported to spreadsheets).</td></tr>
+      <tr><td class="k">Over-processing</td><td>Machining beyond tolerance</td><td>Over-configured approval matrices; redundant fields in electronic forms; double data validation.</td></tr>
+      <tr><td class="k">Inventory</td><td>Pallets of physical WIP</td><td>Unprocessed tickets, open pull requests, unreviewed change requests, pending backlog items.</td></tr>
+      <tr><td class="k">Motion</td><td>Walking across shop floor</td><td>Context switching between 12 enterprise applications; searching for the single source of truth across repositories.</td></tr>
+      <tr><td class="k">Defects</td><td>Scrap and rework loops</td><td>Corrupted datasets, bad manual re-entry, configuration errors resulting in operational system halts.</td></tr>
+      <tr><td class="k">Unused talent</td><td>Frontline ideas ignored</td><td>Specialists and engineers spending 40% of their shifts reconciling data formats and updating project trackers.</td></tr>
+    </table>
+
+    <div class="bridge">
+      <span class="lbl">Bridge to Safety &amp; Mission-Critical Systems</span>
+      <p>In safety-critical domains (naval operations, healthcare, nuclear facilities), digital motion and digital waiting are not merely efficiency losses — they are active safety hazards. When an incident occurs, seconds lost searching for the authoritative procedure or interpreting conflicting system dashboards convert a manageable anomaly into an irreversible accident.</p>
+    </div>
+
+    <h3>Little's Law applied to digital workflows</h3>
+    <p>Recall Little's Law from the morning session: <strong>WIP = Throughput &times; Lead Time</strong>. It governs electronic tickets, pull requests, and safety approvals exactly as it governs physical parts on a conveyor belt.</p>
+    <div class="eq">
+      <div class="f">Lead Time = Open Tickets &divide; Completion Rate</div>
+      <div class="c">Cyberspace obeys queueing physics without exception</div>
+    </div>
+    <p>When organizations deploy enterprise collaboration platforms without WIP limits, the cost of initiating a new work request drops to zero. Work requests explode, inventory in flight surges, and average lead time expands proportionally. Digital platforms that make work easier to initiate without limiting WIP mechanically guarantee systemic delay.</p>
+  </div>
+</section>
+
+<!-- 3 DIGITAL JIDOKA & SAFETY -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>Digital Jidoka: High-Reliability Operations &amp; Safety</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">The right pillar of the TPS house is <em>Jidoka</em>: quality and safety built in at the source. In digital and high-risk environments, Jidoka transforms from a mechanical device into an architecture of systemic resilience.</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>Conventional Reporting</h4>
+        <p>Information is aggregated upward on weekly or monthly cadences. Variance is smoothed, bad news is softened, and executives see a green dashboard until the project or asset is already broken.</p>
+        <p style="margin-bottom:0"><strong>Mechanism:</strong> Late, filtered, political, high-latency.</p>
+      </div>
+      <div class="card">
+        <h4>Digital Jidoka &amp; The Andon</h4>
+        <p>Sensors, logs, and telemetry signal an abnormal operational state the moment boundary conditions are violated. The workflow halts downstream progression until the anomaly is diagnosed.</p>
+        <p style="margin-bottom:0"><strong>Mechanism:</strong> Real-time, transparent, uncorrupted, source-verified.</p>
+      </div>
+    </div>
+
+    <h3>Poka-Yoke in digital architecture</h3>
+    <p>Shigeo Shingo distinguished between informative inspection (discovering defects after the fact) and source inspection (preventing errors from becoming defects). In modern digital systems, this translates directly:</p>
+    <ul class="tight">
+      <li><strong>Physical Poka-Yoke:</strong> Asymmetric connectors (USB-C, naval fuel couplings) that cannot be joined improperly.</li>
+      <li><strong>Digital Poka-Yoke:</strong> Hard programmatic constraints, schema validation, two-man rule digital signing for safety overrides, and automated pre-flight checks that refuse execution if preconditions fail.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">High Reliability Organizations (HRO) Principle</span>
+      <strong>"Preoccupation with failure" (Weick &amp; Sutcliffe, 2007).</strong> In safety systems, an anomaly is not an inconvenience to be cleared off a screen; it is vital intelligence about system boundaries. A digital tool that permits operators to override safety interlocks without root-cause review is the exact equivalent of disconnecting the Toyota Andon cord to keep the line moving.
+    </div>
+
+    <h3>Normal Accidents &amp; Interactive Complexity</h3>
+    <p>Charles Perrow (1984) showed that systems characterized by <strong>high interactive complexity</strong> and <strong>tight coupling</strong> inevitably experience "normal accidents". Digital platforms increase coupling by connecting formerly independent subsystems through real-time automation.</p>
+    <p>If digital integration is executed without human situational capability (<em>C</em>), an anomaly in one subsystem propagates instantaneously through the network before operators can comprehend the state space. Digital tools must be designed to enhance human cognition, not replace it.</p>
+  </div>
+</section>
+
+<!-- 4 BENCHMARKING REVISITED -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Benchmarking: Decoding the rules-in-use</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Benchmarking is conventionally practiced as corporate espionage or tourism: visiting high-performing firms, photographing their tools, buying their software, and pasting their org charts. That is why it fails.</p>
+
+    <h3>Why the copy-paste approach guarantees mediocrity</h3>
+    <p>Returning to the NUMMI puzzle from Session 1: General Motors took tours of NUMMI for twenty years. They photographed the kanban boards, copied the andon lights, and replicated the physical workstations in their other plants. The other plants remained unproductive and combative.</p>
+    <p>Why? Because GM copied <strong>Assets (A)</strong> and documented <strong>Processes (P)</strong>. They could not observe, let alone import, the tacit <strong>Capabilities (C)</strong> and the <em>Rules-in-Use</em>.</p>
+
+    <div class="eq">
+      <div class="f">V<sub>rival</sub> = C<sub>weak</sub> &times; ( A<sub>bought</sub> + P<sub>copied</sub> ) &approx; 0</div>
+      <div class="c">The mathematical explanation of failed benchmarking</div>
+    </div>
+
+    <h3>Why best practice resists transfer: the evidence</h3>
+    <p>NUMMI is not an anecdote about one stubborn company. It is the most visible instance of a finding that strategy and operations research reached independently, and the literature explains the mechanism with unusual precision. Four results matter.</p>
+
+    <h4>It fails even inside the same firm</h4>
+    <p>Szulanski (1996) studied the transfer of best practice between units of the <em>same</em> organisation — no competitive barrier, shared incentives, common systems, cooperative intent. Transfer stalled anyway. The dominant obstacles were not motivational, which is what managers assume; they were knowledge obstacles: <strong>causal ambiguity</strong> about why the practice works, limited <strong>absorptive capacity</strong> in the receiving unit (Cohen &amp; Levinthal, 1990), and a difficult relationship between source and recipient. He named the phenomenon <em>internal stickiness</em>.</p>
+    <p>The implication is severe. If a practice will not travel reliably between two plants of the same company, assuming it travels from a competitor through a site visit and a slide deck is not conservative. It is heroic.</p>
+
+    <h4>Observation is not understanding</h4>
+    <p>Polanyi (1966) set the base case: we know more than we can tell. Nelson and Winter (1982) located organisational knowledge in <strong>routines</strong> — repeated patterns of coordinated action that are largely tacit and that no document fully specifies. Lippman and Rumelt (1982) named the strategic consequence: under <strong>causal ambiguity</strong>, even the firm that <em>owns</em> a superior practice may not know precisely which elements produce the result. It therefore cannot reliably teach it, and a rival cannot reliably copy it.</p>
+    <p>GM's visitors were not looking at the wrong things. They were looking at the only things that could be looked at.</p>
+
+    <h4>Partial copies perform worse than no copy</h4>
+    <p>Rivkin (2000) showed formally that when a strategy is a <em>system of interdependent choices</em>, imitation stays hard even if every element is visible. The number of possible combinations explodes, and a rival who gets most elements right and a few wrong typically performs <strong>worse than one who copies nothing at all</strong>, because the mismatched elements work against each other.</p>
+    <p>This is the mathematical form of the complementarity argument from the morning, and the precise reason GM's other plants — kanban boards installed, andon lights fitted, the rest absent — got worse rather than better.</p>
+
+    <h4>Capability is accumulated, not purchased</h4>
+    <p>Dierickx and Cool (1989) separated assets that can be bought on a market from asset <em>stocks</em> that must be accumulated over time, and identified <strong>time compression diseconomies</strong>: building in one year what a rival built in five costs disproportionately more, and often cannot be done at any price. Winter (2003) then drew the distinction that organises this whole session: an <strong>operational capability</strong> is how the firm earns its living today; a <strong>dynamic capability</strong> is its capacity to change the operational ones.</p>
+    <p>In the language of the morning: <em>P is the operational capability. C is the dynamic one.</em></p>
+
+    <table>
+      <tr><th style="width:215px">Mechanism</th><th>What it predicts</th><th>What it changes in your study</th></tr>
+      <tr><td class="k">Internal stickiness<br><span style="font-weight:400;font-size:14px">Szulanski (1996)</span></td><td>Transfer fails for knowledge reasons, not motivational ones</td><td>Budget for absorption, not only for acquisition. Who here can receive this, and what must they already know?</td></tr>
+      <tr><td class="k">Causal ambiguity<br><span style="font-weight:400;font-size:14px">Lippman &amp; Rumelt (1982)</span></td><td>Even the source may not know which elements matter</td><td>Do not ask the reference what it does. Ask what it stopped doing, and what it would never give up.</td></tr>
+      <tr><td class="k">Interdependence<br><span style="font-weight:400;font-size:14px">Rivkin (2000)</span></td><td>Partial imitation underperforms no imitation</td><td>Identify the bundle, not the practice. If you cannot adopt the set, adopting one element may cost you.</td></tr>
+      <tr><td class="k">Time compression<br><span style="font-weight:400;font-size:14px">Dierickx &amp; Cool (1989)</span></td><td>Accumulated capability cannot be bought quickly at any price</td><td>Ask how long the reference took. Then plan for that order of magnitude, or change the objective.</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">The rule this gives you</span>
+      <strong>Do not benchmark the number. Benchmark the routine that produces it — then ask what your organisation would have to accumulate in order to run that routine.</strong> The first question has an answer you can put on a slide. The second has an answer you can act on.
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">The strategic caveat</span>
+      <p>There is a second-order risk the literature above does not address, and Porter (1996) does. Benchmarking is by construction an <em>imitative</em> activity: it moves the organisation towards a frontier others already occupy. Practised well across an entire industry, it converges competitors onto the same operating model, and competition collapses into price.</p>
+      <p>That is not an argument against benchmarking. It is an argument for being explicit about which of two things you are doing — closing a gap on a qualifier, where convergence is precisely the goal, or building an order winner, where imitation is the wrong instrument entirely.</p>
+    </div>
+
+    <h3>Spear &amp; Bowen's Four Rules applied to Digital Benchmarking</h3>
+    <p>The theory says what to look for. Spear and Bowen (1999) say where to look. Their four rules are the decoding key — the tacit operating rules a site visit will never surface unless the visitor arrives knowing they exist.</p>
+
+    <table>
+      <tr><th style="width:160px">Rule</th><th>What naive benchmarking sees</th><th>What rigorous benchmarking decodes</th></tr>
+      <tr><td class="k">1. Standardized Work</td><td>"They have standard operating procedures and software forms."</td><td>Work is specified to the level of content, sequence, timing, and direct observable outcome. Any variance is treated as a testable scientific problem.</td></tr>
+      <tr><td class="k">2. Direct Connections</td><td>"They use a central ticketing platform or Slack channel."</td><td>Every customer-supplier connection within the organization is binary, direct, and unambiguous, with zero intermediate translation or ambiguous handoffs.</td></tr>
+      <tr><td class="k">3. Simple Pathways</td><td>"They have automated end-to-end routing in their ERP."</td><td>Every product, service, or safety signal travels along a pre-specified, single pathway. No work loops back or diverts unless explicitly designed.</td></tr>
+      <tr><td class="k">4. Scientific Method</td><td>"They run monthly retrospective meetings."</td><td>Any improvement must be structured as a refutable hypothesis, mentored by a senior leader, and executed at the lowest possible organizational level.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 5 INTEGRATING DIGITAL ECOSYSTEMS -->
+<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>Integrating digital platforms into operations</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Enterprise platforms — PPM tools, ERPs, digital twins, AI assistants — create strategic advantage only when integrated according to operational physics.</p>
+
+    <h3>The three layers of digital integration</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>Layer 1: The Sensor / Telemetry Base</h4>
+        <p>Data capture at source. Automated data gathering that removes manual reporting burden from operators.</p>
+        <p style="margin-bottom:0"><strong>Safety analog:</strong> Hull stress gauges, medical vital telemetry, automated change tracking.</p>
+      </div>
+      <div class="card">
+        <h4>Layer 2: The Flow Engine</h4>
+        <p>The rules governing WIP limits, pull mechanisms, routing pathways, and automated exception triggering.</p>
+        <p style="margin-bottom:0"><strong>Safety analog:</strong> Interlocks, emergency trip systems, quarantine pipelines.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h4>Layer 3: Human Sensemaking &amp; Capability (The C Multiplier)</h4>
+      <p>The shared mental model of the team. The psychological safety required to pull the digital Andon, question an anomalous green metric, and treat variance as a refutable hypothesis. Without Layer 3, Layers 1 and 2 merely create expensive clutter.</p>
+      <p style="margin-bottom:0;font-size:14.5px;color:#4A5B70">The three-layer decomposition follows Lima (manuscript in preparation), §6.6.1.</p>
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Adopting an enterprise Portfolio Management platform (Jira, Planview, Microsoft Project Server) changes only Layer 1 and Layer 2. If the governance culture rewards projects for hiding red status until delivery date minus one month, the platform will simply record false progress with higher digital precision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 EXECUTION OPTIMIZATION CHALLENGE -->
+<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Structured Activity — The Digital &amp; Safety Canvas</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">In this structured group challenge (the foundation of the module's Execution Optimization Challenge), you will take the project evaluated this morning in The Value Case and stress-test its digital enablement, safety resilience, and benchmarking rigor.</p>
+
+    <div class="activity">
+      <div class="ah">
+        <b>The Digital &amp; Safety Execution Canvas</b>
+        <span>Groups of three or four · 20 minutes to complete · 3 minutes to present</span>
+      </div>
+      <div class="ab">
+        <p>Apply the five diagnostic filters below to your selected project deliverable:</p>
+
+        <div class="worksheet">
+          <div class="wl"><b>1 · Project &amp; Digital Tooling Architecture</b><span class="box">identification</span></div>
+          <div class="wl" style="font-size:14.5px;color:#4A5B70">What digital platform or toolchain is being deployed, and what specific workflow does it automate?</div>
+        </div>
+
+        <h4>2 · Digital Waste &amp; Latency Audit</h4>
+        <p>Examine where the platform risks introducing digital muda rather than eliminating physical waste.</p>
+        <div class="worksheet">
+          <div class="wl"><b>Primary digital waste identified</b><span class="box">waiting · motion · overproduction · defects</span></div>
+          <div class="wl"><b>WIP constraint mechanism</b><span class="box">how does the tool limit queue sizes?</span></div>
+          <div class="wl"><b>Context switching penalty</b><span class="box">how many disconnected tools must operators toggle?</span></div>
+        </div>
+
+        <h4>3 · Safety &amp; High-Reliability Mechanisms</h4>
+        <p>Evaluate whether the system is designed to fail safely and surface anomalies immediately.</p>
+        <div class="worksheet">
+          <div class="wl"><b>Digital Poka-Yoke present?</b><span class="box">yes / no (describe mechanism)</span></div>
+          <div class="wl"><b>Digital Andon cord</b><span class="box">who can halt the digital delivery and how fast?</span></div>
+          <div class="wl"><b>Latency from anomaly to executive awareness</b><span class="box">seconds · hours · monthly report</span></div>
+        </div>
+
+        <h4>4 · Benchmarking Rigor (Decoding Rules-in-Use)</h4>
+        <p>Test whether your project is copying superficial features or building institutional rules.</p>
+        <div class="worksheet">
+          <div class="wl"><b>International reference benchmark</b><span class="box">organization / standard</span></div>
+          <div class="wl"><b>Is the benchmark copying an Asset (A) or a Rule-in-Use?</b><span class="box">A / P / C</span></div>
+          <div class="wl"><b>What tacit capability must be built for this to work?</b><span class="box">one line</span></div>
+        </div>
+
+        <h4>5 · The Benchmarking Verdict</h4>
+        <p>This morning you decided whether to fund the project. That decision stands. The question here is different: <strong>what do you do with the reference you just examined?</strong></p>
+        <div class="worksheet">
+          <div class="wl"><b>What does the reference do that you do not?</b><span class="box">the practice, not the indicator</span></div>
+          <div class="wl"><b>What would have to be true here for that practice to work?</b><span class="box">the absorption condition</span></div>
+          <div class="wl"><b>How long did the reference take to build it?</b><span class="box">months · years · decades · unknown</span></div>
+          <div class="wl"><b>Adopt · adapt · discard</b><span class="box">choose one</span></div>
+          <div class="wl"><b>If adopt or adapt: the first step, and who owns it</b><span class="box">one line</span></div>
+        </div>
+        <p style="margin-bottom:0;font-size:15.5px"><strong>Two answers are legitimate and often correct.</strong> <em>Discard</em>, when the practice depends on conditions your organisation does not have and cannot reasonably accumulate — saying so is a finding, not a failure. And <em>unknown</em> for the third line: if nobody knows how long the reference took, you do not yet know what you are proposing to replicate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 BUILDING THE MULTIPLIER -->
+<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>Building the multiplier</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">The day has been an argument by elimination. Assets can be bought. Processes can be documented and taught. Benchmarking transfers the second and purchases the first, and neither moves the term that multiplies them. One question is left, and it is the only one with a practical answer: <strong>how is C actually built?</strong></p>
+
+    <h3>Capability is a stock, not a state</h3>
+    <p>Dierickx and Cool's distinction, from Part Four, organises everything here: flows adjust instantly, stocks do not. Treating the capability to improve processes as a stock means asking three separate questions — what flows in, what flows out, and what conditions regulate both.</p>
+    <table>
+      <tr><th style="width:150px"></th><th>Mechanism</th><th>Managerial consequence</th></tr>
+      <tr><td class="k">Inflow</td><td>Deliberate improvement activity that produces causal understanding and validated action together</td><td>Volume of improvement projects is not the measure. Projects that produce only one of the two do not accumulate anything.</td></tr>
+      <tr><td class="k">Condition</td><td>Psychological safety and the credibility of management's commitments</td><td>Where surfacing a problem is costly, the measured performance improves and the real performance does not.</td></tr>
+      <tr><td class="k">Outflow</td><td>Turnover and disuse</td><td>An organisation that was good at improving five years ago may no longer be, and nothing on its balance sheet will say so.</td></tr>
+    </table>
+
+    <h3>What the inflow actually requires</h3>
+    <p>The morning established the finding: across improvement projects in a single factory, only about a quarter accelerated the reduction of waste — the ones producing <em>know-why</em> and <em>know-how</em> simultaneously (Lapré et al., 2000). The rest slowed it or had no effect. Three mechanisms follow from that, and the operations literature describes them with increasing precision.</p>
+    <ul class="tight">
+      <li><strong>Guided experimentation at the point of execution.</strong> Improvement run as a hypothesis, tested by the people doing the work, under a more experienced coach, at the lowest level where the problem is visible. This is Spear and Bowen's fourth rule from Part Four, now read as an accumulation mechanism rather than as a benchmarking target — and it is the best-documented inflow in the literature.</li>
+      <li><strong>Team learning.</strong> Capability lives in coordinated routines, not in individuals. A team that cannot discuss a failure cannot refine a routine, which is why psychological safety is a precondition rather than a nicety.</li>
+      <li><strong>Credibility.</strong> Sustained improvement effort depends on management's promises being believed, above all the promise not to convert improvement gains into redundancies. People do not improve away their own jobs, and they are right not to. This is a condition, not a value statement: break it once and the inflow stops.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">The cost of trying to go faster</span>
+      Time compression diseconomies apply to this stock as they do to any other. Doubling the improvement effort does not halve the time to accumulate, and past some point the additional effort returns less than it costs. An organisation that wants in eighteen months what a reference built over a decade is not facing a budget problem. It is facing an arithmetic one, and the honest response is to change the objective rather than the budget.
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Every element above has a project-management equivalent that most organisations already own and few use as intended. The retrospective is guided experimentation — if its output changes the standard, and nothing if it does not. The lessons-learned repository is an attempt to arrest the outflow, and it fails for exactly the reasons Part Four gives: it stores what can be written down, which is the part that was never the constraint.</p>
+      <p style="margin-bottom:0">The practical test for a PMO: after the last three projects closed, what can this organisation now do that it could not do before — that does not depend on the people who happened to be on those teams?</p>
+    </div>
+
+    <h3>Where the day ends</h3>
+    <div class="eq">
+      <div class="f">V = C × ( A + P )</div>
+      <div class="c">A is bought · P is copied · C is the only term you have to build</div>
+    </div>
+    <p>This morning opened on a plant in Fremont where the assets and the people stayed the same and the result inverted. The afternoon has given that observation its mechanism: what changed was a stock that no visitor could photograph, no contract could transfer, and no platform could install — and which, left alone, would have drained away again within a few years.</p>
+
+    <div class="bridge">
+      <span class="lbl">Where to read more</span>
+      <p style="margin-bottom:0">The accumulation mechanisms, the measurement problem, and the conditions under which the identity V = C × (A + P) would be refuted are developed at length in <em>O que não se copia: capacidade, práticas e desempenho em operações</em> (Lima, manuscript in preparation), which treats the argument of these two sessions as a set of testable propositions rather than as a framework.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFS -->
+<div class="partbar"><div class="wrap"><div class="n">EIGHT</div><h2>Sources &amp; Readings</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Works cited in these notes and informing the afternoon curriculum.</p>
+    <ul class="refs">
+      <li>Cohen, W. M., &amp; Levinthal, D. A. (1990). Absorptive capacity: A new perspective on learning and innovation. <em>Administrative Science Quarterly</em>, 35(1), 128–152.</li>
+      <li>Argote, L., &amp; Epple, D. (1990). Learning curves in manufacturing. <em>Science</em>, 247(4945), 920–924.</li>
+      <li>Dekker, S. (2014). <em>The Field Guide to Understanding 'Human Error'</em> (3rd ed.). Ashgate Publishing.</li>
+      <li>Dierickx, I., &amp; Cool, K. (1989). Asset stock accumulation and sustainability of competitive advantage. <em>Management Science</em>, 35(12), 1504–1511.</li>
+      <li>Lapré, M. A., Mukherjee, A. S., &amp; Van Wassenhove, L. N. (2000). Behind the learning curve: Linking learning activities to waste reduction. <em>Management Science</em>, 46(5), 597–611.</li>
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Open access.</li>
+      <li>Lima, T. F. <em>O que não se copia: capacidade, práticas e desempenho em operações</em>. Manuscript in preparation.</li>
+      <li>Lippman, S. A., &amp; Rumelt, R. P. (1982). Uncertain imitability: An analysis of interfirm differences in efficiency under competition. <em>Bell Journal of Economics</em>, 13(2), 418–438.</li>
+      <li>Little, J. D. C. (1961). A proof for the queuing formula L = λW. <em>Operations Research</em>, 9(3), 383–387.</li>
+      <li>Nelson, R. R., &amp; Winter, S. G. (1982). <em>An Evolutionary Theory of Economic Change</em>. Harvard University Press.</li>
+      <li>Perrow, C. (1984). <em>Normal Accidents: Living with High-Risk Technologies</em>. Basic Books.</li>
+      <li>Polanyi, M. (1966). <em>The Tacit Dimension</em>. Doubleday.</li>
+      <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Reason, J. (1997). <em>Managing the Risks of Organizational Accidents</em>. Ashgate Publishing.</li>
+      <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
+      <li>Shingo, S. (1986). <em>Zero Quality Control: Source Inspection and the Poka-Yoke System</em>. Productivity Press.</li>
+      <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
+      <li>Szulanski, G. (1996). Exploring internal stickiness: Impediments to the transfer of best practice within the firm. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
+      <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
+      <li>Weick, K. E., &amp; Sutcliffe, K. M. (2007). <em>Managing the Unexpected: Resilient Performance in an Age of Uncertainty</em> (2nd ed.). Jossey-Bass.</li>
+      <li>Winter, S. G. (2003). Understanding dynamic capabilities. <em>Strategic Management Journal</em>, 24(10), 991–995.</li>
+      <li>Woods, D. D., Dekker, S., Cook, R., Johannesen, L., &amp; Sarter, N. (2010). <em>Behind Human Error</em>. Ashgate Publishing.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Session 2 reading notes · 17 October 2026<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+</body>
+</html>

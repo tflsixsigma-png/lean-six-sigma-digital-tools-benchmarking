@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 — Reading Notes · Lean Six Sigma &amp; Continuous Improvement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2342; --ink:#04121F; --gold:#B8820F; --gold-soft:#F2DFB4;
+  --paper:#FBFAF7; --card:#FFFFFF; --body:#101B25;
+  --line:#B5C3D3; --line-soft:#DFE6EE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:58px 0 46px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.8vw,46px);line-height:1.1;max-width:19ch;margin-bottom:16px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch;margin-bottom:28px}
+.budget{display:flex;flex-wrap:wrap;border-top:1px solid rgba(242,223,180,.35)}
+.budget div{padding:14px 24px 6px 0;border-right:1px solid rgba(242,223,180,.18)}
+.budget div:last-child{border-right:none}
+.budget .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+.budget .v{font-size:15.5px;color:#F3F7FB;margin-top:2px}
+
+.partbar{background:var(--navy);color:#fff;padding:22px 0}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;margin-top:4px}
+
+section{padding:38px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:22px;font-weight:600;margin:30px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+td.n{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
+
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:24px 20px;margin:22px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:30px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:9px;font-family:'JetBrains Mono',monospace}
+
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.puzzle{background:var(--navy);color:#E6EDF6;border-radius:10px;padding:26px 28px;margin:22px 0;border-left:6px solid var(--gold)}
+.puzzle h4{color:#fff;margin-top:0;font-size:20px}
+.puzzle p{color:#C8D6E6}
+.puzzle .q{margin-top:16px;padding-top:15px;border-top:1px solid rgba(242,223,180,.3);color:var(--gold-soft);font-size:16.5px}
+
+/* Dark surfaces: strong and em must never inherit the near-black body colour */
+.puzzle strong,.eq strong,.cover strong,.partbar strong,.chain strong,footer strong,
+.house .roof strong,th strong{color:#FFFFFF}
+.puzzle em,.eq em,.cover em,.partbar em,footer em,.house .roof em{color:var(--gold-soft)}
+.puzzle .q strong{color:#FFFFFF}
+
+/* Bridge to project management */
+.bridge{background:#EAF1F8;border:1px solid #A9BFD8;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0}
+section:nth-of-type(even) .bridge{background:#EDF3F9}
+.bridge .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);display:block;margin-bottom:6px}
+.bridge p{font-size:16px;margin-bottom:8px}
+.bridge p:last-child{margin-bottom:0}
+
+/* Activity */
+.activity{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:24px 0}
+.activity .ah{background:var(--navy);color:#fff;padding:14px 20px}
+.activity .ah b{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}
+.activity .ah span{display:block;font-size:14px;color:#C2D3E6;margin-top:2px}
+.activity .ab{padding:18px 20px;background:var(--card)}
+section:nth-of-type(even) .activity .ab{background:var(--paper)}
+.worksheet{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:14px 0}
+.worksheet .wl{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dotted #B6C5D6;font-size:15.5px}
+.worksheet .wl:last-child{border-bottom:none}
+.worksheet .wl b{color:var(--navy);font-weight:700}
+.worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
+section:nth-of-type(even) .card{background:var(--paper)}
+.card h4{margin-top:0}
+.card p,.card li{font-size:15.5px}
+.card ul{margin-left:18px}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+ol.tight{margin:8px 0 14px 21px}
+ol.tight li{margin-bottom:8px}
+
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;font-family:'JetBrains Mono',monospace;font-size:14px}
+.chain span{background:var(--navy);color:#fff;padding:8px 13px;border-radius:5px;white-space:nowrap}
+.chain span.end{background:var(--gold);color:var(--ink);font-weight:700}
+.chain i{color:var(--navy);font-style:normal;font-weight:700}
+
+.house{border:2px solid var(--navy);border-radius:9px;overflow:hidden;margin:20px 0}
+.house .roof{background:var(--navy);color:#fff;padding:12px 18px;text-align:center;font-family:'Fraunces',serif;font-size:17px}
+.house .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+.house .col{background:var(--card);padding:15px 16px}
+section:nth-of-type(even) .house .col{background:var(--paper)}
+.house .col.mid{background:#FEF8EA}
+.house .col h5{font-family:'Fraunces',serif;color:var(--navy);font-size:16px;margin-bottom:6px}
+.house .col p{font-size:14.5px;margin-bottom:0}
+.house .base{background:#E9EFF6;padding:12px 18px;text-align:center;font-size:15px;border-top:1px solid var(--line)}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+
+@media(max-width:720px){.grid2,.house .cols{grid-template-columns:1fr}}
+@media print{.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact} section{padding:20px 0}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>Lean Six Sigma &amp; Continuous Improvement</h1>
+    <p class="sub">Notes accompanying the morning session of 17 October. Nothing here needs reading in advance — the session stands on its own. These notes carry the definitions, the figures and the sources, so that what happens in the room can be spent on judgement rather than on terminology.</p>
+    <div class="budget">
+      <div><span class="k">Session</span><div class="v">17 October · 09:00–12:00</div></div>
+      <div><span class="k">Preparation</span><div class="v">None required</div></div>
+      <div><span class="k">Faculty</span><div class="v">Prof. Dr. Thiago Lima</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">Most organisations that adopt lean copy the tools. Few reproduce the results. These notes build the argument for why — and the argument runs on three equations rather than on a list of techniques.</p>
+    <p>They open with a puzzle. <strong>The answer is deliberately not in this document.</strong> You will be asked to write your hypothesis down in the first ten minutes of the session, and we will test it against the framework at the end of the morning — so if you are reading ahead, stop at the end of Part One and let the morning do the rest.</p>
+
+    <div class="note">
+      <span class="lbl">What the session will ask of you</span>
+      <p style="margin-bottom:8px">Nothing to prepare, but three things to have in mind — all of them about your own organisation, all answerable from what you already know.</p>
+      <p style="margin-bottom:8px"><strong>One recurring process</strong> you own or depend on, that takes longer than it should. Contract approval, project initiation, monthly close, incident resolution.</p>
+      <p style="margin-bottom:8px"><strong>Two rough figures:</strong> how many projects are in flight in your unit, and how many closed in the last twelve months. Approximations are fine.</p>
+      <p style="margin-bottom:0"><strong>One authorised project</strong> you know well enough to defend. It closes the session as the group activity in Part Nine. A project you have private doubts about is better material than one you are proud of.</p>
+    </div>
+
+    <p>A note on framing. The examples below run through factories more often than through project offices, because that is where the ideas were developed and tested. They were not developed for factories. Each section ends with a <strong>bridge to project management</strong>, because the mechanisms transfer exactly — queues are queues, variability is variability — and because this programme is about delivery rather than manufacturing.</p>
+  </div>
+</section>
+
+<!-- 1 PUZZLE -->
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>The puzzle</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="puzzle">
+      <h4>Fremont, California</h4>
+      <p><strong>1982.</strong> General Motors closes its Fremont assembly plant. Absenteeism runs near 20%. The workforce is represented by what GM managers describe as the most combative union local in the system. Quality is the worst in General Motors.</p>
+      <p><strong>1984.</strong> The plant reopens as NUMMI, a joint venture with Toyota. Substantially the same workforce is rehired, including the union leadership. Same building. Same equipment. Within roughly two years, quality and productivity approach Toyota's Japanese levels and lead the entire GM system.</p>
+      <div class="q">
+        Same assets. Same people. <strong>What changed — and where would that change appear on a balance sheet?</strong><br>
+        And a second question, harder: GM had access to NUMMI from the inside for two decades. Why was it never replicated across the rest of the network?
+      </div>
+    </div>
+    <p>Hold your answer. Everything that follows is a way of making it precise.</p>
+  </div>
+</section>
+
+<!-- 2 VALUE -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>Value, seen from the customer backwards</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Taiichi Ohno described the whole of the Toyota Production System in one sentence: <em>"All we are doing is looking at the timeline — from the moment the customer gives us an order to the point when we collect the cash — and we are reducing that timeline by removing the non-value-added wastes."</em></p>
+    <p>That sentence does two things at once. It defines the unit of analysis as <strong>elapsed time from order to cash</strong>, not cost per unit. And it makes the customer, not the accounting system, the judge of what counts as work.</p>
+
+    <h3>Three kinds of activity</h3>
+    <table>
+      <tr><th style="width:230px">Type</th><th>Test</th><th style="width:110px">Typical share</th></tr>
+      <tr><td class="k">Value-adding</td><td>Transforms the product or service in a way the customer would knowingly pay for</td><td>Under 5%</td></tr>
+      <tr><td class="k">Necessary non-value-adding</td><td>The customer would not pay for it, but law, technology or contract requires it</td><td>10–30%</td></tr>
+      <tr><td class="k">Waste (<em>muda</em>)</td><td>Neither</td><td>The remainder</td></tr>
+    </table>
+    <p>In value streams that have never been deliberately improved, <strong>value-adding time is a low single-digit percentage of elapsed time.</strong> Everything else is queue. This is the single most consequential number in operations, and almost no organisation measures it.</p>
+
+    <h3>What the customer is actually choosing</h3>
+    <p>"What the customer would pay for" is not a marketing abstraction. It decomposes into operational variables.</p>
+    <p>The <strong>competitive priorities</strong> — cost, quality, delivery speed, flexibility — are the operational determinants of willingness to pay. Terry Hill's distinction then sorts them by function. An <strong>order qualifier</strong> is a threshold: its presence attracts nobody, its absence eliminates you from consideration. An <strong>order winner</strong> is what makes a customer choose you once you are in the set. Nobody selects a restaurant because its bathroom is excellent; plenty never return because it was dirty.</p>
+    <p>The managerial consequence is uncomfortable. Effort poured into qualifiers above the threshold consumes capacity and produces no preference. To be excellent at an order winner, an organisation has to accept being merely adequate elsewhere — and a firm that is mid-table on every attribute has made no choice at all.</p>
+    <p>David Garvin's eight dimensions of quality sharpen this further, because quality is not one variable. <strong>Conformance</strong> lowers cost; <strong>reliability, durability and serviceability</strong> raise willingness to pay. The same quality effort therefore pays twice, on two different edges of value.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>The same distinction governs portfolio selection. Most scoring models treat every criterion as additive — strategic fit, NPV, risk, resource availability — which quietly assumes they are all order winners. They are not. Compliance and regulatory projects are qualifiers: they buy no advantage, and not doing them ends the business. Growth and differentiation projects are winners.</p>
+      <p>A portfolio that scores both on the same scale will systematically over-fund qualifiers, because they are easier to justify and harder to argue against. The discipline is to fund qualifiers to the threshold and no further, and to concentrate the remaining capacity where preference is actually created.</p>
+    </div>
+
+    <h3>The value stick</h3>
+    <p>Brandenburger and Stuart formalised where value comes from:</p>
+    <div class="eq">
+      <div class="f">Value created = WTP − SOC</div>
+      <div class="c">willingness to pay, minus supplier opportunity cost</div>
+    </div>
+    <p>Between those two bounds sit three claims: customer surplus (WTP − price), firm margin (price − cost), and supplier surplus (cost − SOC). Negotiating over price or over supplier terms moves value <em>between</em> parties. Only two moves <strong>create</strong> it: push WTP up, or push SOC down.</p>
+    <p>Lean is unusual because it does both at once. Removing waste lowers cost; the same work raises reliability and speed, which raise what the customer will pay. That is the whole strategic claim of the method, and the rest of these notes explain the mechanism.</p>
+  </div>
+</section>
+
+<!-- 3 WASTE -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>The anatomy of waste</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Ohno catalogued seven wastes; modern practice adds an eighth. The list matters less than its structure: <strong>one of them is the root, and six are symptoms.</strong></p>
+
+    <h4>Overproduction is the root waste</h4>
+    <p>Producing more than is needed, earlier than it is needed, generates the other six. It creates inventory, which needs transport and motion, which hides defects, which forces waiting when the defect is finally found. Attack overproduction and the others shrink; attack the others individually and overproduction regenerates them.</p>
+
+    <table>
+      <tr><th style="width:180px">Waste</th><th>In a factory</th><th>In project and knowledge work</th></tr>
+      <tr><td class="k">Overproduction</td><td>Making more than demand</td><td>Reports nobody reads, features nobody uses, gold-plating</td></tr>
+      <tr><td class="k">Waiting</td><td>Idle machines and people</td><td>Approval queues, decision latency, blocked dependencies</td></tr>
+      <tr><td class="k">Transport</td><td>Moving materials</td><td>Handoffs between departments and systems</td></tr>
+      <tr><td class="k">Over-processing</td><td>Machining beyond specification</td><td>Sign-off chains, redundant status meetings, precision beyond need</td></tr>
+      <tr><td class="k">Inventory</td><td>Stockpiles and work in process</td><td>Half-finished work packages, open tickets, projects started but unstaffed</td></tr>
+      <tr><td class="k">Motion</td><td>Unnecessary movement of people</td><td>Searching for information, tool switching, duplicated data entry</td></tr>
+      <tr><td class="k">Defects</td><td>Scrap and rework</td><td>Rework loops, failed deliverables, change requests from unclear requirements</td></tr>
+      <tr><td class="k">Unused talent</td><td>Ignored operator ideas</td><td>Experts doing administration; front-line insight never reaching decisions</td></tr>
+    </table>
+
+    <h4>Muda is the symptom; mura and muri are the disease</h4>
+    <p>Three Japanese terms, and executives usually learn only the first.</p>
+    <div class="grid2">
+      <div class="card"><h4>Mura — unevenness</h4><p>Irregular flow of work. Unevenness creates queues, and queues create the safety buffers that look like prudent management and are in fact inventory.</p></div>
+      <div class="card"><h4>Muri — overburden</h4><p>People and equipment pushed beyond reasonable limits. Overburden creates defects, breakdowns and absence — which then create more unevenness.</p></div>
+    </div>
+    <p><strong>This is why improvement programmes plateau after year one.</strong> The first wave removes visible muda and produces real gains. Then the gains stop, because the unevenness and overburden that generate muda were never touched, and they regenerate it.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Chronic over-allocation is muri with a resource-management label on it. A specialist assigned at 120% across four projects produces the entire symptom set: defects, because attention is divided; waiting, because every project queues behind the other three; and unused talent, because the scarce expert spends the day reconciling status rather than solving problems.</p>
+      <p>Mura shows up as the quarter-end delivery peak that every organisation knows about and none levels. The peak is treated as a fact of the calendar; it is usually a consequence of how work was released.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 EFFICIENCY PARADOX -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>The efficiency paradox</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Lean is routinely introduced as "doing more with less". Taken literally, that is the definition of the thing lean exists to correct.</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>Resource efficiency</h4>
+        <p>Keep every person and every machine busy. It optimises what cost accounting measures, which is why organisations default to it.</p>
+        <p style="margin-bottom:0">It generates queues, rework and expediting — and it destroys performance globally while every local unit looks efficient.</p>
+      </div>
+      <div class="card">
+        <h4>Flow efficiency</h4>
+        <p>Optimise the unit's journey through the system. It measures the order, not the resource.</p>
+        <p style="margin-bottom:0">It usually improves both once queues collapse — and almost nobody reports it.</p>
+      </div>
+    </div>
+    <p>Flow efficiency is simply the share of elapsed time in which the unit is actually being worked on. You calculated yours in the pre-work. The figure is usually a shock the first time it is computed, and the shock is the point.</p>
+
+    <h3>The physics of lead time</h3>
+    <p>The relationship between utilisation and queue time is not a management opinion. It is a property of any system with variability, and it is steep:</p>
+    <ul class="tight">
+      <li>As utilisation rises toward 100%, <strong>queue time rises towards infinity</strong>. The curve is flat until roughly 80% and then climbs violently.</li>
+      <li>Therefore the instinct to keep every resource busy is <strong>the direct mechanical cause of the inventory it was meant to avoid.</strong></li>
+      <li>Raising utilisation does not raise the system's output. It raises the queue in front of the system.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">The sentence worth memorising</span>
+      <strong>Variability must be absorbed by inventory, by capacity, or by time.</strong> Every organisation chooses one — usually without deciding to. Only one of the three is invisible in the P&amp;L, which is why it is the one most organisations choose by default.
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>The three buffers have exact project equivalents: <strong>inventory</strong> becomes work in progress and partially completed deliverables; <strong>capacity</strong> becomes overtime, contractors and resource reserve; <strong>time</strong> becomes schedule contingency. Goldratt's critical chain is the argument that these buffers should be sized deliberately and placed where they protect the system, rather than hidden inside every individual task estimate — where they are consumed silently and protect nothing.</p>
+      <p>The utilisation point lands hard here. A project organisation that plans its people at 100% allocation has built a system in which every piece of variability — one illness, one late approval, one changed requirement — is absorbed by schedule. The resulting delay is not poor project management. It is the planning assumption, working exactly as specified.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 TPS -->
+<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>The Toyota Production System, as a system</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>The TPS is conventionally drawn as a house, and the drawing is an argument: a roof needs pillars, pillars need a foundation, and removing any element collapses the rest.</p>
+
+    <div class="house">
+      <div class="roof">Goals — highest quality · lowest cost · shortest lead time · best safety · high morale</div>
+      <div class="cols">
+        <div class="col">
+          <h5>Just-In-Time</h5>
+          <p>Takt time · continuous flow · pull and WIP limits · SMED</p>
+        </div>
+        <div class="col mid">
+          <h5>People and teamwork</h5>
+          <p>Kaizen · <em>genchi genbutsu</em> · structured problem solving. The centre of the house, and the multiplier.</p>
+        </div>
+        <div class="col">
+          <h5>Jidoka</h5>
+          <p>Autonomation · stop-and-fix · andon · poka-yoke</p>
+        </div>
+      </div>
+      <div class="base">Stability — <em>heijunka</em> (levelling) · standardised work · 4M stability</div>
+    </div>
+
+    <p><strong>The sequence is physics, not preference.</strong> Pull cannot function on an unstable, unlevelled base: it either starves or floods. This is why organisations that install kanban boards onto chaotic processes get chaos with better visualisation.</p>
+
+    <h3>The left pillar: Just-In-Time</h3>
+    <p>Three mechanisms, and one widespread misconception to clear first.</p>
+    <div class="note">
+      <span class="lbl">Pull is not JIT, and neither is kanban</span>
+      <strong>A pull system is a system that explicitly limits work in process.</strong> That is the definition. A push system releases work according to an external schedule. Kanban is merely one mechanism for limiting WIP; CONWIP is another. Treating the cards as the essence of the system is the most common conceptual error in the boardroom (Hopp &amp; Spearman, 2004).
+    </div>
+    <ul class="tight">
+      <li><strong>Continuous flow</strong> — remove the interruptions, batching and breakdowns that convert value-adding time into elapsed time.</li>
+      <li><strong>Pull</strong> — produce nothing until a downstream signal indicates demand. The signal is what stops overproduction.</li>
+      <li><strong>SMED</strong> — batch sizes exist because changeovers are expensive. Kill the changeover and the economic batch size collapses towards one.</li>
+    </ul>
+    <p>Underneath all three sits <em>heijunka</em>: levelling the schedule so that the pull signal is stable enough to be worth following.</p>
+
+    <h3>The right pillar: Jidoka</h3>
+    <p>Quality built in at the source, through three mechanisms of increasing cost and decreasing frequency:</p>
+    <ul class="tight">
+      <li><strong>Poka-yoke</strong> — design the process so the mistake physically cannot be made.</li>
+      <li><strong>Andon</strong> — signal the abnormality the instant it occurs, not at the end of the shift.</li>
+      <li><strong>Stop-and-fix</strong> — halt the line so that the defect never travels downstream.</li>
+    </ul>
+    <p>Stopping the line looks like the most expensive thing a factory can do, and that reading misses the trade. <strong>A problem that stops the line gets solved; a problem that is worked around does not.</strong> The cost of stopping is visible and immediate; the cost of working around is invisible and permanent.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Three elements of the house are already in your vocabulary under other names. <em>Heijunka</em> is resource levelling. <em>Standardised work</em> is the methodology, templates and checklists the PMO maintains. <em>Poka-yoke</em> is the mandatory field that will not let the form be submitted incomplete.</p>
+      <p>The one with no comfortable equivalent is the andon cord. In most project organisations, status reporting is the opposite of an andon: it aggregates upward on a monthly cycle, and a red status costs the reporter more than it costs the organisation. That is precisely a system in which abnormalities are signalled late and quietly. The question to carry into the session is not whether your governance has escalation paths written down — it is how long someone knew, the last time something went seriously wrong.</p>
+    </div>
+
+    <h3>Why the system beats the tools</h3>
+    <p>This is the best-evidenced claim in the field, and it is the reason the house is drawn as a house rather than as a menu.</p>
+    <table>
+      <tr><th style="width:210px">Source</th><th>Finding</th></tr>
+      <tr><td class="k">Milgrom &amp; Roberts (1990)</td><td>Modern manufacturing is a system of <em>complementarities</em>: the return to any one practice rises with the adoption of the others. Partial adoption yields near-zero or negative returns.</td></tr>
+      <tr><td class="k">MacDuffie (1995)</td><td>Bundles of mutually reinforcing practices explain performance — not individual practices.</td></tr>
+      <tr><td class="k">Shah &amp; Ward (2007)</td><td>Built the field's measurement instruments for lean exclusively on bundle logic.</td></tr>
+    </table>
+    <p>This is the strongest available explanation for the failure rate of tool-led lean programmes. It also explains something counter-intuitive: a partial implementation can leave an organisation <em>worse</em> off than no implementation, because a practice adopted without its complements imposes its costs without delivering its returns.</p>
+  </div>
+</section>
+
+<!-- 6 CAPITAL -->
+<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Lean in the language of capital</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Operational improvement that cannot be stated in financial terms does not survive the budget cycle. Fortunately, the translation is an identity rather than an argument.</p>
+
+    <h3>Little's Law</h3>
+    <div class="eq">
+      <div class="f">WIP = Throughput × Lead Time</div>
+      <div class="c">Little (1961)</div>
+    </div>
+    <p>Hold throughput constant and the identity says something immediate: <strong>cutting lead time cuts work in process proportionally.</strong> And work in process is not an operational abstraction — it is inventory, and inventory is invested capital.</p>
+    <div class="chain">
+      <span>lead time ↓</span><i>→</i><span>WIP ↓</span><i>→</i><span>inventory ↓</span><i>→</i><span>invested capital ↓</span><i>→</i><span class="end">ROIC ↑</span>
+    </div>
+    <p>Flow improvement is a balance-sheet intervention that merely happens to take place on a shop floor.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Little's Law holds for a portfolio exactly as it holds for a production line, and the portfolio version is the more useful one. Take projects in flight as WIP, projects completed per year as throughput, and the identity returns the average time a project spends in the organisation:</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:15px;margin:10px 0"><strong>average project lead time = projects in flight ÷ projects completed per year</strong></p>
+      <p>The arithmetic is unforgiving. An organisation running 20 projects and finishing 10 a year has a two-year average lead time, whatever its schedules say. Halving the number in flight halves the lead time with the same people and the same budget — and throughput usually <em>rises</em>, because the context switching that consumed the difference disappears.</p>
+      <p>This is the counter-intuitive law every steering committee eventually rediscovers at cost: <strong>starting less finishes more.</strong></p>
+    </div>
+
+    <div class="note">
+      <span class="lbl">We do this calculation live in the session</span>
+      <p style="margin-bottom:8px"><strong>A.</strong> Projects currently in flight in your organisation or unit. Count everything authorised and not yet closed, including the ones nobody has touched this month. Those count — they are WIP.<br>
+      <strong>B.</strong> Projects completed and closed in the last twelve months.</p>
+      <p style="margin-bottom:0">A ÷ B is your real average project lead time. Approximate figures are enough. The interesting number is not the result — it is the gap between that result and the lead time your organisation believes it has.</p>
+    </div>
+
+    <h3>Where lean shows up in return on invested capital</h3>
+    <p>ROIC is NOPAT divided by invested capital, and it splits into two independent levers:</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Margin — the numerator</h4>
+        <p>NOPAT ÷ revenue. Lean moves it through scrap, rework, yield and equipment effectiveness.</p>
+        <p style="margin-bottom:0">This is where every standard lean business case is written.</p>
+      </div>
+      <div class="card">
+        <h4>Capital turnover — the denominator</h4>
+        <p>Revenue ÷ invested capital. Lean moves it through inventory, footprint, capacity buffers and the cash cycle.</p>
+        <p style="margin-bottom:0">This is where nobody in the operations meeting is looking.</p>
+      </div>
+    </div>
+
+    <h4>A worked scenario</h4>
+    <p>Lead time is cut from 20 days to 8. Defect reduction adds 20 to NOPAT. Revenue is unchanged.</p>
+    <table>
+      <tr><th>Measure</th><th class="n">Before</th><th class="n">After</th></tr>
+      <tr><td class="k">Inventory</td><td class="n">300</td><td class="n">120</td></tr>
+      <tr><td class="k">Invested capital</td><td class="n">800</td><td class="n">620</td></tr>
+      <tr><td class="k">Operating margin</td><td class="n">8%</td><td class="n">10%</td></tr>
+      <tr><td class="k">ROIC</td><td class="n">10%</td><td class="n">16.1%</td></tr>
+      <tr><td class="k">WACC</td><td class="n">10%</td><td class="n">10%</td></tr>
+      <tr><td class="k">Economic profit</td><td class="n">0</td><td class="n">38</td></tr>
+    </table>
+    <p>Margin improved by 25%. Capital turnover improved by 29%. <strong>The denominator did more work than the numerator</strong> — and the denominator is the half of the equation that operational business cases almost never mention. A firm that was exactly earning its cost of capital is now creating economic profit, without a single additional unit of revenue.</p>
+
+    <h3>Both pillars move both edges of value</h3>
+    <table>
+      <tr><th style="width:180px">Mechanism</th><th>Effect</th></tr>
+      <tr><td class="k">Jidoka → cost</td><td>Defects removed at source; the cost of poor quality collapses. The classic business case.</td></tr>
+      <tr><td class="k">Jidoka → WTP</td><td>Zero-defect delivery lets a B2B customer eliminate incoming inspection and cut safety stock. A willingness-to-pay argument with a hard number attached.</td></tr>
+      <tr><td class="k">JIT → cost</td><td>Less inventory, handling, expediting and obsolescence; a smaller footprint.</td></tr>
+      <tr><td class="k">JIT → WTP</td><td>Customers pay for speed and predictability, because short lead times cut their own forecasting risk.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 7 DMAIC -->
+<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>DMAIC — conducting improvement, analysing problems</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Everything so far describes what good looks like. DMAIC is the method for getting there from where you are — a discipline for conducting an improvement and, above all, for analysing a problem before paying to solve it.</p>
+
+    <h3>The failure mode it exists to prevent</h3>
+    <p>Six Sigma was developed at Motorola in the 1980s and scaled across industry in the following decade. Its statistical ambition — a process so consistent that specification limits sit six standard deviations from the mean, roughly 3.4 defects per million opportunities — is the part everyone remembers. It is not the part that matters most to a senior manager.</p>
+    <p>What matters is the discipline. An experienced manager recognises a problem in seconds and already knows what to do. That recognition is pattern-matching against previous problems: fast, frequently right, and entirely unverified. When it is wrong, the organisation finds out after it has paid for the solution — and because the supposed cause was never written down, the error teaches nothing.</p>
+    <p><strong>DMAIC does not exist to distrust experience. It exists so that the experienced manager's hypothesis is written down before it is funded, and can therefore be refuted while refutation is still cheap.</strong></p>
+
+    <h3>The five phases</h3>
+    <table>
+      <tr><th style="width:105px">Phase</th><th>The question it answers</th><th style="width:34%">Representative tools</th></tr>
+      <tr><td class="k">Define</td><td>What is the problem, whose is it, what does it cost, and where does the scope end?</td><td>Project charter · SIPOC · voice of the customer</td></tr>
+      <tr><td class="k">Measure</td><td>What is today's performance, measured in a way anyone would trust?</td><td>Operational definitions · measurement system analysis</td></tr>
+      <tr><td class="k">Analyze</td><td>What is the cause — verified, not assumed?</td><td>Five whys · Ishikawa · Pareto · hypothesis testing</td></tr>
+      <tr><td class="k">Improve</td><td>Does the solution work in a pilot, before it is scaled?</td><td>Controlled pilot · poka-yoke · design of experiments</td></tr>
+      <tr><td class="k">Control</td><td>Does the gain survive the dissolution of the project team?</td><td>Control charts · control plan · standardised work</td></tr>
+    </table>
+    <p>Two observations that are easy to skip. First, Define and Measure look like bureaucracy and are half the work: a badly defined problem has no verifiable solution, and a measure nobody trusts ends every discussion in opinion. Second, <strong>poka-yoke appears in this table and also in the Jidoka pillar above.</strong> Lean and Six Sigma are not rival systems; they share mechanisms and attack different enemies — flow and waste on one side, variation and defects on the other.</p>
+
+    <h3>Analyze, in practice</h3>
+    <p>This is the phase we will work through live in the session, using one of your own pre-work sentences.</p>
+    <p>The five whys is the simplest root-cause technique and the easiest to perform badly. Two rules govern it:</p>
+    <ul class="tight">
+      <li><strong>A cause attributed to a person is not a process cause.</strong> "Because he did not deliver on time" is a restatement of the symptom. The next question is always: what in the process allows that to happen without anyone noticing?</li>
+      <li><strong>Stop when you reach something somebody controls.</strong> A chain that bottoms out in "because the market is volatile" has gone one step too far; a chain that stops at the second link has not gone far enough.</li>
+    </ul>
+    <p>What the technique reliably demonstrates is that the cause people name first is usually the third or fourth link in the chain — that is, still a symptom. Pareto analysis then answers a different question: of the many verified causes, which few account for most of the effect.</p>
+
+    <h3>Where initiatives die</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>In Analyze</h4>
+        <p style="margin-bottom:0">The team arrives with its preferred solution and uses the phase to justify it. The diagnostic symptom is simple: the root cause turns out to be whatever someone already wanted to buy.</p>
+      </div>
+      <div class="card">
+        <h4>In Control</h4>
+        <p style="margin-bottom:0">The gain exists for as long as the team exists. Once the team disperses, the process regresses within months, because nobody inherited the standard.</p>
+      </div>
+    </div>
+    <p>The cheapest safeguard against both is a <strong>tollgate</strong> at the end of each phase, chaired by the executive sponsor who owns the business result rather than by the specialist running the project. Whoever conducts the work is not whoever approves it.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>A DMAIC initiative is itself a project, and the vocabulary overlaps almost exactly: the charter is a project charter, the tollgates are stage gates, the sponsor is the sponsor. What differs is where the weight sits. A conventional project plan commits to a solution at authorisation; DMAIC forbids naming the solution until Analyze has verified a cause. The gate between Analyze and Improve is the one with no equivalent in most governance frameworks, and it is the one that does the work.</p>
+      <p>Control maps onto benefits realisation and handover to operations — the phase most project methodologies describe and fewest organisations actually perform. A project formally closed with the process owner untrained and the standard unwritten has not transferred anything. It has only stopped.</p>
+    </div>
+
+    <h3>Where the method does not apply</h3>
+    <p>DMAIC assumes a repeatable process with a definable defect. Applied to the exploratory front end of a business — research, invention, early-stage product discovery — it suppresses precisely the variation that discovery depends on. The organisation needs two regimes, one for exploring and one for exploiting, and clarity about which process is in which.</p>
+  </div>
+</section>
+
+<!-- 8 VCAP -->
+<div class="partbar"><div class="wrap"><div class="n">EIGHT</div><h2>The third equation</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Operations strategy is usually taught as a list of practices. Van Mieghem and Allon organise it instead around four linked elements — value, capabilities, assets and processes — and the relationship between them is where this session arrives.</p>
+
+    <div class="eq">
+      <div class="f">V = C × ( A + P )</div>
+      <div class="c">Lima (2026), Ch. 1 — after Van Mieghem &amp; Allon (2015)</div>
+    </div>
+
+    <table>
+      <tr><th style="width:150px">Term</th><th>What it is</th><th style="width:30%">Visibility</th></tr>
+      <tr><td class="k">A — Assets</td><td>Plants, machines, systems. What the pillars stand on.</td><td>Visible and purchasable</td></tr>
+      <tr><td class="k">P — Processes</td><td>How work flows across the assets. The pillars and the foundation.</td><td>Partly visible, imitable with effort</td></tr>
+      <tr><td class="k">C — Capability</td><td>The repeated ability to improve P. The centre of the house.</td><td>Barely visible, rarely imitable</td></tr>
+    </table>
+
+    <p>The form of the equation is the claim. <strong>Assets and processes are additive and purchasable; capability is a coefficient.</strong> You can buy a plant, license a platform, hire a consultant to redraw a process. You cannot buy the organisation's repeated ability to improve. And if C approaches zero, V approaches zero regardless of what A and P are worth.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Sort a PMO's assets by the equation and the result is uncomfortable. The scheduling tool, the portfolio platform, the dashboards: <strong>A</strong>. The methodology, the templates, the gate model, the certified staff: <strong>P</strong>. Both are purchasable, and both are available to every competitor at roughly the same price.</p>
+      <p><strong>C</strong> is what is left: whether this organisation reliably gets better at delivering than it was two years ago, and whether that improvement survives the departure of the people who drove it. It is also the reason two organisations running the same methodology, with the same certifications and the same tooling, deliver at visibly different standards — a gap no maturity assessment fully explains and every experienced manager recognises.</p>
+      <p>Which raises the question the session closes on, and which the afternoon takes up directly: if C is the multiplier, what actually builds it?</p>
+    </div>
+
+    <h3>Three equations, one operating system</h3>
+    <table>
+      <tr><th style="width:190px">Equation</th><th>What it establishes</th></tr>
+      <tr><td class="k">Value stick<br><span style="font-weight:400;font-size:14px">WTP − SOC</span></td><td>Lean pushes both edges outward at once: Jidoka and JIT each lower cost and raise willingness to pay.</td></tr>
+      <tr><td class="k">Economic profit<br><span style="font-weight:400;font-size:14px">ROIC vs. WACC</span></td><td>Lean lifts the numerator and cuts the denominator, moving return above the cost of capital.</td></tr>
+      <tr><td class="k">VCAP<br><span style="font-weight:400;font-size:14px">V = C × (A + P)</span></td><td>It does so only for organisations that build the multiplier rather than buying the bracket.</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">Two ideas to bring to the session</span>
+      <p style="margin-bottom:8px"><strong>Porter's objection.</strong> Operational effectiveness is imitable, so its gains compete away; strategy-grade advantage must live somewhere harder to copy. Where, exactly — and what does that imply for an improvement programme whose entire output is better processes?</p>
+      <p style="margin-bottom:0"><strong>Spear and Bowen's finding.</strong> What distinguishes Toyota is not its tools but its <em>rules-in-use</em>: tacit rules governing how flow paths are specified and how every improvement is run as a controlled experiment. Tacit rules can be observed and still not transferred. Hold that thought against the puzzle in Part One.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ACTIVITY -->
+<div class="partbar"><div class="wrap"><div class="n">NINE</div><h2>Group activity — The Value Case</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">The final block of the session is worked in groups. You will take one real project and appraise it through the three lenses built in these notes: where it moves willingness to pay, where it removes waste, and what it actually builds.</p>
+
+    <div class="note">
+      <span class="lbl">The raw material</span>
+      <strong>One authorised project from your own organisation</strong> — in flight or recently approved — that you know well enough to defend. It does not need to be large, successful, or yours. Groups choose one project from among those their members propose, and the choice takes ninety seconds: pick the one the group disagrees about, not the one with the best business case.
+    </div>
+
+    <h3>Why this appraisal differs from a standard business case</h3>
+    <p>A conventional business case answers one question: does the return exceed the cost? That question is necessary and it is not sufficient, because it is silent on three things that decide whether the return survives.</p>
+    <ul class="tight">
+      <li><strong>Which edge of value does this move?</strong> A project that only lowers cost is competing on the edge where every rival is also working. A project that raises willingness to pay is harder, rarer, and usually under-argued because the number is harder to produce.</li>
+      <li><strong>Is the cost saving a named waste, or an aspiration?</strong> "Improves efficiency by 15%" is a target. "Eliminates the three re-approvals caused by incomplete submissions" is a waste with a name, and only the second can be verified afterwards.</li>
+      <li><strong>Does the organisation end up more capable, or only better equipped?</strong> A project that delivers assets and processes can be replicated by any competitor willing to spend the same money. A project that leaves the organisation better at improving cannot.</li>
+    </ul>
+
+    <div class="activity">
+      <div class="ah">
+        <b>The Value Case Canvas</b>
+        <span>Groups of three or four · 15 minutes to complete · 3 minutes to defend</span>
+      </div>
+      <div class="ab">
+        <p>The group picks <strong>one</strong> of the projects brought by its members and completes five fields. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
+
+        <div class="worksheet">
+          <div class="wl"><b>1 · The project</b><span class="box">one line</span></div>
+          <div class="wl" style="font-size:14.5px;color:#4A5B70">What it is, who sponsors it, and what it was approved to achieve.</div>
+        </div>
+
+        <h4>2 · The WTP edge — does the customer notice?</h4>
+        <p>Identify whether this project raises what someone would be willing to pay, and be precise about the mechanism.</p>
+        <div class="worksheet">
+          <div class="wl"><b>Competitive priority affected</b><span class="box">cost · quality · speed · flexibility</span></div>
+          <div class="wl"><b>Quality dimension, if any (Garvin)</b><span class="box">conformance · reliability · durability · serviceability · …</span></div>
+          <div class="wl"><b>Order winner or qualifier?</b><span class="box">winner · qualifier</span></div>
+          <div class="wl"><b>Who is the customer here — and would they notice?</b><span class="box">yes · no</span></div>
+        </div>
+        <p style="font-size:15.5px"><strong>The test:</strong> if the honest answer is that no customer would notice, say so. Many perfectly sound projects move only the cost edge. Recording that truthfully is what makes the appraisal useful — and it changes how the project should be argued and against what it should be measured.</p>
+
+        <h4>3 · The cost edge — name the waste</h4>
+        <p>Identify which of the eight wastes the project actually removes. Name them from the list; do not substitute a benefit for a waste.</p>
+        <div class="worksheet">
+          <div class="wl"><b>Primary waste removed</b><span class="box">from the eight</span></div>
+          <div class="wl"><b>Where in the process it occurs today</b><span class="box">the step or queue</span></div>
+          <div class="wl"><b>Secondary wastes affected</b><span class="box">optional</span></div>
+          <div class="wl"><b>Order of magnitude, if you can estimate it</b><span class="box">optional</span></div>
+        </div>
+        <p style="font-size:15.5px"><strong>The test:</strong> "reduces costs" and "improves productivity" are not wastes — they are consequences. If the group cannot name a waste from the list, the project may be removing something real that nobody has yet defined, which is itself a finding worth reporting. And if the waste removed is <em>overproduction</em>, note it: that is the root waste, and the project is probably worth more than its business case claims.</p>
+
+        <h4>4 · What the project actually builds</h4>
+        <p>Decompose the deliverable into the three terms. Most projects touch more than one; few touch all three.</p>
+        <div class="worksheet">
+          <div class="wl"><b>A — Assets</b><span class="box">what is bought or built?</span></div>
+          <div class="wl"><b>P — Processes</b><span class="box">what flow changes, and how?</span></div>
+          <div class="wl"><b>C — Capability</b><span class="box">does the organisation get better at improving?</span></div>
+        </div>
+        <p style="font-size:15.5px"><strong>The test for C is strict.</strong> Training people to operate the new system is not capability — it is part of delivering the asset. Capability means the organisation ends the project <em>better at improving processes than it was before</em>: a routine that survives, a standard that is now owned, a group that can now run the next improvement without external help. Most projects leave C untouched, and that is a legitimate answer.</p>
+
+        <h4>5 · The verdict</h4>
+        <div class="worksheet">
+          <div class="wl"><b>How long before a competitor could replicate this?</b><span class="box">months · years · never</span></div>
+          <div class="wl"><b>Fund · fund with conditions · do not fund</b><span class="box">choose one</span></div>
+          <div class="wl"><b>If conditions: what would have to be added to build C?</b><span class="box">one line</span></div>
+        </div>
+        <p style="margin-bottom:0;font-size:15.5px">The group presents field 1 and field 5, with the reasoning that connects them. Three minutes, one spokesperson.</p>
+      </div>
+    </div>
+
+    <h3>What to expect</h3>
+    <p>Two results are common enough to be worth naming in advance, and neither is a failure of the project you chose.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Only one edge moves</h4>
+        <p style="margin-bottom:0">Most project portfolios are built almost entirely of cost-edge projects. That is not wrong, but it is a choice, and usually an unexamined one. The question it raises: what would it take for this same project to also move willingness to pay — and would that cost much more?</p>
+      </div>
+      <div class="card">
+        <h4>C is empty</h4>
+        <p style="margin-bottom:0">Projects deliver assets and processes because those are what can be specified, scheduled and signed off. Capability resists all three. The question it raises: if A and P are purchasable by any competitor, what in this portfolio is actually building advantage?</p>
+      </div>
+    </div>
+    <p>Bring the completed canvas with you to the afternoon session. It is the input to the module's Execution Optimization Challenge.</p>
+  </div>
+</section>
+
+<!-- 10 ACCUMULATION -->
+<div class="partbar"><div class="wrap"><div class="n">TEN</div><h2>Going further — how capability accumulates</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">This section is optional. The session closes on the claim that C is the multiplier and that it cannot be bought. The obvious next question — then how is it built? — is a research topic in its own right, and what follows is the short version of what the evidence supports.</p>
+
+    <h3>Repetition alone does not accumulate capability</h3>
+    <p>The learning curve — unit cost falling with cumulative output — has been documented since Wright's 1936 study of aircraft manufacturing. But the later literature found it is not a uniform law. Argote and Epple (1990) showed that organisations vary widely in how fast they learn, and attributed the variation to organisational forgetting, personnel turnover, knowledge transfer from elsewhere, and scale.</p>
+    <p>That finding moves the question. If accumulated experience does not determine learning speed, and organisations with comparable experience learn at different rates, the explanation lies in <strong>what organisations do with the experience</strong> — the deliberate component, not the automatic one.</p>
+
+    <h3>The finding worth remembering</h3>
+    <p>Two studies of the same factory, a decade apart, give the sharpest decomposition available. Mukherjee and colleagues (1998), across 62 quality improvement projects, separated <strong>conceptual learning</strong> — understanding the cause-and-effect relationships, the <em>know-why</em> — from <strong>operational learning</strong> — validating the actions that produce the result, the <em>know-how</em>.</p>
+    <p>Lapré and colleagues (2000) then linked the learning activity of those projects to the factory's actual waste rate. The result is uncomfortable and precise:</p>
+    <div class="note">
+      <span class="lbl">Lapré et al. (2000)</span>
+      <strong>Only about a quarter of the improvement projects accelerated the reduction of waste</strong> — and they were the ones that produced know-why and know-how <em>simultaneously</em>. The remainder either slowed the reduction down or had no measurable effect at all.
+    </div>
+    <p>A project that produces know-how without know-why leaves the organisation able to repeat an action it does not understand. A project that produces know-why without know-how leaves it with a diagnosis nobody implemented. Neither accumulates anything. This is the empirical core of the DMAIC argument in Part Seven, and it explains why the Analyze phase is not a formality.</p>
+    <p>Pisano (1994) adds a boundary condition from 23 pharmaceutical process-development projects: where the underlying science is deep and well understood, learning <em>before</em> execution — laboratory experimentation — speeds development. Where it is not, as in biotechnology, it does not. The effective form of learning depends on how much is already known about the process.</p>
+
+    <div class="bridge">
+      <span class="lbl">Where this goes</span>
+      <p style="margin-bottom:0">If improvement projects are how capability accumulates, two questions follow immediately: under what conditions do they work, and how is the accumulated stock lost again? Those are the closing questions of the <em>afternoon</em> session, after benchmarking has shown why the stock cannot be acquired from anyone else.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFS -->
+<div class="partbar"><div class="wrap"><div class="n">ELEVEN</div><h2>Sources</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Works cited in these notes and in the session.</p>
+    <ul class="refs">
+      <li>Brandenburger, A. M., &amp; Stuart, H. W. (1996). Value-based business strategy. <em>Journal of Economics &amp; Management Strategy</em>, 5(1), 5–24.</li>
+      <li>Garvin, D. A. (1987). Competing on the eight dimensions of quality. <em>Harvard Business Review</em>, 65(6), 101–109.</li>
+      <li>Hill, T. (2000). <em>Manufacturing Strategy: Text and Cases</em> (3rd ed.). McGraw-Hill.</li>
+      <li>Hopp, W. J., &amp; Spearman, M. L. (2004). To pull or not to pull: what is the question? <em>Manufacturing &amp; Service Operations Management</em>, 6(2), 133–148.</li>
+      <li>Argote, L., &amp; Epple, D. (1990). Learning curves in manufacturing. <em>Science</em>, 247(4945), 920–924.</li>
+      <li>Hopp, W. J., &amp; Spearman, M. L. (2011). <em>Factory Physics</em> (3rd ed.). Waveland Press.</li>
+      <li>Lapré, M. A., Mukherjee, A. S., &amp; Van Wassenhove, L. N. (2000). Behind the learning curve: Linking learning activities to waste reduction. <em>Management Science</em>, 46(5), 597–611.</li>
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Open access.</li>
+      <li>Lima, T. F. <em>O que não se copia: capacidade, práticas e desempenho em operações</em>. Manuscript in preparation.</li>
+      <li>Mukherjee, A. S., Lapré, M. A., &amp; Van Wassenhove, L. N. (1998). Knowledge driven quality improvement. <em>Management Science</em>, 44(11-part-2), S35–S49.</li>
+      <li>Pisano, G. P. (1994). Knowledge, integration, and the locus of learning. <em>Strategic Management Journal</em>, 15(S1), 85–100.</li>
+      <li>Linderman, K., Schroeder, R. G., Zaheer, S., &amp; Choo, A. S. (2003). Six Sigma: a goal-theoretic perspective. <em>Journal of Operations Management</em>, 21(2), 193–203.</li>
+      <li>Little, J. D. C. (1961). A proof for the queuing formula L = λW. <em>Operations Research</em>, 9(3), 383–387.</li>
+      <li>MacDuffie, J. P. (1995). Human resource bundles and manufacturing performance. <em>ILR Review</em>, 48(2), 197–221.</li>
+      <li>Milgrom, P., &amp; Roberts, J. (1990). The economics of modern manufacturing. <em>American Economic Review</em>, 80(3), 511–528.</li>
+      <li>Modig, N., &amp; Åhlström, P. (2012). <em>This Is Lean: Resolving the Efficiency Paradox</em>. Rheologica.</li>
+      <li>Ohno, T. (1988). <em>Toyota Production System: Beyond Large-Scale Production</em>. Productivity Press.</li>
+      <li>Repenning, N. P., &amp; Sterman, J. D. (2001). Nobody ever gets credit for fixing problems that never happened. <em>California Management Review</em>, 43(4), 64–88.</li>
+      <li>Rother, M., &amp; Shook, J. (2003). <em>Learning to See</em>. Lean Enterprise Institute.</li>
+      <li>Schroeder, R. G., Linderman, K., Liedtke, C., &amp; Choo, A. S. (2008). Six Sigma: definition and underlying theory. <em>Journal of Operations Management</em>, 26(4), 536–554.</li>
+      <li>Shah, R., &amp; Ward, P. T. (2007). Defining and developing measures of lean production. <em>Journal of Operations Management</em>, 25(4), 785–805.</li>
+      <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
+      <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Session 1 reading notes · 17 October 2026<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+</body>
+</html>
