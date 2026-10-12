@@ -83,6 +83,32 @@ section:nth-of-type(even) .activity .ab{background:var(--paper)}
 .worksheet .wl b{color:var(--navy);font-weight:700}
 .worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
 
+/* Fillable canvas */
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:64px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;
+  padding:12px 22px;border-radius:6px;border:2px solid var(--gold);
+}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}}
+
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
 section:nth-of-type(even) .card{background:var(--paper)}
@@ -332,48 +358,141 @@ footer b{color:var(--gold-soft)}
         <b>The Digital &amp; Safety Execution Canvas</b>
         <span>Groups of three or four · 20 minutes to complete · 3 minutes to present</span>
       </div>
-      <div class="ab">
-        <p>Apply the five diagnostic filters below to your selected project deliverable:</p>
+      <div class="ab" id="canvas">
+        <p>Apply the five diagnostic filters below to your selected project deliverable.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
 
         <div class="worksheet">
-          <div class="wl"><b>1 · Project &amp; Digital Tooling Architecture</b><span class="box">identification</span></div>
-          <div class="wl" style="font-size:14.5px;color:#4A5B70">What digital platform or toolchain is being deployed, and what specific workflow does it automate?</div>
+          <div class="field">
+            <label for="d-tooling">1 · Project and digital tooling</label>
+            <div class="hint">Which platform or toolchain is being deployed, and what specific workflow does it automate?</div>
+            <input type="text" id="d-tooling" data-section="Project and digital tooling" data-label="Platform and workflow automated" placeholder="One line">
+          </div>
         </div>
 
-        <h4>2 · Digital Waste &amp; Latency Audit</h4>
-        <p>Examine where the platform risks introducing digital muda rather than eliminating physical waste.</p>
+        <h4>2 · Digital waste and latency audit</h4>
+        <p>Examine where the platform risks introducing digital muda rather than removing physical waste.</p>
         <div class="worksheet">
-          <div class="wl"><b>Primary digital waste identified</b><span class="box">waiting · motion · overproduction · defects</span></div>
-          <div class="wl"><b>WIP constraint mechanism</b><span class="box">how does the tool limit queue sizes?</span></div>
-          <div class="wl"><b>Context switching penalty</b><span class="box">how many disconnected tools must operators toggle?</span></div>
+          <div class="field">
+            <label for="d-waste">Primary digital waste it risks creating</label>
+            <select id="d-waste" data-section="Digital waste" data-label="Primary digital waste risked">
+              <option value="">Select one</option>
+              <option>Overproduction — reports and data nobody reads</option>
+              <option>Waiting — approval lag and decision latency</option>
+              <option>Transport — handoffs across disconnected systems</option>
+              <option>Over-processing — redundant fields and approval matrices</option>
+              <option>Inventory — unprocessed tickets and open items</option>
+              <option>Motion — context switching and hunting for the source</option>
+              <option>Defects — re-entry errors and configuration faults</option>
+              <option>Unused talent — specialists reconciling data</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-wip">WIP constraint mechanism</label>
+            <div class="hint">How does the tool limit how much work is in progress? "It does not" is a common and important answer.</div>
+            <input type="text" id="d-wip" data-section="Digital waste" data-label="WIP constraint mechanism" placeholder="The mechanism, or none">
+          </div>
+          <div class="field">
+            <label for="d-switch">Context switching</label>
+            <div class="hint">How many separate systems must someone open to answer "what is the status"?</div>
+            <input type="text" id="d-switch" data-section="Digital waste" data-label="Context switching" placeholder="A number, and which systems">
+          </div>
         </div>
 
-        <h4>3 · Safety &amp; High-Reliability Mechanisms</h4>
-        <p>Evaluate whether the system is designed to fail safely and surface anomalies immediately.</p>
+        <h4>3 · Safety and high-reliability mechanisms</h4>
+        <p>Evaluate whether the system is designed to fail safely and to surface anomalies immediately.</p>
         <div class="worksheet">
-          <div class="wl"><b>Digital Poka-Yoke present?</b><span class="box">yes / no (describe mechanism)</span></div>
-          <div class="wl"><b>Digital Andon cord</b><span class="box">who can halt the digital delivery and how fast?</span></div>
-          <div class="wl"><b>Latency from anomaly to executive awareness</b><span class="box">seconds · hours · monthly report</span></div>
+          <div class="field">
+            <label for="d-poka">Digital poka-yoke present?</label>
+            <div class="hint">A hard constraint that makes the error impossible — not a warning that can be dismissed.</div>
+            <input type="text" id="d-poka" data-section="Safety mechanisms" data-label="Digital poka-yoke" placeholder="Yes and the mechanism, or no">
+          </div>
+          <div class="field">
+            <label for="d-andon">Digital andon</label>
+            <div class="hint">Who can halt progression, and how fast?</div>
+            <input type="text" id="d-andon" data-section="Safety mechanisms" data-label="Digital andon" placeholder="Who, and how quickly">
+          </div>
+          <div class="field">
+            <label for="d-latency">Latency from anomaly to leadership awareness</label>
+            <select id="d-latency" data-section="Safety mechanisms" data-label="Anomaly-to-awareness latency">
+              <option value="">Select one</option>
+              <option>Seconds — automatic signalling at the source</option>
+              <option>Hours</option><option>Days</option>
+              <option>The next weekly report</option><option>The next monthly report</option>
+              <option>Only when the consequence arrives</option>
+            </select>
+          </div>
         </div>
 
-        <h4>4 · Benchmarking Rigor (Decoding Rules-in-Use)</h4>
-        <p>Test whether your project is copying superficial features or building institutional rules.</p>
+        <h4>4 · Benchmarking rigour — decoding rules-in-use</h4>
+        <p>Test whether the project copies surface features or builds institutional rules.</p>
         <div class="worksheet">
-          <div class="wl"><b>International reference benchmark</b><span class="box">organization / standard</span></div>
-          <div class="wl"><b>Is the benchmark copying an Asset (A) or a Rule-in-Use?</b><span class="box">A / P / C</span></div>
-          <div class="wl"><b>What tacit capability must be built for this to work?</b><span class="box">one line</span></div>
+          <div class="field">
+            <label for="d-reference">The reference</label>
+            <div class="hint">An organisation or a standard. Remember that the most useful reference is often outside your industry.</div>
+            <input type="text" id="d-reference" data-section="Benchmarking rigour" data-label="The reference" placeholder="Who, or which standard">
+          </div>
+          <div class="field">
+            <label for="d-apc">Is this copying an asset, a process, or a rule-in-use?</label>
+            <select id="d-apc" data-section="Benchmarking rigour" data-label="A, P or C">
+              <option value="">Select one</option>
+              <option>A — an asset we would buy</option>
+              <option>P — a process we would document and copy</option>
+              <option>C — a rule-in-use we would have to build</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-tacit">What tacit capability must be built for this to work here?</label>
+            <input type="text" id="d-tacit" data-section="Benchmarking rigour" data-label="Tacit capability required" placeholder="One line">
+          </div>
         </div>
 
-        <h4>5 · The Benchmarking Verdict</h4>
+        <h4>5 · The benchmarking verdict</h4>
         <p>This morning you decided whether to fund the project. That decision stands. The question here is different: <strong>what do you do with the reference you just examined?</strong></p>
         <div class="worksheet">
-          <div class="wl"><b>What does the reference do that you do not?</b><span class="box">the practice, not the indicator</span></div>
-          <div class="wl"><b>What would have to be true here for that practice to work?</b><span class="box">the absorption condition</span></div>
-          <div class="wl"><b>How long did the reference take to build it?</b><span class="box">months · years · decades · unknown</span></div>
-          <div class="wl"><b>Adopt · adapt · discard</b><span class="box">choose one</span></div>
-          <div class="wl"><b>If adopt or adapt: the first step, and who owns it</b><span class="box">one line</span></div>
+          <div class="field">
+            <label for="d-does">What does the reference do that you do not?</label>
+            <div class="hint">The practice, not the indicator.</div>
+            <textarea id="d-does" data-section="The verdict" data-label="What the reference does that we do not"></textarea>
+          </div>
+          <div class="field">
+            <label for="d-condition">What would have to be true here for that practice to work?</label>
+            <div class="hint">The absorption condition.</div>
+            <textarea id="d-condition" data-section="The verdict" data-label="Absorption condition"></textarea>
+          </div>
+          <div class="field">
+            <label for="d-howlong">How long did the reference take to build it?</label>
+            <select id="d-howlong" data-section="The verdict" data-label="Time the reference took">
+              <option value="">Select one</option>
+              <option>Months</option><option>A few years</option><option>A decade or more</option>
+              <option>Unknown — nobody in the group knows</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-decision">Adopt, adapt or discard</label>
+            <select id="d-decision" data-section="The verdict" data-label="Decision">
+              <option value="">Select one</option>
+              <option>Adopt</option><option>Adapt</option><option>Discard</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-step">If adopt or adapt: the first step, and who owns it</label>
+            <input type="text" id="d-step" data-section="The verdict" data-label="First step and owner" placeholder="One line">
+          </div>
         </div>
         <p style="margin-bottom:0;font-size:15.5px"><strong>Two answers are legitimate and often correct.</strong> <em>Discard</em>, when the practice depends on conditions your organisation does not have and cannot reasonably accumulate — saying so is a finding, not a failure. And <em>unknown</em> for the third line: if nobody knows how long the reference took, you do not yet know what you are proposing to replicate.</p>
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="d-group">Group</label>
+          <input type="text" id="d-group" data-label="Group" placeholder="Names, or a group number">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="d-download">Download the canvas</button>
+          <button type="button" class="ghost" id="d-copy">Copy as text</button>
+          <button type="button" class="ghost" id="d-clear">Clear</button>
+        </div>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download before closing the tab.</p>
       </div>
     </div>
   </div>
@@ -466,6 +585,86 @@ footer b{color:var(--gold-soft)}
     Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
   </div>
 </footer>
+
+<script>
+(function(){
+  var root = document.getElementById('canvas');
+  if (!root) return;
+  var KEY = 'sorbonne-digital-canvas-v1';
+  var group = document.getElementById('d-group');
+  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
+  var all = group ? fields.concat([group]) : fields;
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
+  } catch (e) {}
+
+  function save(){
+    try {
+      var o = {};
+      all.forEach(function(f){ o[f.id] = f.value; });
+      localStorage.setItem(KEY, JSON.stringify(o));
+    } catch (e) {}
+  }
+  all.forEach(function(f){
+    f.addEventListener('input', save);
+    f.addEventListener('change', save);
+  });
+
+  function build(){
+    var out = ['# The Digital & Safety Canvas', '', 'Digital Tools & Benchmarking — Module 3, Session 4', '17 October 2026 · Sorbonne Business School / IDGP Academy', ''];
+    out.push('**Group:** ' + ((group && group.value.trim()) || '—'));
+    var section = '';
+    fields.forEach(function(f){
+      var sec = f.getAttribute('data-section') || '';
+      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
+      out.push('- **' + f.getAttribute('data-label') + ':** ' + (f.value.trim() || '—'));
+    });
+    out.push('');
+    return out.join('\n');
+  }
+
+  function slug(){
+    var g = (group && group.value.trim()) || 'group';
+    return g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'group';
+  }
+
+  function flash(btn, msg){
+    var old = btn.textContent;
+    btn.textContent = msg;
+    setTimeout(function(){ btn.textContent = old; }, 2200);
+  }
+
+  document.getElementById('d-download').addEventListener('click', function(){
+    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'digital-safety-canvas-' + slug() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById('d-copy').addEventListener('click', function(){
+    var btn = this, text = build();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ flash(btn, 'Copied'); })
+        .catch(function(){ window.prompt('Copy the canvas:', text); });
+    } else {
+      window.prompt('Copy the canvas:', text);
+    }
+  });
+
+  document.getElementById('d-clear').addEventListener('click', function(){
+    if (!window.confirm('Clear every field on this canvas?')) return;
+    all.forEach(function(f){ f.value = ''; });
+    save();
+  });
+})();
+</script>
 
 </body>
 </html>

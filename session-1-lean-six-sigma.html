@@ -86,6 +86,32 @@ section:nth-of-type(even) .activity .ab{background:var(--paper)}
 .worksheet .wl b{color:var(--navy);font-weight:700}
 .worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
 
+/* Fillable canvas */
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:64px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;
+  padding:12px 22px;border-radius:6px;border:2px solid var(--gold);
+}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}}
+
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
 section:nth-of-type(even) .card{background:var(--paper)}
@@ -546,50 +572,140 @@ footer b{color:var(--gold-soft)}
         <b>The Value Case Canvas</b>
         <span>Groups of three or four · 15 minutes to complete · 3 minutes to defend</span>
       </div>
-      <div class="ab">
+      <div class="ab" id="canvas">
         <p>The group picks <strong>one</strong> of the projects brought by its members and completes five fields. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
 
         <div class="worksheet">
-          <div class="wl"><b>1 · The project</b><span class="box">one line</span></div>
-          <div class="wl" style="font-size:14.5px;color:#4A5B70">What it is, who sponsors it, and what it was approved to achieve.</div>
+          <div class="field">
+            <label for="c-project">1 · The project</label>
+            <div class="hint">What it is, who sponsors it, and what it was approved to achieve.</div>
+            <input type="text" id="c-project" data-section="The project" data-label="The project" placeholder="One line">
+          </div>
         </div>
 
         <h4>2 · The WTP edge — does the customer notice?</h4>
         <p>Identify whether this project raises what someone would be willing to pay, and be precise about the mechanism.</p>
         <div class="worksheet">
-          <div class="wl"><b>Competitive priority affected</b><span class="box">cost · quality · speed · flexibility</span></div>
-          <div class="wl"><b>Quality dimension, if any (Garvin)</b><span class="box">conformance · reliability · durability · serviceability · …</span></div>
-          <div class="wl"><b>Order winner or qualifier?</b><span class="box">winner · qualifier</span></div>
-          <div class="wl"><b>Who is the customer here — and would they notice?</b><span class="box">yes · no</span></div>
+          <div class="field">
+            <label for="c-priority">Competitive priority affected</label>
+            <select id="c-priority" data-section="The WTP edge" data-label="Competitive priority">
+              <option value="">Select one</option>
+              <option>Cost</option><option>Quality</option><option>Delivery speed</option><option>Flexibility</option>
+              <option>None — this project does not move any of them</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-garvin">Quality dimension, if any</label>
+            <div class="hint">Conformance lowers cost. Reliability, durability and serviceability raise willingness to pay.</div>
+            <select id="c-garvin" data-section="The WTP edge" data-label="Quality dimension (Garvin)">
+              <option value="">Select one, or leave blank</option>
+              <option>Performance</option><option>Features</option><option>Reliability</option><option>Conformance</option>
+              <option>Durability</option><option>Serviceability</option><option>Aesthetics</option><option>Perceived quality</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-winner">Order winner or qualifier?</label>
+            <select id="c-winner" data-section="The WTP edge" data-label="Winner or qualifier">
+              <option value="">Select one</option>
+              <option>Order winner — it produces preference</option>
+              <option>Qualifier — its absence eliminates us, its presence attracts nobody</option>
+              <option>Neither</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-customer">Who is the customer here — and would they notice?</label>
+            <div class="hint">If the honest answer is that nobody outside would notice, say so. Many sound projects move only the cost edge.</div>
+            <input type="text" id="c-customer" data-section="The WTP edge" data-label="The customer, and whether they would notice" placeholder="The customer, and yes or no">
+          </div>
         </div>
-        <p style="font-size:15.5px"><strong>The test:</strong> if the honest answer is that no customer would notice, say so. Many perfectly sound projects move only the cost edge. Recording that truthfully is what makes the appraisal useful — and it changes how the project should be argued and against what it should be measured.</p>
 
         <h4>3 · The cost edge — name the waste</h4>
-        <p>Identify which of the eight wastes the project actually removes. Name them from the list; do not substitute a benefit for a waste.</p>
+        <p>Identify which of the eight wastes the project actually removes. Name it from the list; do not substitute a benefit for a waste.</p>
         <div class="worksheet">
-          <div class="wl"><b>Primary waste removed</b><span class="box">from the eight</span></div>
-          <div class="wl"><b>Where in the process it occurs today</b><span class="box">the step or queue</span></div>
-          <div class="wl"><b>Secondary wastes affected</b><span class="box">optional</span></div>
-          <div class="wl"><b>Order of magnitude, if you can estimate it</b><span class="box">optional</span></div>
+          <div class="field">
+            <label for="c-waste">Primary waste removed</label>
+            <select id="c-waste" data-section="The cost edge" data-label="Primary waste removed">
+              <option value="">Select one of the eight</option>
+              <option>Overproduction — the root waste</option><option>Waiting</option><option>Transport</option>
+              <option>Over-processing</option><option>Inventory</option><option>Motion</option>
+              <option>Defects</option><option>Unused talent</option>
+              <option>None of the eight — see note below</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-where">Where in the process it occurs today</label>
+            <input type="text" id="c-where" data-section="The cost edge" data-label="Where the waste occurs" placeholder="The step or the queue">
+          </div>
+          <div class="field">
+            <label for="c-secondary">Secondary wastes affected</label>
+            <div class="hint">Optional.</div>
+            <input type="text" id="c-secondary" data-section="The cost edge" data-label="Secondary wastes" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label for="c-magnitude">Order of magnitude, if you can estimate it</label>
+            <div class="hint">Optional. Days, hours, percentage — whatever you can defend.</div>
+            <input type="text" id="c-magnitude" data-section="The cost edge" data-label="Order of magnitude" placeholder="Optional">
+          </div>
         </div>
         <p style="font-size:15.5px"><strong>The test:</strong> "reduces costs" and "improves productivity" are not wastes — they are consequences. If the group cannot name a waste from the list, the project may be removing something real that nobody has yet defined, which is itself a finding worth reporting. And if the waste removed is <em>overproduction</em>, note it: that is the root waste, and the project is probably worth more than its business case claims.</p>
 
         <h4>4 · What the project actually builds</h4>
         <p>Decompose the deliverable into the three terms. Most projects touch more than one; few touch all three.</p>
         <div class="worksheet">
-          <div class="wl"><b>A — Assets</b><span class="box">what is bought or built?</span></div>
-          <div class="wl"><b>P — Processes</b><span class="box">what flow changes, and how?</span></div>
-          <div class="wl"><b>C — Capability</b><span class="box">does the organisation get better at improving?</span></div>
+          <div class="field">
+            <label for="c-assets">A — Assets</label>
+            <div class="hint">What is bought or built?</div>
+            <textarea id="c-assets" data-section="What the project builds" data-label="A — Assets"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-processes">P — Processes</label>
+            <div class="hint">What flow changes, and how?</div>
+            <textarea id="c-processes" data-section="What the project builds" data-label="P — Processes"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-capability">C — Capability</label>
+            <div class="hint">What will this organisation be able to do afterwards that it could not do before — and that does not depend on the new system?</div>
+            <textarea id="c-capability" data-section="What the project builds" data-label="C — Capability"></textarea>
+          </div>
         </div>
         <p style="font-size:15.5px"><strong>The test for C is strict.</strong> Training people to operate the new system is not capability — it is part of delivering the asset. Capability means the organisation ends the project <em>better at improving processes than it was before</em>: a routine that survives, a standard that is now owned, a group that can now run the next improvement without external help. Most projects leave C untouched, and that is a legitimate answer.</p>
 
         <h4>5 · The verdict</h4>
         <div class="worksheet">
-          <div class="wl"><b>How long before a competitor could replicate this?</b><span class="box">months · years · never</span></div>
-          <div class="wl"><b>Fund · fund with conditions · do not fund</b><span class="box">choose one</span></div>
-          <div class="wl"><b>If conditions: what would have to be added to build C?</b><span class="box">one line</span></div>
+          <div class="field">
+            <label for="c-replicate">How long before a competitor could replicate this?</label>
+            <select id="c-replicate" data-section="The verdict" data-label="Time to replicate">
+              <option value="">Select one</option>
+              <option>Months</option><option>A year or two</option><option>Years</option>
+              <option>They could not — and here is why</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-verdict">The decision</label>
+            <select id="c-verdict" data-section="The verdict" data-label="Decision">
+              <option value="">Select one</option>
+              <option>Fund</option><option>Fund with conditions</option><option>Do not fund</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-conditions">If conditions: what would have to be added to build C?</label>
+            <input type="text" id="c-conditions" data-section="The verdict" data-label="Conditions to build C" placeholder="One line">
+          </div>
         </div>
         <p style="margin-bottom:0;font-size:15.5px">The group presents field 1 and field 5, with the reasoning that connects them. Three minutes, one spokesperson.</p>
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="c-group">Group</label>
+          <input type="text" id="c-group" data-label="Group" placeholder="Names, or a group number">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="c-download">Download the canvas</button>
+          <button type="button" class="ghost" id="c-copy">Copy as text</button>
+          <button type="button" class="ghost" id="c-clear">Clear</button>
+        </div>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download before closing the tab.</p>
       </div>
     </div>
 
@@ -676,6 +792,86 @@ footer b{color:var(--gold-soft)}
     Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
   </div>
 </footer>
+
+<script>
+(function(){
+  var root = document.getElementById('canvas');
+  if (!root) return;
+  var KEY = 'sorbonne-value-case-v1';
+  var group = document.getElementById('c-group');
+  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
+  var all = group ? fields.concat([group]) : fields;
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
+  } catch (e) {}
+
+  function save(){
+    try {
+      var o = {};
+      all.forEach(function(f){ o[f.id] = f.value; });
+      localStorage.setItem(KEY, JSON.stringify(o));
+    } catch (e) {}
+  }
+  all.forEach(function(f){
+    f.addEventListener('input', save);
+    f.addEventListener('change', save);
+  });
+
+  function build(){
+    var out = ['# The Value Case', '', 'Lean Six Sigma & Continuous Improvement — Module 3, Session 4', '17 October 2026 · Sorbonne Business School / IDGP Academy', ''];
+    out.push('**Group:** ' + ((group && group.value.trim()) || '—'));
+    var section = '';
+    fields.forEach(function(f){
+      var sec = f.getAttribute('data-section') || '';
+      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
+      out.push('- **' + f.getAttribute('data-label') + ':** ' + (f.value.trim() || '—'));
+    });
+    out.push('');
+    return out.join('\n');
+  }
+
+  function slug(){
+    var g = (group && group.value.trim()) || 'group';
+    return g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'group';
+  }
+
+  function flash(btn, msg){
+    var old = btn.textContent;
+    btn.textContent = msg;
+    setTimeout(function(){ btn.textContent = old; }, 2200);
+  }
+
+  document.getElementById('c-download').addEventListener('click', function(){
+    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'value-case-' + slug() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById('c-copy').addEventListener('click', function(){
+    var btn = this, text = build();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ flash(btn, 'Copied'); })
+        .catch(function(){ window.prompt('Copy the canvas:', text); });
+    } else {
+      window.prompt('Copy the canvas:', text);
+    }
+  });
+
+  document.getElementById('c-clear').addEventListener('click', function(){
+    if (!window.confirm('Clear every field on this canvas?')) return;
+    all.forEach(function(f){ f.value = ''; });
+    save();
+  });
+})();
+</script>
 
 </body>
 </html>
