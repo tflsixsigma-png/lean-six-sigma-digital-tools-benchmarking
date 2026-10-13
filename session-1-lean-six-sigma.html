@@ -245,6 +245,17 @@ footer b{color:var(--gold-soft)}
       <li><strong>Operational effectiveness erodes by construction.</strong> If the improvement is visible and copyable, B eventually makes the same move, the two parentheses converge, and VC tends to zero. The firm is left creating more value than before and capturing no more of it than its rival. This is Porter's objection, stated as arithmetic rather than as an opinion, and the afternoon session returns to it as the central risk of benchmarking.</li>
     </ul>
     <p>The practical use of the formula is in the third reading. It gives a single test to put to any improvement project: <em>when the competitor does this too, what is left?</em> If the answer is nothing, the project is a qualifier and should be funded to the threshold and no further. If something is left, name it — that residue is the advantage, and the rest of the day is about where it can come from.</p>
+
+    <h3>The five principles, and where each one is treated</h3>
+    <p>Womack and Jones reduced the method to five principles in sequence. They are worth stating as a set once, because the sequence is itself the argument: every principle after the first is meaningless until the first has been answered.</p>
+    <table>
+      <tr><th style="width:30px"></th><th style="width:20%">Principle</th><th>What it asks</th><th style="width:20%">Where</th></tr>
+      <tr><td class="n">1</td><td class="k">Value</td><td>What is the customer actually paying for? Defined from the customer backwards, never from the process forwards.</td><td>This part</td></tr>
+      <tr><td class="n">2</td><td class="k">Value stream</td><td>Which activities deliver that value, which merely enable it, and which do neither? The map is the instrument.</td><td>Part Three</td></tr>
+      <tr><td class="n">3</td><td class="k">Flow</td><td>Can the work move without stopping? Stoppage, not slowness, is what makes lead time long.</td><td>Part Four</td></tr>
+      <tr><td class="n">4</td><td class="k">Pull</td><td>Is work released by downstream demand, or pushed by upstream capacity and a plan?</td><td>Part Five</td></tr>
+      <tr><td class="n">5</td><td class="k">Perfection</td><td>Does the cycle repeat, with the standard rewritten each time? This is the principle that decides whether the first four survive.</td><td>Parts Seven and Ten</td></tr>
+    </table>
   </div>
 </section>
 
@@ -252,7 +263,7 @@ footer b{color:var(--gold-soft)}
 <div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>The anatomy of waste</h2></div></div>
 <section>
   <div class="wrap">
-    <p>Ohno catalogued seven wastes; modern practice adds an eighth. The list matters less than its structure: <strong>one of them is the root, and six are symptoms.</strong></p>
+    <p>Ohno catalogued <strong>seven</strong> wastes, and that is the canonical list; modern practice adds an eighth, unused talent, which is not Ohno's and is the one most relevant to knowledge work. The list matters less than its structure: <strong>one of them is the root, and the others are symptoms.</strong></p>
 
     <h4>Overproduction is the root waste</h4>
     <p>Producing more than is needed, earlier than it is needed, generates the other six. It creates inventory, which needs transport and motion, which hides defects, which forces waiting when the defect is finally found. Attack overproduction and the others shrink; attack the others individually and overproduction regenerates them.</p>
@@ -268,6 +279,29 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Defects</td><td>Scrap and rework</td><td>Rework loops, failed deliverables, change requests from unclear requirements</td></tr>
       <tr><td class="k">Unused talent</td><td>Ignored operator ideas</td><td>Experts doing administration; front-line insight never reaching decisions</td></tr>
     </table>
+
+    <h3>Making it visible — the value stream map</h3>
+    <p>The list above is a vocabulary. A value stream map is the instrument that locates the items in a specific process, and it is the second Lean principle made operational. It is drawn by walking the process, not by assembling it from what people say in a meeting — which is why the first draft almost always contradicts the official procedure.</p>
+    <p>A map carries three things at once, and the third is the one that does the work.</p>
+    <table>
+      <tr><th style="width:24%">Layer</th><th>What it records</th><th style="width:34%">What it reveals</th></tr>
+      <tr><td class="k">The work</td><td>Each step, in sequence, with who performs it</td><td>Handoffs — which are transport, and where the defects enter</td></tr>
+      <tr><td class="k">The information</td><td>What triggers each step: a signal, a schedule, a queue, an approval</td><td>Whether the stream is pulled or pushed, and where decisions wait on data</td></tr>
+      <tr><td class="k">The timeline</td><td>For each step, the time actually worked and the time elapsed before the next step starts</td><td>The ratio between the two, which is flow efficiency, and is the number the map exists to produce</td></tr>
+    </table>
+    <p>Two figures come out of the timeline. <strong>Process time</strong> is the total time anyone is actually working on the unit. <strong>Lead time</strong> is the elapsed time from the first step to the last. In administrative and project processes the first is typically between two and ten per cent of the second, and the gap is not idleness — it is queue. Everything in the waste table lives in that gap.</p>
+    <p>A useful map adds one more figure per step: the proportion of items arriving <strong>complete and accurate</strong>, needing no clarification or rework. A chain of steps each at 90% complete-and-accurate does not deliver 90%, and the arithmetic of that is in Part Four.</p>
+
+    <div class="note">
+      <span class="lbl">Current state, then future state</span>
+      The map of today is diagnosis. The second map — the future state — is the improvement plan, and it is what makes the exercise more than documentation. The discipline is that every difference between the two maps must be attributable to a named change with an owner. A future state nobody can trace back to specific interventions is a wish drawn in boxes.
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>The process worth mapping in a project organisation is rarely the delivery work itself. It is the surrounding administrative stream: the path from a change request to an approved change, from an invoice to a payment, from a defect report to a closed defect. These are repeatable, they are measurable, and they are where the elapsed time actually accumulates.</p>
+      <p style="margin-bottom:0">Map one of them end to end and the characteristic finding appears: four hours of work spread across three weeks, with the three weeks sitting in two approval queues that exist because of an authority limit nobody has revisited since it was set.</p>
+    </div>
 
     <h4>Muda is the symptom; mura and muri are the disease</h4>
     <p>Three Japanese terms, and executives usually learn only the first.</p>
@@ -303,7 +337,7 @@ footer b{color:var(--gold-soft)}
         <p style="margin-bottom:0">It usually improves both once queues collapse — and almost nobody reports it.</p>
       </div>
     </div>
-    <p>Flow efficiency is simply the share of elapsed time in which the unit is actually being worked on. You calculated yours in the pre-work. The figure is usually a shock the first time it is computed, and the shock is the point.</p>
+    <p>Flow efficiency is simply the share of elapsed time in which the unit is actually being worked on — process time over lead time, the ratio the value stream map in Part Three was built to produce. The figure is usually a shock the first time it is computed, and the shock is the point.</p>
 
     <h3>The physics of lead time</h3>
     <p>The relationship between utilisation and queue time is not a management opinion. It is a property of any system with variability, and it is steep:</p>
@@ -316,6 +350,43 @@ footer b{color:var(--gold-soft)}
     <div class="note">
       <span class="lbl">The sentence worth memorising</span>
       <strong>Variability must be absorbed by inventory, by capacity, or by time.</strong> Every organisation chooses one — usually without deciding to. Only one of the three is invisible in the P&amp;L, which is why it is the one most organisations choose by default.
+    </div>
+
+    <h3>The other half of the method — variation</h3>
+    <p>Everything above is about variability without naming its source, and this is where the Six Sigma half of Lean Six Sigma enters. Lean attacks the time the work spends not being worked on. Six Sigma attacks the <strong>dispersion</strong> of the process — and dispersion is precisely what makes lead time unpredictable. They are not alternative programmes. They are two attacks on the same quantity, which is why the integration is more than a brand.</p>
+
+    <h4>Two kinds of variation, and only one is a problem to be solved</h4>
+    <p>Shewhart's distinction governs everything that follows. <strong>Common-cause</strong> variation is inherent in the process as designed: it is the ordinary scatter a stable process produces, and no amount of investigating individual cases will reduce it, because every case has a different story and none of the stories is the cause. <strong>Special-cause</strong> variation comes from something that was not there before, and it can be found and removed.</p>
+    <p>The managerial consequence is uncomfortable and expensive to ignore. <strong>Reacting to common-cause variation as though it were special cause makes the process worse</strong>, because each reaction is an unplanned adjustment to a stable system. The monthly meeting that demands an explanation for every variance against target, favourable or adverse, is this error institutionalised — and it is the single most common misuse of a performance dashboard.</p>
+
+    <h4>Capability — the promise is the spread, not the average</h4>
+    <p>A process has a voice, which is its natural spread, and the customer has a requirement, which is a tolerance. Capability compares the two.</p>
+    <div class="eq">
+      <div class="f" style="font-size:clamp(20px,3.4vw,27px)">C<sub>p</sub> = (USL − LSL) / 6σ</div>
+      <div class="c">the width the customer allows, over the width the process produces</div>
+    </div>
+    <p>C<sub>p</sub> assumes the process is centred on the target. C<sub>pk</sub> removes that assumption and is therefore the one that matters, because a process can be admirably narrow and reliably in the wrong place. A conventional threshold is C<sub>pk</sub> ≥ 1.33, and the operational reading of it is simple: <strong>the average tells you almost nothing about what the customer will experience; the spread, relative to the tolerance, tells you everything.</strong></p>
+    <p>This transfers directly to services and to projects, where the tolerance is usually a promise rather than an engineering specification. A response committed at 48 hours with an average of 30 and a spread that reaches 90 is a process that will break its promise regularly while reporting comfortable averages every month.</p>
+
+    <h4>What a sigma level actually says</h4>
+    <table>
+      <tr><th style="width:20%">Sigma level</th><th style="width:22%">Defects per million</th><th style="width:20%">Right first time</th><th>What it means in practice</th></tr>
+      <tr><td class="k">3σ</td><td class="n">66,807</td><td class="n">93.3%</td><td>Typical of a process nobody has studied. Feels acceptable in isolation.</td></tr>
+      <tr><td class="k">4σ</td><td class="n">6,210</td><td class="n">99.38%</td><td>A well-run process with active controls.</td></tr>
+      <tr><td class="k">5σ</td><td class="n">233</td><td class="n">99.977%</td><td>Requires design changes, not vigilance.</td></tr>
+      <tr><td class="k">6σ</td><td class="n">3.4</td><td class="n">99.99966%</td><td>The benchmark the method is named after.</td></tr>
+    </table>
+    <p style="font-size:15px;color:#4A5B70">These figures follow the convention of allowing a 1.5σ long-term drift in the process mean, which is why 6σ corresponds to 3.4 defects per million rather than to the two-per-billion a static normal distribution would give. It is a convention, not a law, and it is worth knowing that it is one.</p>
+
+    <div class="note">
+      <span class="lbl">The arithmetic that makes the case to an executive</span>
+      Quality is almost never argued step by step; it is argued at the step and experienced across the chain. A twenty-step process in which <strong>every step is 99% right</strong> delivers a correct outcome <strong>81.8%</strong> of the time. At 99.38% per step — a 4σ process — it delivers 88.3%. At 99.9% per step it delivers 98.0%.<br><br>So the familiar objection, <em>our quality is already good</em>, is usually true at the step and false at the outcome. It also explains why removing steps is a quality intervention and not only a cost one: every handoff you delete is a term removed from that product.
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">Why the two halves need each other</span>
+      <p>Lean without Six Sigma removes steps and queues and then cannot hold the gain, because the variation that generated the queues is still there and rebuilds them as buffers. Six Sigma without Lean produces beautifully capable steps inside a process whose elapsed time is still ninety per cent waiting — a stable process delivering slowly and predictably.</p>
+      <p style="margin-bottom:0">The connection back to Part Two is direct. Reducing variation lowers cost through less rework, which moves the SOC edge; and it raises reliability and conformance, which moves the WTP edge. It is the same double movement the value stick predicted, now with a measurable instrument attached.</p>
     </div>
 
     <div class="bridge">
@@ -589,7 +660,7 @@ footer b{color:var(--gold-soft)}
         <span>Groups of three or four · 15 minutes to complete · 3 minutes to defend</span>
       </div>
       <div class="ab" id="canvas">
-        <p>The group picks <strong>one</strong> of the projects brought by its members and completes five fields. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
+        <p>The group picks <strong>one</strong> of the projects brought by its members and completes six fields, one of which is a short value stream sketch. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
         <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
 
         <div class="worksheet">
@@ -636,8 +707,33 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <h4>3 · The cost edge — name the waste</h4>
-        <p>Identify which of the eight wastes the project actually removes. Name it from the list; do not substitute a benefit for a waste.</p>
+        <h4>3 · Map the stream — where the time actually goes</h4>
+        <p>Sketch the process the project touches, at the level of three to six steps. You are not drawing a full value stream map in ten minutes; you are producing the two numbers a map exists to produce, and locating the gap between them.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-steps">The steps, in sequence</label>
+            <div class="hint">Three to six, each with who performs it. Separate them with arrows: request → triage → approval → execution.</div>
+            <input type="text" id="c-steps" data-section="The value stream" data-label="The steps in sequence" placeholder="step (who) → step (who) → step (who)">
+          </div>
+          <div class="field">
+            <label for="c-pt">Process time — the time anyone is actually working on it</label>
+            <div class="hint">Add up the hands-on time across the steps. An estimate the group can defend is enough.</div>
+            <input type="text" id="c-pt" data-section="The value stream" data-label="Process time" placeholder="e.g. about 4 hours">
+          </div>
+          <div class="field">
+            <label for="c-lt">Lead time — elapsed time from first step to last</label>
+            <div class="hint">Calendar time, not working time. The ratio of the two is your flow efficiency, and it is usually between two and ten per cent.</div>
+            <input type="text" id="c-lt" data-section="The value stream" data-label="Lead time" placeholder="e.g. about 3 weeks">
+          </div>
+          <div class="field">
+            <label for="c-gap">Where the gap sits</label>
+            <div class="hint">Name the one or two places that hold most of the elapsed time. That is where the project should be aimed, and it is frequently not where it is aimed today.</div>
+            <input type="text" id="c-gap" data-section="The value stream" data-label="Where the elapsed time sits" placeholder="The queue, the approval, the handoff">
+          </div>
+        </div>
+
+        <h4>4 · The cost edge — name the waste</h4>
+        <p>Now name which of the wastes lives in the gap you just located. Name it from the list; do not substitute a benefit for a waste.</p>
         <div class="worksheet">
           <div class="field">
             <label for="c-waste">Primary waste removed</label>
@@ -666,7 +762,7 @@ footer b{color:var(--gold-soft)}
         </div>
         <p style="font-size:15.5px"><strong>The test:</strong> "reduces costs" and "improves productivity" are not wastes — they are consequences. If the group cannot name a waste from the list, the project may be removing something real that nobody has yet defined, which is itself a finding worth reporting. And if the waste removed is <em>overproduction</em>, note it: that is the root waste, and the project is probably worth more than its business case claims.</p>
 
-        <h4>4 · What the project actually builds</h4>
+        <h4>5 · What the project actually builds</h4>
         <p>Decompose the deliverable into the three terms. Most projects touch more than one; few touch all three.</p>
         <div class="worksheet">
           <div class="field">
@@ -687,7 +783,7 @@ footer b{color:var(--gold-soft)}
         </div>
         <p style="font-size:15.5px"><strong>The test for C is strict.</strong> Training people to operate the new system is not capability — it is part of delivering the asset. Capability means the organisation ends the project <em>better at improving processes than it was before</em>: a routine that survives, a standard that is now owned, a group that can now run the next improvement without external help. Most projects leave C untouched, and that is a legitimate answer.</p>
 
-        <h4>5 · The verdict</h4>
+        <h4>6 · The verdict</h4>
         <div class="worksheet">
           <div class="field">
             <label for="c-replicate">How long before a competitor could replicate this?</label>
@@ -775,6 +871,12 @@ footer b{color:var(--gold-soft)}
     <p>Works cited in these notes and in the session.</p>
     <ul class="refs">
       <li>Brandenburger, A. M., &amp; Stuart, H. W. (1996). Value-based business strategy. <em>Journal of Economics &amp; Management Strategy</em>, 5(1), 5–24.</li>
+      <li>George, M. L. (2002). <em>Lean Six Sigma: Combining Six Sigma Quality with Lean Speed</em>. McGraw-Hill.</li>
+      <li>Rother, M., &amp; Shook, J. (1999). <em>Learning to See: Value Stream Mapping to Add Value and Eliminate Muda</em>. Lean Enterprise Institute.</li>
+      <li>Serra, C. E. M., &amp; Kunc, M. (2015). Benefits realisation management and its influence on project success and on the execution of business strategies. <em>International Journal of Project Management</em>, 33(1), 53–66.</li>
+      <li>Shewhart, W. A. (1931). <em>Economic Control of Quality of Manufactured Product</em>. Van Nostrand.</li>
+      <li>Whyte, J., Stasis, A., &amp; Lindkvist, C. (2016). Managing information and control in digitalised project environments. <em>Production Planning &amp; Control</em>, 27(16), 1345–1354.</li>
+      <li>Womack, J. P., &amp; Jones, D. T. (1996). <em>Lean Thinking: Banish Waste and Create Wealth in Your Corporation</em>. Simon &amp; Schuster.</li>
       <li>Garvin, D. A. (1987). Competing on the eight dimensions of quality. <em>Harvard Business Review</em>, 65(6), 101–109.</li>
       <li>Hill, T. (2000). <em>Manufacturing Strategy: Text and Cases</em> (3rd ed.). McGraw-Hill.</li>
       <li>Hopp, W. J., &amp; Spearman, M. L. (2004). To pull or not to pull: what is the question? <em>Manufacturing &amp; Service Operations Management</em>, 6(2), 133–148.</li>

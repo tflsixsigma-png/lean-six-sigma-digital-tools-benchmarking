@@ -25,7 +25,7 @@ Both group activities are fillable in the page: the canvases are forms, answers 
 
 One thesis runs across both sessions: operational efficiency is a consequence of strategic choice and of flow, not of utilisation — and the returns to assets and processes are proportional to a capability that cannot be purchased.
 
-The morning builds this from operations: Ohno's timeline and the anatomy of waste, the efficiency paradox and the physics of lead time, the Toyota Production System as a system of complementarities, DMAIC as the method for conducting improvement, and the translation of flow into invested capital.
+The morning builds this from operations: the five Lean principles and value stream mapping as the instrument that makes waste visible, Ohno's timeline and the anatomy of waste, the efficiency paradox and the physics of lead time, variation and process capability as the other half of the method, the Toyota Production System as a system of complementarities, DMAIC as the method for conducting improvement, and the translation of flow into invested capital.
 
 The afternoon tests it against what money can buy. Digital platforms are assets; benchmarking transfers processes. Neither moves the coefficient.
 

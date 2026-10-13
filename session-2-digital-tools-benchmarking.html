@@ -199,6 +199,24 @@ footer b{color:var(--gold-soft)}
       <div class="c">a platform enters the bracket · the coefficient is bought separately, or not at all</div>
     </div>
 
+    <h3>The landscape, in six categories</h3>
+    <p>The market is large, it changes faster than any syllabus, and nothing below is a recommendation. The categories are what matter, because <strong>the category tells you what a tool does and the VCAP term tells you what it is worth</strong>. The named products are examples only, offered so the categories are recognisable.</p>
+    <table>
+      <tr><th style="width:24%">Category</th><th style="width:26%">Examples</th><th style="width:26%">What it typically changes</th><th style="width:24%">Usual term</th></tr>
+      <tr><td class="k">Collaboration and work management</td><td>Asana, Monday, Trello, Planner, Jira</td><td>Visibility of tasks and ownership</td><td>A, and P if the flow of work is genuinely redesigned</td></tr>
+      <tr><td class="k">Scheduling and portfolio</td><td>MS Project, Primavera P6, Planview, Clarity</td><td>Baselines, dependencies, resource and portfolio views</td><td>A, occasionally P</td></tr>
+      <tr><td class="k">Analytics and dashboards</td><td>Power BI, Tableau, Looker</td><td>What leadership can see, and how often</td><td>A — and see the caution below</td></tr>
+      <tr><td class="k">Integration and the data layer</td><td>APIs, integration platforms, a warehouse or lakehouse</td><td>Where the authoritative version of each fact lives</td><td>Frequently the only genuine P in a programme</td></tr>
+      <tr><td class="k">Automation and workflow</td><td>Workflow engines, robotic process automation</td><td>Steps performed without a person</td><td>P, and A</td></tr>
+      <tr><td class="k">AI and assistive</td><td>Assistants, forecasting models, document generation, agents</td><td>Predictions, drafts, and increasingly actions</td><td>A — Parts Three and Four are about why</td></tr>
+    </table>
+    <p>Two observations that survive every change in the market. The least visible category — integration and the data layer — is the one that most often carries the real process change, and it is the one hardest to put in a business case because it demonstrates nothing on a screen. And the most visible category, dashboards, changes what is seen without changing what is done, unless somebody also changes the decision the dashboard feeds.</p>
+
+    <div class="note">
+      <span class="lbl">A caution on dashboards, carried over from this morning</span>
+      A dashboard reports variation; it does not distinguish the two kinds. A governance routine that demands an explanation for every movement against target — favourable or adverse — is treating common-cause variation as though it were special cause, which this morning established makes the process worse rather than better. The instrument is not the problem. The routine attached to it is, and the routine is a <strong>P</strong> decision that almost never appears in the tooling business case.
+    </div>
+
     <h3>The triage, applied to a tool</h3>
     <table>
       <tr><th style="width:17%">Term</th><th style="width:40%">What a tool contributes</th><th style="width:43%">The test</th></tr>
@@ -338,6 +356,11 @@ footer b{color:var(--gold-soft)}
 
     <p>Used <strong>before</strong> adoption, the chain is a checklist of conditions the organisation itself controls. Used <strong>after</strong>, it locates the link where the implementation failed — which is a different and more useful question than whether the model was accurate.</p>
 
+    <div class="bridge">
+      <span class="lbl">Condition 4 has a name in the project literature</span>
+      <p style="margin-bottom:0">Naming the indicator, its data source and its baseline before approval is <strong>benefits realisation management</strong>, and Serra and Kunc (2015) find that the practices which govern it are associated with project success and with the execution of business strategy — not with better delivery of outputs, which is the distinction that matters here. A digital investment appraised without it can be delivered on time, on budget, to specification, and still leave nothing to point at afterwards. Condition 4 is that finding written as a question somebody has to answer in writing.</p>
+    </div>
+
     <h3>Model accuracy does not separate success from failure</h3>
     <p>In the studies with no effect or an unfavourable one, predictive performance stayed high and stable wherever it was measured. Four mechanisms in the fit between tool and work explain them, and they group cleanly into the two middle conditions. The figures are from hospital implementations.</p>
     <table>
@@ -395,6 +418,29 @@ footer b{color:var(--gold-soft)}
 <section>
   <div class="wrap">
     <p class="lead">Benchmarking is conventionally practiced as corporate espionage or tourism: visiting high-performing firms, photographing their tools, buying their software, and pasting their org charts. That is why it fails.</p>
+
+    <h3>The method, before the critique</h3>
+    <p>Benchmarking has an established methodology, and the criticism that follows in this part is a criticism of how it is practised rather than of the method itself. Camp's formulation, from the Xerox programme that made the practice general, runs in four movements.</p>
+    <table>
+      <tr><th style="width:30px"></th><th style="width:20%">Phase</th><th>What it requires</th><th style="width:30%">Where it is usually skipped</th></tr>
+      <tr><td class="n">1</td><td class="k">Plan</td><td>Decide what to benchmark — a process, not a department — identify a comparator, and settle how the measure will be defined before anybody goes looking.</td><td>The comparator is chosen for prestige rather than for comparability.</td></tr>
+      <tr><td class="n">2</td><td class="k">Collect</td><td>Gather data on both sides using the same definition, and record the conditions under which each figure was produced.</td><td>Their figure is taken from a published source; ours is calculated differently.</td></tr>
+      <tr><td class="n">3</td><td class="k">Analyse</td><td>Establish the size of the gap and, far more importantly, the practice that produces it.</td><td>The gap is quantified and the practice is never identified. This is the fatal one.</td></tr>
+      <tr><td class="n">4</td><td class="k">Adapt</td><td>Set targets, change the practice, embed it, and re-measure.</td><td>Targets are set from the gap with no change to the practice that would close it.</td></tr>
+    </table>
+
+    <h4>Choosing the comparator</h4>
+    <p>Four kinds, in increasing order of difficulty and of payoff.</p>
+    <ul class="tight">
+      <li><strong>Internal</strong> — another unit, plant or region in the same organisation. Easiest access, most comparable conditions, smallest ceiling: it can only take you to the best you already are.</li>
+      <li><strong>Competitive</strong> — a direct rival. The most wanted and the least available, and the one most likely to converge the industry, for the reasons set out below.</li>
+      <li><strong>Functional</strong> — an organisation that performs the same function in a different industry.</li>
+      <li><strong>Generic</strong> — a process that is structurally analogous in a wholly unrelated setting. Xerox famously fixed its warehouse by studying a catalogue retailer rather than a competitor, and the distance is what made the practice visible instead of invisible.</li>
+    </ul>
+
+    <h4>Making the numbers comparable, and using international comparators</h4>
+    <p>Most benchmarking failures are arithmetic before they are strategic. Three corrections do most of the work: <strong>define the boundaries</strong> of the process identically on both sides — most on-time-delivery disputes are disputes about when the clock starts; <strong>normalise for scale and mix</strong>, since cost per unit across different volumes and product mixes is not one measure but two; and <strong>record the conditions</strong>, because a figure achieved under different regulation, labour markets or demand variability is not a target, it is a datum.</p>
+    <p>International comparators — standards bodies, professional-association survey data, published maturity studies — are useful for exactly one thing: establishing whether a gap exists at all, and roughly how large. They cannot tell you what produces it, because they report distributions rather than practices. Treating a percentile from a survey as an improvement objective is the error in phase 3 above, formalised and given a chart.</p>
 
     <h3>Why the copy-paste approach guarantees mediocrity</h3>
     <p>Returning to the NUMMI puzzle from Session 1: General Motors took tours of NUMMI for twenty years. They photographed the kanban boards, copied the andon lights, and replicated the physical workstations in their other plants. The other plants remained unproductive and combative.</p>
@@ -514,6 +560,11 @@ footer b{color:var(--gold-soft)}
     </table>
     <p>The three levels are Argyris and Schön's; the mapping onto Kata follows Michels and Forcellini (2023), who also note that empirical evidence for the link across varied contexts remains scarce. The second level is worth dwelling on, because it is the one that explains a cultural prerequisite rather than asserting it: double-loop learning requires questioning the governing norms, which an organisation that punishes error cannot do. People conceal mistakes and avoid risky experiments, and they are behaving rationally. <em>Yokoten</em> — circulating know-how across the organisation without restriction — is the complementary mechanism: it is what turns an individual's learning into collective property, and therefore what arrests the outflow Part Eight describes.</p>
 
+    <div class="note">
+      <span class="lbl">Where this meets another session of the module</span>
+      The experiment logic below overlaps deliberately with the Design Thinking session earlier in Module 3, which covers prototyping and rapid experimentation in their own right. It is repeated here for one reason: to connect the experiment to a <em>governance</em> question — what an early-stage initiative can honestly take to a finance committee — and then to hand it to the Kata routine, which is what keeps experimentation running after the workshop energy has gone.
+    </div>
+
     <h3>When the path is unknown, what do you take to the CFO?</h3>
     <p>The Complex domain creates a governance problem, not only a method problem: an early-stage initiative cannot produce the ROI projection that approval requires. The financial argument is sound and rarely made. Early-stage innovation ROI is by definition zero or negative — exactly like any asset under construction that does not yet generate cash flow. The real exposure is not the provisional negative return; it is the risk of building something for which there is no demand, and that risk is only reduced by early validation. Validated learning is therefore best presented as <strong>capital-risk reduction</strong>: each hypothesis confirmed raises the probability of a positive return on the total investment.</p>
     <table>
@@ -557,8 +608,10 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">VCAP triage</td><td>Does this change what we own, how work flows, or what we are able to improve? Most honest answers land on the first two.</td><td>This morning's identity, V = C × (A + P)</td></tr>
       <tr><td class="k">Philosophical debt</td><td>Where the tool contains AI: has anyone written down what it should want, what it may count as knowing, and what it is able to see?</td><td>Part Three — Schrage &amp; Kiron's three pillars</td></tr>
       <tr><td class="k">The six conditions</td><td>Where the tool contains AI: at which link does the chain from a working model to a result currently break, or go unmeasured?</td><td>Part Four — the six-condition chain</td></tr>
-      <tr><td class="k">The reference</td><td>What does somebody already do that we do not — the routine, not the number — and what would have to be true here for it to work?</td><td>Part Five — internal stickiness, causal ambiguity, time compression</td></tr>
+      <tr><td class="k">The reference</td><td>What does somebody already do that we do not — the routine, not the number — and what would have to be true here for it to work?</td><td>Part Five — the method, then internal stickiness, causal ambiguity and time compression</td></tr>
+      <tr><td class="k">Maturity and roadmap</td><td>Which capability gaps most constrain performance, and in what order can they credibly be closed over six months?</td><td>The six conditions read across, plus strategic value against feasibility</td></tr>
     </table>
+    <p>The fifth layer is where the instrument stops being about one tool. Read across, the six conditions are a maturity statement about the organisation — which conditions it can satisfy and demonstrate, which it satisfies without evidence, and which it has never observed. The instrument deliberately produces no composite maturity score: a single figure would conceal the only thing worth knowing, which is <em>where</em> the chain stops. The roadmap then sequences the three largest gaps by strategic value against feasibility, which is the output the module's assignment asks for.</p>
 
     <p>The two AI layers do different work and the instrument keeps them apart deliberately. The pillars ask whether anything was <em>articulated</em>; the six conditions ask whether anything was <em>measured</em>. A tool can pass the first and fail the second — a clearly stated purpose whose output reaches nobody in time — and it can pass the second and fail the first, which is the more dangerous case: a chain that demonstrably moves an indicator, with no one able to say which other indicator is paying for it.</p>
 
@@ -672,6 +725,11 @@ footer b{color:var(--gold-soft)}
       <li>Nelson, R. R., &amp; Winter, S. G. (1982). <em>An Evolutionary Theory of Economic Change</em>. Harvard University Press.</li>
       <li>Polanyi, M. (1966). <em>The Tacit Dimension</em>. Doubleday.</li>
       <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Camp, R. C. (1989). <em>Benchmarking: The Search for Industry Best Practices That Lead to Superior Performance</em>. ASQC Quality Press.</li>
+      <li>Project Management Institute. (2021). <em>Pulse of the Profession: The Power of Digital PM</em>. PMI.</li>
+      <li>Serra, C. E. M., &amp; Kunc, M. (2015). Benefits realisation management and its influence on project success and on the execution of business strategies. <em>International Journal of Project Management</em>, 33(1), 53&ndash;66.</li>
+      <li>Westerman, G., Bonnet, D., &amp; McAfee, A. (2014). <em>Leading Digital: Turning Technology into Business Transformation</em>. Harvard Business Review Press.</li>
+      <li>Whyte, J., Stasis, A., &amp; Lindkvist, C. (2016). Managing information and control in digitalised project environments. <em>Production Planning &amp; Control</em>, 27(16), 1345&ndash;1354.</li>
       <li>Argyris, C., &amp; Sch&ouml;n, D. A. (1978). <em>Organizational Learning: A Theory of Action Perspective</em>. Addison-Wesley.</li>
       <li>Lima, T. F., &amp; Araujo, C. A. S. <em>Artificial intelligence adoption and hospital management outcomes: a systematic review and an analytical framework for appraising implementations</em>. COPPEAD/UFRJ. Manuscript in preparation. (Source of the six-condition chain in Part Four.)</li>
       <li>Michels, V., &amp; Forcellini, F. A. (2023). Toyota Kata and organizational learning: a bibliometric review. <em>Brazilian Journal of Business</em>.</li>

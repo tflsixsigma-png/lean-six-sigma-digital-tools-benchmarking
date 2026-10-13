@@ -46,6 +46,8 @@ td.k{font-weight:700;color:var(--navy);white-space:nowrap}
 .sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
 .sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
 @media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.grid3{grid-template-columns:1fr}}
 .note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
 .note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
 .eq{background:var(--ink);color:#fff;border-radius:9px;padding:22px;margin:20px 0;text-align:center}
@@ -106,7 +108,7 @@ footer b{color:var(--gold-soft)}
   <div class="wrap">
     <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
     <h1>Digital Tool Appraisal</h1>
-    <p class="sub">An instrument for deciding what a digital tool — including an AI system — actually changes in your organisation, and what it quietly leaves undone.</p>
+    <p class="sub">An instrument for deciding what a digital tool — including an AI system — actually changes in your organisation, what it quietly leaves undone, and which capability gaps to close first.</p>
     <a class="back" href="index.html">← Back to the 17 October material</a>
   </div>
 </header>
@@ -114,7 +116,7 @@ footer b{color:var(--gold-soft)}
 <section>
   <div class="wrap">
     <p class="lead">Four questions decide whether a digital investment returns anything. Does it change what the organisation <em>is able to do</em>, or only what it <em>owns</em>? Where it contains AI: what has the system been told to want, to know, and to see — and at which link does the chain from a working model to a result actually break? And what is the reference already doing that you are not: the routine, not the number?</p>
-    <p>This instrument asks all four. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
+    <p>This instrument asks all four, and then turns the answers outward: a capability maturity read of the organisation rather than of the tool, and a six-month roadmap across the three gaps that most constrain performance. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
   </div>
 </section>
 
@@ -359,8 +361,9 @@ footer b{color:var(--gold-soft)}
             </div>
           </div>
 
-          <h4 style="margin-top:28px">4 · The six conditions</h4>
+          <h4 style="margin-top:28px">4 · Capability maturity — the six conditions</h4>
           <p style="font-size:15.5px;color:#4A5B70">The chain from a working model to an organisational result, after Lima &amp; Araujo (COPPEAD/UFRJ, manuscript in preparation). Each condition is necessary and none is sufficient, so the useful answer is the <em>first</em> one that is not a clear yes. <strong>Not measured</strong> is a legitimate and common answer — and a more tractable finding than a failure.</p>
+          <p style="font-size:15.5px;color:#4A5B70">Read across, the six answers <em>are</em> a maturity statement, and a more defensible one than a stage number: they say which conditions this organisation can currently satisfy and demonstrate, which it satisfies without evidence, and which it has never observed. There is no composite score here on purpose. A single figure would hide the only thing worth knowing, which is <em>where</em> the chain stops.</p>
 
           <div class="block">
             <div class="field">
@@ -502,7 +505,71 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <h4>6 · The verdict</h4>
+        <h4>6 · Capability gaps and the six-month roadmap</h4>
+        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one by the two axes that actually decide sequence.</p>
+        <div class="block">
+          <div class="field">
+            <label for="r-g1">Gap 1</label>
+            <input type="text" id="r-g1" data-section="The roadmap" data-label="Gap 1" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v1">Gap 1 — strategic value, feasibility, and when</label>
+            <div class="grid3">
+              <select id="r-v1" data-section="The roadmap" data-label="Gap 1 strategic value">
+                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-f1" data-section="The roadmap" data-label="Gap 1 feasibility">
+                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-h1" data-section="The roadmap" data-label="Gap 1 horizon">
+                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g2">Gap 2</label>
+            <input type="text" id="r-g2" data-section="The roadmap" data-label="Gap 2" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v2">Gap 2 — strategic value, feasibility, and when</label>
+            <div class="grid3">
+              <select id="r-v2" data-section="The roadmap" data-label="Gap 2 strategic value">
+                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-f2" data-section="The roadmap" data-label="Gap 2 feasibility">
+                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-h2" data-section="The roadmap" data-label="Gap 2 horizon">
+                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g3">Gap 3</label>
+            <input type="text" id="r-g3" data-section="The roadmap" data-label="Gap 3" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v3">Gap 3 — strategic value, feasibility, and when</label>
+            <div class="grid3">
+              <select id="r-v3" data-section="The roadmap" data-label="Gap 3 strategic value">
+                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-f3" data-section="The roadmap" data-label="Gap 3 feasibility">
+                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              </select>
+              <select id="r-h3" data-section="The roadmap" data-label="Gap 3 horizon">
+                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-first">What has to be true by the end of month two?</label>
+            <div class="hint">One sentence, measurable. A roadmap whose first checkpoint cannot be stated is a list of intentions with dates attached.</div>
+            <textarea id="r-first" data-section="The roadmap" data-label="The month-two checkpoint"></textarea>
+          </div>
+        </div>
+
+        <h4>7 · The verdict</h4>
         <div class="block">
           <div class="field">
             <label for="t-debt">Where is the largest debt?</label>
@@ -700,6 +767,38 @@ footer b{color:var(--gold-soft)}
       var act = document.getElementById('k-3b');
       if (act && !act.value.trim()) {
         out.push('You have not written the action sentence: when the output says X, who does what, using what. Until that sentence exists, the project has identified a capability rather than a benefit.');
+      }
+    }
+
+    var VAL = {H:'high', M:'medium', L:'low'};
+    var seq = [];
+    for (var g = 1; g <= 3; g++) {
+      var name = (document.getElementById('r-g' + g).value || '').trim();
+      var v = document.getElementById('r-v' + g).value;
+      var f = document.getElementById('r-f' + g).value;
+      var h = document.getElementById('r-h' + g).value;
+      if (name || v || f || h) seq.push({n: name || 'Gap ' + g, v: v, f: f, h: h});
+    }
+    if (seq.length) {
+      var quickWins = seq.filter(function(x){ return x.v === 'H' && x.f === 'H'; });
+      var hard = seq.filter(function(x){ return x.v === 'H' && x.f === 'L'; });
+      var filler = seq.filter(function(x){ return x.v === 'L' && x.f === 'H'; });
+      if (quickWins.length) {
+        out.push('High value and high feasibility: <b>' + quickWins.map(function(x){return x.n;}).join('; ') + '</b>. These belong in the first two months — not because they are easy, but because an early demonstrated result is what buys the patience the harder items will need.');
+      }
+      if (hard.length) {
+        var early = hard.filter(function(x){ return x.h === 'Months 0–2'; });
+        if (early.length) {
+          out.push('<b>' + early.map(function(x){return x.n;}).join('; ') + '</b>: high value, low feasibility, scheduled in the first two months. That ordering is the commonest way a roadmap loses its sponsor. Either break it into a part that is feasible now, or move it later and say openly what has to change first.');
+        } else {
+          out.push('High value and low feasibility: <b>' + hard.map(function(x){return x.n;}).join('; ') + '</b>. Time compression diseconomies apply — this is accumulated, not purchased, so the honest plan states the condition that has to be built rather than the date it is wanted by.');
+        }
+      }
+      if (filler.length && !quickWins.length) {
+        out.push('Your most feasible items are also your least valuable. A roadmap made of these delivers visible activity and no change in position, which is the failure mode that is hardest to detect from inside.');
+      }
+      if (!document.getElementById('r-first').value.trim()) {
+        out.push('The month-two checkpoint is blank. A roadmap whose first verifiable outcome cannot be written in one sentence is a list of intentions with dates attached.');
       }
     }
 
