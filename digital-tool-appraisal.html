@@ -106,8 +106,8 @@ footer b{color:var(--gold-soft)}
 
 <section>
   <div class="wrap">
-    <p class="lead">Two questions decide whether a digital investment returns anything. The first is whether it changes what the organisation <em>is able to do</em>, or only what it <em>owns</em>. The second applies when the tool contains AI, and it is the one almost nobody asks: what has this system been told to want, to know, and to see?</p>
-    <p>This instrument asks both. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
+    <p class="lead">Three questions decide whether a digital investment returns anything. Does it change what the organisation <em>is able to do</em>, or only what it <em>owns</em>? Where it contains AI: what has the system been told to want, to know, and to see? And what is the reference already doing that you are not — the routine, not the number?</p>
+    <p>This instrument asks all three. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
   </div>
 </section>
 
@@ -337,7 +337,55 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <h4>4 · The verdict</h4>
+        <h4>4 · The reference</h4>
+        <p style="font-size:15.5px;color:#4A5B70">Somebody already does this well. The question is not what their number is, but what routine produces it — and what you would have to accumulate before that routine would work here.</p>
+        <div class="block">
+          <div class="field">
+            <label for="b-ref">Who, or what standard?</label>
+            <div class="hint">The most useful reference is often outside your industry. Xerox fixed its warehouse by studying a catalogue retailer, not a competitor.</div>
+            <input type="text" id="b-ref" data-section="The reference" data-label="The reference" placeholder="An organisation, or a published standard">
+          </div>
+          <div class="field">
+            <label for="b-what">What does the reference do that you do not?</label>
+            <div class="hint">The practice, not the indicator. "They are 30% faster" is a number; "they review the representation quarterly with a named owner" is a practice.</div>
+            <textarea id="b-what" data-section="The reference" data-label="What the reference does that we do not"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-term">Would you be copying an asset, a process, or a rule-in-use?</label>
+            <select id="b-term" data-section="The reference" data-label="What would be copied">
+              <option value="">Select one</option>
+              <option>A — an asset we would buy</option>
+              <option>P — a process we would document and copy</option>
+              <option>C — a rule-in-use we would have to build</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-condition">What would have to be true here for that practice to work?</label>
+            <div class="hint">The absorption condition. Transfer fails for knowledge reasons far more often than motivational ones — including between two units of the same company.</div>
+            <textarea id="b-condition" data-section="The reference" data-label="Absorption condition"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-howlong">How long did the reference take to build it?</label>
+            <select id="b-howlong" data-section="The reference" data-label="Time the reference took">
+              <option value="">Select one</option>
+              <option>Months</option>
+              <option>A few years</option>
+              <option>A decade or more</option>
+              <option value="flag-howlong">Unknown — nobody here knows</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-decision">Adopt, adapt or discard</label>
+            <select id="b-decision" data-section="The reference" data-label="Adopt, adapt or discard">
+              <option value="">Select one</option>
+              <option>Adopt — conditions are already in place</option>
+              <option>Adapt — translate it to our context</option>
+              <option>Discard — it depends on conditions we do not have and cannot reasonably accumulate</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>5 · The verdict</h4>
         <div class="block">
           <div class="field">
             <label for="t-debt">Where is the largest debt?</label>
@@ -508,6 +556,18 @@ footer b{color:var(--gold-soft)}
       if (!document.getElementById('p-missing').value.trim()) {
         out.push('You have not named a variable the system cannot see. Either the representation is unusually complete, or nobody has looked — and the second is far more common.');
       }
+    }
+
+    if (flagged('b-howlong')) {
+      out.push('Nobody here knows how long the reference took. Until somebody does, you do not yet know what you are proposing to replicate — and a plan built on that gap is a budget problem disguised as a schedule.');
+    }
+    var bTerm = document.getElementById('b-term').value;
+    var bDec = document.getElementById('b-decision').value;
+    if (bTerm.indexOf('C —') === 0 && bDec.indexOf('Adopt') === 0) {
+      out.push('You are proposing to <b>adopt</b> something you classified as a <b>rule-in-use</b>. Rules-in-use are the part that does not transfer by observation — if the conditions really are already in place, say which ones; if not, this is an adapt, with time attached.');
+    }
+    if (bDec.indexOf('Discard') === 0) {
+      out.push('<b>Discard</b> is a finding, not a failure. Record why: the condition the practice depends on, and whether it is one you could accumulate if you decided to.');
     }
 
     var body = document.getElementById('readout-body');

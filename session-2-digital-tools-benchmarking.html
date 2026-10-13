@@ -348,153 +348,64 @@ footer b{color:var(--gold-soft)}
 </section>
 
 <!-- 6 EXECUTION OPTIMIZATION CHALLENGE -->
-<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Structured Activity — The Digital &amp; Safety Canvas</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Structured activity — the Digital Tool Appraisal</h2></div></div>
 <section>
   <div class="wrap">
-    <p class="lead">In this structured group challenge (the foundation of the module's Execution Optimization Challenge), you will take the project evaluated this morning in The Value Case and stress-test its digital enablement, safety resilience, and benchmarking rigor.</p>
+    <p class="lead">The morning asked whether a project was worth funding. This afternoon asks a harder question about the same project: of the digital tooling it depends on, what is actually being bought — and what is being left undone?</p>
 
-    <div class="activity">
-      <div class="ah">
-        <b>The Digital &amp; Safety Execution Canvas</b>
-        <span>Groups of three or four · 20 minutes to complete · 3 minutes to present</span>
+    <div class="note">
+      <span class="lbl">The instrument</span>
+      The appraisal is a separate page, fillable and exportable in the same way as the morning's canvas: <a href="digital-tool-appraisal.html"><strong>Digital Tool Appraisal</strong></a>. Open it now. It carries its own instructions; what follows is why it asks what it asks.
+    </div>
+
+    <h3>Three layers, and why they are one instrument</h3>
+    <p>The appraisal does not inventory features. A list of whether the tool has a poka-yoke, how many systems people toggle between and whether an andon exists is an audit, and an audit is work for one person with a checklist — not for four senior managers with twenty minutes. What four senior managers can do that a checklist cannot is <strong>judge</strong>, and the three layers each force a judgement that is uncomfortable to make honestly.</p>
+
+    <table>
+      <tr><th style="width:24%">Layer</th><th style="width:38%">The judgement it forces</th><th style="width:38%">Where it comes from</th></tr>
+      <tr><td class="k">VCAP triage</td><td>Does this change what we own, how work flows, or what we are able to improve? Most honest answers land on the first two.</td><td>This morning's identity, V = C × (A + P)</td></tr>
+      <tr><td class="k">Philosophical debt</td><td>Where the tool contains AI: has anyone written down what it should want, what it may count as knowing, and what it is able to see?</td><td>Schrage &amp; Kiron's three pillars — teleology, epistemology, ontology</td></tr>
+      <tr><td class="k">The reference</td><td>What does somebody already do that we do not — the routine, not the number — and what would have to be true here for it to work?</td><td>Part Four of these notes: internal stickiness, causal ambiguity, time compression</td></tr>
+    </table>
+
+    <h3>Why the AI layer belongs in a benchmarking session</h3>
+    <p>Because AI is the extreme case of the argument this day has been making. It is the most expensive asset an organisation can buy, and the one whose return depends most completely on a capability that cannot be bought with it.</p>
+    <p>Schrage and Kiron put the claim sharply: the binding constraint on value from AI is not technical but philosophical. Organisations invest heavily in algorithms, data and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. Those unarticulated assumptions compound — and the parallel with technical debt is exact in form and instructive in its difference.</p>
+
+    <div class="eq">
+      <div class="f">Technical debt accumulates in A and P.<br>Philosophical debt accumulates where C should be.</div>
+      <div class="c">a shortcut in the artefact, versus an absence in the organisation</div>
+    </div>
+
+    <p>Technical debt is a compromise somebody made and could document. Philosophical debt is the absence of the documentation itself: nobody wrote down the hierarchy of purposes, so nobody can audit it, so nobody can improve it. An organisation that cannot say what its system is optimising for has no object on which to run an improvement routine. That is a deficit in C, arriving dressed as a purchase of A.</p>
+
+    <h3>The three pillars, and where you have already met them</h3>
+    <p>Each pillar restates, in another vocabulary, something these two sessions have already established. That is the reason to take them seriously rather than as a separate topic bolted on at the end of a day about operations.</p>
+    <table>
+      <tr><th style="width:21%">Pillar</th><th style="width:40%">What it governs</th><th style="width:39%">Where it already appears</th></tr>
+      <tr><td class="k">Teleology</td><td>What the system should achieve — the hierarchy of purposes, and what happens when objectives conflict</td><td>Order winners and qualifiers. A system optimising the wrong metric is one whose purposes were never ranked.</td></tr>
+      <tr><td class="k">Epistemology</td><td>What counts as valid knowledge — how it is acquired, validated, and how certainty is expressed</td><td>The digital andon. A system that knows when it does not know, and escalates, <em>is</em> signalling at the source.</td></tr>
+      <tr><td class="k">Ontology</td><td>How the system represents reality — which entities it recognises, which variables do not exist for it</td><td>Causal ambiguity. Representing a supplier by price and lead time alone is the error of benchmarking the indicator instead of the practice.</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">The failure these three predict</span>
+      A sourcing system optimised for cost and delivery which, two years on, has systematically excluded suppliers in regions the firm's own strategy prioritised. The fault is not in the model. The hierarchy of objectives was never written down, so the trade-off was resolved by default — and silently, because nothing in the architecture was built to surface it.
+    </div>
+
+    <h3>What to expect</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>"Not documented" will be the honest answer</h4>
+        <p style="margin-bottom:0">Most groups find that nobody can say what the system optimises for when objectives conflict. That is the finding, not a failure of the exercise — and it is cheap to fix before deployment and expensive afterwards, once the organisation has two years of decisions made under the implicit hierarchy.</p>
       </div>
-      <div class="ab" id="canvas">
-        <p>Apply the five diagnostic filters below to your selected project deliverable.</p>
-        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
-
-        <div class="worksheet">
-          <div class="field">
-            <label for="d-tooling">1 · Project and digital tooling</label>
-            <div class="hint">Which platform or toolchain is being deployed, and what specific workflow does it automate?</div>
-            <input type="text" id="d-tooling" data-section="Project and digital tooling" data-label="Platform and workflow automated" placeholder="One line">
-          </div>
-        </div>
-
-        <h4>2 · Digital waste and latency audit</h4>
-        <p>Examine where the platform risks introducing digital muda rather than removing physical waste.</p>
-        <div class="worksheet">
-          <div class="field">
-            <label for="d-waste">Primary digital waste it risks creating</label>
-            <select id="d-waste" data-section="Digital waste" data-label="Primary digital waste risked">
-              <option value="">Select one</option>
-              <option>Overproduction — reports and data nobody reads</option>
-              <option>Waiting — approval lag and decision latency</option>
-              <option>Transport — handoffs across disconnected systems</option>
-              <option>Over-processing — redundant fields and approval matrices</option>
-              <option>Inventory — unprocessed tickets and open items</option>
-              <option>Motion — context switching and hunting for the source</option>
-              <option>Defects — re-entry errors and configuration faults</option>
-              <option>Unused talent — specialists reconciling data</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="d-wip">WIP constraint mechanism</label>
-            <div class="hint">How does the tool limit how much work is in progress? "It does not" is a common and important answer.</div>
-            <input type="text" id="d-wip" data-section="Digital waste" data-label="WIP constraint mechanism" placeholder="The mechanism, or none">
-          </div>
-          <div class="field">
-            <label for="d-switch">Context switching</label>
-            <div class="hint">How many separate systems must someone open to answer "what is the status"?</div>
-            <input type="text" id="d-switch" data-section="Digital waste" data-label="Context switching" placeholder="A number, and which systems">
-          </div>
-        </div>
-
-        <h4>3 · Safety and high-reliability mechanisms</h4>
-        <p>Evaluate whether the system is designed to fail safely and to surface anomalies immediately.</p>
-        <div class="worksheet">
-          <div class="field">
-            <label for="d-poka">Digital poka-yoke present?</label>
-            <div class="hint">A hard constraint that makes the error impossible — not a warning that can be dismissed.</div>
-            <input type="text" id="d-poka" data-section="Safety mechanisms" data-label="Digital poka-yoke" placeholder="Yes and the mechanism, or no">
-          </div>
-          <div class="field">
-            <label for="d-andon">Digital andon</label>
-            <div class="hint">Who can halt progression, and how fast?</div>
-            <input type="text" id="d-andon" data-section="Safety mechanisms" data-label="Digital andon" placeholder="Who, and how quickly">
-          </div>
-          <div class="field">
-            <label for="d-latency">Latency from anomaly to leadership awareness</label>
-            <select id="d-latency" data-section="Safety mechanisms" data-label="Anomaly-to-awareness latency">
-              <option value="">Select one</option>
-              <option>Seconds — automatic signalling at the source</option>
-              <option>Hours</option><option>Days</option>
-              <option>The next weekly report</option><option>The next monthly report</option>
-              <option>Only when the consequence arrives</option>
-            </select>
-          </div>
-        </div>
-
-        <h4>4 · Benchmarking rigour — decoding rules-in-use</h4>
-        <p>Test whether the project copies surface features or builds institutional rules.</p>
-        <div class="worksheet">
-          <div class="field">
-            <label for="d-reference">The reference</label>
-            <div class="hint">An organisation or a standard. Remember that the most useful reference is often outside your industry.</div>
-            <input type="text" id="d-reference" data-section="Benchmarking rigour" data-label="The reference" placeholder="Who, or which standard">
-          </div>
-          <div class="field">
-            <label for="d-apc">Is this copying an asset, a process, or a rule-in-use?</label>
-            <select id="d-apc" data-section="Benchmarking rigour" data-label="A, P or C">
-              <option value="">Select one</option>
-              <option>A — an asset we would buy</option>
-              <option>P — a process we would document and copy</option>
-              <option>C — a rule-in-use we would have to build</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="d-tacit">What tacit capability must be built for this to work here?</label>
-            <input type="text" id="d-tacit" data-section="Benchmarking rigour" data-label="Tacit capability required" placeholder="One line">
-          </div>
-        </div>
-
-        <h4>5 · The benchmarking verdict</h4>
-        <p>This morning you decided whether to fund the project. That decision stands. The question here is different: <strong>what do you do with the reference you just examined?</strong></p>
-        <div class="worksheet">
-          <div class="field">
-            <label for="d-does">What does the reference do that you do not?</label>
-            <div class="hint">The practice, not the indicator.</div>
-            <textarea id="d-does" data-section="The verdict" data-label="What the reference does that we do not"></textarea>
-          </div>
-          <div class="field">
-            <label for="d-condition">What would have to be true here for that practice to work?</label>
-            <div class="hint">The absorption condition.</div>
-            <textarea id="d-condition" data-section="The verdict" data-label="Absorption condition"></textarea>
-          </div>
-          <div class="field">
-            <label for="d-howlong">How long did the reference take to build it?</label>
-            <select id="d-howlong" data-section="The verdict" data-label="Time the reference took">
-              <option value="">Select one</option>
-              <option>Months</option><option>A few years</option><option>A decade or more</option>
-              <option>Unknown — nobody in the group knows</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="d-decision">Adopt, adapt or discard</label>
-            <select id="d-decision" data-section="The verdict" data-label="Decision">
-              <option value="">Select one</option>
-              <option>Adopt</option><option>Adapt</option><option>Discard</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="d-step">If adopt or adapt: the first step, and who owns it</label>
-            <input type="text" id="d-step" data-section="The verdict" data-label="First step and owner" placeholder="One line">
-          </div>
-        </div>
-        <p style="margin-bottom:0;font-size:15.5px"><strong>Two answers are legitimate and often correct.</strong> <em>Discard</em>, when the practice depends on conditions your organisation does not have and cannot reasonably accumulate — saying so is a finding, not a failure. And <em>unknown</em> for the third line: if nobody knows how long the reference took, you do not yet know what you are proposing to replicate.</p>
-      </div>
-      <div class="exportbar">
-        <div class="field">
-          <label for="d-group">Group</label>
-          <input type="text" id="d-group" data-label="Group" placeholder="Names, or a group number">
-        </div>
-        <div class="btnrow">
-          <button type="button" class="primary" id="d-download">Download the canvas</button>
-          <button type="button" class="ghost" id="d-copy">Copy as text</button>
-          <button type="button" class="ghost" id="d-clear">Clear</button>
-        </div>
-        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download before closing the tab.</p>
+      <div class="card">
+        <h4>Most tools will land on A, or A and P</h4>
+        <p style="margin-bottom:0">That is a correctly identified purchase, not a weakness. What it means is that a competitor with the same budget can hold the same position — so the business case should be argued on that basis rather than on advantage.</p>
       </div>
     </div>
+
+    <p>Bring the exported appraisal with you. Together with the morning's Value Case it is the input to the module's Execution Optimization Challenge.</p>
   </div>
 </section>
 
@@ -567,6 +478,8 @@ footer b{color:var(--gold-soft)}
       <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
       <li>Reason, J. (1997). <em>Managing the Risks of Organizational Accidents</em>. Ashgate Publishing.</li>
       <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
+      <li>Schrage, M., &amp; Kiron, D. (2024). Is philosophy the next LLM training frontier? <em>MIT Initiative on the Digital Economy</em>.</li>
+      <li>Schrage, M., &amp; Kiron, D. (2025). Philosophy eats AI. <em>MIT Sloan Management Review</em>.</li>
       <li>Shingo, S. (1986). <em>Zero Quality Control: Source Inspection and the Poka-Yoke System</em>. Productivity Press.</li>
       <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
       <li>Szulanski, G. (1996). Exploring internal stickiness: Impediments to the transfer of best practice within the firm. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
@@ -585,86 +498,6 @@ footer b{color:var(--gold-soft)}
     Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
   </div>
 </footer>
-
-<script>
-(function(){
-  var root = document.getElementById('canvas');
-  if (!root) return;
-  var KEY = 'sorbonne-digital-canvas-v1';
-  var group = document.getElementById('d-group');
-  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
-  var all = group ? fields.concat([group]) : fields;
-
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
-  } catch (e) {}
-
-  function save(){
-    try {
-      var o = {};
-      all.forEach(function(f){ o[f.id] = f.value; });
-      localStorage.setItem(KEY, JSON.stringify(o));
-    } catch (e) {}
-  }
-  all.forEach(function(f){
-    f.addEventListener('input', save);
-    f.addEventListener('change', save);
-  });
-
-  function build(){
-    var out = ['# The Digital & Safety Canvas', '', 'Digital Tools & Benchmarking — Module 3, Session 4', '17 October 2026 · Sorbonne Business School / IDGP Academy', ''];
-    out.push('**Group:** ' + ((group && group.value.trim()) || '—'));
-    var section = '';
-    fields.forEach(function(f){
-      var sec = f.getAttribute('data-section') || '';
-      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
-      out.push('- **' + f.getAttribute('data-label') + ':** ' + (f.value.trim() || '—'));
-    });
-    out.push('');
-    return out.join('\n');
-  }
-
-  function slug(){
-    var g = (group && group.value.trim()) || 'group';
-    return g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'group';
-  }
-
-  function flash(btn, msg){
-    var old = btn.textContent;
-    btn.textContent = msg;
-    setTimeout(function(){ btn.textContent = old; }, 2200);
-  }
-
-  document.getElementById('d-download').addEventListener('click', function(){
-    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'digital-safety-canvas-' + slug() + '.md';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
-  });
-
-  document.getElementById('d-copy').addEventListener('click', function(){
-    var btn = this, text = build();
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){ flash(btn, 'Copied'); })
-        .catch(function(){ window.prompt('Copy the canvas:', text); });
-    } else {
-      window.prompt('Copy the canvas:', text);
-    }
-  });
-
-  document.getElementById('d-clear').addEventListener('click', function(){
-    if (!window.confirm('Clear every field on this canvas?')) return;
-    all.forEach(function(f){ f.value = ''; });
-    save();
-  });
-})();
-</script>
 
 </body>
 </html>
