@@ -20,7 +20,6 @@ Both group activities are fillable in the page: the canvases are forms, answers 
 | Text | Status |
 |---|---|
 | [Excelência Operacional: da Estratégia à Execução](https://atenaeditora.com.br/catalogo/ebook/excelencia-operacional-da-estrategia-a-execucao-operacoes-servicos-melhoria-continua-e-inteligencia-artificial) (Atena Editora, 2026) | Published, open access — the citable source of the VCAP framework |
-| [`book-chapter-7.html`](book-chapter-7.html) — *O que não se copia*, Ch. 7 | Manuscript in preparation; further reading, **not** a citable source |
 
 ## The argument
 
