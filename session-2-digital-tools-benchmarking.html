@@ -125,6 +125,18 @@ ol.tight li{margin-bottom:8px}
 .chain span.end{background:var(--gold);color:var(--ink);font-weight:700}
 .chain i{color:var(--navy);font-style:normal;font-weight:700}
 
+.sixchain{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:22px 0 10px}
+.sixchain .st{background:var(--navy);color:#fff;border-radius:7px;padding:13px 11px;border-top:5px solid #8BA4C0}
+.sixchain .st.cap{background:var(--ink);border-top-color:var(--gold)}
+.sixchain .st .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-soft);font-weight:700;display:block}
+.sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
+.sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.sixchain strong{color:#fff}
+.chainkey{display:flex;gap:20px;flex-wrap:wrap;font-size:14.5px;color:#3E5064;margin:0 0 18px}
+.chainkey span{display:flex;align-items:center;gap:8px}
+.chainkey i{width:15px;height:15px;border-radius:3px;display:inline-block;border:1px solid #6B8098}
+@media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+
 .refs li{margin:0 0 7px 20px;font-size:15px}
 footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
 footer b{color:var(--gold-soft)}
@@ -278,8 +290,108 @@ footer b{color:var(--gold-soft)}
   </div>
 </section>
 
-<!-- 4 BENCHMARKING REVISITED -->
-<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Benchmarking: Decoding the rules-in-use</h2></div></div>
+<!-- 4 THE CHAIN -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>From a working model to an organisational result</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Part Three argued that where a tool contains AI, the binding constraint is conceptual rather than technical. That is an argument. This part is the measurement — and it comes from the only studies that installed AI in a real organisation, changed something, and measured what happened afterwards.</p>
+
+    <div class="note">
+      <span class="lbl">Provenance, and the limit of the evidence</span>
+      The framework in this part is drawn from a systematic review by the author and Claudia Araujo (COPPEAD/UFRJ, manuscript in preparation), conducted under PRISMA 2020 across four databases. <strong>Its evidence base is hospital implementations.</strong> The six conditions are stated here in general organisational terms, which is an extension of the framework and not a finding of the review; every figure quoted below is a hospital figure and is labelled as such. It is offered as a structure for appraisal, not as a citable result.
+    </div>
+
+    <h3>Most of the literature stops at the model</h3>
+    <p>Of 1,271 records screened, <strong>37</strong> had both an implementation and a comparison — roughly one for every eight that end at a model or a simulation. The largest single exclusion category, 464 studies, reported algorithmic metrics only: accuracy, AUROC, F1. They are studies about a model, not about an organisation.</p>
+    <p>That ratio is the first finding, and it travels well beyond healthcare. The published evidence that an AI tool works is overwhelmingly evidence that it predicts well. Whether anything changed in the organisation is a different question, far less often asked, and the answer is not implied by the first.</p>
+
+    <div class="note">
+      <span class="lbl">What the literature measures, and what that implies</span>
+      Of the 37 studies, <strong>36 measured productive efficiency</strong> — time, cost, throughput. Patient-centredness appeared in 8, responsive governance in 2. Read through the morning's arithmetic, this is a striking result: AI as actually implemented and measured is almost entirely an exercise in lowering cost, which is the edge of value where every competitor is also working. It is a <em>qualifier</em> programme being argued as a winner. VC, the difference between two firms, is not where this literature looks.
+    </div>
+
+    <h3>Six conditions, each necessary, none sufficient</h3>
+    <p>Organisational value is the end of a chain. A break at any link stops the effect, however good the preceding links were. The two middle conditions are not properties of the tool at all: they are capabilities of the organisation that bought it.</p>
+
+    <div class="sixchain">
+      <div class="st"><span class="n">0</span><span class="t">Evidence base</span><span class="r">the tool</span></div>
+      <div class="st"><span class="n">1</span><span class="t">Technical capability in operation</span><span class="r">the tool</span></div>
+      <div class="st cap"><span class="n">2</span><span class="t">Workflow integration</span><span class="r">capability 1</span></div>
+      <div class="st cap"><span class="n">3</span><span class="t">Translation into action</span><span class="r">capability 2</span></div>
+      <div class="st"><span class="n">4</span><span class="t">Organisational outcome</span><span class="r">the result</span></div>
+      <div class="st"><span class="n">5</span><span class="t">Net value</span><span class="r">the result</span></div>
+    </div>
+    <div class="chainkey">
+      <span><i style="background:#0A2342"></i> Conditions of the tool, and of the result</span>
+      <span><i style="background:#04121F;border-color:#B8820F"></i> The two organisational capabilities — this is C, made measurable</span>
+    </div>
+
+    <table>
+      <tr><th style="width:30px"></th><th style="width:20%">Condition</th><th>The question to ask</th><th style="width:33%">The failure signal observed in the review</th></tr>
+      <tr><td class="n">0</td><td class="k">Evidence base</td><td>Has this class of application produced a measured result in a real organisation — not in a model and not in a simulation?</td><td>Many modelling studies, no measured implementation; divergent results inside the same application category.</td></tr>
+      <tr><td class="n">1</td><td class="k">Technical capability in operation</td><td>Does the model still perform on our data, at the threshold actually in use, counting only outputs that arrive before people had already noticed?</td><td>Performance reported before deployment not reproduced in routine use — and the organisation unchanged even where the model stayed accurate.</td></tr>
+      <tr><td class="n">2</td><td class="k">Workflow integration</td><td>Does the output reach whoever decides, while the decision is still open? Who receives it, at which step, and is it in fact used?</td><td>Output ignored by most of the staff, or arriving after the decision had been taken.</td></tr>
+      <tr><td class="n">3</td><td class="k">Translation into action</td><td>When the output arrives, is there an owner able to interpret it and act — with the resources and dependencies that action requires?</td><td>Cases correctly identified and no capacity to act on them: people never contacted, actions blocked on unavailable resources.</td></tr>
+      <tr><td class="n">4</td><td class="k">Organisational outcome</td><td>Which management indicator should move, from which data source, against which baseline — measured without relying on opinion?</td><td>Effect concentrated in a single performance dimension; perceived gains not confirmed by objective measurement.</td></tr>
+      <tr><td class="n">5</td><td class="k">Net value</td><td>What will the gain cost, and who bears that cost? Who is de-prioritised, what work is displaced, what does verification take?</td><td>Gains offset by work shifted to other people or other hours, and by the effort of checking generated content.</td></tr>
+    </table>
+
+    <p>Used <strong>before</strong> adoption, the chain is a checklist of conditions the organisation itself controls. Used <strong>after</strong>, it locates the link where the implementation failed — which is a different and more useful question than whether the model was accurate.</p>
+
+    <h3>Model accuracy does not separate success from failure</h3>
+    <p>In the studies with no effect or an unfavourable one, predictive performance stayed high and stable wherever it was measured. Four mechanisms in the fit between tool and work explain them, and they group cleanly into the two middle conditions. The figures are from hospital implementations.</p>
+    <table>
+      <tr><th style="width:22%">Mechanism</th><th style="width:15%">Condition</th><th>What was observed</th></tr>
+      <tr><td class="k">Adoption</td><td>2 · integration</td><td><strong>67%</strong> of staff rarely or never used an admission-prediction tool. Adjusted odds ratio for the implementation period: 1.03 (95% CI 0.93–1.13). The model was fine. Nobody opened it.</td></tr>
+      <tr><td class="k">Timing</td><td>2 · integration</td><td>A neural network's output reached the physician <em>after</em> the cardiac markers returned, when the disposition decision had already been made. It changed management in <strong>2 of 432</strong> cases.</td></tr>
+      <tr><td class="k">Reach</td><td>3 · translation</td><td><strong>42.3%</strong> of the patients the model flagged as likely no-shows were never contacted. In a separate nodule follow-up, 47 of 80 were not located, with delays attributed to staffing.</td></tr>
+      <tr><td class="k">Execution barrier</td><td>3 · translation</td><td>Time fell for low-barrier actions and not for actions requiring a chain of dependencies. Earlier warning does not accelerate an action whose constraint was never information.</td></tr>
+    </table>
+
+    <div class="bridge">
+      <span class="lbl">The counterpoint, which is the useful half</span>
+      <p style="margin-bottom:0">Where the intervention operated on work that was <strong>already centralised</strong>, the effect appeared. The same model engaged pharmacists, whose work was centralised, while the component requiring a new, decentralised behaviour failed in the same hospital. Elsewhere the useful element was not the recommendation engine but the prioritisation, because it triggered a discussion inside a routine that already existed. The practical rule: an AI output lands where there is already a routine to receive it, and dies where it would have to create one.</p>
+    </div>
+
+    <h3>Two studies that settle the argument</h3>
+    <p>Two randomised studies of appointment no-shows share the application, the action — a telephone call — and the design, and reached opposite results.</p>
+    <table>
+      <tr><th style="width:26%">Study</th><th>Result</th><th style="width:38%">Where the chain stands</th></tr>
+      <tr><td class="k">McMahon et al., 2026<br><span style="font-weight:400;font-size:14px">MRI no-shows, Switzerland</span></td><td>21.9% vs 22.0% (p = 0.48). No effect.</td><td>Model discrimination had drifted to a modest AUROC of 0.61, but the output was tied to a concrete action. The chain broke at <strong>reach</strong>: 42.3% of those selected were never called.</td></tr>
+      <tr><td class="k">Dunstan et al., 2023<br><span style="font-weight:400;font-size:14px">paediatric no-shows, Chile</span></td><td>21.0% → 10.7%, −10.3 points against a concurrent control (p ≈ 0.002).</td><td>Worked — and the contact rate was never reported. The chain identifies the <strong>missing measure</strong>: we cannot say why this succeeded where the other failed.</td></tr>
+    </table>
+    <p>A model-centred appraisal cannot tell these two apart, because on model terms they are the same study. The difference lies entirely in condition 3, and it was measured in one case and not in the other.</p>
+
+    <h3>Three conditions on the evidence itself</h3>
+    <p>These are not links in the chain. They qualify whatever evidence reaches the decision-maker at every link, and each has a counterpart in how vendors present results.</p>
+    <ul class="tight">
+      <li><strong>A concurrent comparator.</strong> Before-and-after with no control attributes to the tool everything else that changed in the same period. Nineteen of the 37 studies had no concurrent group.</li>
+      <li><strong>Objective measurement.</strong> Where perception and objective measurement were collected in the same study, they diverged: in one, search took 43 seconds <em>longer</em> with the tool, and users reported that it saved them time.</li>
+      <li><strong>Independence from the vendor.</strong> A vendor-reported sensitivity of 91% fell to 18% once restricted to alerts arriving before clinical recognition — the only alerts that could have changed anything. Notably, the 13 studies declaring vendor ties were <em>less</em> favourable than the rest, which is the opposite of sponsorship bias and suggests the optimism is upstream of the funding.</li>
+    </ul>
+    <p>The laboratory-to-floor gap is the general form of all three. A contouring tool that saved 93% of the time in the laboratory saved 36% to 67% in the clinic. Nothing about the model changed; the setting did.</p>
+
+    <div class="bridge">
+      <span class="lbl">How this joins Part Three</span>
+      <p>The three pillars and the six conditions are the same argument at different altitudes, and each pillar fails at an identifiable link. <strong>Teleology</strong> fails at conditions 4 and 5 — a system with no documented hierarchy of purposes produces a gain on one indicator and a cost on another that nobody assigned. <strong>Epistemology</strong> fails at condition 2 — a system that does not know when it does not know sends an output nobody can act on, at a moment when nobody can act. <strong>Ontology</strong> fails at conditions 1 and 3, where the world the model was trained on meets a case it has no category for.</p>
+      <p style="margin-bottom:0">Philosophical debt, read this way, is not an abstraction. It is a measurable break in a chain, and conditions 2 and 3 are where it surfaces first.</p>
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Conditions 2 and 3 are almost never in scope. A digital project is scoped to deliver a working system — condition 1 — and the integration into someone's decision and the capacity to act on the output are treated as adoption, change management, or somebody else's problem after go-live. The review says that is where the value is won or lost.</p>
+      <p style="margin-bottom:0">The practical consequence for a business case: name the decision the output enters, the person who owns the resulting action, and the resources that action consumes — before approval, not after. A project that cannot name all three has not identified a benefit; it has identified a capability, which is condition 1 and is not the same thing.</p>
+    </div>
+
+    <div class="eq">
+      <div class="f" style="font-size:clamp(20px,3.2vw,27px)">Adopting AI is a process-design decision,<br>not a technology purchase.</div>
+      <div class="c">conditions 2 and 3 are the organisation's, not the vendor's</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 BENCHMARKING REVISITED -->
+<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>Benchmarking: Decoding the rules-in-use</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">Benchmarking is conventionally practiced as corporate espionage or tourism: visiting high-performing firms, photographing their tools, buying their software, and pasting their org charts. That is why it fails.</p>
@@ -345,7 +457,89 @@ footer b{color:var(--gold-soft)}
   </div>
 </section>
 
-<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>Structured activity — the Digital Tool Appraisal</h2></div></div>
+<!-- 6 TRANSFORMATION VECTOR -->
+<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>The transformation vector — how this is actually run</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Everything so far has been diagnosis: what the money bought, where the chain breaks, why the copy underperforms the original. Diagnosis ends on a question no business case answers. If the path cannot be known in advance, what replaces the plan?</p>
+    <p>This part is drawn from Chapter III of <em>Excelência Operacional</em>, where Cynefin, Lean, Lean Startup and Toyota Kata are read as one system. The order matters: Cynefin says which method the problem admits, and Kata is the routine that executes it.</p>
+
+    <h3>The domain decides the method</h3>
+    <p>Cynefin — Welsh for <em>habitat</em> — is a sense-making instrument. Its premise is that different contexts require fundamentally different styles of decision, and that the characteristic error of leadership is not a bad decision but a decision made with the method of the wrong domain.</p>
+    <table>
+      <tr><th style="width:17%">Domain</th><th style="width:30%">Nature of the problem</th><th style="width:27%">Approach</th><th>The trap</th></tr>
+      <tr><td class="k">Simple</td><td>Predictable and stable; cause and effect obvious to everyone</td><td>Sense → Categorise → Respond. Apply the established protocol</td><td>Rigidity and complacency; blindness to a change of context</td></tr>
+      <tr><td class="k">Complicated</td><td>Requires expertise and analysis; several right answers exist</td><td>Sense → Analyse → Respond. Consult specialists, analyse data</td><td>Paralysis by analysis; excessive dependence on specialists</td></tr>
+      <tr><td class="k">Complex</td><td>Cause and effect visible only in hindsight; patterns emerge from experiments. <strong>Innovation, culture and digital transformation live here</strong></td><td>Probe → Sense → Respond. Safe-to-fail experiments, iterative learning</td><td>Wanting full control before acting; planning what can only be discovered</td></tr>
+      <tr><td class="k">Chaotic</td><td>No perceptible causal relation; speed matters more than precision</td><td>Act → Sense → Respond. Immediate action to stabilise</td><td>Inaction, or analysis during a crisis</td></tr>
+      <tr><td class="k">Confusion</td><td>The leader does not know which domain they are in. The most dangerous state</td><td>Break the problem up and reclassify each part</td><td>Applying a preferred decision style with no diagnosis at all</td></tr>
+    </table>
+    <p>Most leaders are trained for the Complicated domain, and that training serves a large share of daily operational problems well. The difficulty is that the highest-stakes problems — disruptive innovation, digital transformation, cultural change — are inherently Complex. Applying Complicated methods there is not merely ineffective: it is counterproductive, because a detailed plan manufactures a sense of control that delays experimentation and penalises learning.</p>
+
+    <div class="puzzle">
+      <h4>Netflix and Blockbuster, 2007</h4>
+      <p>In 2007 there was no best practice available to establish whether consumers would pay for streaming. Netflix operated the problem as Complex: it launched streaming as a free benefit for DVD subscribers (<strong>probe</strong>), observed adoption patterns (<strong>sense</strong>), and only then pivoted the business model (<strong>respond</strong>). Blockbuster treated the same question as Simple and applied historical best practice.</p>
+      <p class="q">The same market, the same moment, two opposite readings of the domain. One of the two firms was gone by 2010.</p>
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">Why this indicts the previous part</span>
+      <p style="margin-bottom:0">Benchmarking is a Simple-and-Complicated instrument. It presupposes that a knowable right answer already exists somewhere and that the task is to locate and transfer it. Pointed at a Complex problem it does something worse than fail: it imports a confident answer to somebody else's question, and the confidence is what does the damage. That is the mechanism behind Part Five's finding that a partial imitation can underperform not imitating at all.</p>
+    </div>
+
+    <h3>Kata: the routine that makes probe–sense–respond repeatable</h3>
+    <p>Probe → Sense → Respond is a logic, not a practice. Without a routine it is indistinguishable from improvisation, and it decays the moment the urgency passes. Kata — in the martial arts, a pattern rehearsed until it becomes reflex — is a routine of scientific thinking applied daily. It does not prescribe what to do. <strong>It prescribes how to think.</strong></p>
+    <table>
+      <tr><th style="width:30px"></th><th style="width:24%">Step</th><th>What it requires</th><th style="width:16%">Horizon</th></tr>
+      <tr><td class="n">1</td><td class="k">Direction or challenge</td><td>Aspirational enough to orient, concrete enough to guide daily decisions. The true north that replaces micromanagement with shared purpose.</td><td>1–3 years</td></tr>
+      <tr><td class="n">2</td><td class="k">Grasp the current condition</td><td>Go to the gemba and observe the process as it actually is. Patterns, gaps and facts — and the knowledge is shared, so the next cycle does not restart from zero.</td><td>Continuous</td></tr>
+      <tr><td class="n">3</td><td class="k">Set the target condition</td><td>A measurable future state, neither trivial nor impossible: in the zone of productive learning, which demands effort without paralysing.</td><td>Up to 3 months</td></tr>
+      <tr><td class="n">4</td><td class="k">Run experiments</td><td>PDCA daily. The path is deliberately obscure — were it clear, there would be nothing to learn. Each experiment moves the boundary of what the organisation knows.</td><td>Weekly / daily</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">The coaching routine — five questions</span>
+      The mentor does not supply the answer; the questions develop the capacity to find it. <strong>1.</strong> What is the target condition? <strong>2.</strong> What is the current condition? <strong>3.</strong> What obstacles are in the way, and which one are you addressing now? <strong>4.</strong> What is your next step, and what do you expect to happen? <strong>5.</strong> When can we see what you learned from that step?<br><br>The point of the five questions is not to solve the problem. It is to produce people who solve problems — which is the only form in which capability survives the person who had it.
+    </div>
+
+    <p>This is also the answer to the most common failure of Lean programmes. Tools are adopted — kanban, 5S, value stream maps — and the improvement does not survive six months. Kata's explanation is that the tools were the visible content and the routine was the form that sustained them: no mentor asking the five questions, no active PDCA cycles, no defined target condition. The tools get used while the urgency lasts and are abandoned when it passes.</p>
+
+    <h3>Why the routine builds the coefficient</h3>
+    <p>Kata's claim on C is specific, and it is the claim that connects this part to the close of the day. Organisations have excellent principles and poor routines, and <strong>it is the routines that determine the real culture — not the values on the wall.</strong></p>
+    <table>
+      <tr><th style="width:24%">Level of learning</th><th style="width:36%">How the routine produces it</th><th>What accumulates</th></tr>
+      <tr><td class="k">Single-loop<br><span style="font-weight:400;font-size:14px">adaptive</span></td><td>Daily PDCA in the improvement kata: each experiment adjusts the action without questioning the governing norms</td><td>Operational efficiency, compounding over time</td></tr>
+      <tr><td class="k">Double-loop<br><span style="font-weight:400;font-size:14px">generative</span></td><td>The coaching routine creates the safety to question the status quo: the learner is expected to investigate the facts without pressure</td><td>Revision of the norms themselves, and of leadership's mental models</td></tr>
+      <tr><td class="k">Deutero-learning<br><span style="font-weight:400;font-size:14px">learning to learn</span></td><td>The coaching routine in its essence: it teaches a method for any problem, not the answer to one problem</td><td>Self-renewal — the most durable form of the coefficient</td></tr>
+    </table>
+    <p>The three levels are Argyris and Schön's; the mapping onto Kata follows Michels and Forcellini (2023), who also note that empirical evidence for the link across varied contexts remains scarce. The second level is worth dwelling on, because it is the one that explains a cultural prerequisite rather than asserting it: double-loop learning requires questioning the governing norms, which an organisation that punishes error cannot do. People conceal mistakes and avoid risky experiments, and they are behaving rationally. <em>Yokoten</em> — circulating know-how across the organisation without restriction — is the complementary mechanism: it is what turns an individual's learning into collective property, and therefore what arrests the outflow Part Eight describes.</p>
+
+    <h3>When the path is unknown, what do you take to the CFO?</h3>
+    <p>The Complex domain creates a governance problem, not only a method problem: an early-stage initiative cannot produce the ROI projection that approval requires. The financial argument is sound and rarely made. Early-stage innovation ROI is by definition zero or negative — exactly like any asset under construction that does not yet generate cash flow. The real exposure is not the provisional negative return; it is the risk of building something for which there is no demand, and that risk is only reduced by early validation. Validated learning is therefore best presented as <strong>capital-risk reduction</strong>: each hypothesis confirmed raises the probability of a positive return on the total investment.</p>
+    <table>
+      <tr><th style="width:30px"></th><th style="width:22%">Phase</th><th>How to execute it</th><th style="width:28%">The trap</th></tr>
+      <tr><td class="n">1</td><td class="k">Frame the hypothesis</td><td>Identify the one assumption which, if false, invalidates the whole model. State it in a single testable sentence.</td><td>Vague hypotheses, or several at once, which make diagnosis impossible</td></tr>
+      <tr><td class="n">2</td><td class="k">Build the MVP</td><td>The leanest version that tests that assumption. In services this can be a spreadsheet, a flyer, or fifteen minutes of conversation. The object is to learn, not to impress.</td><td>An over-elaborate MVP — confusing a product with an experiment</td></tr>
+      <tr><td class="n">3</td><td class="k">Measure the learning</td><td>Decide <em>before</em> the experiment which signal confirms or refutes the hypothesis. Behavioural evidence, not stated intention.</td><td>Vanity metrics: activity in place of real buying or using behaviour</td></tr>
+      <tr><td class="n">4</td><td class="k">Pivot or persevere</td><td>Confirmed: scale. Refuted: change one fundamental variable and start again. Speed here is itself an advantage.</td><td>Persevering from inertia, pivoting from impatience — both without evidence</td></tr>
+    </table>
+
+    <div class="bridge">
+      <span class="lbl">The dilemma this part exists to answer</span>
+      <p><strong>A competitor implements generative AI in its processes and cuts cost by 30%. What do you do?</strong></p>
+      <p><strong>1 · Cynefin.</strong> Is the thing in front of you Simple — copy the technology — or Complex — discover how AI could create value specific to your customer? Do not confuse the two. <strong>2 · Lean.</strong> Is human contact a driver of willingness to pay in your segment? If it is, automating it cuts cost and destroys revenue at the same time. <strong>3 · Lean Startup.</strong> Before deciding, build an MVP: test on a subset of customers and measure the effect on NPS and churn, not only on cost. <strong>4 · Kata.</strong> Set a 90-day target condition and run controlled experiments towards it.</p>
+      <p style="margin-bottom:0">The reflex to copy the competitor usually reproduces operational effectiveness without producing differentiated advantage — which, in the morning's notation, is an improvement that leaves VC where it was.</p>
+    </div>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>This is the stage-gate problem stated precisely. A gate asks for a plan; a Complex problem can only supply a hypothesis, so the plan gets written anyway and the organisation then manages the plan instead of the problem. The reconciliation is not to abandon governance but to change what the gate receives: the deliverable of an early gate is a target condition and the evidence from the last experiment, not a schedule and a projection.</p>
+      <p style="margin-bottom:0">Ries's portfolio framing is the governing discipline — mature operations and high-risk innovation managed as different asset classes, with different metrics and different tolerances. Mixing the two logics kills promising projects early and sustains stagnant ones indefinitely.</p>
+    </div>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>Structured activity — the Digital Tool Appraisal</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">The morning asked whether a project was worth funding. This afternoon asks a harder question about the same project: of the digital tooling it depends on, what is actually being bought — and what is being left undone?</p>
@@ -355,39 +549,22 @@ footer b{color:var(--gold-soft)}
       The appraisal is a separate page, fillable and exportable in the same way as the morning's canvas: <a href="digital-tool-appraisal.html"><strong>Digital Tool Appraisal</strong></a>. Open it now. It carries its own instructions; what follows is why it asks what it asks.
     </div>
 
-    <h3>Three layers, and why they are one instrument</h3>
-    <p>The appraisal does not inventory features. A list of whether the tool has a poka-yoke, how many systems people toggle between and whether an andon exists is an audit, and an audit is work for one person with a checklist — not for four senior managers with twenty minutes. What four senior managers can do that a checklist cannot is <strong>judge</strong>, and the three layers each force a judgement that is uncomfortable to make honestly.</p>
+    <h3>Four layers, and why they are one instrument</h3>
+    <p>The appraisal does not inventory features. A list of whether the tool has a poka-yoke, how many systems people toggle between and whether an andon exists is an audit, and an audit is work for one person with a checklist — not for four senior managers with twenty minutes. What four senior managers can do that a checklist cannot is <strong>judge</strong>, and each layer forces a judgement that is uncomfortable to make honestly.</p>
 
     <table>
-      <tr><th style="width:24%">Layer</th><th style="width:38%">The judgement it forces</th><th style="width:38%">Where it comes from</th></tr>
+      <tr><th style="width:22%">Layer</th><th style="width:40%">The judgement it forces</th><th style="width:38%">Where it comes from</th></tr>
       <tr><td class="k">VCAP triage</td><td>Does this change what we own, how work flows, or what we are able to improve? Most honest answers land on the first two.</td><td>This morning's identity, V = C × (A + P)</td></tr>
-      <tr><td class="k">Philosophical debt</td><td>Where the tool contains AI: has anyone written down what it should want, what it may count as knowing, and what it is able to see?</td><td>Schrage &amp; Kiron's three pillars — teleology, epistemology, ontology</td></tr>
-      <tr><td class="k">The reference</td><td>What does somebody already do that we do not — the routine, not the number — and what would have to be true here for it to work?</td><td>Part Four of these notes: internal stickiness, causal ambiguity, time compression</td></tr>
+      <tr><td class="k">Philosophical debt</td><td>Where the tool contains AI: has anyone written down what it should want, what it may count as knowing, and what it is able to see?</td><td>Part Three — Schrage &amp; Kiron's three pillars</td></tr>
+      <tr><td class="k">The six conditions</td><td>Where the tool contains AI: at which link does the chain from a working model to a result currently break, or go unmeasured?</td><td>Part Four — the six-condition chain</td></tr>
+      <tr><td class="k">The reference</td><td>What does somebody already do that we do not — the routine, not the number — and what would have to be true here for it to work?</td><td>Part Five — internal stickiness, causal ambiguity, time compression</td></tr>
     </table>
 
-    <h3>Why the AI layer belongs in a benchmarking session</h3>
-    <p>Because AI is the extreme case of the argument this day has been making. It is the most expensive asset an organisation can buy, and the one whose return depends most completely on a capability that cannot be bought with it.</p>
-    <p>Schrage and Kiron put the claim sharply: the binding constraint on value from AI is not technical but philosophical. Organisations invest heavily in algorithms, data and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. Those unarticulated assumptions compound — and the parallel with technical debt is exact in form and instructive in its difference.</p>
+    <p>The two AI layers do different work and the instrument keeps them apart deliberately. The pillars ask whether anything was <em>articulated</em>; the six conditions ask whether anything was <em>measured</em>. A tool can pass the first and fail the second — a clearly stated purpose whose output reaches nobody in time — and it can pass the second and fail the first, which is the more dangerous case: a chain that demonstrably moves an indicator, with no one able to say which other indicator is paying for it.</p>
 
-    <div class="eq">
-      <div class="f">Technical debt accumulates in A and P.<br>Philosophical debt accumulates where C should be.</div>
-      <div class="c">a shortcut in the artefact, versus an absence in the organisation</div>
-    </div>
-
-    <p>Technical debt is a compromise somebody made and could document. Philosophical debt is the absence of the documentation itself: nobody wrote down the hierarchy of purposes, so nobody can audit it, so nobody can improve it. An organisation that cannot say what its system is optimising for has no object on which to run an improvement routine. That is a deficit in C, arriving dressed as a purchase of A.</p>
-
-    <h3>The three pillars, and where you have already met them</h3>
-    <p>Each pillar restates, in another vocabulary, something these two sessions have already established. That is the reason to take them seriously rather than as a separate topic bolted on at the end of a day about operations.</p>
-    <table>
-      <tr><th style="width:21%">Pillar</th><th style="width:40%">What it governs</th><th style="width:39%">Where it already appears</th></tr>
-      <tr><td class="k">Teleology</td><td>What the system should achieve — the hierarchy of purposes, and what happens when objectives conflict</td><td>Order winners and qualifiers. A system optimising the wrong metric is one whose purposes were never ranked.</td></tr>
-      <tr><td class="k">Epistemology</td><td>What counts as valid knowledge — how it is acquired, validated, and how certainty is expressed</td><td>The digital andon. A system that knows when it does not know, and escalates, <em>is</em> signalling at the source.</td></tr>
-      <tr><td class="k">Ontology</td><td>How the system represents reality — which entities it recognises, which variables do not exist for it</td><td>Causal ambiguity. Representing a supplier by price and lead time alone is the error of benchmarking the indicator instead of the practice.</td></tr>
-    </table>
-
-    <div class="note">
-      <span class="lbl">The failure these three predict</span>
-      A sourcing system optimised for cost and delivery which, two years on, has systematically excluded suppliers in regions the firm's own strategy prioritised. The fault is not in the model. The hierarchy of objectives was never written down, so the trade-off was resolved by default — and silently, because nothing in the architecture was built to surface it.
+    <div class="bridge">
+      <span class="lbl">Where the verdict leads</span>
+      <p style="margin-bottom:0">A verdict is not a score, and the instrument does not produce one. It produces a located gap — and Part Six says what to do with it. If the gap is at condition 2 or 3, the problem is Complex: the integration into somebody's decision and the capacity to act cannot be specified in advance, so the next move is a target condition at ninety days and an experiment, not a requirements document. If the gap is a missing measure, the next move is simply to measure it before spending anything further.</p>
     </div>
 
     <h3>What to expect</h3>
@@ -402,18 +579,20 @@ footer b{color:var(--gold-soft)}
       </div>
     </div>
 
+    <p>Expect, too, that the six conditions will be answered <em>not measured</em> more often than <em>no</em>. That is the characteristic result and it is worth saying out loud: an organisation that cannot say whether the output reached the decision in time, or whether the recommended action was ever carried out, does not have a failing implementation — it has an unobserved one, which is a different and more tractable problem.</p>
+
     <p>Bring the exported appraisal with you. Together with the morning's Value Case it is the input to the module's Execution Optimization Challenge.</p>
   </div>
 </section>
 
 <!-- 7 BUILDING THE MULTIPLIER -->
-<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Building the multiplier</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">EIGHT</div><h2>Building the multiplier</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">The day has been an argument by elimination. Assets can be bought. Processes can be documented and taught. Benchmarking transfers the second and purchases the first, and neither moves the term that multiplies them. One question is left, and it is the only one with a practical answer: <strong>how is C actually built?</strong></p>
 
     <h3>Capability is a stock, not a state</h3>
-    <p>Dierickx and Cool's distinction, from Part Four, organises everything here: flows adjust instantly, stocks do not. Treating the capability to improve processes as a stock means asking three separate questions — what flows in, what flows out, and what conditions regulate both.</p>
+    <p>Dierickx and Cool's distinction, from Part Five, organises everything here: flows adjust instantly, stocks do not. Treating the capability to improve processes as a stock means asking three separate questions — what flows in, what flows out, and what conditions regulate both.</p>
     <table>
       <tr><th style="width:150px"></th><th>Mechanism</th><th>Managerial consequence</th></tr>
       <tr><td class="k">Inflow</td><td>Deliberate improvement activity that produces causal understanding and validated action together</td><td>Volume of improvement projects is not the measure. Projects that produce only one of the two do not accumulate anything.</td></tr>
@@ -424,8 +603,8 @@ footer b{color:var(--gold-soft)}
     <h3>What the inflow actually requires</h3>
     <p>The morning established the finding: across improvement projects in a single factory, only about a quarter accelerated the reduction of waste — the ones producing <em>know-why</em> and <em>know-how</em> simultaneously (Lapré et al., 2000). The rest slowed it or had no effect. Three mechanisms follow from that, and the operations literature describes them with increasing precision.</p>
     <ul class="tight">
-      <li><strong>Guided experimentation at the point of execution.</strong> Improvement run as a hypothesis, tested by the people doing the work, under a more experienced coach, at the lowest level where the problem is visible. This is Spear and Bowen's fourth rule from Part Four, now read as an accumulation mechanism rather than as a benchmarking target — and it is the best-documented inflow in the literature.</li>
-      <li><strong>Team learning.</strong> Capability lives in coordinated routines, not in individuals. A team that cannot discuss a failure cannot refine a routine, which is why psychological safety is a precondition rather than a nicety.</li>
+      <li><strong>Guided experimentation at the point of execution.</strong> Improvement run as a hypothesis, tested by the people doing the work, under a more experienced coach, at the lowest level where the problem is visible. This is Spear and Bowen's fourth rule from Part Five, now read as an accumulation mechanism rather than as a benchmarking target — and it is the best-documented inflow in the literature. <strong>Part Six gave it a name and a cadence:</strong> the improvement kata is this mechanism operationalised, and the coaching kata is what keeps it running when nobody is being audited.</li>
+      <li><strong>Team learning.</strong> Capability lives in coordinated routines, not in individuals. A team that cannot discuss a failure cannot refine a routine, which is why psychological safety is a precondition rather than a nicety. In the terms of Part Six, it is the precondition of double-loop learning: an organisation that punishes error can run single-loop PDCA indefinitely and never revise the norm that produced the problem.</li>
       <li><strong>Credibility.</strong> Sustained improvement effort depends on management's promises being believed, above all the promise not to convert improvement gains into redundancies. People do not improve away their own jobs, and they are right not to. This is a condition, not a value statement: break it once and the inflow stops.</li>
     </ul>
 
@@ -436,7 +615,7 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>Every element above has a project-management equivalent that most organisations already own and few use as intended. The retrospective is guided experimentation — if its output changes the standard, and nothing if it does not. The lessons-learned repository is an attempt to arrest the outflow, and it fails for exactly the reasons Part Four gives: it stores what can be written down, which is the part that was never the constraint.</p>
+      <p>Every element above has a project-management equivalent that most organisations already own and few use as intended. The retrospective is guided experimentation — if its output changes the standard, and nothing if it does not. The lessons-learned repository is an attempt to arrest the outflow, and it fails for exactly the reasons Part Five gives: it stores what can be written down, which is the part that was never the constraint.</p>
       <p style="margin-bottom:0">The practical test for a PMO: after the last three projects closed, what can this organisation now do that it could not do before — that does not depend on the people who happened to be on those teams?</p>
     </div>
 
@@ -477,7 +656,7 @@ footer b{color:var(--gold-soft)}
 </section>
 
 <!-- REFS -->
-<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>Sources &amp; Readings</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">NINE</div><h2>Sources &amp; Readings</h2></div></div>
 <section>
   <div class="wrap">
     <p>Works cited in these notes and informing the afternoon curriculum.</p>
@@ -493,6 +672,13 @@ footer b{color:var(--gold-soft)}
       <li>Nelson, R. R., &amp; Winter, S. G. (1982). <em>An Evolutionary Theory of Economic Change</em>. Harvard University Press.</li>
       <li>Polanyi, M. (1966). <em>The Tacit Dimension</em>. Doubleday.</li>
       <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Argyris, C., &amp; Sch&ouml;n, D. A. (1978). <em>Organizational Learning: A Theory of Action Perspective</em>. Addison-Wesley.</li>
+      <li>Lima, T. F., &amp; Araujo, C. A. S. <em>Artificial intelligence adoption and hospital management outcomes: a systematic review and an analytical framework for appraising implementations</em>. COPPEAD/UFRJ. Manuscript in preparation. (Source of the six-condition chain in Part Four.)</li>
+      <li>Michels, V., &amp; Forcellini, F. A. (2023). Toyota Kata and organizational learning: a bibliometric review. <em>Brazilian Journal of Business</em>.</li>
+      <li>Ries, E. (2011). <em>The Lean Startup</em>. Crown Business.</li>
+      <li>Rother, M. (2009). <em>Toyota Kata: Managing People for Improvement, Adaptiveness and Superior Results</em>. McGraw-Hill.</li>
+      <li>Snowden, D. J., &amp; Boone, M. E. (2007). A leader's framework for decision making. <em>Harvard Business Review</em>, 85(11), 68&ndash;76.</li>
+      <li>Veillard, J., Champagne, F., Klazinga, N., Kazandjian, V., Arah, O. A., &amp; Guisset, A.-L. (2005). A performance assessment framework for hospitals: the WHO Regional Office for Europe PATH project. <em>International Journal for Quality in Health Care</em>, 17(6), 487&ndash;496.</li>
       <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
       <li>Schrage, M., &amp; Kiron, D. (2024). Is philosophy the next LLM training frontier? <em>MIT Initiative on the Digital Economy</em>.</li>
       <li>Schrage, M., &amp; Kiron, D. (2025). Philosophy eats AI. <em>MIT Sloan Management Review</em>.</li>

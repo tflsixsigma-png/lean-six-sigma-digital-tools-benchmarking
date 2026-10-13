@@ -27,7 +27,11 @@ One thesis runs across both sessions: operational efficiency is a consequence of
 
 The morning builds this from operations: Ohno's timeline and the anatomy of waste, the efficiency paradox and the physics of lead time, the Toyota Production System as a system of complementarities, DMAIC as the method for conducting improvement, and the translation of flow into invested capital.
 
-The afternoon tests it against what money can buy. Digital platforms are assets; benchmarking transfers processes. Neither moves the coefficient. The session closes on the accumulation mechanisms that do.
+The afternoon tests it against what money can buy. Digital platforms are assets; benchmarking transfers processes. Neither moves the coefficient.
+
+Where the tool contains AI the afternoon runs two complementary appraisals: Schrage and Kiron's three pillars, which ask what the organisation never *articulated*, and a six-condition chain from the author's systematic review of AI implementations, which asks what it never *measured*. The two middle conditions of that chain — whether the output reaches whoever decides while the decision is still open, and whether anyone can act on it — are C in measurable form.
+
+It then turns from diagnosis to method: Cynefin to establish that digital transformation is a Complex problem rather than a Complicated one, and Toyota Kata as the routine that executes probe–sense–respond without decaying once the urgency passes. The session closes on the accumulation mechanisms that build the coefficient.
 
 Both sessions are framed by the same identity:
 
