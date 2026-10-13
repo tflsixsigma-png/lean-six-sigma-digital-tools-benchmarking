@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Tool Appraisal — VCAP fit and philosophical debt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#04121F;--gold:#B8820F;--gold-soft:#F2DFB4;--paper:#FBFAF7;--card:#FFFFFF;--body:#101B25;--line:#B5C3D3;--line-soft:#DFE6EE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:56px 0 44px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(29px,4.4vw,42px);line-height:1.12;max-width:20ch;margin-bottom:15px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+
+.partbar{background:var(--navy);color:#fff;padding:20px 0;margin-top:6px}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:25px;font-weight:600;margin-top:3px}
+section{padding:36px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:21px;font-weight:600;margin:26px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:22px;margin:20px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:27px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:8px;font-family:'JetBrains Mono',monospace}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+
+/* instrument */
+.inst{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:26px 0}
+.inst .ih{background:var(--navy);color:#fff;padding:16px 22px}
+.inst .ih b{font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+.inst .ih span{display:block;font-size:14.5px;color:#C2D3E6;margin-top:2px}
+.inst .ib{padding:20px 22px;background:var(--card)}
+.block{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:16px 0}
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:62px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.pillar{border-left:7px solid var(--gold);padding-left:18px;margin:22px 0 6px}
+.pillar h4{margin-top:0}
+.pillar .map{font-size:15px;color:#4A5B70;margin-bottom:4px}
+#ai-layer[hidden]{display:none}
+.gate{background:#EAF1F8;border:1px solid #A9BFD8;border-radius:8px;padding:16px 20px;margin:18px 0;font-size:16px}
+
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:20px 0}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;padding:12px 22px;border-radius:6px;border:2px solid var(--gold)}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}#ai-layer[hidden]{display:block}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>Digital Tool Appraisal</h1>
+    <p class="sub">An instrument for deciding what a digital tool — including an AI system — actually changes in your organisation, and what it quietly leaves undone.</p>
+    <a class="back" href="index.html">← Back to the 17 October material</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">Two questions decide whether a digital investment returns anything. The first is whether it changes what the organisation <em>is able to do</em>, or only what it <em>owns</em>. The second applies when the tool contains AI, and it is the one almost nobody asks: what has this system been told to want, to know, and to see?</p>
+    <p>This instrument asks both. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
+  </div>
+</section>
+
+<!-- 1 -->
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>Why a tool can be excellent and still return nothing</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>The afternoon session establishes the frame. Value is not the sum of what an organisation owns and how it works — it is that sum scaled by its capacity to improve.</p>
+    <div class="eq">
+      <div class="f">V = C × ( A + P )</div>
+      <div class="c">assets and processes are additive and purchasable · capability is a coefficient</div>
+    </div>
+    <p>A platform is almost always an <strong>A</strong> decision, sometimes a <strong>P</strong> decision, and very rarely a <strong>C</strong> decision. That is not a criticism of platforms — it is a statement of what they are. The error is paying for A and booking the benefit as though C had moved.</p>
+
+    <h3>Technical debt accumulates in A and P. Philosophical debt accumulates where C should be.</h3>
+    <p>Schrage and Kiron argue that the binding constraint on value from AI is not technical but philosophical: organisations invest heavily in algorithms, data infrastructure and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. The unarticulated assumptions do not stay harmless. They compound.</p>
+    <p>The parallel with technical debt is exact, and so is the difference. Technical debt is a shortcut in the artefact. <strong>Philosophical debt is an absence in the organisation</strong> — nobody wrote down the hierarchy of purposes, so nobody can audit it, so nobody can improve it. An organisation that cannot say what its system is optimising for has no basis on which to run an improvement routine over it. That is a deficit in C, arriving dressed as a deficit in A.</p>
+
+    <h3>The three pillars, and where you have already met them</h3>
+    <p>Each of Schrage and Kiron's pillars restates something the day has already established in another vocabulary. That is the reason to take them seriously rather than as a separate topic.</p>
+    <table>
+      <tr><th style="width:21%">Pillar</th><th style="width:40%">What it governs</th><th style="width:39%">Where it appears in the session</th></tr>
+      <tr><td class="k">Teleology</td><td>What the system should achieve — the hierarchy of purposes, and what happens when objectives conflict</td><td>Order winners and qualifiers. A system optimising the wrong metric is one whose purposes were never ranked — the same error as over-investing in a qualifier.</td></tr>
+      <tr><td class="k">Epistemology</td><td>What counts as valid knowledge — how the system acquires it, validates it and expresses certainty</td><td>The digital andon. A system that knows when it does not know, and escalates, <em>is</em> signalling at the source rather than reporting on a cycle.</td></tr>
+      <tr><td class="k">Ontology</td><td>How the system represents reality — which entities it recognises, which relations it models, which variables it ignores</td><td>Causal ambiguity. Representing a supplier by price and lead time alone is the same error as benchmarking the indicator instead of the practice that produces it.</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">The failure these predict</span>
+      A sourcing system optimised for cost and delivery that, two years on, has systematically excluded suppliers in regions the firm's own strategy prioritised. The fault is not in the model. It is that the hierarchy of objectives was never written down, so the trade-off was resolved by default — and silently, because nothing in the architecture was built to surface it.
+    </div>
+
+    <h3>Why this matters more for AI than for anything else you buy</h3>
+    <p>Every tool embeds assumptions. What distinguishes an AI system is that it <strong>acts on them at scale, continuously, and without re-stating them</strong>. A spreadsheet with a wrong assumption produces one wrong number that somebody reads. A model with an unarticulated teleology produces ten thousand decisions a month, each technically correct and strategically wrong, and reports high confidence throughout.</p>
+    <p>This sharpens as systems become agentic. A predictive system recommends and a human decides; an agentic system formulates plans and acts. At that point the hierarchy of purposes stops being documentation and becomes the control surface — the only place where the boundary of autonomy is actually set.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>The instrument</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Appraise one tool at a time. Answer from what the organisation can actually evidence, not from what the business case promised. <strong>"Not documented" and "nobody knows" are the most useful answers here</strong> — they are precisely what the instrument is looking for.</p>
+
+    <div class="inst">
+      <div class="ih">
+        <b>Digital Tool Appraisal</b>
+        <span>About 20 minutes for one tool · the AI layer appears only if it applies</span>
+      </div>
+      <div class="ib" id="canvas">
+
+        <h4>1 · The tool</h4>
+        <div class="block">
+          <div class="field">
+            <label for="t-name">Tool or platform</label>
+            <input type="text" id="t-name" data-section="The tool" data-label="Tool or platform" placeholder="What it is called">
+          </div>
+          <div class="field">
+            <label for="t-workflow">The workflow it automates</label>
+            <div class="hint">Be specific. "Improves collaboration" is not a workflow.</div>
+            <input type="text" id="t-workflow" data-section="The tool" data-label="Workflow automated" placeholder="One line">
+          </div>
+          <div class="field">
+            <label for="t-stage">Where it stands</label>
+            <select id="t-stage" data-section="The tool" data-label="Stage">
+              <option value="">Select one</option>
+              <option>Under evaluation — not yet bought</option>
+              <option>Bought, being implemented</option>
+              <option>In production under a year</option>
+              <option>In production more than a year</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-ai">Does it include AI or machine learning?</label>
+            <div class="hint">Anything that learns from data, scores, ranks, forecasts, classifies or generates. If a vendor calls it AI and you are not sure what it does, answer yes — that uncertainty is itself a finding.</div>
+            <select id="t-ai" data-section="The tool" data-label="Contains AI or ML">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="unsure">Unsure — the vendor says so; we cannot say what it does</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>2 · VCAP triage — what does it actually change?</h4>
+        <div class="block">
+          <div class="field">
+            <label for="t-term">Which term does it move?</label>
+            <div class="hint">Training people to operate the new system is part of delivering the asset. C means the organisation ends up better at improving its processes than it was before.</div>
+            <select id="t-term" data-section="VCAP triage" data-label="Which term it moves">
+              <option value="">Select one</option>
+              <option value="A">A — we own something we did not own before</option>
+              <option value="AP">A and P — the way work flows changes too</option>
+              <option value="APC">A, P and C — we will also be better at improving afterwards</option>
+              <option value="none">Honestly, none of them yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-c">If you claimed C: what will the organisation be able to do afterwards that it cannot do now — and that does not depend on this system?</label>
+            <div class="hint">Leave blank if you did not claim C. A blank here is a legitimate and common answer.</div>
+            <textarea id="t-c" data-section="VCAP triage" data-label="The C claim, defended"></textarea>
+          </div>
+          <div class="field">
+            <label for="t-wip">Does it limit work in progress?</label>
+            <div class="hint">A tool that makes work easier to start without capping what is in progress mechanically lengthens lead time.</div>
+            <select id="t-wip" data-section="VCAP triage" data-label="WIP limiting">
+              <option value="">Select one</option>
+              <option>Yes — there is an explicit cap, and it is enforced</option>
+              <option>There is a cap that nobody enforces</option>
+              <option value="flag-wip">No — it only makes starting work easier</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-truth">Source of truth</label>
+            <select id="t-truth" data-section="VCAP triage" data-label="Source of truth">
+              <option value="">Select one</option>
+              <option>It replaces existing sources — one authoritative home afterwards</option>
+              <option value="flag-truth">It adds another place where the same fact lives</option>
+              <option>It consumes from an existing authoritative source</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-adopt">Adoption — expected against actual</label>
+            <div class="hint">Of the people meant to use it as the working record, what share actually do? Write "too early" if it is not live.</div>
+            <input type="text" id="t-adopt" data-section="VCAP triage" data-label="Adoption, expected vs actual" placeholder="e.g. expected 100%, actual about 40%">
+          </div>
+          <div class="field">
+            <label for="t-replicate">How long before a competitor with the same budget has the same thing?</label>
+            <select id="t-replicate" data-section="VCAP triage" data-label="Time to replication">
+              <option value="">Select one</option>
+              <option value="flag-rep">Months — they would buy the same product</option>
+              <option>A year or two</option>
+              <option>Longer, because of what we would also have to build</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="gate" id="ai-gate">The philosophical layer below applies to tools that contain AI or machine learning. Answer question 1.4 above and it will appear if it is relevant.</div>
+
+        <div id="ai-layer" hidden>
+          <h4>3 · Philosophical debt audit</h4>
+          <p style="font-size:15.5px;color:#4A5B70">Three pillars, after Schrage and Kiron. The question in each case is not whether the system is good, but whether the organisation has <em>articulated</em> the assumption — because an assumption nobody wrote down is one nobody can audit or improve.</p>
+
+          <div class="pillar">
+            <h4>Teleology — what it is told to want</h4>
+            <div class="map">The hierarchy of purposes. Most critical, most often skipped.</div>
+          </div>
+          <div class="block">
+            <div class="field">
+              <label for="p-objective">What is it optimising for, precisely?</label>
+              <div class="hint">The actual objective function or target metric, not the business goal it was sold against.</div>
+              <input type="text" id="p-objective" data-section="Teleology" data-label="What it optimises for" placeholder="The metric it actually maximises or minimises">
+            </div>
+            <div class="field">
+              <label for="p-hierarchy">Is the hierarchy of objectives documented?</label>
+              <div class="hint">When cost, service level, risk and sustainability conflict, is it written down which wins?</div>
+              <select id="p-hierarchy" data-section="Teleology" data-label="Hierarchy of objectives documented">
+                <option value="">Select one</option>
+                <option>Yes — written, owned and reviewed</option>
+                <option>Written once, never revisited</option>
+                <option value="flag-teleology">Not documented — it is implicit in the configuration</option>
+                <option value="flag-teleology">Nobody in this organisation could answer it</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-conflict">What has it already sacrificed to hit its metric?</label>
+              <div class="hint">Every optimiser trades something away. If you cannot name what, that is the finding.</div>
+              <textarea id="p-conflict" data-section="Teleology" data-label="What it trades away"></textarea>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <h4>Epistemology — what it is allowed to count as knowing</h4>
+            <div class="map">How it acquires knowledge, validates it, and expresses certainty.</div>
+          </div>
+          <div class="block">
+            <div class="field">
+              <label for="p-uncertainty">Does it express uncertainty, and does anything happen when it is high?</label>
+              <select id="p-uncertainty" data-section="Epistemology" data-label="Uncertainty and escalation">
+                <option value="">Select one</option>
+                <option>Yes — low confidence escalates to a human, automatically</option>
+                <option>It reports confidence; nothing is triggered by it</option>
+                <option value="flag-epistemology">It returns an answer with no stated confidence</option>
+                <option value="flag-epistemology">We do not know</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-invalidate">What would invalidate its training data?</label>
+              <div class="hint">A model learns the conditions that generated its data. Name the event that would end those conditions — a market shift, a regulation, a reorganisation, a pandemic.</div>
+              <textarea id="p-invalidate" data-section="Epistemology" data-label="What would invalidate the training data"></textarea>
+            </div>
+            <div class="field">
+              <label for="p-causal">Correlation or causation?</label>
+              <div class="hint">Does anyone in the organisation know which of the patterns it acts on are causal?</div>
+              <select id="p-causal" data-section="Epistemology" data-label="Correlation versus causation">
+                <option value="">Select one</option>
+                <option>Tested — we know which relationships are causal</option>
+                <option>Partly — for the major drivers only</option>
+                <option value="flag-epistemology">It acts on correlations; nobody has tested them</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <h4>Ontology — what it is able to see</h4>
+            <div class="map">Which entities it recognises, which relations it models, which variables do not exist for it.</div>
+          </div>
+          <div class="block">
+            <div class="field">
+              <label for="p-entities">Which entities and variables does it represent?</label>
+              <input type="text" id="p-entities" data-section="Ontology" data-label="Entities and variables represented" placeholder="e.g. suppliers by price, lead time and defect rate">
+            </div>
+            <div class="field">
+              <label for="p-missing">Name one variable that matters to this decision and that the system cannot see.</label>
+              <div class="hint">Geopolitical exposure, a relationship, a regulatory change, a supplier's own fragility. If nothing comes to mind in sixty seconds, that is worth noting as an answer.</div>
+              <textarea id="p-missing" data-section="Ontology" data-label="A variable it cannot see"></textarea>
+            </div>
+            <div class="field">
+              <label for="p-review">Who reviews what the system represents, and when?</label>
+              <select id="p-review" data-section="Ontology" data-label="Review of the representation">
+                <option value="">Select one</option>
+                <option>A named owner, on a fixed cadence</option>
+                <option>Only when something goes wrong</option>
+                <option value="flag-ontology">Nobody — it has the representation it was built with</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <h4>4 · The verdict</h4>
+        <div class="block">
+          <div class="field">
+            <label for="t-debt">Where is the largest debt?</label>
+            <select id="t-debt" data-section="The verdict" data-label="Largest debt">
+              <option value="">Select one</option>
+              <option>Technical — the artefact itself</option>
+              <option>Philosophical — unarticulated purpose, knowledge or representation</option>
+              <option>Adoption — it works and people do not use it</option>
+              <option>Capability — we would not be able to improve it after buying it</option>
+              <option>None that we can see</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-decision">The decision</label>
+            <select id="t-decision" data-section="The verdict" data-label="Decision">
+              <option value="">Select one</option>
+              <option>Proceed</option>
+              <option>Proceed once the conditions below are met</option>
+              <option>Pause — the debt has to be paid first</option>
+              <option>Do not proceed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-step">The first step, and who owns it</label>
+            <input type="text" id="t-step" data-section="The verdict" data-label="First step and owner" placeholder="One line">
+          </div>
+        </div>
+
+        <div class="readout" id="readout">
+          <h4>What your answers say</h4>
+          <div id="readout-body"><p class="none" style="margin:0">Fill the instrument in and this will summarise what you have just told it — it restates your own answers; it does not score them.</p></div>
+        </div>
+
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="t-who">Appraised by</label>
+          <input type="text" id="t-who" data-label="Appraised by" placeholder="Name, or the group">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="t-download">Download the appraisal</button>
+          <button type="button" class="ghost" id="t-copy">Copy as text</button>
+          <button type="button" class="ghost" id="t-clear">Clear</button>
+        </div>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Download before closing the tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>Reading the result</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>The instrument has no score, deliberately. It produces three things worth looking at.</p>
+    <ul class="tight">
+      <li><strong>Which term you could defend.</strong> Most honest appraisals land on A, or on A and P. That is not a failure — it is a correctly identified purchase. The failure is claiming C and being unable to say, in one sentence, what the organisation will be able to do afterwards without the system.</li>
+      <li><strong>How many pillars are unarticulated.</strong> Not how good the system is — whether anyone wrote the assumption down. A pillar nobody has articulated cannot be audited, and therefore cannot be improved. Three unarticulated pillars in a system that is already acting autonomously is the condition under which the sourcing failure above becomes likely rather than unlucky.</li>
+      <li><strong>Whether the debt is payable before or only after.</strong> Teleology is cheap to articulate before deployment and expensive afterwards, because by then the system has been acting on the implicit hierarchy and the organisation has accumulated two years of decisions made under it.</li>
+    </ul>
+    <div class="note">
+      <span class="lbl">The one question to take into the next steering committee</span>
+      Technical safeguards — value limits, audit logs, anomaly alerts — are necessary and not sufficient. Before granting any system autonomy, ask the three philosophical ones: is the hierarchy of purposes documented, including what happens when objectives conflict? Does it know when it does not know, and escalate? Can it recognise a situation it has never seen, or does it only optimise inside the world it was trained on? Without those three, autonomy is risk wearing the costume of efficiency.
+    </div>
+  </div>
+</section>
+
+<!-- refs -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Sources</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Schrage, M., &amp; Kiron, D. (2025). Philosophy eats AI. <em>MIT Sloan Management Review</em>. The three pillars — teleology, epistemology and ontology — and the argument that the binding constraint on value from AI is philosophical rather than technical, are theirs.</li>
+      <li>Schrage, M., &amp; Kiron, D. (2024). Is philosophy the next LLM training frontier? <em>MIT Initiative on the Digital Economy</em>.</li>
+      <li>Lima, T. F. (2026). <em>Excelência operacional: da estratégia à execução</em>, ch. 5. Atena Editora. Open access. The treatment of the three pillars for operations, the executive dilemmas, and the predictive-to-agentic comparison.</li>
+      <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
+      <li>Lima, T. F. (2026). <em>Excelência operacional</em>, ch. 1, for the identity V = C × (A + P).</li>
+    </ul>
+    <p style="font-size:15.5px;color:#4A5B70;margin-top:18px">The mapping between the three pillars and the operational arguments of the session — teleology to order winners, epistemology to signalling at the source, ontology to causal ambiguity — is this course's, not the original authors'.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Digital Tool Appraisal<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.getElementById('canvas');
+  if (!root) return;
+  var KEY = 'sorbonne-tool-appraisal-v1';
+  var who = document.getElementById('t-who');
+  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
+  var all = who ? fields.concat([who]) : fields;
+
+  var aiQ = document.getElementById('t-ai');
+  var layer = document.getElementById('ai-layer');
+  var gate = document.getElementById('ai-gate');
+
+  function syncLayer(){
+    var on = aiQ.value === 'yes' || aiQ.value === 'unsure';
+    layer.hidden = !on;
+    gate.hidden = on;
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
+  } catch (e) {}
+
+  function save(){
+    try {
+      var o = {};
+      all.forEach(function(f){ o[f.id] = f.value; });
+      localStorage.setItem(KEY, JSON.stringify(o));
+    } catch (e) {}
+  }
+
+  function flagged(id){
+    var el = document.getElementById(id);
+    return el && typeof el.value === 'string' && el.value.indexOf('flag-') === 0;
+  }
+  function sel(id){
+    var el = document.getElementById(id);
+    if (!el || !el.value) return '';
+    return el.options ? el.options[el.selectedIndex].text : el.value;
+  }
+
+  function readout(){
+    var out = [];
+    var term = document.getElementById('t-term').value;
+    var cClaim = document.getElementById('t-c').value.trim();
+
+    if (term === 'APC' && !cClaim) {
+      out.push('You claimed this moves <b>C</b> and left the defence blank. That is the one combination worth revisiting before the appraisal goes anywhere: name what the organisation will be able to do afterwards without the system, or drop the claim to A and P.');
+    } else if (term === 'APC' && cClaim) {
+      out.push('You claimed <b>C</b> and defended it. Hold that sentence — it is what the business case should be arguing, and it is usually the part that goes unwritten.');
+    } else if (term === 'A' || term === 'AP') {
+      out.push('You placed this in <b>' + (term === 'A' ? 'A' : 'A and P') + '</b>. That is a correctly identified purchase, not a weakness — but it means any competitor with the same budget can hold the same position, and the business case should be argued on that basis rather than on advantage.');
+    } else if (term === 'none') {
+      out.push('You could not place it in any term. Worth resolving before money moves.');
+    }
+
+    if (flagged('t-wip')) out.push('It makes work easier to start and does not cap what is in progress. By Little’s Law that lengthens lead time rather than shortening it — expect more in flight, not faster delivery.');
+    if (flagged('t-truth')) out.push('It adds another home for the same fact. That is a standing reconciliation cost, and it is the mechanism by which dashboards become negotiations.');
+    if (flagged('t-rep')) { /* reserved */ }
+    if (document.getElementById('t-replicate').value.indexOf('flag-') === 0) out.push('A competitor buys the same thing in months. Whatever advantage this produces has to come from something other than the tool.');
+
+    var ai = document.getElementById('t-ai').value;
+    if (ai === 'yes' || ai === 'unsure') {
+      var pillars = [];
+      if (flagged('p-hierarchy')) pillars.push('teleology');
+      if (flagged('p-uncertainty') || flagged('p-causal')) pillars.push('epistemology');
+      if (flagged('p-review')) pillars.push('ontology');
+      if (pillars.length) {
+        out.push('Unarticulated pillars: <b>' + pillars.join(', ') + '</b>. Not a judgement on the system — a statement that the assumption was never written down, and therefore cannot be audited or improved. This is debt in C arriving dressed as a purchase of A.');
+      }
+      if (ai === 'unsure') {
+        out.push('You cannot say what the AI in this tool does. Before anything else, that is the question to put to the vendor in writing.');
+      }
+      if (!document.getElementById('p-invalidate').value.trim()) {
+        out.push('You have not named what would invalidate its training data. Every model learns the conditions that produced its data; naming the event that ends those conditions is the cheapest safeguard available.');
+      }
+      if (!document.getElementById('p-missing').value.trim()) {
+        out.push('You have not named a variable the system cannot see. Either the representation is unusually complete, or nobody has looked — and the second is far more common.');
+      }
+    }
+
+    var body = document.getElementById('readout-body');
+    if (!out.length) {
+      body.innerHTML = '<p class="none" style="margin:0">Fill the instrument in and this will summarise what you have just told it — it restates your own answers; it does not score them.</p>';
+    } else {
+      body.innerHTML = '<ul>' + out.map(function(s){ return '<li>' + s + '</li>'; }).join('') + '</ul>';
+    }
+  }
+
+  function onChange(){ save(); syncLayer(); readout(); }
+  all.forEach(function(f){
+    f.addEventListener('input', onChange);
+    f.addEventListener('change', onChange);
+  });
+  syncLayer();
+  readout();
+
+  function build(){
+    var out = ['# Digital Tool Appraisal', '', 'Module 3 — Methods, Tools and Operational Efficiency', 'Sorbonne Business School / IDGP Academy', ''];
+    out.push('**Appraised by:** ' + ((who && who.value.trim()) || '—'));
+    var aiOn = document.getElementById('t-ai').value === 'yes' || document.getElementById('t-ai').value === 'unsure';
+    var section = '';
+    var philo = ['Teleology', 'Epistemology', 'Ontology'];
+    fields.forEach(function(f){
+      var sec = f.getAttribute('data-section') || '';
+      if (!aiOn && philo.indexOf(sec) !== -1) return;
+      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
+      var v = f.options ? (f.value ? f.options[f.selectedIndex].text : '') : f.value;
+      out.push('- **' + f.getAttribute('data-label') + ':** ' + ((v || '').trim() || '—'));
+    });
+    var r = document.getElementById('readout-body').innerText.trim();
+    if (r && r.indexOf('Fill the instrument') !== 0) {
+      out.push('', '## What these answers say', '', r);
+    }
+    out.push('');
+    return out.join('\n');
+  }
+
+  function slug(){
+    var n = (document.getElementById('t-name').value.trim()) || 'tool';
+    return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'tool';
+  }
+
+  document.getElementById('t-download').addEventListener('click', function(){
+    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'tool-appraisal-' + slug() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById('t-copy').addEventListener('click', function(){
+    var btn = this, text = build();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        var old = btn.textContent; btn.textContent = 'Copied';
+        setTimeout(function(){ btn.textContent = old; }, 2200);
+      }).catch(function(){ window.prompt('Copy the appraisal:', text); });
+    } else {
+      window.prompt('Copy the appraisal:', text);
+    }
+  });
+
+  document.getElementById('t-clear').addEventListener('click', function(){
+    if (!window.confirm('Clear every field?')) return;
+    all.forEach(function(f){ f.value = ''; });
+    onChange();
+  });
+})();
+</script>
+
+</body>
+</html>
