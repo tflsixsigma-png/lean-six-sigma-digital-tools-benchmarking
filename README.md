@@ -38,6 +38,22 @@ V = C × (A + P)
 
 after Van Mieghem & Allon (2015), with the multiplicative formulation developed in Lima (2026).
 
+Two further formulations close the argument. The morning adds the comparison form of the value stick:
+
+```
+VC = (WTP_A − Cost_A) − (WTP_B − Cost_B)
+```
+
+Competitive advantage is the difference between the value two firms create, which is why a copyable improvement returns it to zero — Porter's objection stated as arithmetic, and the central risk of the afternoon's benchmarking.
+
+The afternoon closes on:
+
+```
+Operational Excellence = Design(VCAP) × Culture
+```
+
+The author's adaptation: the configuration an organisation specifies, multiplied by whether it is lived. A didactic relation, not an instrument — the product form exists to forbid the claim that a strong design offsets a weak practice.
+
 ## Structure of the notes
 
 Each document carries timestamped content blocks, bridges to project management practice, an in-session group activity with its canvas, and a full source list. No preparation is required of participants: both sessions are self-contained, and the notes are reference material to keep.
