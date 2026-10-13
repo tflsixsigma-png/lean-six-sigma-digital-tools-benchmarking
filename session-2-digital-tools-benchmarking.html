@@ -139,7 +139,7 @@ footer b{color:var(--gold-soft)}
   <div class="wrap">
     <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
     <h1>Digital Tools &amp; Benchmarking</h1>
-    <p class="sub">Integration of digital platforms and international best practices. Notes accompanying the afternoon session of 17 October. A bridge from the morning equations to digital execution, high reliability, and the question the whole day has been building towards.</p>
+    <p class="sub">Integration of digital platforms and international best practices. Notes accompanying the afternoon session of 17 October — on what a technology investment actually buys, and on what has to be articulated before it returns anything.</p>
     <div class="budget">
       <div><span class="k">Session</span><div class="v">17 October · 14:00–17:00</div></div>
       <div><span class="k">Preparation</span><div class="v">None required</div></div>
@@ -150,101 +150,131 @@ footer b{color:var(--gold-soft)}
 
 <section>
   <div class="wrap">
-    <p class="lead">Most digital transformations automate the waste they were intended to remove. Platforms are licensed, dashboards are populated, yet decision latency grows and operational vulnerability remains unmeasured. These notes establish why.</p>
-    <p>In the morning session, we demonstrated that operational performance is governed by three fundamental equations: the Value Stick (<em>WTP &minus; SOC</em>), Economic Profit (<em>ROIC vs. WACC</em>), and the VCAP identity: <strong>V = C &times; (A + P)</strong>. This afternoon, we take those equations into the digital domain and test them against the uncompromising requirements of high-reliability systems and operational safety.</p>
+    <p class="lead">This morning ended on a claim: value is not the sum of what an organisation owns and how it works, but that sum scaled by its capacity to improve. The afternoon tests the claim against the two things organisations buy when they want that capacity and cannot build it — technology, and other people's practices.</p>
+    <p>The order is deliberate. Digital platforms come first because they are the most expensive thing on the list and the easiest to mistake for capability. Artificial intelligence comes next because it is the extreme case of the same error. Benchmarking comes last because it is the only one that looks like it should work.</p>
     <div class="note">
-      <span class="lbl">What to bring from the morning session</span>
-      <p style="margin-bottom:8px"><strong>The Value Case Canvas:</strong> The project appraised by your group in Part Nine of the morning notes. We will subject its architecture to digital failure-mode analysis and international benchmarking.</p>
-      <p style="margin-bottom:0"><strong>Your NUMMI hypothesis:</strong> The explanation of why GM could not replicate NUMMI despite 20 years of unrestricted access. The exact same mechanism explains why purchasing standard enterprise software does not build competitive advantage.</p>
+      <span class="lbl">What to bring from the morning</span>
+      <p style="margin-bottom:8px"><strong>Your Value Case canvas</strong> — the project your group appraised. This afternoon examines the tooling that project depends on.</p>
+      <p style="margin-bottom:0"><strong>Your NUMMI hypothesis</strong>, and the resolution we reached. The same mechanism explains why buying enterprise software does not build competitive advantage, and the puzzle below is its digital twin.</p>
     </div>
   </div>
 </section>
 
-<!-- 1 THE PUZZLE -->
+<!-- 1 PUZZLE -->
 <div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>The digital puzzle</h2></div></div>
 <section>
   <div class="wrap">
     <div class="puzzle">
-      <h4>The Glass Cockpit &amp; The Latent Failure</h4>
-      <p><strong>The setting.</strong> Modern command centers, offshore platforms, hospital intensive care units, and aerospace operations possess orders of magnitude more computing power, automated telemetry, and real-time dashboards than their predecessors two decades ago.</p>
-      <p>Yet cross-industry investigations (Reason, 1997; Woods, 2010; Dekker, 2014) reveal a recurring paradox: <strong>digital systems frequently create new pathways to failure while hiding early warning indicators behind green status indicators.</strong> Teams drown in data while starving for actionable situational awareness.</p>
+      <h4>Two firms, one platform</h4>
+      <p><strong>The setting.</strong> Two organisations in the same industry, of comparable size, buy the same enterprise platform from the same vendor in the same year. Same modules, same implementation partner, comparable budgets. One of them also deploys the same demand-forecasting model, trained on a similar history.</p>
+      <p>Three years later, one has materially shorter lead times and a forecast its planners trust. The other has the platform, the licences, the dashboards — and a planning process that works around all three.</p>
       <div class="q">
-        More telemetry. More automated workflows. Faster networks.<br>
-        <strong>Why does automating an unstable process generate catastrophic failure faster, and why does dashboard green so often conceal operational red?</strong>
+        Nothing in the purchase differed. <strong>Where did the difference come from, and why was it invisible in both business cases?</strong>
       </div>
     </div>
-    <p>The answer connects directly to the morning session: technology represents <em>Assets</em>. Unless coupled with operational <em>Capability</em> and safety-grade <em>Rules-in-Use</em>, digital platforms merely accelerate the propagation of defects.</p>
+    <p>If this sounds like Fremont with better software, that is the point. The morning established that assets and processes are additive and purchasable while capability is a coefficient. This afternoon the assets are more expensive, the vendors more persuasive, and the arithmetic unchanged.</p>
   </div>
 </section>
 
-<!-- 2 DIGITAL WASTE & LITTLE'S LAW -->
-<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>Digital waste &amp; Little's Law in cyberspace</h2></div></div>
+<!-- 2 WHAT A PLATFORM BUYS -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>What a digital investment actually buys</h2></div></div>
 <section>
   <div class="wrap">
-    <p class="lead">In physical manufacturing, waste is visible: pallets clog corridors, scrap piles up near machining centers. In digital and project environments, waste is silent, invisible, and stored in server memory.</p>
+    <p class="lead">Almost every platform is an <strong>A</strong> decision. Some are also a <strong>P</strong> decision. Very few are a <strong>C</strong> decision — and the error that destroys the business case is not buying A, it is booking the benefit as though C had moved.</p>
 
-    <h3>The translation of the eight wastes into digital systems</h3>
+    <div class="eq">
+      <div class="f">V = C × ( A + P )</div>
+      <div class="c">a platform enters the bracket · the coefficient is bought separately, or not at all</div>
+    </div>
+
+    <h3>The triage, applied to a tool</h3>
     <table>
-      <tr><th style="width:170px">Waste</th><th>Physical Form (Morning)</th><th>Digital Platform Form (Afternoon)</th></tr>
-      <tr><td class="k">Overproduction</td><td>Batches ahead of demand</td><td>Automated reports no executive reads; unused software features; data exhaust stored without purpose.</td></tr>
-      <tr><td class="k">Waiting</td><td>Idle operators, parts in queue</td><td>Approval lag in workflow engines; decision latency behind unread notifications and ticket queues.</td></tr>
-      <tr><td class="k">Transport</td><td>Forklift transit</td><td>Information handoffs across disconnected platforms (APIs broken, data re-exported to spreadsheets).</td></tr>
-      <tr><td class="k">Over-processing</td><td>Machining beyond tolerance</td><td>Over-configured approval matrices; redundant fields in electronic forms; double data validation.</td></tr>
-      <tr><td class="k">Inventory</td><td>Pallets of physical WIP</td><td>Unprocessed tickets, open pull requests, unreviewed change requests, pending backlog items.</td></tr>
-      <tr><td class="k">Motion</td><td>Walking across shop floor</td><td>Context switching between 12 enterprise applications; searching for the single source of truth across repositories.</td></tr>
-      <tr><td class="k">Defects</td><td>Scrap and rework loops</td><td>Corrupted datasets, bad manual re-entry, configuration errors resulting in operational system halts.</td></tr>
-      <tr><td class="k">Unused talent</td><td>Frontline ideas ignored</td><td>Specialists and engineers spending 40% of their shifts reconciling data formats and updating project trackers.</td></tr>
+      <tr><th style="width:17%">Term</th><th style="width:40%">What a tool contributes</th><th style="width:43%">The test</th></tr>
+      <tr><td class="k">A — Assets</td><td>Licences, infrastructure, models, dashboards. The organisation owns something it did not own before.</td><td>Could a competitor with the same budget hold this position in six months? Usually yes.</td></tr>
+      <tr><td class="k">P — Processes</td><td>The flow of work changes: approvals route differently, handoffs disappear, a queue is capped.</td><td>Would the new flow survive if the tool were replaced by a different vendor's?</td></tr>
+      <tr><td class="k">C — Capability</td><td>The organisation ends up better at improving its processes than it was before.</td><td>What can it now do that it could not do before — <em>that does not depend on the new system?</em></td></tr>
+    </table>
+    <p>Training people to operate the new system is not capability. It is part of delivering the asset, and it ends when the people who were trained leave. The C test is deliberately hard to pass, because most honest answers are A, or A and P, and recording that truthfully is what makes the appraisal useful.</p>
+
+    <h3>The productivity paradox, and why it is not about technology</h3>
+    <p>Research on information technology investment has repeatedly found the same shape: the returns to technology appear where complementary organisational practices exist, and are close to nil where they do not. The pattern survived decades of changing technology because it was never about the technology.</p>
+    <p>It is the same complementarity argument from this morning, in a different literature. A practice adopted without its complements imposes its costs and withholds its returns — and a platform is a practice that arrives with an invoice attached.</p>
+
+    <div class="bridge">
+      <span class="lbl">In project terms</span>
+      <p>Two consequences follow immediately, and most portfolio platform business cases contain neither.</p>
+      <p><strong>Adoption is the return.</strong> A tool used as the working record by 40% of the people it was bought for does not deliver 40% of a single-source-of-truth benefit. It delivers close to none, because the remaining 60% means every figure still has to be reconciled. Budget change management with the same seriousness as licences, or expect the arithmetic to punish you.</p>
+      <p style="margin-bottom:0"><strong>One source of truth per data type.</strong> A schedule date, a risk, a cost figure: each needs exactly one authoritative home, with everything else consuming it. The moment the same fact lives in two systems the organisation starts paying a permanent reconciliation tax — and its dashboards become negotiations rather than instruments.</p>
+    </div>
+
+    <h3>The trap that looks like speed</h3>
+    <p>A platform that makes work easier to start, and does not cap what is in progress, lengthens lead time rather than shortening it. Little's Law does not stop at the screen: with throughput fixed, more in flight is more time in flight. The platform delivers exactly what it promised — frictionless initiation — and the organisation experiences it as delay.</p>
+    <p>This is worth saying plainly because it is the most common disappointment in enterprise tooling, and it is almost never diagnosed correctly. The tool is not underperforming. It is performing, and nobody capped the queue.</p>
+  </div>
+</section>
+
+<!-- 3 PHILOSOPHY EATS AI -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>Philosophy eats AI</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">Every digital transformation now passes through artificial intelligence, and AI is the extreme case of everything above: the most expensive asset an organisation can buy, and the one whose return depends most completely on a capability that cannot be bought alongside it.</p>
+
+    <p>Schrage and Kiron put the claim sharply. The binding constraint on sustainable value from AI is <strong>not technical but philosophical</strong>. Organisations invest heavily in algorithms, data infrastructure and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. Those assumptions do not stay harmless because they were never written down. They are executed, at scale, continuously.</p>
+
+    <h3>Three pillars</h3>
+    <p>Each governs a different question, and each has an exact counterpart in what these two sessions have already established — which is the reason to treat them as operations content rather than as philosophy imported for decoration.</p>
+
+    <h4>Teleology — what the system is told to want</h4>
+    <p>The objectives and the hierarchy among them. It is the most critical of the three and the most frequently skipped, because a single objective is easy to state and a <em>ranking</em> of conflicting objectives requires a decision nobody wants to put in writing.</p>
+    <p>When a system optimises the wrong metric, or when objectives conflict with no explicit hierarchy, it produces outcomes that are technically correct and strategically destructive. A demand forecast optimised to minimise inventory will systematically underestimate seasonal peaks. A credit approval system optimised to reduce default will systematically exclude profitable segments.</p>
+    <div class="bridge">
+      <span class="lbl">Where you have met this</span>
+      <p style="margin-bottom:0">Order winners and qualifiers. A system optimising the wrong metric is a system whose purposes were never ranked — exactly the organisation that pours effort into a qualifier above the threshold and wonders why preference did not follow.</p>
+    </div>
+
+    <h4>Epistemology — what the system may count as knowing</h4>
+    <p>How it acquires knowledge, how it validates it, and how it expresses certainty. Systems that do not separate correlation from causation, that do not quantify uncertainty, or that treat historical patterns as permanent truths are epistemologically fragile.</p>
+    <p>The practical consequence is decisions taken with high statistical confidence in conditions that no longer resemble the ones that generated the training data. The pandemic invalidated the historical data behind practically every demand model in operation simultaneously — and the models kept reporting confidence throughout.</p>
+    <div class="bridge">
+      <span class="lbl">Where you have met this</span>
+      <p style="margin-bottom:0">Signalling at the source. A system that knows when it does not know, and escalates rather than answering, is an andon: the abnormality surfaces the moment it occurs instead of arriving in the next monthly report. A system that always returns an answer, with no stated confidence, is aggregated reporting with a faster clock.</p>
+    </div>
+
+    <h4>Ontology — what the system is able to see</h4>
+    <p>Which entities it recognises, which relations it models, which variables exist for it at all. A sourcing system that represents suppliers by price and quality alone — ignoring geopolitical exposure, sustainability and innovation capacity — has an impoverished ontology. Its recommendations will be locally optimal and systemically fragile.</p>
+    <div class="bridge">
+      <span class="lbl">Where you have met this</span>
+      <p style="margin-bottom:0">Causal ambiguity, from the benchmarking argument that follows. Representing a supplier by price and lead time alone is the same error as benchmarking the indicator instead of the practice that produces it: in both cases the representation omits the thing that actually explains the result.</p>
+    </div>
+
+    <h3>Philosophical debt</h3>
+    <p>Schrage and Kiron name the accumulation: <strong>philosophical debt</strong> — unarticulated assumptions about purpose, knowledge and reality, embedded in the models, compounding silently until the damage is hard to reverse. The analogy with technical debt is exact in form, and the difference is where the argument of this day lands.</p>
+    <div class="eq">
+      <div class="f">Technical debt accumulates in A and P.<br>Philosophical debt accumulates where C should be.</div>
+      <div class="c">a shortcut in the artefact · an absence in the organisation</div>
+    </div>
+    <p>Technical debt is a compromise somebody made and could document. Philosophical debt <em>is</em> the absence of the documentation: nobody wrote down the hierarchy of purposes, so nobody can audit it, so nobody can improve it. An organisation that cannot say what its system is optimising for has no object on which to run an improvement routine. That is a deficit in capability, arriving dressed as a purchase of assets.</p>
+
+    <div class="note">
+      <span class="lbl">The failure these three predict</span>
+      A sourcing system optimised for cost and delivery which, two years on, has systematically excluded suppliers in the regions the firm's own strategy prioritised. The fault is not in the model. The correction is not technical either — adding a column does not resolve it. The hierarchy of objectives was never articulated, so the trade-off was decided by default; and without articulating it, the technical fix simply creates a new debt in the opposite direction.
+    </div>
+
+    <h3>From predictive to agentic, and why the stakes change</h3>
+    <p>Most AI in operations today is predictive: the system analyses, forecasts or recommends, and a human decides and acts. Agentic systems formulate plans and take action in pursuit of objectives without a human in each step. Along all three pillars, what was documentation becomes a control surface.</p>
+    <table>
+      <tr><th style="width:19%">Dimension</th><th style="width:27%">Predictive</th><th style="width:27%">Agentic</th><th style="width:27%">What leadership must decide</th></tr>
+      <tr><td class="k">Autonomy</td><td>Recommends; a human decides and acts</td><td>Plans, acts, learns from outcomes</td><td>Explicitly where autonomy begins and ends — and who is accountable</td></tr>
+      <tr><td class="k">Teleology</td><td>Objectives fixed by whoever configured it</td><td>Formulates and refines goals within limits</td><td>The hierarchy of purposes becomes the most critical strategic document</td></tr>
+      <tr><td class="k">Epistemology</td><td>Validates against historical patterns</td><td>Identifies gaps in its knowledge and seeks new information</td><td>Governance of sources and of what counts as valid evidence</td></tr>
+      <tr><td class="k">Ontology</td><td>Fixed representation from the training data</td><td>Can extend its representation with new concepts</td><td>Periodic review of which variables the system considers — and which it ignores</td></tr>
     </table>
 
     <div class="bridge">
-      <span class="lbl">Bridge to Safety &amp; Mission-Critical Systems</span>
-      <p>In safety-critical domains (naval operations, healthcare, nuclear facilities), digital motion and digital waiting are not merely efficiency losses — they are active safety hazards. When an incident occurs, seconds lost searching for the authoritative procedure or interpreting conflicting system dashboards convert a manageable anomaly into an irreversible accident.</p>
+      <span class="lbl">The question for the next steering committee</span>
+      <p>Technical safeguards — value limits, audit logs, anomaly alerts — are necessary and not sufficient. Before granting any system autonomy, three philosophical ones:</p>
+      <p style="margin-bottom:0"><strong>Teleology:</strong> is the hierarchy of purposes documented, including what the system should do when cost, quality and sustainability conflict? <strong>Epistemology:</strong> does it know when it does not know, and escalate below a confidence threshold? <strong>Ontology:</strong> can it recognise a supplier or a context it has never seen, or does it only optimise inside the world it was trained on? Without those three, autonomy is risk wearing the costume of efficiency.</p>
     </div>
-
-    <h3>Little's Law applied to digital workflows</h3>
-    <p>Recall Little's Law from the morning session: <strong>WIP = Throughput &times; Lead Time</strong>. It governs electronic tickets, pull requests, and safety approvals exactly as it governs physical parts on a conveyor belt.</p>
-    <div class="eq">
-      <div class="f">Lead Time = Open Tickets &divide; Completion Rate</div>
-      <div class="c">Cyberspace obeys queueing physics without exception</div>
-    </div>
-    <p>When organizations deploy enterprise collaboration platforms without WIP limits, the cost of initiating a new work request drops to zero. Work requests explode, inventory in flight surges, and average lead time expands proportionally. Digital platforms that make work easier to initiate without limiting WIP mechanically guarantee systemic delay.</p>
-  </div>
-</section>
-
-<!-- 3 DIGITAL JIDOKA & SAFETY -->
-<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>Digital Jidoka: High-Reliability Operations &amp; Safety</h2></div></div>
-<section>
-  <div class="wrap">
-    <p class="lead">The right pillar of the TPS house is <em>Jidoka</em>: quality and safety built in at the source. In digital and high-risk environments, Jidoka transforms from a mechanical device into an architecture of systemic resilience.</p>
-
-    <div class="grid2">
-      <div class="card">
-        <h4>Conventional Reporting</h4>
-        <p>Information is aggregated upward on weekly or monthly cadences. Variance is smoothed, bad news is softened, and executives see a green dashboard until the project or asset is already broken.</p>
-        <p style="margin-bottom:0"><strong>Mechanism:</strong> Late, filtered, political, high-latency.</p>
-      </div>
-      <div class="card">
-        <h4>Digital Jidoka &amp; The Andon</h4>
-        <p>Sensors, logs, and telemetry signal an abnormal operational state the moment boundary conditions are violated. The workflow halts downstream progression until the anomaly is diagnosed.</p>
-        <p style="margin-bottom:0"><strong>Mechanism:</strong> Real-time, transparent, uncorrupted, source-verified.</p>
-      </div>
-    </div>
-
-    <h3>Poka-Yoke in digital architecture</h3>
-    <p>Shigeo Shingo distinguished between informative inspection (discovering defects after the fact) and source inspection (preventing errors from becoming defects). In modern digital systems, this translates directly:</p>
-    <ul class="tight">
-      <li><strong>Physical Poka-Yoke:</strong> Asymmetric connectors (USB-C, naval fuel couplings) that cannot be joined improperly.</li>
-      <li><strong>Digital Poka-Yoke:</strong> Hard programmatic constraints, schema validation, two-man rule digital signing for safety overrides, and automated pre-flight checks that refuse execution if preconditions fail.</li>
-    </ul>
-
-    <div class="note">
-      <span class="lbl">High Reliability Organizations (HRO) Principle</span>
-      <strong>"Preoccupation with failure" (Weick &amp; Sutcliffe, 2007).</strong> In safety systems, an anomaly is not an inconvenience to be cleared off a screen; it is vital intelligence about system boundaries. A digital tool that permits operators to override safety interlocks without root-cause review is the exact equivalent of disconnecting the Toyota Andon cord to keep the line moving.
-    </div>
-
-    <h3>Normal Accidents &amp; Interactive Complexity</h3>
-    <p>Charles Perrow (1984) showed that systems characterized by <strong>high interactive complexity</strong> and <strong>tight coupling</strong> inevitably experience "normal accidents". Digital platforms increase coupling by connecting formerly independent subsystems through real-time automation.</p>
-    <p>If digital integration is executed without human situational capability (<em>C</em>), an anomaly in one subsystem propagates instantaneously through the network before operators can comprehend the state space. Digital tools must be designed to enhance human cognition, not replace it.</p>
   </div>
 </section>
 
@@ -314,41 +344,7 @@ footer b{color:var(--gold-soft)}
   </div>
 </section>
 
-<!-- 5 INTEGRATING DIGITAL ECOSYSTEMS -->
-<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>Integrating digital platforms into operations</h2></div></div>
-<section>
-  <div class="wrap">
-    <p class="lead">Enterprise platforms — PPM tools, ERPs, digital twins, AI assistants — create strategic advantage only when integrated according to operational physics.</p>
-
-    <h3>The three layers of digital integration</h3>
-    <div class="grid2">
-      <div class="card">
-        <h4>Layer 1: The Sensor / Telemetry Base</h4>
-        <p>Data capture at source. Automated data gathering that removes manual reporting burden from operators.</p>
-        <p style="margin-bottom:0"><strong>Safety analog:</strong> Hull stress gauges, medical vital telemetry, automated change tracking.</p>
-      </div>
-      <div class="card">
-        <h4>Layer 2: The Flow Engine</h4>
-        <p>The rules governing WIP limits, pull mechanisms, routing pathways, and automated exception triggering.</p>
-        <p style="margin-bottom:0"><strong>Safety analog:</strong> Interlocks, emergency trip systems, quarantine pipelines.</p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:18px">
-      <h4>Layer 3: Human Sensemaking &amp; Capability (The C Multiplier)</h4>
-      <p>The shared mental model of the team. The psychological safety required to pull the digital Andon, question an anomalous green metric, and treat variance as a refutable hypothesis. Without Layer 3, Layers 1 and 2 merely create expensive clutter.</p>
-      <p style="margin-bottom:0;font-size:14.5px;color:#4A5B70">The three-layer decomposition follows Lima (manuscript in preparation), §6.6.1.</p>
-    </div>
-
-    <div class="bridge">
-      <span class="lbl">In project terms</span>
-      <p>Adopting an enterprise Portfolio Management platform (Jira, Planview, Microsoft Project Server) changes only Layer 1 and Layer 2. If the governance culture rewards projects for hiding red status until delivery date minus one month, the platform will simply record false progress with higher digital precision.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 6 EXECUTION OPTIMIZATION CHALLENGE -->
-<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Structured activity — the Digital Tool Appraisal</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">FIVE</div><h2>Structured activity — the Digital Tool Appraisal</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">The morning asked whether a project was worth funding. This afternoon asks a harder question about the same project: of the digital tooling it depends on, what is actually being bought — and what is being left undone?</p>
@@ -410,7 +406,7 @@ footer b{color:var(--gold-soft)}
 </section>
 
 <!-- 7 BUILDING THE MULTIPLIER -->
-<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>Building the multiplier</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">SIX</div><h2>Building the multiplier</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">The day has been an argument by elimination. Assets can be bought. Processes can be documented and taught. Benchmarking transfers the second and purchases the first, and neither moves the term that multiplies them. One question is left, and it is the only one with a practical answer: <strong>how is C actually built?</strong></p>
@@ -458,14 +454,13 @@ footer b{color:var(--gold-soft)}
 </section>
 
 <!-- REFS -->
-<div class="partbar"><div class="wrap"><div class="n">EIGHT</div><h2>Sources &amp; Readings</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">SEVEN</div><h2>Sources &amp; Readings</h2></div></div>
 <section>
   <div class="wrap">
     <p>Works cited in these notes and informing the afternoon curriculum.</p>
     <ul class="refs">
       <li>Cohen, W. M., &amp; Levinthal, D. A. (1990). Absorptive capacity: A new perspective on learning and innovation. <em>Administrative Science Quarterly</em>, 35(1), 128–152.</li>
       <li>Argote, L., &amp; Epple, D. (1990). Learning curves in manufacturing. <em>Science</em>, 247(4945), 920–924.</li>
-      <li>Dekker, S. (2014). <em>The Field Guide to Understanding 'Human Error'</em> (3rd ed.). Ashgate Publishing.</li>
       <li>Dierickx, I., &amp; Cool, K. (1989). Asset stock accumulation and sustainability of competitive advantage. <em>Management Science</em>, 35(12), 1504–1511.</li>
       <li>Lapré, M. A., Mukherjee, A. S., &amp; Van Wassenhove, L. N. (2000). Behind the learning curve: Linking learning activities to waste reduction. <em>Management Science</em>, 46(5), 597–611.</li>
       <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Open access.</li>
@@ -473,20 +468,15 @@ footer b{color:var(--gold-soft)}
       <li>Lippman, S. A., &amp; Rumelt, R. P. (1982). Uncertain imitability: An analysis of interfirm differences in efficiency under competition. <em>Bell Journal of Economics</em>, 13(2), 418–438.</li>
       <li>Little, J. D. C. (1961). A proof for the queuing formula L = λW. <em>Operations Research</em>, 9(3), 383–387.</li>
       <li>Nelson, R. R., &amp; Winter, S. G. (1982). <em>An Evolutionary Theory of Economic Change</em>. Harvard University Press.</li>
-      <li>Perrow, C. (1984). <em>Normal Accidents: Living with High-Risk Technologies</em>. Basic Books.</li>
       <li>Polanyi, M. (1966). <em>The Tacit Dimension</em>. Doubleday.</li>
       <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
-      <li>Reason, J. (1997). <em>Managing the Risks of Organizational Accidents</em>. Ashgate Publishing.</li>
       <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
       <li>Schrage, M., &amp; Kiron, D. (2024). Is philosophy the next LLM training frontier? <em>MIT Initiative on the Digital Economy</em>.</li>
       <li>Schrage, M., &amp; Kiron, D. (2025). Philosophy eats AI. <em>MIT Sloan Management Review</em>.</li>
-      <li>Shingo, S. (1986). <em>Zero Quality Control: Source Inspection and the Poka-Yoke System</em>. Productivity Press.</li>
       <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
       <li>Szulanski, G. (1996). Exploring internal stickiness: Impediments to the transfer of best practice within the firm. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
       <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
-      <li>Weick, K. E., &amp; Sutcliffe, K. M. (2007). <em>Managing the Unexpected: Resilient Performance in an Age of Uncertainty</em> (2nd ed.). Jossey-Bass.</li>
       <li>Winter, S. G. (2003). Understanding dynamic capabilities. <em>Strategic Management Journal</em>, 24(10), 991–995.</li>
-      <li>Woods, D. D., Dekker, S., Cook, R., Johannesen, L., &amp; Sarter, N. (2010). <em>Behind Human Error</em>. Ashgate Publishing.</li>
     </ul>
   </div>
 </section>
