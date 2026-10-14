@@ -32,8 +32,8 @@ const parts = await page.evaluate(({ meta, tocnum }) => {
   document.querySelectorAll('.gate').forEach(g => {
     const d = document.createElement('div');
     d.className = 'ap-printnote';
-    d.innerHTML = '<b>The next two sections apply only where the tool contains AI or machine learning.</b> ' +
-      'If the last question of section 1 is answered no, go straight to section 5. In the online version these sections appear and disappear on their own.';
+    d.innerHTML = '<b>Section 4 applies only where the tool contains AI or machine learning.</b> ' +
+      'If the last question of section 1 is answered no, go straight to section 5. In the online version the section appears and disappears on its own.';
     g.replaceWith(d);
   });
 

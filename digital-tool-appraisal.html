@@ -46,6 +46,9 @@ td.k{font-weight:700;color:var(--navy);white-space:nowrap}
 .sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
 .sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
 @media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+.after{margin:30px 0 8px;padding:16px 20px;border-top:3px solid var(--gold);border-bottom:1px solid var(--line);background:#FEF8EA}
+.after b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.after span{display:block;font-size:15px;color:#4A5B70;margin-top:4px;line-height:1.5}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:700px){.grid3{grid-template-columns:1fr}}
 .note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
@@ -115,46 +118,25 @@ footer b{color:var(--gold-soft)}
 
 <section>
   <div class="wrap">
-    <p class="lead">Four questions decide whether a digital investment returns anything. Does it change what the organisation <em>is able to do</em>, or only what it <em>owns</em>? Where it contains AI: what has the system been told to want, to know, and to see — and at which link does the chain from a working model to a result actually break? And what is the reference already doing that you are not: the routine, not the number?</p>
-    <p>This instrument asks all four, and then turns the answers outward: a capability maturity read of the organisation rather than of the tool, and a six-month roadmap across the three gaps that most constrain performance. It takes about twenty minutes for one tool, and it is designed to be filled in by the people who will live with the decision rather than by the people selling it.</p>
+    <p class="lead">Three questions decide whether a digital investment returns anything. Does it change what the organisation <em>owns</em>, or what it is <em>able to do</em>? At which link does the chain from a working tool to an organisational result break — or go unmeasured? And, where the tool contains AI, what has the system been told to want, to know and to see?</p>
+    <p>The instrument asks all three in the room, in about twenty minutes for one tool, and then turns outward in two follow-up sections: what a reference organisation does that you do not, and which capability gaps to close first over six months. It is designed to be filled in by the people who will live with the decision rather than by the people selling it, and <strong>"not documented" and "nobody knows" are its most useful answers.</strong></p>
   </div>
 </section>
 
 <!-- 1 -->
-<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>Why a tool can be excellent and still return nothing</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>What you need in order to answer</h2></div></div>
 <section>
   <div class="wrap">
-    <p>The afternoon session establishes the frame. Value is not the sum of what an organisation owns and how it works — it is that sum scaled by its capacity to improve.</p>
+    <p>Everything below is developed in the afternoon's reading notes. This page carries only the three ideas the fields depend on.</p>
+
+    <h3>A tool enters the bracket; it does not touch the coefficient</h3>
     <div class="eq">
       <div class="f">V = C × ( A + P )</div>
       <div class="c">assets and processes are additive and purchasable · capability is a coefficient</div>
     </div>
-    <p>A platform is almost always an <strong>A</strong> decision, sometimes a <strong>P</strong> decision, and very rarely a <strong>C</strong> decision. That is not a criticism of platforms — it is a statement of what they are. The error is paying for A and booking the benefit as though C had moved.</p>
+    <p>A platform is almost always an <strong>A</strong> decision — the organisation owns something new. Sometimes it is also a <strong>P</strong> decision — the way work flows changes. It is very rarely a <strong>C</strong> decision, which would mean the organisation ends up better at <em>improving</em> its processes than it was before. The error that destroys business cases is paying for A and booking the benefit as though C had moved.</p>
 
-    <h3>Technical debt accumulates in A and P. Philosophical debt accumulates where C should be.</h3>
-    <p>Schrage and Kiron argue that the binding constraint on value from AI is not technical but philosophical: organisations invest heavily in algorithms, data infrastructure and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. The unarticulated assumptions do not stay harmless. They compound.</p>
-    <p>The parallel with technical debt is exact, and so is the difference. Technical debt is a shortcut in the artefact. <strong>Philosophical debt is an absence in the organisation</strong> — nobody wrote down the hierarchy of purposes, so nobody can audit it, so nobody can improve it. An organisation that cannot say what its system is optimising for has no basis on which to run an improvement routine over it. That is a deficit in C, arriving dressed as a deficit in A.</p>
-
-    <h3>The three pillars, and where you have already met them</h3>
-    <p>Each of Schrage and Kiron's pillars restates something the day has already established in another vocabulary. That is the reason to take them seriously rather than as a separate topic.</p>
-    <table>
-      <tr><th style="width:21%">Pillar</th><th style="width:40%">What it governs</th><th style="width:39%">Where it appears in the session</th></tr>
-      <tr><td class="k">Teleology</td><td>What the system should achieve — the hierarchy of purposes, and what happens when objectives conflict</td><td>Order winners and qualifiers. A system optimising the wrong metric is one whose purposes were never ranked — the same error as over-investing in a qualifier.</td></tr>
-      <tr><td class="k">Epistemology</td><td>What counts as valid knowledge — how the system acquires it, validates it and expresses certainty</td><td>The digital andon. A system that knows when it does not know, and escalates, <em>is</em> signalling at the source rather than reporting on a cycle.</td></tr>
-      <tr><td class="k">Ontology</td><td>How the system represents reality — which entities it recognises, which relations it models, which variables it ignores</td><td>Causal ambiguity. Representing a supplier by price and lead time alone is the same error as benchmarking the indicator instead of the practice that produces it.</td></tr>
-    </table>
-
-    <div class="note">
-      <span class="lbl">The failure these predict</span>
-      A sourcing system optimised for cost and delivery that, two years on, has systematically excluded suppliers in regions the firm's own strategy prioritised. The fault is not in the model. It is that the hierarchy of objectives was never written down, so the trade-off was resolved by default — and silently, because nothing in the architecture was built to surface it.
-    </div>
-
-    <h3>Why this matters more for AI than for anything else you buy</h3>
-    <p>Every tool embeds assumptions. What distinguishes an AI system is that it <strong>acts on them at scale, continuously, and without re-stating them</strong>. A spreadsheet with a wrong assumption produces one wrong number that somebody reads. A model with an unarticulated teleology produces ten thousand decisions a month, each technically correct and strategically wrong, and reports high confidence throughout.</p>
-    <p>This sharpens as systems become agentic. A predictive system recommends and a human decides; an agentic system formulates plans and acts. At that point the hierarchy of purposes stops being documentation and becomes the control surface — the only place where the boundary of autonomy is actually set.</p>
-
-    <h3>And what the measured evidence says</h3>
-    <p>The pillars are an argument about what goes unarticulated. There is also a measurement, and it comes from a systematic review of the implementations that actually happened. Of 1,271 records screened, 37 had both an implementation and a comparison — roughly one for every eight that end at a model or a simulation. In the studies with no effect, predictive performance was high and stable. <strong>Model accuracy does not separate success from failure.</strong> What separates them is a chain of six conditions, each necessary and none sufficient.</p>
+    <h3>Six conditions between a working tool and a result</h3>
     <div class="sixchain">
       <div class="st"><span class="n">0</span><span class="t">Evidence base</span><span class="r">the tool</span></div>
       <div class="st"><span class="n">1</span><span class="t">Technical capability in operation</span><span class="r">the tool</span></div>
@@ -163,11 +145,16 @@ footer b{color:var(--gold-soft)}
       <div class="st"><span class="n">4</span><span class="t">Organisational outcome</span><span class="r">the result</span></div>
       <div class="st"><span class="n">5</span><span class="t">Net value</span><span class="r">the result</span></div>
     </div>
-    <p>The two middle conditions are not properties of the tool at all. They are capabilities of the organisation that bought it: whether the output reaches whoever decides while the decision is still open, and whether anyone is able to act on it with the resources that action requires. That is C, in a form you can measure — and it is where the reviewed evidence says value is most often lost.</p>
-    <div class="note">
-      <span class="lbl">Provenance, and the limit of the evidence</span>
-      The chain is drawn from a systematic review of AI implementations conducted under PRISMA 2020 (Lima, manuscript in preparation). <strong>Its evidence base is hospital implementations.</strong> The conditions are stated here in general organisational terms, which is an extension and not a finding of the review. Use it as a structure for appraisal, not as a citable result.
-    </div>
+    <p>Each is necessary and none is sufficient: a break at any link stops the effect, however good the links before it. The two in the middle are not properties of the tool at all — they are capabilities of the organisation that bought it, and they are where a systematic review of real implementations found value most often lost. The chain is drawn from that review (Lima, manuscript in preparation); its evidence base is hospital implementations and it is used here as a structure for appraisal, not as a citable result.</p>
+
+    <h3>Where the tool contains AI: three things nobody wrote down</h3>
+    <table>
+      <tr><th style="width:21%">Pillar</th><th>The question</th><th style="width:34%">What it looks like when it is missing</th></tr>
+      <tr><td class="k">Teleology</td><td>What has the system been told to want — and when its objectives conflict, which one wins?</td><td>It optimises one metric brilliantly and nobody can say what it traded away</td></tr>
+      <tr><td class="k">Epistemology</td><td>What is it allowed to count as knowing — and does it know when it does not know?</td><td>It returns an answer with high confidence in conditions that no longer resemble its training data</td></tr>
+      <tr><td class="k">Ontology</td><td>What is it able to see — and which variable that matters does not exist for it?</td><td>A supplier represented by price and lead time alone, in a decision that turned on geopolitics</td></tr>
+    </table>
+    <p>After Schrage and Kiron. An assumption nobody wrote down is one nobody can audit or improve — which is why the audit in section 4 asks not whether the system is good, but whether the assumption was <em>articulated</em>.</p>
   </div>
 </section>
 
@@ -180,7 +167,7 @@ footer b{color:var(--gold-soft)}
     <div class="inst">
       <div class="ih">
         <b>Digital Tool Appraisal</b>
-        <span>Sections 1, 2 and 7 take about ten minutes; with the AI sections, about twenty-five. Sections 5 and 6 are usually completed after the session.</span>
+        <span>In the room: sections 1 to 5, about twenty minutes for one tool. Sections 6 and 7 are the follow-up assignment.</span>
       </div>
       <div class="ib" id="canvas">
 
@@ -272,10 +259,104 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <div class="gate" id="ai-gate">Sections 3 and 4 apply only to tools that contain AI or machine learning. Answer the last question of section 1 — <em>Does it include AI or machine learning?</em> — and they will appear if they are relevant.</div>
+        <h4>3 · Capability maturity — the six conditions</h4>
+        <p style="font-size:15.5px;color:#4A5B70">The chain from a working tool to an organisational result, after Lima (manuscript in preparation). It applies to any tool; where the tool contains AI, conditions 0 and 1 bite harder. Each condition is necessary and none is sufficient, so the useful answer is the <em>first</em> one that is not a clear yes. <strong>Not measured</strong> is a legitimate and common answer — and a more tractable finding than a failure.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Read across, the six answers <em>are</em> a maturity statement, and a more defensible one than a stage number: they say which conditions this organisation can currently satisfy and demonstrate, which it satisfies without evidence, and which it has never observed. There is no composite score here on purpose. A single figure would hide the only thing worth knowing, which is <em>where</em> the chain stops.</p>
+
+        <div class="block">
+          <div class="field">
+            <label for="k-0">0 · Evidence base — has this kind of application produced a measured result in a real organisation?</label>
+            <div class="hint">"Kind of application" means the job: demand forecasting, scheduling, document generation, risk scoring, case prioritisation. Not a model, not a simulation, not a pilot that reported accuracy — an implementation somebody measured afterwards, ideally in an organisation like yours.</div>
+            <select id="k-0" data-section="The six conditions" data-label="0 · Evidence base">
+              <option value="">—</option>
+              <option>Yes, in a comparable organisation</option>
+              <option>Partly — results exist but diverge</option>
+              <option value="flag-k0">No, only modelling or vendor material</option>
+              <option value="flag-ku">Not measured, or nobody has looked</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-1">1 · Technical capability in operation — does it do here what the demo did, on <em>our</em> data, the way we actually run it?</label>
+            <div class="hint">For any tool: has anyone checked, after go-live, that it performs as specified on our volumes and our exceptions? For an AI tool, more sharply: vendor accuracy was measured on the vendor's data with the vendor's settings — has it been checked on ours, with the cut-off we actually use, counting only outputs that tell people something they did not already know?</div>
+            <select id="k-1" data-section="The six conditions" data-label="1 · Technical capability in operation">
+              <option value="">—</option>
+              <option>Yes, verified locally after deployment</option>
+              <option>Partly — verified once, not monitored</option>
+              <option value="flag-k1">No, or performance has drifted</option>
+              <option value="flag-ku">Not measured</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-2">2 · Workflow integration — does the output reach whoever decides, while the decision is still open?</label>
+            <div class="hint">The first of the two organisational conditions. Name the person and the step, not the dashboard.</div>
+            <select id="k-2" data-section="The six conditions" data-label="2 · Workflow integration">
+              <option value="">—</option>
+              <option>Yes — named recipient, inside the decision window</option>
+              <option>Partly — it arrives, but late or to the wrong role</option>
+              <option value="flag-k2">No — it is available rather than delivered</option>
+              <option value="flag-ku">Not measured — we do not know if it is used</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-2b">Who receives the output, at which step, and is it in fact used?</label>
+            <div class="hint">Two thirds of staff rarely or never opening the tool is the commonest observed failure, and it is invisible unless somebody asks.</div>
+            <input type="text" id="k-2b" data-section="The six conditions" data-label="Recipient, step and actual use" placeholder="Role · step in the process · evidence of use">
+          </div>
+          <div class="field">
+            <label for="k-3">3 · Translation into action — is there an owner able to act, with the resources the action requires?</label>
+            <div class="hint">The second organisational condition. If acting on the output needs three approvals, a budget line and a resource nobody has, an earlier warning changes nothing — the constraint was never information.</div>
+            <select id="k-3" data-section="The six conditions" data-label="3 · Translation into action">
+              <option value="">—</option>
+              <option>Yes — named owner, resourced, low barrier</option>
+              <option>Partly — owner named, resources contested</option>
+              <option value="flag-k3">No — identification without capacity to act</option>
+              <option value="flag-ku">Not measured — we do not know the follow-through rate</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-3b">The action, its owner, and what it depends on</label>
+            <div class="hint">Write the sentence the business case should contain: when the output says X, <em>who</em> does <em>what</em>, using <em>what</em>.</div>
+            <textarea id="k-3b" data-section="The six conditions" data-label="The action, owner and dependencies"></textarea>
+          </div>
+          <div class="field">
+            <label for="k-4">4 · Organisational outcome — which indicator should move, measured how?</label>
+            <div class="hint">One named indicator, one data source, one baseline — and not a satisfaction survey. Where perception and objective measurement were collected together, they diverged.</div>
+            <select id="k-4" data-section="The six conditions" data-label="4 · Organisational outcome">
+              <option value="">—</option>
+              <option>Yes — named indicator, source and baseline</option>
+              <option>Partly — indicator named, no baseline</option>
+              <option value="flag-k4">No — benefit stated in general terms</option>
+              <option value="flag-k4">Measured only by what users report</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-5">5 · Net value — what does the gain cost, and who bears it?</label>
+            <div class="hint">Who is de-prioritised, which work moves to other people or other hours, and what checking the output takes. The hour saved in the back office that reappears as an hour of overtime in the front office is not a gain; it is a relocation.</div>
+            <select id="k-5" data-section="The six conditions" data-label="5 · Net value">
+              <option value="">—</option>
+              <option>Yes — the displaced cost is identified and accepted</option>
+              <option>Partly — suspected but not quantified</option>
+              <option value="flag-k5">No — only the gain has been counted</option>
+              <option value="flag-ku">Not measured</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-valid">How good is the evidence you just used to answer?</label>
+            <div class="hint">Three things make a result trustworthy: a comparison group measured at the same time, an objective measure rather than what people said they felt, and a source that is not selling the tool. Tick the weakest point in what you relied on. Vendor material usually fails at least two of the three.</div>
+            <select id="k-valid" data-section="The six conditions" data-label="Weakest point in the evidence">
+              <option value="">—</option>
+              <option>None — a comparison group at the same time, an objective measure, an independent source</option>
+              <option value="flag-kv">No comparison group — only before-and-after, so anything else that changed gets credited to the tool</option>
+              <option value="flag-kv">Measured by what users reported, not by an objective figure</option>
+              <option value="flag-kv">The figures come from the vendor</option>
+              <option value="flag-kv">More than one of these</option>
+            </select>
+          </div>
+        </div>
+        <div class="gate" id="ai-gate">Section 4 applies only to tools that contain AI or machine learning. Answer the last question of section 1 — <em>Does it include AI or machine learning?</em> — and it will appear if it is relevant.</div>
 
         <div id="ai-layer" hidden>
-          <h4>3 · Philosophical debt audit</h4>
+          <h4>4 · Philosophical debt audit — AI only</h4>
           <p style="font-size:15.5px;color:#4A5B70">Three pillars, after Schrage and Kiron. The question in each case is not whether the system is good, but whether the organisation has <em>articulated</em> the assumption — because an assumption nobody wrote down is one nobody can audit or improve.</p>
 
           <div class="pillar">
@@ -299,11 +380,6 @@ footer b{color:var(--gold-soft)}
                 <option value="flag-teleology">Nobody in this organisation could answer it</option>
               </select>
             </div>
-            <div class="field">
-              <label for="p-conflict">What has it already sacrificed to hit its metric?</label>
-              <div class="hint">Every optimiser trades something away. If you cannot name what, that is the finding.</div>
-              <textarea id="p-conflict" data-section="Teleology" data-label="What it trades away"></textarea>
-            </div>
           </div>
 
           <div class="pillar">
@@ -326,16 +402,6 @@ footer b{color:var(--gold-soft)}
               <div class="hint">A model learns the conditions that generated its data. Name the event that would end those conditions — a market shift, a regulation, a reorganisation, a pandemic.</div>
               <textarea id="p-invalidate" data-section="Epistemology" data-label="What would invalidate the training data"></textarea>
             </div>
-            <div class="field">
-              <label for="p-causal">Correlation or causation?</label>
-              <div class="hint">Example: the model flags suppliers with late deliveries as risky. Is lateness the cause of the trouble, or do both come from something else — a region, a contract type, a season? If nobody has checked, the system acts on a correlation, and it will keep acting on it after the underlying cause has changed.</div>
-              <select id="p-causal" data-section="Epistemology" data-label="Correlation versus causation">
-                <option value="">Select one</option>
-                <option>Tested — we know which relationships are causal</option>
-                <option>Partly — for the major drivers only</option>
-                <option value="flag-epistemology">It acts on correlations; nobody has tested them</option>
-              </select>
-            </div>
           </div>
 
           <div class="pillar">
@@ -343,11 +409,6 @@ footer b{color:var(--gold-soft)}
             <div class="map">Which entities it recognises, which relations it models, which variables do not exist for it.</div>
           </div>
           <div class="block">
-            <div class="field">
-              <label for="p-entities">Which things, and which attributes of them, does it see?</label>
-              <div class="hint">A system only reasons about what it has a field for. List the objects it knows — suppliers, orders, tickets, people — and the handful of attributes it uses to describe each.</div>
-              <input type="text" id="p-entities" data-section="Ontology" data-label="Entities and variables represented" placeholder="e.g. suppliers by price, lead time and defect rate">
-            </div>
             <div class="field">
               <label for="p-missing">Name one variable that matters to this decision and that the system cannot see.</label>
               <div class="hint">Geopolitical exposure, a relationship, a regulatory change, a supplier's own fragility. If nothing comes to mind in sixty seconds, that is worth noting as an answer.</div>
@@ -364,103 +425,43 @@ footer b{color:var(--gold-soft)}
             </div>
           </div>
 
-          <h4 style="margin-top:28px">4 · Capability maturity — the six conditions</h4>
-          <p style="font-size:15.5px;color:#4A5B70">The chain from a working model to an organisational result, after Lima (manuscript in preparation). Each condition is necessary and none is sufficient, so the useful answer is the <em>first</em> one that is not a clear yes. <strong>Not measured</strong> is a legitimate and common answer — and a more tractable finding than a failure.</p>
-          <p style="font-size:15.5px;color:#4A5B70">Read across, the six answers <em>are</em> a maturity statement, and a more defensible one than a stage number: they say which conditions this organisation can currently satisfy and demonstrate, which it satisfies without evidence, and which it has never observed. There is no composite score here on purpose. A single figure would hide the only thing worth knowing, which is <em>where</em> the chain stops.</p>
+        </div>
 
-          <div class="block">
-            <div class="field">
-              <label for="k-0">0 · Evidence base — has this kind of application produced a measured result in a real organisation?</label>
-              <div class="hint">"Kind of application" means the job: demand forecasting, scheduling, document generation, risk scoring, case prioritisation. Not a model, not a simulation, not a pilot that reported accuracy — an implementation somebody measured afterwards, ideally in an organisation like yours.</div>
-              <select id="k-0" data-section="The six conditions" data-label="0 · Evidence base">
-                <option value="">—</option>
-                <option>Yes, in a comparable organisation</option>
-                <option>Partly — results exist but diverge</option>
-                <option value="flag-k0">No, only modelling or vendor material</option>
-                <option value="flag-ku">Not measured, or nobody has looked</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-1">1 · Technical capability in operation — does it still perform on <em>our</em> data, the way we actually run it?</label>
-              <div class="hint">Vendor accuracy was measured on the vendor's data, with the vendor's settings. Has anyone checked it on ours, after go-live, with the cut-off we actually use for a flag or an alert? And count only the outputs that tell people something they did not already know — a warning that arrives after everyone has noticed is accurate and useless.</div>
-              <select id="k-1" data-section="The six conditions" data-label="1 · Technical capability in operation">
-                <option value="">—</option>
-                <option>Yes, verified locally after deployment</option>
-                <option>Partly — verified once, not monitored</option>
-                <option value="flag-k1">No, or performance has drifted</option>
-                <option value="flag-ku">Not measured</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-2">2 · Workflow integration — does the output reach whoever decides, while the decision is still open?</label>
-              <div class="hint">The first of the two organisational conditions. Name the person and the step, not the dashboard.</div>
-              <select id="k-2" data-section="The six conditions" data-label="2 · Workflow integration">
-                <option value="">—</option>
-                <option>Yes — named recipient, inside the decision window</option>
-                <option>Partly — it arrives, but late or to the wrong role</option>
-                <option value="flag-k2">No — it is available rather than delivered</option>
-                <option value="flag-ku">Not measured — we do not know if it is used</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-2b">Who receives the output, at which step, and is it in fact used?</label>
-              <div class="hint">Two thirds of staff rarely or never opening the tool is the commonest observed failure, and it is invisible unless somebody asks.</div>
-              <input type="text" id="k-2b" data-section="The six conditions" data-label="Recipient, step and actual use" placeholder="Role · step in the process · evidence of use">
-            </div>
-            <div class="field">
-              <label for="k-3">3 · Translation into action — is there an owner able to act, with the resources the action requires?</label>
-              <div class="hint">The second organisational condition. If acting on the output needs three approvals, a budget line and a resource nobody has, an earlier warning changes nothing — the constraint was never information.</div>
-              <select id="k-3" data-section="The six conditions" data-label="3 · Translation into action">
-                <option value="">—</option>
-                <option>Yes — named owner, resourced, low barrier</option>
-                <option>Partly — owner named, resources contested</option>
-                <option value="flag-k3">No — identification without capacity to act</option>
-                <option value="flag-ku">Not measured — we do not know the follow-through rate</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-3b">The action, its owner, and what it depends on</label>
-              <div class="hint">Write the sentence the business case should contain: when the output says X, <em>who</em> does <em>what</em>, using <em>what</em>.</div>
-              <textarea id="k-3b" data-section="The six conditions" data-label="The action, owner and dependencies"></textarea>
-            </div>
-            <div class="field">
-              <label for="k-4">4 · Organisational outcome — which indicator should move, measured how?</label>
-              <div class="hint">One named indicator, one data source, one baseline — and not a satisfaction survey. Where perception and objective measurement were collected together, they diverged.</div>
-              <select id="k-4" data-section="The six conditions" data-label="4 · Organisational outcome">
-                <option value="">—</option>
-                <option>Yes — named indicator, source and baseline</option>
-                <option>Partly — indicator named, no baseline</option>
-                <option value="flag-k4">No — benefit stated in general terms</option>
-                <option value="flag-k4">Measured only by what users report</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-5">5 · Net value — what does the gain cost, and who bears it?</label>
-              <div class="hint">Who is de-prioritised, which work moves to other people or other hours, and what checking the output takes. The hour saved in the back office that reappears as an hour of overtime in the front office is not a gain; it is a relocation.</div>
-              <select id="k-5" data-section="The six conditions" data-label="5 · Net value">
-                <option value="">—</option>
-                <option>Yes — the displaced cost is identified and accepted</option>
-                <option>Partly — suspected but not quantified</option>
-                <option value="flag-k5">No — only the gain has been counted</option>
-                <option value="flag-ku">Not measured</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="k-valid">How good is the evidence you just used to answer?</label>
-              <div class="hint">Three things make a result trustworthy: a comparison group measured at the same time, an objective measure rather than what people said they felt, and a source that is not selling the tool. Tick the weakest point in what you relied on. Vendor material usually fails at least two of the three.</div>
-              <select id="k-valid" data-section="The six conditions" data-label="Weakest point in the evidence">
-                <option value="">—</option>
-                <option>None — a comparison group at the same time, an objective measure, an independent source</option>
-                <option value="flag-kv">No comparison group — only before-and-after, so anything else that changed gets credited to the tool</option>
-                <option value="flag-kv">Measured by what users reported, not by an objective figure</option>
-                <option value="flag-kv">The figures come from the vendor</option>
-                <option value="flag-kv">More than one of these</option>
-              </select>
-            </div>
+        <h4>5 · The verdict</h4>
+        <div class="block">
+          <div class="field">
+            <label for="t-debt">Where is the largest debt?</label>
+            <select id="t-debt" data-section="The verdict" data-label="Largest debt">
+              <option value="">Select one</option>
+              <option>Technical — the artefact itself</option>
+              <option>Philosophical — unarticulated purpose, knowledge or representation</option>
+              <option>Adoption — it works and people do not use it</option>
+              <option>Capability — we would not be able to improve it after buying it</option>
+              <option>None that we can see</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-decision">The decision</label>
+            <select id="t-decision" data-section="The verdict" data-label="Decision">
+              <option value="">Select one</option>
+              <option>Proceed</option>
+              <option>Proceed once named conditions are met — write the first of them as the step below</option>
+              <option>Pause — the debt has to be paid first</option>
+              <option>Do not proceed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="t-step">The first step, and who owns it</label>
+            <input type="text" id="t-step" data-section="The verdict" data-label="First step and owner" placeholder="One line">
           </div>
         </div>
 
-        <h4>5 · The reference</h4>
+        <div class="after">
+          <b>After the session</b>
+          <span>Sections 6 and 7 take the appraisal from one tool to the organisation. They are the module's follow-up assignment, and they are better done with a week of thought than with ten minutes of room time.</span>
+        </div>
+
+        <h4>6 · The reference</h4>
         <p style="font-size:15.5px;color:#4A5B70">Somebody already does this well. The question is not what their number is, but what routine produces it — and what you would have to accumulate before that routine would work here.</p>
         <div class="block">
           <div class="field">
@@ -508,7 +509,7 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <h4>6 · Capability gaps and the six-month roadmap</h4>
+        <h4>7 · Capability gaps and the six-month roadmap</h4>
         <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one on the two axes that decide sequence. <strong>Strategic value</strong>: how much it moves something customers choose you for, or removes a constraint that keeps recurring. <strong>Feasibility</strong>: whether the conditions to build it exist today — the people, the data, and the authority to change the process.</p>
         <div class="block">
           <div class="field">
@@ -572,35 +573,6 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <h4>7 · The verdict</h4>
-        <div class="block">
-          <div class="field">
-            <label for="t-debt">Where is the largest debt?</label>
-            <select id="t-debt" data-section="The verdict" data-label="Largest debt">
-              <option value="">Select one</option>
-              <option>Technical — the artefact itself</option>
-              <option>Philosophical — unarticulated purpose, knowledge or representation</option>
-              <option>Adoption — it works and people do not use it</option>
-              <option>Capability — we would not be able to improve it after buying it</option>
-              <option>None that we can see</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="t-decision">The decision</label>
-            <select id="t-decision" data-section="The verdict" data-label="Decision">
-              <option value="">Select one</option>
-              <option>Proceed</option>
-              <option>Proceed once named conditions are met — write the first of them as the step below</option>
-              <option>Pause — the debt has to be paid first</option>
-              <option>Do not proceed</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="t-step">The first step, and who owns it</label>
-            <input type="text" id="t-step" data-section="The verdict" data-label="First step and owner" placeholder="One line">
-          </div>
-        </div>
-
         <div class="readout" id="readout">
           <h4>What your answers say</h4>
           <div id="readout-body"><p class="none" style="margin:0">Fill the instrument in and this will summarise what you have just told it — it restates your own answers; it does not score them.</p></div>
@@ -629,14 +601,10 @@ footer b{color:var(--gold-soft)}
   <div class="wrap">
     <p>The instrument has no score, deliberately. It produces three things worth looking at.</p>
     <ul class="tight">
-      <li><strong>Which term you could defend.</strong> Most honest appraisals land on A, or on A and P. That is not a failure — it is a correctly identified purchase. The failure is claiming C and being unable to say, in one sentence, what the organisation will be able to do afterwards without the system.</li>
-      <li><strong>How many pillars are unarticulated.</strong> Not how good the system is — whether anyone wrote the assumption down. A pillar nobody has articulated cannot be audited, and therefore cannot be improved. Three unarticulated pillars in a system that is already acting autonomously is the condition under which the sourcing failure above becomes likely rather than unlucky.</li>
-      <li><strong>Whether the debt is payable before or only after.</strong> Teleology is cheap to articulate before deployment and expensive afterwards, because by then the system has been acting on the implicit hierarchy and the organisation has accumulated two years of decisions made under it.</li>
+      <li><strong>Which term you could defend.</strong> Most honest appraisals land on A, or on A and P. That is a correctly identified purchase, not a failure. The failure is claiming C and being unable to say, in one sentence, what the organisation will be able to do afterwards without the system.</li>
+      <li><strong>Where the chain first stops being a clear yes.</strong> That link is the finding. If it is condition 2 or 3, the problem is the organisation's and no vendor can fix it. If the answer is "not measured", the next step is to measure, not to spend — an unobserved implementation is a far more tractable problem than a failing one.</li>
+      <li><strong>Where the tool contains AI, how many pillars nobody wrote down.</strong> Not how good the system is — whether the assumption was articulated. Teleology is cheap to write down before deployment and expensive afterwards, once the system has been acting on the implicit hierarchy for two years.</li>
     </ul>
-    <div class="note">
-      <span class="lbl">The one question to take into the next steering committee</span>
-      Technical safeguards — value limits, audit logs, anomaly alerts — are necessary and not sufficient. Before granting any system autonomy, ask the three philosophical ones: is the hierarchy of purposes documented, including what happens when objectives conflict? Does it know when it does not know, and escalate? Can it recognise a situation it has never seen, or does it only optimise inside the world it was trained on? Without those three, autonomy is risk wearing the costume of efficiency.
-    </div>
   </div>
 </section>
 
@@ -729,7 +697,7 @@ footer b{color:var(--gold-soft)}
     if (ai === 'yes' || ai === 'unsure') {
       var pillars = [];
       if (flagged('p-hierarchy')) pillars.push('teleology');
-      if (flagged('p-uncertainty') || flagged('p-causal')) pillars.push('epistemology');
+      if (flagged('p-uncertainty')) pillars.push('epistemology');
       if (flagged('p-review')) pillars.push('ontology');
       if (pillars.length) {
         out.push('Unarticulated pillars: <b>' + pillars.join(', ') + '</b>. Not a judgement on the system — a statement that the assumption was never written down, and therefore cannot be audited or improved. This is debt in C arriving dressed as a purchase of A.');
@@ -744,64 +712,65 @@ footer b{color:var(--gold-soft)}
         out.push('You have not named a variable the system cannot see. Either the representation is unusually complete, or nobody has looked — and the second is far more common.');
       }
 
-      var NAMES = ['evidence base', 'technical capability in operation', 'workflow integration', 'translation into action', 'organisational outcome', 'net value'];
-      var firstBreak = -1, unmeasured = [], answered = 0;
-      for (var i = 0; i < 6; i++) {
-        var el = document.getElementById('k-' + i);
-        if (!el || !el.value) continue;
-        answered++;
-        if (el.value === 'flag-ku') { unmeasured.push(i + ' · ' + NAMES[i]); }
-        if (el.value.indexOf('flag-') === 0 && firstBreak === -1) { firstBreak = i; }
-      }
-      if (firstBreak === 0 || firstBreak === 1 || firstBreak === 4 || firstBreak === 5) {
-        out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b>. Conditions after it cannot compensate, so this is the one to resolve before anything downstream is argued.');
-      } else if (firstBreak === 2 || firstBreak === 3) {
-        out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b> — one of the two organisational conditions. This is not a fault in the tool and no vendor can fix it: it is the capability the tool was supposed to be buying. It is also where the reviewed evidence says value is most often lost.');
-      }
-      if (unmeasured.length) {
-        out.push('Not measured at: <b>' + unmeasured.join('; ') + '</b>. An unobserved implementation is a more tractable problem than a failing one — the next step is to measure, not to spend.');
-      }
-      if (answered === 6 && firstBreak === -1 && !unmeasured.length) {
-        out.push('No break and no missing measure across all six conditions. That is rare; it is worth checking the answers against evidence somebody outside the project would accept.');
-      }
-      if (document.getElementById('k-valid').value.indexOf('flag-') === 0) {
-        out.push('Your evidence fails at least one of the three conditions on evidence quality. That does not make the tool wrong — it makes every answer above provisional, and it should be said in the business case rather than discovered later.');
-      }
-      var act = document.getElementById('k-3b');
-      if (act && !act.value.trim()) {
-        out.push('You have not written the action sentence: when the output says X, who does what, using what. Until that sentence exists, the project has identified a capability rather than a benefit.');
-      }
+    }
+
+    var NAMES = ['evidence base', 'technical capability in operation', 'workflow integration', 'translation into action', 'organisational outcome', 'net value'];
+    var firstBreak = -1, unmeasured = [], answered = 0;
+    for (var i = 0; i < 6; i++) {
+      var el = document.getElementById('k-' + i);
+      if (!el || !el.value) continue;
+      answered++;
+      if (el.value === 'flag-ku') { unmeasured.push(i + ' · ' + NAMES[i]); }
+      if (el.value.indexOf('flag-') === 0 && firstBreak === -1) { firstBreak = i; }
+    }
+    if (firstBreak === 0 || firstBreak === 1 || firstBreak === 4 || firstBreak === 5) {
+      out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b>. Conditions after it cannot compensate, so this is the one to resolve before anything downstream is argued.');
+    } else if (firstBreak === 2 || firstBreak === 3) {
+      out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b> — one of the two organisational conditions. This is not a fault in the tool and no vendor can fix it: it is the capability the tool was supposed to be buying. It is also where the reviewed evidence says value is most often lost.');
+    }
+    if (unmeasured.length) {
+      out.push('Not measured at: <b>' + unmeasured.join('; ') + '</b>. An unobserved implementation is a more tractable problem than a failing one — the next step is to measure, not to spend.');
+    }
+    if (answered === 6 && firstBreak === -1 && !unmeasured.length) {
+      out.push('No break and no missing measure across all six conditions. That is rare; it is worth checking the answers against evidence somebody outside the project would accept.');
+    }
+    if (document.getElementById('k-valid').value.indexOf('flag-') === 0) {
+      out.push('Your evidence fails at least one of the three conditions on evidence quality. That does not make the tool wrong — it makes every answer above provisional, and it should be said in the business case rather than discovered later.');
+    }
+    var act = document.getElementById('k-3b');
+    if (act && !act.value.trim()) {
+      out.push('You have not written the action sentence: when the output says X, who does what, using what. Until that sentence exists, the project has identified a capability rather than a benefit.');
     }
 
     var VAL = {H:'high', M:'medium', L:'low'};
     var seq = [];
     for (var g = 1; g <= 3; g++) {
-      var name = (document.getElementById('r-g' + g).value || '').trim();
-      var v = document.getElementById('r-v' + g).value;
-      var f = document.getElementById('r-f' + g).value;
-      var h = document.getElementById('r-h' + g).value;
-      if (name || v || f || h) seq.push({n: name || 'Gap ' + g, v: v, f: f, h: h});
+    var name = (document.getElementById('r-g' + g).value || '').trim();
+    var v = document.getElementById('r-v' + g).value;
+    var f = document.getElementById('r-f' + g).value;
+    var h = document.getElementById('r-h' + g).value;
+    if (name || v || f || h) seq.push({n: name || 'Gap ' + g, v: v, f: f, h: h});
     }
     if (seq.length) {
-      var quickWins = seq.filter(function(x){ return x.v === 'H' && x.f === 'H'; });
-      var hard = seq.filter(function(x){ return x.v === 'H' && x.f === 'L'; });
-      var filler = seq.filter(function(x){ return x.v === 'L' && x.f === 'H'; });
-      if (quickWins.length) {
-        out.push('High value and high feasibility: <b>' + quickWins.map(function(x){return x.n;}).join('; ') + '</b>. These belong in the first two months — not because they are easy, but because an early demonstrated result is what buys the patience the harder items will need.');
+    var quickWins = seq.filter(function(x){ return x.v === 'H' && x.f === 'H'; });
+    var hard = seq.filter(function(x){ return x.v === 'H' && x.f === 'L'; });
+    var filler = seq.filter(function(x){ return x.v === 'L' && x.f === 'H'; });
+    if (quickWins.length) {
+      out.push('High value and high feasibility: <b>' + quickWins.map(function(x){return x.n;}).join('; ') + '</b>. These belong in the first two months — not because they are easy, but because an early demonstrated result is what buys the patience the harder items will need.');
+    }
+    if (hard.length) {
+      var early = hard.filter(function(x){ return x.h === 'Months 0–2'; });
+      if (early.length) {
+        out.push('<b>' + early.map(function(x){return x.n;}).join('; ') + '</b>: high value, low feasibility, scheduled in the first two months. That ordering is the commonest way a roadmap loses its sponsor. Either break it into a part that is feasible now, or move it later and say openly what has to change first.');
+      } else {
+        out.push('High value and low feasibility: <b>' + hard.map(function(x){return x.n;}).join('; ') + '</b>. Time compression diseconomies apply — this is accumulated, not purchased, so the honest plan states the condition that has to be built rather than the date it is wanted by.');
       }
-      if (hard.length) {
-        var early = hard.filter(function(x){ return x.h === 'Months 0–2'; });
-        if (early.length) {
-          out.push('<b>' + early.map(function(x){return x.n;}).join('; ') + '</b>: high value, low feasibility, scheduled in the first two months. That ordering is the commonest way a roadmap loses its sponsor. Either break it into a part that is feasible now, or move it later and say openly what has to change first.');
-        } else {
-          out.push('High value and low feasibility: <b>' + hard.map(function(x){return x.n;}).join('; ') + '</b>. Time compression diseconomies apply — this is accumulated, not purchased, so the honest plan states the condition that has to be built rather than the date it is wanted by.');
-        }
-      }
-      if (filler.length && !quickWins.length) {
-        out.push('Your most feasible items are also your least valuable. A roadmap made of these delivers visible activity and no change in position, which is the failure mode that is hardest to detect from inside.');
-      }
-      if (!document.getElementById('r-first').value.trim()) {
-        out.push('The month-two checkpoint is blank. A roadmap whose first verifiable outcome cannot be written in one sentence is a list of intentions with dates attached.');
+    }
+    if (filler.length && !quickWins.length) {
+      out.push('Your most feasible items are also your least valuable. A roadmap made of these delivers visible activity and no change in position, which is the failure mode that is hardest to detect from inside.');
+    }
+    if (!document.getElementById('r-first').value.trim()) {
+      out.push('The month-two checkpoint is blank. A roadmap whose first verifiable outcome cannot be written in one sentence is a list of intentions with dates attached.');
       }
     }
 
