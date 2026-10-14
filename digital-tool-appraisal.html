@@ -180,7 +180,7 @@ footer b{color:var(--gold-soft)}
     <div class="inst">
       <div class="ih">
         <b>Digital Tool Appraisal</b>
-        <span>About 20 minutes for one tool · the AI layer appears only if it applies</span>
+        <span>Sections 1, 2 and 7 take about ten minutes; with the AI sections, about twenty-five. Sections 5 and 6 are usually completed after the session.</span>
       </div>
       <div class="ib" id="canvas">
 
@@ -237,7 +237,7 @@ footer b{color:var(--gold-soft)}
           </div>
           <div class="field">
             <label for="t-wip">Does it limit work in progress?</label>
-            <div class="hint">A tool that makes work easier to start without capping what is in progress mechanically lengthens lead time.</div>
+            <div class="hint">Work in progress is everything started and not yet finished. With the same capacity, more in flight means each item waits longer — Little's Law from the morning. A tool that makes work easier to <em>start</em> without capping what is in progress lengthens lead time by construction.</div>
             <select id="t-wip" data-section="VCAP triage" data-label="WIP limiting">
               <option value="">Select one</option>
               <option>Yes — there is an explicit cap, and it is enforced</option>
@@ -246,7 +246,8 @@ footer b{color:var(--gold-soft)}
             </select>
           </div>
           <div class="field">
-            <label for="t-truth">Source of truth</label>
+            <label for="t-truth">Where will each fact live afterwards?</label>
+            <div class="hint">Every type of fact — a schedule date, a risk, a cost figure — needs exactly one authoritative home, with everything else reading from it. The moment the same fact lives in two systems, somebody reconciles them forever and the dashboards become negotiations.</div>
             <select id="t-truth" data-section="VCAP triage" data-label="Source of truth">
               <option value="">Select one</option>
               <option>It replaces existing sources — one authoritative home afterwards</option>
@@ -256,11 +257,12 @@ footer b{color:var(--gold-soft)}
           </div>
           <div class="field">
             <label for="t-adopt">Adoption — expected against actual</label>
-            <div class="hint">Of the people meant to use it as the working record, what share actually do? Write "too early" if it is not live.</div>
+            <div class="hint">Of the people meant to do their work <em>inside</em> it — not just log in — what share actually do? Write "too early" if it is not live. A tool used by 40% of its intended users does not deliver 40% of a single-source benefit; it delivers close to none, because the other 60% still has to be reconciled.</div>
             <input type="text" id="t-adopt" data-section="VCAP triage" data-label="Adoption, expected vs actual" placeholder="e.g. expected 100%, actual about 40%">
           </div>
           <div class="field">
             <label for="t-replicate">How long before a competitor with the same budget has the same thing?</label>
+            <div class="hint">This is the test for whether the tool buys advantage or only parity. Anything purchasable is available to a rival at roughly the same price.</div>
             <select id="t-replicate" data-section="VCAP triage" data-label="Time to replication">
               <option value="">Select one</option>
               <option value="flag-rep">Months — they would buy the same product</option>
@@ -270,7 +272,7 @@ footer b{color:var(--gold-soft)}
           </div>
         </div>
 
-        <div class="gate" id="ai-gate">The philosophical layer below applies to tools that contain AI or machine learning. Answer question 1.4 above and it will appear if it is relevant.</div>
+        <div class="gate" id="ai-gate">Sections 3 and 4 apply only to tools that contain AI or machine learning. Answer the last question of section 1 — <em>Does it include AI or machine learning?</em> — and they will appear if they are relevant.</div>
 
         <div id="ai-layer" hidden>
           <h4>3 · Philosophical debt audit</h4>
@@ -283,7 +285,7 @@ footer b{color:var(--gold-soft)}
           <div class="block">
             <div class="field">
               <label for="p-objective">What is it optimising for, precisely?</label>
-              <div class="hint">The actual objective function or target metric, not the business goal it was sold against.</div>
+              <div class="hint">The number the system actually tries to maximise or minimise — cost per order, forecast error, time to resolution — not the business goal it was sold against. If nobody can say, write "unknown". That is the finding, not a gap in your answer.</div>
               <input type="text" id="p-objective" data-section="Teleology" data-label="What it optimises for" placeholder="The metric it actually maximises or minimises">
             </div>
             <div class="field">
@@ -326,7 +328,7 @@ footer b{color:var(--gold-soft)}
             </div>
             <div class="field">
               <label for="p-causal">Correlation or causation?</label>
-              <div class="hint">Does anyone in the organisation know which of the patterns it acts on are causal?</div>
+              <div class="hint">Example: the model flags suppliers with late deliveries as risky. Is lateness the cause of the trouble, or do both come from something else — a region, a contract type, a season? If nobody has checked, the system acts on a correlation, and it will keep acting on it after the underlying cause has changed.</div>
               <select id="p-causal" data-section="Epistemology" data-label="Correlation versus causation">
                 <option value="">Select one</option>
                 <option>Tested — we know which relationships are causal</option>
@@ -342,7 +344,8 @@ footer b{color:var(--gold-soft)}
           </div>
           <div class="block">
             <div class="field">
-              <label for="p-entities">Which entities and variables does it represent?</label>
+              <label for="p-entities">Which things, and which attributes of them, does it see?</label>
+              <div class="hint">A system only reasons about what it has a field for. List the objects it knows — suppliers, orders, tickets, people — and the handful of attributes it uses to describe each.</div>
               <input type="text" id="p-entities" data-section="Ontology" data-label="Entities and variables represented" placeholder="e.g. suppliers by price, lead time and defect rate">
             </div>
             <div class="field">
@@ -367,8 +370,8 @@ footer b{color:var(--gold-soft)}
 
           <div class="block">
             <div class="field">
-              <label for="k-0">0 · Evidence base — has this class of application produced a measured result in a real organisation?</label>
-              <div class="hint">Not a model, not a simulation, not a pilot that reported accuracy. An implementation somebody measured afterwards.</div>
+              <label for="k-0">0 · Evidence base — has this kind of application produced a measured result in a real organisation?</label>
+              <div class="hint">"Kind of application" means the job: demand forecasting, scheduling, document generation, risk scoring, case prioritisation. Not a model, not a simulation, not a pilot that reported accuracy — an implementation somebody measured afterwards, ideally in an organisation like yours.</div>
               <select id="k-0" data-section="The six conditions" data-label="0 · Evidence base">
                 <option value="">—</option>
                 <option>Yes, in a comparable organisation</option>
@@ -378,8 +381,8 @@ footer b{color:var(--gold-soft)}
               </select>
             </div>
             <div class="field">
-              <label for="k-1">1 · Technical capability in operation — does it still perform on our data, at the threshold in use?</label>
-              <div class="hint">On local data rather than the development set, and counting only outputs that arrive before people had already noticed the thing themselves.</div>
+              <label for="k-1">1 · Technical capability in operation — does it still perform on <em>our</em> data, the way we actually run it?</label>
+              <div class="hint">Vendor accuracy was measured on the vendor's data, with the vendor's settings. Has anyone checked it on ours, after go-live, with the cut-off we actually use for a flag or an alert? And count only the outputs that tell people something they did not already know — a warning that arrives after everyone has noticed is accurate and useless.</div>
               <select id="k-1" data-section="The six conditions" data-label="1 · Technical capability in operation">
                 <option value="">—</option>
                 <option>Yes, verified locally after deployment</option>
@@ -406,7 +409,7 @@ footer b{color:var(--gold-soft)}
             </div>
             <div class="field">
               <label for="k-3">3 · Translation into action — is there an owner able to act, with the resources the action requires?</label>
-              <div class="hint">The second organisational condition. An action with a chain of dependencies does not accelerate because the warning came earlier.</div>
+              <div class="hint">The second organisational condition. If acting on the output needs three approvals, a budget line and a resource nobody has, an earlier warning changes nothing — the constraint was never information.</div>
               <select id="k-3" data-section="The six conditions" data-label="3 · Translation into action">
                 <option value="">—</option>
                 <option>Yes — named owner, resourced, low barrier</option>
@@ -433,7 +436,7 @@ footer b{color:var(--gold-soft)}
             </div>
             <div class="field">
               <label for="k-5">5 · Net value — what does the gain cost, and who bears it?</label>
-              <div class="hint">Who is de-prioritised, which work moves to other people or other hours, and what verifying the output takes. A gain that relocates a fixed resource is not a gain.</div>
+              <div class="hint">Who is de-prioritised, which work moves to other people or other hours, and what checking the output takes. The hour saved in the back office that reappears as an hour of overtime in the front office is not a gain; it is a relocation.</div>
               <select id="k-5" data-section="The six conditions" data-label="5 · Net value">
                 <option value="">—</option>
                 <option>Yes — the displaced cost is identified and accepted</option>
@@ -443,14 +446,14 @@ footer b{color:var(--gold-soft)}
               </select>
             </div>
             <div class="field">
-              <label for="k-valid">Which of the three conditions on the evidence does your material fail?</label>
-              <div class="hint">These qualify every answer above. Tick the honest one; vendor material usually fails at least two.</div>
-              <select id="k-valid" data-section="The six conditions" data-label="Weakest condition on the evidence">
+              <label for="k-valid">How good is the evidence you just used to answer?</label>
+              <div class="hint">Three things make a result trustworthy: a comparison group measured at the same time, an objective measure rather than what people said they felt, and a source that is not selling the tool. Tick the weakest point in what you relied on. Vendor material usually fails at least two of the three.</div>
+              <select id="k-valid" data-section="The six conditions" data-label="Weakest point in the evidence">
                 <option value="">—</option>
-                <option>None — concurrent comparator, objective measure, independent source</option>
-                <option value="flag-kv">No concurrent comparator — before-and-after only</option>
-                <option value="flag-kv">Measured by perception rather than objectively</option>
-                <option value="flag-kv">The evidence comes from the vendor</option>
+                <option>None — a comparison group at the same time, an objective measure, an independent source</option>
+                <option value="flag-kv">No comparison group — only before-and-after, so anything else that changed gets credited to the tool</option>
+                <option value="flag-kv">Measured by what users reported, not by an objective figure</option>
+                <option value="flag-kv">The figures come from the vendor</option>
                 <option value="flag-kv">More than one of these</option>
               </select>
             </div>
@@ -476,12 +479,12 @@ footer b{color:var(--gold-soft)}
               <option value="">Select one</option>
               <option>A — an asset we would buy</option>
               <option>P — a process we would document and copy</option>
-              <option>C — a rule-in-use we would have to build</option>
+              <option>C — a way of working that lives in people's habits, which we would have to build</option>
             </select>
           </div>
           <div class="field">
             <label for="b-condition">What would have to be true here for that practice to work?</label>
-            <div class="hint">The absorption condition. Transfer fails for knowledge reasons far more often than motivational ones — including between two units of the same company.</div>
+            <div class="hint">What would our people need to already know, or already be able to do, for this to take here? Practices fail to transfer for reasons of knowledge far more often than of motivation — including between two units of the same company.</div>
             <textarea id="b-condition" data-section="The reference" data-label="Absorption condition"></textarea>
           </div>
           <div class="field">
@@ -506,7 +509,7 @@ footer b{color:var(--gold-soft)}
         </div>
 
         <h4>6 · Capability gaps and the six-month roadmap</h4>
-        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one by the two axes that actually decide sequence.</p>
+        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one on the two axes that decide sequence. <strong>Strategic value</strong>: how much it moves something customers choose you for, or removes a constraint that keeps recurring. <strong>Feasibility</strong>: whether the conditions to build it exist today — the people, the data, and the authority to change the process.</p>
         <div class="block">
           <div class="field">
             <label for="r-g1">Gap 1</label>
@@ -587,7 +590,7 @@ footer b{color:var(--gold-soft)}
             <select id="t-decision" data-section="The verdict" data-label="Decision">
               <option value="">Select one</option>
               <option>Proceed</option>
-              <option>Proceed once the conditions below are met</option>
+              <option>Proceed once named conditions are met — write the first of them as the step below</option>
               <option>Pause — the debt has to be paid first</option>
               <option>Do not proceed</option>
             </select>

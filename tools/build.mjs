@@ -33,7 +33,7 @@ const parts = await page.evaluate(({ meta, tocnum }) => {
     const d = document.createElement('div');
     d.className = 'ap-printnote';
     d.innerHTML = '<b>The next two sections apply only where the tool contains AI or machine learning.</b> ' +
-      'If question 1.4 is answered no, go straight to section 5. In the online version these sections appear and disappear on their own.';
+      'If the last question of section 1 is answered no, go straight to section 5. In the online version these sections appear and disappear on their own.';
     g.replaceWith(d);
   });
 
