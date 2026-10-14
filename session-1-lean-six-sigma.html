@@ -74,6 +74,8 @@ section:nth-of-type(even) .bridge{background:#EDF3F9}
 .bridge p:last-child{margin-bottom:0}
 
 /* Activity */
+.bridge .k{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7E5B0C;font-weight:700;margin-right:6px}
+.bridge ol,.bridge ul{margin:6px 0 8px 20px;font-size:16px}
 .activity{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:24px 0}
 .activity .ah{background:var(--navy);color:#fff;padding:14px 20px}
 .activity .ah b{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}
@@ -245,8 +247,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>The same distinction governs portfolio selection. Most scoring models treat every criterion as additive — strategic fit, NPV, risk, resource availability — which quietly assumes they are all order winners. They are not. Compliance and regulatory projects are qualifiers: they buy no advantage, and not doing them ends the business. Growth and differentiation projects are winners.</p>
-      <p>A portfolio that scores both on the same scale will systematically over-fund qualifiers, because they are easier to justify and harder to argue against. The discipline is to fund qualifiers to the threshold and no further, and to concentrate the remaining capacity where preference is actually created.</p>
+      <p><b class="k">The idea</b> A qualifier buys nothing above the threshold; only a winner creates preference. Spending beyond the threshold on a qualifier is waste with a strategic label.</p>
+      <p><b class="k">In a project</b> Most portfolio scoring models add strategic fit, NPV, risk and resource availability on one scale — which quietly assumes every criterion is a winner. Compliance and regulatory projects are qualifiers: they buy no advantage and not doing them ends the business. Put thirty initiatives through such a model and the eighteen compliance items, easy to justify and hard to argue against, come out ahead of the twelve that would actually move a customer.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Split the list <em>before</em> scoring. Ask of every item: if we do not do this, do we lose a deal or do we lose the licence? Fund the second kind to the threshold and no further; let only the first kind compete for what is left.</p>
     </div>
 
     <h3>The value stick</h3>
@@ -289,7 +292,7 @@ footer b{color:var(--gold-soft)}
       <tr><td class="n">2</td><td class="k">Value stream</td><td>Which activities deliver that value, which merely enable it, and which do neither? The map is the instrument.</td><td>Part Three</td></tr>
       <tr><td class="n">3</td><td class="k">Flow</td><td>Can the work move without stopping? Stoppage, not slowness, is what makes lead time long.</td><td>Part Four</td></tr>
       <tr><td class="n">4</td><td class="k">Pull</td><td>Is work released by downstream demand, or pushed by upstream capacity and a plan?</td><td>Part Five</td></tr>
-      <tr><td class="n">5</td><td class="k">Perfection</td><td>Does the cycle repeat, with the standard rewritten each time? This is the principle that decides whether the first four survive.</td><td>Parts Seven and Ten</td></tr>
+      <tr><td class="n">5</td><td class="k">Perfection</td><td>Does the cycle repeat, with the standard rewritten each time? This is the principle that decides whether the first four survive.</td><td>Parts Seven and Eleven</td></tr>
     </table>
   </div>
 </section>
@@ -401,8 +404,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>The process worth mapping in a project organisation is rarely the delivery work itself. It is the surrounding administrative stream: the path from a change request to an approved change, from an invoice to a payment, from a defect report to a closed defect. These are repeatable, they are measurable, and they are where the elapsed time actually accumulates.</p>
-      <p style="margin-bottom:0">Map one of them end to end and the characteristic finding appears: four hours of work spread across three weeks, with the three weeks sitting in two approval queues that exist because of an authority limit nobody has revisited since it was set.</p>
+      <p><b class="k">The idea</b> Map the stream, not the deliverable. The elapsed time lives in the handoffs around the work, not in the work.</p>
+      <p><b class="k">In a project</b> The streams worth mapping are the administrative ones: change request to approved change, invoice to payment, defect reported to defect closed. They repeat, they can be timed, and they are where lead time accumulates. The characteristic finding is the one in Figure 1 — four hours of work across fifteen working days, with the days sitting in two approval queues that exist because of an authority limit nobody has revisited since it was set.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Pick one of the three. Walk it with the people who perform each step, not from the procedure. Write two numbers on one line: hours worked, days elapsed. The ratio is the conversation.</p>
     </div>
 
     <h4>Muda is the symptom; mura and muri are the disease</h4>
@@ -415,8 +419,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>Chronic over-allocation is muri with a resource-management label on it. A specialist assigned at 120% across four projects produces the entire symptom set: defects, because attention is divided; waiting, because every project queues behind the other three; and unused talent, because the scarce expert spends the day reconciling status rather than solving problems.</p>
-      <p>Mura shows up as the quarter-end delivery peak that every organisation knows about and none levels. The peak is treated as a fact of the calendar; it is usually a consequence of how work was released.</p>
+      <p><b class="k">The idea</b> Overburden (<em>muri</em>) and unevenness (<em>mura</em>) are not wastes themselves; they are what manufactures the wastes. Remove the symptoms and they come back.</p>
+      <p><b class="k">In a project</b> Chronic over-allocation is <em>muri</em> with a resource-management label. A specialist at 120% across four projects produces the entire symptom set at once: defects, because attention is divided; waiting, because each project queues behind the other three; unused talent, because the scarce expert spends the day reconciling status. The quarter-end delivery peak that every organisation knows and none levels is <em>mura</em> — treated as a fact of the calendar, it is usually a consequence of how work was released.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> List everyone allocated above 100%, and count projects per person. Two is a working limit; four is a queue with a name. Then look at the release calendar for the peak and ask what was decided three months earlier that produced it.</p>
     </div>
   </div>
 </section>
@@ -620,8 +625,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>The three buffers have exact project equivalents: <strong>inventory</strong> becomes work in progress and partially completed deliverables; <strong>capacity</strong> becomes overtime, contractors and resource reserve; <strong>time</strong> becomes schedule contingency. Goldratt's critical chain is the argument that these buffers should be sized deliberately and placed where they protect the system, rather than hidden inside every individual task estimate — where they are consumed silently and protect nothing.</p>
-      <p>The utilisation point lands hard here. A project organisation that plans its people at 100% allocation has built a system in which every piece of variability — one illness, one late approval, one changed requirement — is absorbed by schedule. The resulting delay is not poor project management. It is the planning assumption, working exactly as specified.</p>
+      <p><b class="k">The idea</b> Variability must be absorbed somewhere — in inventory, in capacity, or in time. An organisation that has not chosen has chosen time, because time is the only buffer invisible in the P&amp;L.</p>
+      <p><b class="k">In a project</b> The three buffers have exact equivalents: inventory is work in progress and half-finished deliverables; capacity is overtime, contractors and reserve; time is schedule contingency. Goldratt's critical chain is the argument that these should be sized deliberately and placed where they protect the whole project — not hidden inside every task estimate, where they are consumed silently and protect nothing. A plan that allocates people at 100% has decided, without saying so, that every illness, late approval and changed requirement will be absorbed by the schedule. The resulting delay is the planning assumption working exactly as specified.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Open the resource plan and find the allocation assumption. If it is 100%, the schedule is the buffer. Then find where contingency lives: if it is in every task, nobody will ever see it spent.</p>
     </div>
   </div>
 </section>
@@ -678,8 +684,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>Three elements of the house are already in your vocabulary under other names. <em>Heijunka</em> is resource levelling. <em>Standardised work</em> is the methodology, templates and checklists the PMO maintains. <em>Poka-yoke</em> is the mandatory field that will not let the form be submitted incomplete.</p>
-      <p>The one with no comfortable equivalent is the andon cord. In most project organisations, status reporting is the opposite of an andon: it aggregates upward on a monthly cycle, and a red status costs the reporter more than it costs the organisation. That is precisely a system in which abnormalities are signalled late and quietly. The question to carry into the session is not whether your governance has escalation paths written down — it is how long someone knew, the last time something went seriously wrong.</p>
+      <p><b class="k">The idea</b> Most of the Toyota house already exists in a project organisation under other names. One element does not, and it is the one that matters most.</p>
+      <p><b class="k">In a project</b> <em>Heijunka</em> is resource levelling. Standardised work is the methodology, templates and checklists the PMO maintains. <em>Poka-yoke</em> is the mandatory field that will not let the form be submitted incomplete. The element with no comfortable equivalent is the andon cord. Monthly status reporting is its opposite: it aggregates upward on a cycle, and a red status costs the reporter more than it costs the organisation — a system designed to signal abnormalities late and quietly.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Measure one lag: from the moment a problem is first known to someone on the team to the moment it reaches someone who can act. Then ask what happened, the last time, to the person who reported red early. The answer is your andon policy, whatever the governance document says.</p>
     </div>
 
     <h3>Why the system beats the tools</h3>
@@ -713,10 +720,11 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>Little's Law holds for a portfolio exactly as it holds for a production line, and the portfolio version is the more useful one. Take projects in flight as WIP, projects completed per year as throughput, and the identity returns the average time a project spends in the organisation:</p>
-      <p style="font-family:'JetBrains Mono',monospace;font-size:15px;margin:10px 0"><strong>average project lead time = projects in flight ÷ projects completed per year</strong></p>
-      <p>The arithmetic is unforgiving. An organisation running 20 projects and finishing 10 a year has a two-year average lead time, whatever its schedules say. Halving the number in flight halves the lead time with the same people and the same budget — and throughput usually <em>rises</em>, because the context switching that consumed the difference disappears.</p>
-      <p>This is the counter-intuitive law every steering committee eventually rediscovers at cost: <strong>starting less finishes more.</strong></p>
+      <p><b class="k">The idea</b> Little's Law is an identity, not a model: average time in the system equals the number in the system divided by the rate at which they leave.</p>
+      <p><b class="k">In a project</b> Take projects in flight as work in progress and projects completed per year as throughput, and the identity returns the average time a project spends in the organisation:</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:15px;margin:6px 0 10px"><strong>average project lead time = projects in flight ÷ projects completed per year</strong></p>
+      <p>Twenty projects in flight, ten finished a year: a two-year average lead time, whatever the schedules say. Halve the number in flight and the lead time halves, with the same people and the same budget — and throughput usually <em>rises</em>, because the context switching that consumed the difference disappears. This is the counter-intuitive law every steering committee eventually rediscovers at cost: <strong>starting less finishes more.</strong></p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Two counts: everything authorised and not closed, and everything closed in the last twelve months. Divide. Put the result beside the lead time your organisation believes it has. The gap is the agenda for the next portfolio review.</p>
     </div>
 
 <figure class="fig sim" id="sim-little">
@@ -998,8 +1006,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>A DMAIC initiative is itself a project, and the vocabulary overlaps almost exactly: the charter is a project charter, the tollgates are stage gates, the sponsor is the sponsor. What differs is where the weight sits. A conventional project plan commits to a solution at authorisation; DMAIC forbids naming the solution until Analyze has verified a cause. The gate between Analyze and Improve is the one with no equivalent in most governance frameworks, and it is the one that does the work.</p>
-      <p>Control maps onto benefits realisation and handover to operations — the phase most project methodologies describe and fewest organisations actually perform. A project formally closed with the process owner untrained and the standard unwritten has not transferred anything. It has only stopped.</p>
+      <p><b class="k">The idea</b> DMAIC is a project with the weight in a different place: a conventional plan commits to a solution at authorisation; DMAIC forbids naming one until a cause has been verified.</p>
+      <p><b class="k">In a project</b> The vocabulary overlaps almost exactly — the charter is a project charter, the tollgates are stage gates, the sponsor is the sponsor. The gate between Analyze and Improve is the one with no equivalent in most governance frameworks, and it is the one that does the work. Control maps onto benefits realisation and handover to operations — the phase every methodology describes and few organisations perform. A project closed with the process owner untrained and the measure unmonitored has reached Improve and stopped.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> At the next approval, ask what the verified cause is. If the answer is a solution — "we need a new system", "we need more people" — the project is at Define, whatever the gate it is passing through says.</p>
     </div>
 
     <h3>Where the method does not apply</h3>
@@ -1029,9 +1038,9 @@ footer b{color:var(--gold-soft)}
 
     <div class="bridge">
       <span class="lbl">In project terms</span>
-      <p>Sort a PMO's assets by the equation and the result is uncomfortable. The scheduling tool, the portfolio platform, the dashboards: <strong>A</strong>. The methodology, the templates, the gate model, the certified staff: <strong>P</strong>. Both are purchasable, and both are available to every competitor at roughly the same price.</p>
-      <p><strong>C</strong> is what is left: whether this organisation reliably gets better at delivering than it was two years ago, and whether that improvement survives the departure of the people who drove it. It is also the reason two organisations running the same methodology, with the same certifications and the same tooling, deliver at visibly different standards — a gap no maturity assessment fully explains and every experienced manager recognises.</p>
-      <p>Which raises the question the session closes on, and which the afternoon takes up directly: if C is the multiplier, what actually builds it?</p>
+      <p><b class="k">The idea</b> Sort what a PMO owns by the three terms, and most of it lands in the bracket.</p>
+      <p><b class="k">In a project</b> The scheduling tool, the portfolio platform, the dashboards: <strong>A</strong>. The methodology, the templates, the gate model, the certified staff: <strong>P</strong>. Both are purchasable, and both are available to every competitor at roughly the same price. <strong>C</strong> is what is left — whether this organisation reliably gets better at delivering than it was two years ago, and whether that improvement survives the departure of the people who drove it. It is also why two organisations running the same methodology, with the same certifications and the same tooling, deliver at visibly different standards: a gap no maturity assessment fully explains and every experienced manager recognises.</p>
+      <p style="margin-bottom:0"><b class="k">On Monday</b> Three questions for the PMO. What do we deliver better this year than last, and how do we know? Which improvement survived its author leaving? What would remain if the tool were replaced tomorrow? The third answer is C, and it is usually shorter than anyone expects.</p>
     </div>
 
     <h3>The puzzle, answered</h3>
@@ -1260,8 +1269,51 @@ footer b{color:var(--gold-soft)}
   </div>
 </section>
 
-<!-- 10 ACCUMULATION -->
-<div class="partbar"><div class="wrap"><div class="n">TEN</div><h2>Going further — how capability accumulates</h2></div></div>
+<!-- 10 WHERE THE MORNING ENDS -->
+<div class="partbar"><div class="wrap"><div class="n">TEN</div><h2>Where the morning ends</h2></div></div>
+<section>
+  <div class="wrap">
+    <p class="lead">The morning made one claim and spent three hours earning it: <strong>operational efficiency is a consequence of what the customer values and of how work flows — not of how busy the resources are — and the returns to everything an organisation buys are scaled by a capability it cannot buy.</strong></p>
+
+    <h3>The argument, in five moves</h3>
+    <ol class="tight">
+      <li><strong>Value is defined from the customer backwards.</strong> Order winners create preference, qualifiers only avoid elimination, and the value stick says there are exactly two ways to create value: raise what the customer will pay, or lower what it costs to serve them.</li>
+      <li><strong>Waste is the gap between those two edges</strong>, and the value stream map makes it visible: a few hours of work inside weeks of elapsed time, almost all of it waiting.</li>
+      <li><strong>The waiting is produced by utilisation, not cured by it.</strong> Keeping everyone busy lengthens the queue by the physics of variability; flow efficiency, not resource efficiency, is what the customer experiences.</li>
+      <li><strong>Variation is the other half of the method.</strong> Lean removes the time the work is not being worked on; Six Sigma narrows the spread that makes that time unpredictable. Neither holds its gain without the other.</li>
+      <li><strong>All of it shows up in return on capital</strong> — in the margin through less rework, and in the denominator through less inventory. The denominator is the half of the equation that operational business cases forget.</li>
+    </ol>
+
+    <h3>Four equations, one staircase</h3>
+    <table>
+      <tr><th style="width:28%">Equation</th><th>What it adds to the one before</th></tr>
+      <tr><td class="k">Value created = WTP − SOC</td><td>Where value comes from, and the only two moves that create it.</td></tr>
+      <tr><td class="k">VC = (WTP<sub>A</sub> − C<sub>A</sub>) − (WTP<sub>B</sub> − C<sub>B</sub>)</td><td>Creating value is not having an advantage. Advantage is the difference — and a copyable improvement returns it to zero.</td></tr>
+      <tr><td class="k">ROIC = margin × capital turnover</td><td>How the improvement reaches the people who fund it, through both levers at once.</td></tr>
+      <tr><td class="k">V = C × (A + P)</td><td>Why two organisations with the same assets and processes get different results — and where the residue of advantage can live.</td></tr>
+    </table>
+
+    <h3>What should survive six months</h3>
+    <ul class="tight">
+      <li><strong>Count elapsed time, not effort.</strong> The question is never "how long does this take to do" but "how long does it wait" — and the answer is usually ninety per cent of the lead time.</li>
+      <li><strong>Starting less finishes more.</strong> Projects in flight divided by projects finished a year is your real lead time, whatever the schedules say, and it is the one number on the slide nobody can argue with.</li>
+      <li><strong>Buy the bracket, build the coefficient.</strong> Every tool and every method is available to a competitor at the same price. What is not is the organisation's repeated ability to find and fix its own problems — which is what Fremont changed, and what GM could not copy.</li>
+    </ul>
+
+    <div class="bridge">
+      <span class="lbl">On Monday</span>
+      <p><b class="k">One process</b> Take the recurring process you brought, walk it with the people who do it, and write two numbers on one line: hours of work, days of elapsed time. The ratio is the conversation you need to have.</p>
+      <p><b class="k">Two counts</b> Projects in flight; projects closed in the last twelve months. Divide. Put the result beside the lead time your organisation believes it has.</p>
+      <p style="margin-bottom:0"><b class="k">One question</b> At the next approval you sit in, ask which edge of value the project moves and what is left when the competitor does the same. If the answer is nothing, fund it to the threshold and not beyond.</p>
+    </div>
+
+    <h3>What the afternoon tests</h3>
+    <p>The morning's identity says assets and processes are additive and purchasable, and capability is a coefficient. The afternoon takes that claim to the two places where organisations spend the most trying to buy capability: digital platforms, and other organisations' practices. If the identity is right, neither purchase should move the coefficient — and the afternoon's question is what does.</p>
+  </div>
+</section>
+
+<!-- 11 ACCUMULATION -->
+<div class="partbar"><div class="wrap"><div class="n">ELEVEN</div><h2>Going further — how capability accumulates</h2></div></div>
 <section>
   <div class="wrap">
     <p class="lead">This section is optional. The session closes on the claim that C is the multiplier and that it cannot be bought. The obvious next question — then how is it built? — is a research topic in its own right, and what follows is the short version of what the evidence supports.</p>
@@ -1345,7 +1397,7 @@ footer b{color:var(--gold-soft)}
 </section>
 
 <!-- REFS -->
-<div class="partbar"><div class="wrap"><div class="n">ELEVEN</div><h2>Sources</h2></div></div>
+<div class="partbar"><div class="wrap"><div class="n">TWELVE</div><h2>Sources</h2></div></div>
 <section>
   <div class="wrap">
     <p>Works cited in these notes and in the session.</p>

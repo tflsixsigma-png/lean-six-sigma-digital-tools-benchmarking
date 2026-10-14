@@ -23,7 +23,7 @@ JOBS = [
             "meta": "<b>17 October 2026</b> &nbsp;·&nbsp; 09:00–12:00<br><b>Prof. Dr. Thiago Lima</b><br>International Certificate in Project Management and Organizational Performance",
             "foot": "No preparation is required. These notes carry the definitions, figures and sources, so the time in the room can be spent on judgement rather than on terminology.",
             "tocTitle": "Contents",
-            "tocKick": "The session builds one argument in eleven movements: value is defined from the customer backwards, waste is what the customer would not pay for, and the efficiency that matters is the unit's journey rather than the resource's occupancy.",
+            "tocKick": "The session builds one argument in twelve movements: value is defined from the customer backwards, waste is what the customer would not pay for, and the efficiency that matters is the unit's journey rather than the resource's occupancy.",
             "tocNote": "<b>Bring three things.</b> One recurring process that takes longer than it should; two rough figures — projects in flight, and projects closed in the last twelve months; and one authorised project you know well enough to defend, which is the raw material for the group activity in Part Nine.",
             "runningFoot": "Lean Six Sigma &amp; Continuous Improvement · 17 October 2026 · Prof. Dr. Thiago Lima",
         },
