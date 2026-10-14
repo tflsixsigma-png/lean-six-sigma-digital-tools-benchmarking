@@ -309,7 +309,7 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Waiting</td><td>Idle machines and people</td><td>Approval queues, decision latency, blocked dependencies</td></tr>
       <tr><td class="k">Transport</td><td>Moving materials</td><td>Handoffs between departments and systems</td></tr>
       <tr><td class="k">Over-processing</td><td>Machining beyond specification</td><td>Sign-off chains, redundant status meetings, precision beyond need</td></tr>
-      <tr><td class="k">Inventory</td><td>Stockpiles and work in process</td><td>Half-finished work packages, open tickets, projects started but unstaffed</td></tr>
+      <tr><td class="k">Inventory</td><td>Stockpiles and work in process (WIP)</td><td>Half-finished work packages, open tickets, projects started but unstaffed</td></tr>
       <tr><td class="k">Motion</td><td>Unnecessary movement of people</td><td>Searching for information, tool switching, duplicated data entry</td></tr>
       <tr><td class="k">Defects</td><td>Scrap and rework</td><td>Rework loops, failed deliverables, change requests from unclear requirements</td></tr>
       <tr><td class="k">Unused talent</td><td>Ignored operator ideas</td><td>Experts doing administration; front-line insight never reaching decisions</td></tr>
@@ -650,8 +650,9 @@ footer b{color:var(--gold-soft)}
       </div>
       <div class="base">Stability — <em>heijunka</em> (levelling) · standardised work · 4M stability</div>
     </div>
+    <p style="font-size:14.5px;color:#4A5B70;margin-top:-6px"><strong>The terms in the house, in one line each.</strong> <em>Takt time</em> — the pace of customer demand, the beat the whole line is set to. <em>SMED</em> — single-minute exchange of die: changeovers made fast enough that small batches become economical. <em>Genchi genbutsu</em> — go and see for yourself, at the place where the work happens. <em>Autonomation</em> — a machine that stops itself when something goes wrong. <em>Andon</em> — the signal, usually a light or a cord, by which anyone halts the line on a problem. <em>Poka-yoke</em> — a device that makes the error physically impossible. <em>Heijunka</em> — levelling volume and mix so the line sees a steady load. <em>4M</em> — the four sources of variation to stabilise first: man, machine, material, method.</p>
 
-    <p><strong>The sequence is physics, not preference.</strong> Pull cannot function on an unstable, unlevelled base: it either starves or floods. This is why organisations that install kanban boards onto chaotic processes get chaos with better visualisation.</p>
+    <p><strong>The sequence is physics, not preference.</strong> Pull cannot function on an unstable, unlevelled base: it either starves or floods. This is why organisations that install kanban boards — the cards or columns that signal when the next unit may be started — onto chaotic processes get chaos with better visualisation.</p>
 
     <h3>The left pillar: Just-In-Time</h3>
     <p>Three mechanisms, and one widespread misconception to clear first.</p>
@@ -841,7 +842,7 @@ footer b{color:var(--gold-soft)}
 </svg>
 <figcaption><b>Figure 6.</b> Return on invested capital, decomposed. The identity has two branches and the morning's work lands on both: removing defects and expediting lifts the left branch, and removing lead time lifts the right one by taking capital out of the denominator. A programme argued only as cost saving is claiming half of what it does.</figcaption>
 </figure>
-    <p>ROIC is NOPAT divided by invested capital, and it splits into two independent levers:</p>
+    <p>ROIC — return on invested capital — is NOPAT, net operating profit after tax, divided by the capital invested to earn it. It splits into two independent levers:</p>
     <div class="grid2">
       <div class="card">
         <h4>Margin — the numerator</h4>
@@ -863,7 +864,7 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Invested capital</td><td class="n">800</td><td class="n">620</td></tr>
       <tr><td class="k">Operating margin</td><td class="n">8%</td><td class="n">10%</td></tr>
       <tr><td class="k">ROIC</td><td class="n">10%</td><td class="n">16.1%</td></tr>
-      <tr><td class="k">WACC</td><td class="n">10%</td><td class="n">10%</td></tr>
+      <tr><td class="k">WACC <span style="font-weight:400;font-size:13px">— the cost of that capital</span></td><td class="n">10%</td><td class="n">10%</td></tr>
       <tr><td class="k">Economic profit</td><td class="n">0</td><td class="n">38</td></tr>
     </table>
     <p>Margin improved by 25%. Capital turnover improved by 29%. <strong>The denominator did more work than the numerator</strong> — and the denominator is the half of the equation that operational business cases almost never mention. A firm that was exactly earning its cost of capital is now creating economic profit, without a single additional unit of revenue.</p>
@@ -970,10 +971,11 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Improve</td><td>Does the solution work in a pilot, before it is scaled?</td><td>Controlled pilot · poka-yoke · design of experiments</td></tr>
       <tr><td class="k">Control</td><td>Does the gain survive the dissolution of the project team?</td><td>Control charts · control plan · standardised work</td></tr>
     </table>
+    <p style="font-size:14.5px;color:#4A5B70">The third column names the usual instruments of each phase; it does not teach them, and none of them is examined here. What matters is the question in the second column — a phase is complete when its question has an answer somebody would stake a decision on, whichever instrument produced it.</p>
     <p>Two observations that are easy to skip. First, Define and Measure look like bureaucracy and are half the work: a badly defined problem has no verifiable solution, and a measure nobody trusts ends every discussion in opinion. Second, <strong>poka-yoke appears in this table and also in the Jidoka pillar above.</strong> Lean and Six Sigma are not rival systems; they share mechanisms and attack different enemies — flow and waste on one side, variation and defects on the other.</p>
 
     <h3>Analyze, in practice</h3>
-    <p>This is the phase we will work through live in the session, using one of your own pre-work sentences.</p>
+    <p>This is the phase we work through live in the session, on the queue the value stream sketch in Part Nine reveals.</p>
     <p>The five whys is the simplest root-cause technique and the easiest to perform badly. Two rules govern it:</p>
     <ul class="tight">
       <li><strong>A cause attributed to a person is not a process cause.</strong> "Because he did not deliver on time" is a restatement of the symptom. The next question is always: what in the process allows that to happen without anyone noticing?</li>
@@ -1031,6 +1033,11 @@ footer b{color:var(--gold-soft)}
       <p><strong>C</strong> is what is left: whether this organisation reliably gets better at delivering than it was two years ago, and whether that improvement survives the departure of the people who drove it. It is also the reason two organisations running the same methodology, with the same certifications and the same tooling, deliver at visibly different standards — a gap no maturity assessment fully explains and every experienced manager recognises.</p>
       <p>Which raises the question the session closes on, and which the afternoon takes up directly: if C is the multiplier, what actually builds it?</p>
     </div>
+
+    <h3>The puzzle, answered</h3>
+    <p>Part One asked two questions and told you to hold your answer. The identity answers both.</p>
+    <p><strong>What changed at Fremont, and where does it appear on a balance sheet?</strong> Not A: same building, same equipment. Not only P: the processes changed, but GM photographed and copied those for twenty years without the result. What changed was C — the organisation's repeated ability to find and fix its own problems, with the same people who had been unable to the year before. On the balance sheet it appears nowhere, which is the point. It shows up only in its consequences: in the quality figures, in the inventory that was no longer needed, in a return on capital that no line item explains.</p>
+    <p><strong>Why was it never replicated across GM?</strong> Because what GM could observe was the bracket, and what produced the result was the coefficient. The kanban boards, the andon cords, the standardised work sheets were all visible and all copied. The rules-in-use that made them work — how problems are surfaced, who is allowed to stop the line, how an improvement is run as an experiment — were not written down anywhere, because at Toyota nobody needed to write them down. That is the whole of the afternoon's argument about benchmarking, and it is why the day ends on how C is built rather than on where it can be bought.</p>
 
     <h3>The equations, in one place</h3>
     <table>
@@ -1091,6 +1098,7 @@ footer b{color:var(--gold-soft)}
         <div class="worksheet">
           <div class="field">
             <label for="c-priority">Competitive priority affected</label>
+            <div class="hint">The four operational things a customer can be paying for, from Part Two. Pick the one this project moves most.</div>
             <select id="c-priority" data-section="The WTP edge" data-label="Competitive priority">
               <option value="">Select one</option>
               <option>Cost</option><option>Quality</option><option>Delivery speed</option><option>Flexibility</option>
@@ -1157,7 +1165,7 @@ footer b{color:var(--gold-soft)}
               <option>Overproduction — the root waste</option><option>Waiting</option><option>Transport</option>
               <option>Over-processing</option><option>Inventory</option><option>Motion</option>
               <option>Defects</option><option>Unused talent</option>
-              <option>None of the eight — see note below</option>
+              <option>None of the eight — then the project does not move the cost edge, and the verdict should say so</option>
             </select>
           </div>
           <div class="field">
@@ -1216,7 +1224,7 @@ footer b{color:var(--gold-soft)}
             </select>
           </div>
           <div class="field">
-            <label for="c-conditions">If conditions: what would have to be added to build C?</label>
+            <label for="c-conditions">If conditions: what would have to be added to build C? If you chose "they could not", say here why.</label>
             <input type="text" id="c-conditions" data-section="The verdict" data-label="Conditions to build C" placeholder="One line">
           </div>
         </div>
@@ -1248,7 +1256,7 @@ footer b{color:var(--gold-soft)}
         <p style="margin-bottom:0">Projects deliver assets and processes because those are what can be specified, scheduled and signed off. Capability resists all three. The question it raises: if A and P are purchasable by any competitor, what in this portfolio is actually building advantage?</p>
       </div>
     </div>
-    <p>Bring the completed canvas with you to the afternoon session. It is the input to the module's Execution Optimization Challenge.</p>
+    <p>Bring the completed canvas with you to the afternoon session, and keep the export. Module 3 closes with a group Execution Optimization Challenge, and an appraised project of your own is the kind of material it draws on.</p>
   </div>
 </section>
 
