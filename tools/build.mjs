@@ -22,6 +22,13 @@ const parts = await page.evaluate(({ meta, tocnum }) => {
   document.querySelectorAll('.back, .exportbar, .savenote, .readout').forEach(n => n.remove());
 
   // the conditional-layer gate is an on-screen behaviour; say the printed thing instead
+  // the simulators keep their default rendering; the controls make no sense on paper
+  document.querySelectorAll('.sim').forEach(f => {
+    var c = f.querySelector('.simctl'); if (c) c.remove();
+    var s = f.querySelector('.simhead span');
+    if (s) s.textContent = 'Shown here at its default setting. The version on the course page has sliders, and the chart and the sentence below move with them.';
+  });
+
   document.querySelectorAll('.gate').forEach(g => {
     const d = document.createElement('div');
     d.className = 'ap-printnote';

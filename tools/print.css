@@ -84,3 +84,9 @@ input,select,textarea{display:none !important}
 .inst{border:none !important;border-radius:0;margin:14pt 0}
 .inst .ib{padding:0}
 .inst .ih{border-bottom:3px solid var(--gold)}
+.simctl{display:none !important}
+.sim .simhead b{font-size:15pt}
+.simout{font-size:10.2pt;padding:8pt 12pt}
+.simgrid{gap:6pt;margin-top:10pt}
+.simgrid b{font-size:14pt}
+.simgrid span{font-size:8.4pt}

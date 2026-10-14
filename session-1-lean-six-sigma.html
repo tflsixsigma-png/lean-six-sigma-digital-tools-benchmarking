@@ -138,6 +138,32 @@ section:nth-of-type(even) .house .col{background:var(--paper)}
 .house .col p{font-size:14.5px;margin-bottom:0}
 .house .base{background:#E9EFF6;padding:12px 18px;text-align:center;font-size:15px;border-top:1px solid var(--line)}
 
+/* ---------- figures ---------- */
+.fig{margin:24px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px}
+section:nth-of-type(even) .fig{background:#FFFFFF}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{font-size:14.5px;color:#44566B;margin-top:12px;line-height:1.52;border-top:1px solid #DFE6EE;padding-top:10px}
+.fig figcaption b{color:var(--navy)}
+.sim .simhead{margin-bottom:14px}
+.sim .simhead b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.sim .simhead span{font-size:14.5px;color:#56687C;display:block;margin-top:3px}
+.simctl{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;align-items:center;
+  background:#F3F6FA;border:1px solid #C6D2DF;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.simctl label{font-size:14.5px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;gap:10px}
+.simctl output{font-family:'JetBrains Mono',monospace;color:#7E5B0C;font-weight:700}
+.simctl input[type=range]{width:100%;accent-color:#B8820F;height:26px}
+.simout{font-size:16px;color:var(--body);margin:14px 0 0;max-width:none;
+  border-left:5px solid var(--gold);background:#FEF8EA;padding:12px 16px}
+.simout b{color:var(--navy)}
+.simgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.simgrid div{background:#F3F6FA;border:1px solid #C6D2DF;border-radius:7px;padding:10px 12px}
+.simgrid div.hi{background:var(--ink);border-color:var(--ink)}
+.simgrid span{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#56687C;font-weight:700}
+.simgrid div.hi span{color:#9FB6CE}
+.simgrid b{font-family:'JetBrains Mono',monospace;font-size:19px;color:var(--navy)}
+.simgrid div.hi b{color:#F2DFB4}
+@media(max-width:700px){.simctl{grid-template-columns:1fr}.simgrid{grid-template-columns:repeat(2,1fr)}}
+
 .refs li{margin:0 0 7px 20px;font-size:15px}
 footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
 footer b{color:var(--gold-soft)}
@@ -244,7 +270,16 @@ footer b{color:var(--gold-soft)}
       <li><strong>Both terms can be attacked.</strong> VC rises when A improves and equally when B's advantage is made harder to sustain. Most of the literature in these notes is about the first term. The second is why capability that resists imitation matters more than capability that does not.</li>
       <li><strong>Operational effectiveness erodes by construction.</strong> If the improvement is visible and copyable, B eventually makes the same move, the two parentheses converge, and VC tends to zero. The firm is left creating more value than before and capturing no more of it than its rival. This is Porter's objection, stated as arithmetic rather than as an opinion, and the afternoon session returns to it as the central risk of benchmarking.</li>
     </ul>
-    <p>The practical use of the formula is in the third reading. It gives a single test to put to any improvement project: <em>when the competitor does this too, what is left?</em> If the answer is nothing, the project is a qualifier and should be funded to the threshold and no further. If something is left, name it — that residue is the advantage, and the rest of the day is about where it can come from.</p>
+    <p>The practical use of the formula is in the third reading. It gives a single test to put to any improvement project: <em>when the competitor does this too, what is left?</em> If the answer is nothing, the project is a qualifier and should be funded to the threshold and no further. If something is left, name it — that residue is the advantage.</p>
+
+    <h3>Where the residue can live</h3>
+    <p>Naming it is easier with the identity that organises the rest of the day. Van Mieghem and Allon describe an operation through four linked elements — value, capabilities, assets and processes — and the relationship between them answers the question VC leaves open.</p>
+    <div class="eq">
+      <div class="f">V = C × ( A + P )</div>
+      <div class="c">Lima (2026), Ch. 1 — after Van Mieghem &amp; Allon (2015)</div>
+    </div>
+    <p><strong>A</strong> is what the organisation owns: plants, machines, systems. <strong>P</strong> is how work flows across them. <strong>C</strong> is its repeated ability to improve P. The form of the expression is the claim: assets and processes are <em>additive and purchasable</em>, capability is a <em>coefficient</em>.</p>
+    <p>Read against VC, that settles where the difference between two firms can survive. Anything in the bracket is available to a competitor at roughly the same price, so improvements that live there move both parentheses and the difference returns towards zero. Only the coefficient resists, because it is the one term nobody can invoice you for. <strong>This is the whole argument of the day, stated early so that everything after it can be read as evidence for or against it</strong> — and Part Eight returns to the identity once there is enough material to test it.</p>
 
     <h3>The five principles, and where each one is treated</h3>
     <p>Womack and Jones reduced the method to five principles in sequence. They are worth stating as a set once, because the sequence is itself the argument: every principle after the first is meaningless until the first has been answered.</p>
@@ -289,6 +324,73 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">The information</td><td>What triggers each step: a signal, a schedule, a queue, an approval</td><td>Whether the stream is pulled or pushed, and where decisions wait on data</td></tr>
       <tr><td class="k">The timeline</td><td>For each step, the time actually worked and the time elapsed before the next step starts</td><td>The ratio between the two, which is flow efficiency, and is the number the map exists to produce</td></tr>
     </table>
+<figure class="fig">
+<svg viewBox="0 0 1160 440" role="img" aria-label="Value stream map of a change-request process, showing four hours of process time across fifteen days of lead time">
+<rect width="1160" height="440" fill="#FFFFFF"/>
+<text x="24.0" y="30.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">THE WORK, AND WHAT TRIGGERS EACH STEP</text>
+<rect x="24" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="24" y1="104" x2="192" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="108.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Request logged</text>
+<text x="108.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="108.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">15 min</text>
+<path d="M 202.0 142 L 244.0 142 L 223.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="223.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 198 96.0 L 248 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="254" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="254" y1="104" x2="422" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="338.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Triage</text>
+<text x="338.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="338.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">30 min</text>
+<path d="M 432.0 142 L 474.0 142 L 453.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="453.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 428 96.0 L 478 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="484" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="484" y1="104" x2="652" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="568.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Technical review</text>
+<text x="568.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="568.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">90 min</text>
+<path d="M 662.0 142 L 704.0 142 L 683.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="683.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 658 96.0 L 708 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="714" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="714" y1="104" x2="882" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="798.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Approval board</text>
+<text x="798.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="798.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">45 min</text>
+<path d="M 892.0 142 L 934.0 142 L 913.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="913.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 888 96.0 L 938 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="944" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="944" y1="104" x2="1112" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="1028.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Implementation</text>
+<text x="1028.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="1028.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">60 min</text>
+<text x="24.0" y="240.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">THE TIMELINE — WORKED TIME BELOW, ELAPSED TIME ABOVE</text>
+<path d="M 24 322 L 192 322 L 192 272 L 254 272 L 254 322 L 422 322 L 422 272 L 484 272 L 484 322 L 652 322 L 652 272 L 714 272 L 714 322 L 882 322 L 882 272 L 944 272 L 944 322 L 1112 322" fill="none" stroke="#0A2342" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="108.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">15 min</text>
+<text x="338.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">30 min</text>
+<text x="568.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">90 min</text>
+<text x="798.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">45 min</text>
+<text x="1028.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">60 min</text>
+<text x="223.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">2 days</text>
+<text x="453.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">6 days</text>
+<text x="683.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">1 day</text>
+<text x="913.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">6 days</text>
+<rect x="24" y="358" width="1112" height="60" rx="6" fill="#0A2342"/>
+<text x="46.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">PROCESS TIME</text>
+<text x="46.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">4 hours</text>
+<text x="324.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">LEAD TIME</text>
+<text x="324.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">15 working days</text>
+<line x1="302.0" y1="370" x2="302.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+<text x="602.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">FLOW EFFICIENCY</text>
+<text x="602.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#F2DFB4" text-anchor="start" font-weight="600">3.3%</text>
+<line x1="580.0" y1="370" x2="580.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+<text x="880.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">WHERE IT SITS</text>
+<text x="880.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">two approval queues</text>
+<line x1="858.0" y1="370" x2="858.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+</svg>
+<figcaption><b>Figure 1.</b> A value stream map of an administrative process — a change request from arrival to implementation. The boxes carry the worked time, the triangles the waiting. The staircase at the bottom is the whole point of the exercise: four hours of work spread across fifteen working days, with almost all of the elapsed time sitting in two approval queues.</figcaption>
+</figure>
     <p>Two figures come out of the timeline. <strong>Process time</strong> is the total time anyone is actually working on the unit. <strong>Lead time</strong> is the elapsed time from the first step to the last. In administrative and project processes the first is typically between two and ten per cent of the second, and the gap is not idleness — it is queue. Everything in the waste table lives in that gap.</p>
     <p>A useful map adds one more figure per step: the proportion of items arriving <strong>complete and accurate</strong>, needing no clarification or rework. A chain of steps each at 90% complete-and-accurate does not deliver 90%, and the arithmetic of that is in Part Four.</p>
 
@@ -339,6 +441,43 @@ footer b{color:var(--gold-soft)}
     </div>
     <p>Flow efficiency is simply the share of elapsed time in which the unit is actually being worked on — process time over lead time, the ratio the value stream map in Part Three was built to produce. The figure is usually a shock the first time it is computed, and the shock is the point.</p>
 
+<figure class="fig">
+<svg viewBox="0 0 980 720" role="img" aria-label="Two-by-two matrix of resource efficiency against flow efficiency with the efficiency frontier">
+<rect width="980" height="720" fill="#FFFFFF"/>
+<rect x="120" y="50" width="810" height="450" fill="#EAF0F6" opacity=".45"/>
+<line x1="525.0" y1="50" x2="525.0" y2="500" stroke="#A9BACB" stroke-width="1" stroke-dasharray="5 4"/>
+<line x1="120" y1="275.0" x2="930" y2="275.0" stroke="#A9BACB" stroke-width="1" stroke-dasharray="5 4"/>
+<defs><marker id="arrH" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0A2342"/></marker></defs>
+<path d="M 120 203.0 A 534.6 297.0 0 0 1 654.6 500" fill="none" stroke="#B8820F" stroke-width="3" stroke-dasharray="8 5"/>
+<path d="M 120 81.5 A 753.3 418.5 0 0 1 873.3 500" fill="none" stroke="#2A5D9F" stroke-width="3"/>
+<path d="M 498.3 289.9 L 634.4 214.2" stroke="#0A2342" stroke-width="2.6" marker-end="url(#arrH)"/>
+<line x1="120" y1="500" x2="930" y2="500" stroke="#0A2342" stroke-width="2"/>
+<line x1="120" y1="50" x2="120" y2="500" stroke="#0A2342" stroke-width="2"/>
+<circle cx="920.0" cy="60.0" r="8" fill="#0A2342"/>
+<text x="142.0" y="444.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Wasteland</text>
+<text x="142.0" y="465.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">busy nobody, moves nothing</text>
+<text x="547.0" y="444.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Efficient islands</text>
+<text x="547.0" y="465.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">every unit busy, the work still waits</text>
+<text x="142.0" y="224.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Efficient ocean</text>
+<text x="142.0" y="245.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">work flows, capacity deliberately spare</text>
+<text x="900.0" y="86.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="end" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">The perfect state</text>
+<text x="900.0" y="107.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="end" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">unreachable while variation is what it is</text>
+<text x="525.0" y="538.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Resource efficiency  →  how busy the people and machines are</text>
+<text transform="translate(72,275.0) rotate(-90)" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Flow efficiency  →  how little the work waits</text>
+<line x1="120" y1="576" x2="150" y2="576" stroke="#B8820F" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="160.0" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the frontier today</text>
+<line x1="286.2" y1="576" x2="316.2" y2="576" stroke="#2A5D9F" stroke-width="3"/>
+<text x="326.2" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the frontier once variation is removed</text>
+<path d="M 590.4 576 L 614.4 576" stroke="#0A2342" stroke-width="2.6" marker-end="url(#arrH)"/>
+<text x="630.4" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the one move that is not a trade-off</text>
+<rect x="120" y="610" width="810" height="120" rx="7" fill="#0A2342"/>
+<text x="144.0" y="642.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#F2DFB4" text-anchor="start" font-weight="700" letter-spacing="1.8">THE PARADOX</text>
+<text x="144.0" y="670.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#FFFFFF" text-anchor="start" font-weight="400">Every point on a frontier is a trade-off, so pushing one efficiency up pushes the other down and the argument</text>
+<text x="144.0" y="692.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#FFFFFF" text-anchor="start" font-weight="400">never ends. The one move that is not a trade-off is removing the variation that drew the curve in the first place.</text>
+<text x="144.0" y="714.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#C6D4E4" text-anchor="start" font-weight="400">Most organisations sit bottom-right, call it productivity, and never notice they chose a point on a poor curve.</text>
+</svg>
+<figcaption><b>Figure 2.</b> The efficiency matrix, after Modig and Åhlström (2012). Resource efficiency and flow efficiency are not two names for the same thing, and the curve is the reason they trade off: with variation at its current level, the combinations beyond the frontier cannot be bought with effort. Removing variation is what moves the frontier towards the corner where both are high.</figcaption>
+</figure>
     <h3>The physics of lead time</h3>
     <p>The relationship between utilisation and queue time is not a management opinion. It is a property of any system with variability, and it is steep:</p>
     <ul class="tight">
@@ -359,6 +498,54 @@ footer b{color:var(--gold-soft)}
     <p>Shewhart's distinction governs everything that follows. <strong>Common-cause</strong> variation is inherent in the process as designed: it is the ordinary scatter a stable process produces, and no amount of investigating individual cases will reduce it, because every case has a different story and none of the stories is the cause. <strong>Special-cause</strong> variation comes from something that was not there before, and it can be found and removed.</p>
     <p>The managerial consequence is uncomfortable and expensive to ignore. <strong>Reacting to common-cause variation as though it were special cause makes the process worse</strong>, because each reaction is an unplanned adjustment to a stable system. The monthly meeting that demands an explanation for every variance against target, favourable or adverse, is this error institutionalised — and it is the single most common misuse of a performance dashboard.</p>
 
+<figure class="fig">
+<svg viewBox="0 0 1160 440" role="img" aria-label="Control chart with centre line, three-sigma limits, one point beyond the upper limit and a run of seven below the centre">
+<rect width="1160" height="440" fill="#FFFFFF"/>
+<rect x="90" y="123.5" width="1030" height="190.6" fill="#EAF0F6" opacity=".6"/>
+<line x1="90" y1="123.5" x2="1120" y2="123.5" stroke="#0A2342" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="80.0" y="128.5" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">UCL  +3σ</text>
+<line x1="90" y1="218.8" x2="1120" y2="218.8" stroke="#0A2342" stroke-width="2.2"/>
+<text x="80.0" y="223.8" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">centre line</text>
+<line x1="90" y1="314.1" x2="1120" y2="314.1" stroke="#0A2342" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="80.0" y="319.1" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">LCL  −3σ</text>
+<line x1="90" y1="330" x2="1120" y2="330" stroke="#0A2342" stroke-width="2"/>
+<text x="605.0" y="364.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#56687C" text-anchor="middle" font-weight="400">successive measurements, in order</text>
+<path d="M 90.0 210.9 L 134.8 234.7 L 179.6 195.0 L 224.3 242.6 L 269.1 218.8 L 313.9 187.1 L 358.7 250.6 L 403.5 202.9 L 448.3 226.8 L 493.0 210.9 L 537.8 242.6 L 582.6 195.0 L 627.4 218.8 L 672.2 91.8 L 717.0 226.8 L 761.7 202.9 L 806.5 242.6 L 851.3 250.6 L 896.1 234.7 L 940.9 258.5 L 985.7 242.6 L 1030.4 250.6 L 1075.2 266.5 L 1120.0 210.9" fill="none" stroke="#2A5D9F" stroke-width="2"/>
+<circle cx="90.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="134.8" cy="234.7" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="179.6" cy="195.0" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="224.3" cy="242.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="269.1" cy="218.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="313.9" cy="187.1" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="358.7" cy="250.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="403.5" cy="202.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="448.3" cy="226.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="493.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="537.8" cy="242.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="582.6" cy="195.0" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="627.4" cy="218.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="672.2" cy="91.8" r="7" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="717.0" cy="226.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="761.7" cy="202.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="806.5" cy="242.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="851.3" cy="250.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="896.1" cy="234.7" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="940.9" cy="258.5" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="985.7" cy="242.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1030.4" cy="250.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1075.2" cy="266.5" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1120.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<line x1="672.2" y1="77.8" x2="672.2" y2="46" stroke="#B8820F" stroke-width="1.8"/>
+<text x="664.2" y="40.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#7E5B0C" text-anchor="end" font-weight="700">one point beyond the limit — a special cause, and worth investigating</text>
+<rect x="794.5" y="376" width="292.7" height="4" fill="#B8820F"/>
+<text x="940.9" y="406.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">seven consecutive points below the centre line —</text>
+<text x="940.9" y="424.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="middle" font-weight="400">inside the limits, and still a special cause: the process has shifted</text>
+<text x="90.0" y="406.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="700">Everything in blue is common cause:</text>
+<text x="90.0" y="424.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the process doing what it was built to do.</text>
+<text x="90.0" y="442.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Explaining these points one by one makes it worse.</text>
+</svg>
+<figcaption><b>Figure 3.</b> A control chart of the same process over twenty-four measurements. The limits are calculated from the process itself, not from the target. Two signals are present and everything else is noise — and the costly managerial error is not missing the two signals, it is explaining the noise.</figcaption>
+</figure>
     <h4>Capability — the promise is the spread, not the average</h4>
     <p>A process has a voice, which is its natural spread, and the customer has a requirement, which is a tolerance. Capability compares the two.</p>
     <div class="eq">
@@ -368,6 +555,48 @@ footer b{color:var(--gold-soft)}
     <p>C<sub>p</sub> assumes the process is centred on the target. C<sub>pk</sub> removes that assumption and is therefore the one that matters, because a process can be admirably narrow and reliably in the wrong place. A conventional threshold is C<sub>pk</sub> ≥ 1.33, and the operational reading of it is simple: <strong>the average tells you almost nothing about what the customer will experience; the spread, relative to the tolerance, tells you everything.</strong></p>
     <p>This transfers directly to services and to projects, where the tolerance is usually a promise rather than an engineering specification. A response committed at 48 hours with an average of 30 and a spread that reaches 90 is a process that will break its promise regularly while reporting comfortable averages every month.</p>
 
+<figure class="fig">
+<svg viewBox="0 0 1160 420" role="img" aria-label="Two normal distributions against the same tolerance limits, one centred and one shifted">
+<rect width="1160" height="420" fill="#FFFFFF"/>
+<text x="20.0" y="38.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Centred on target</text>
+<rect x="138.0" y="80" width="304.0" height="220" fill="#EAF0F6" opacity=".75"/>
+<line x1="138.0" y1="78" x2="138.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="138.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">LSL</text>
+<line x1="442.0" y1="78" x2="442.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="442.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">USL</text>
+<path d="M 36 300.0 L 40 300.0 L 44 300.0 L 48 300.0 L 52 300.0 L 56 300.0 L 60 300.0 L 64 300.0 L 68 300.0 L 72 300.0 L 76 300.0 L 80 300.0 L 84 300.0 L 88 300.0 L 92 300.0 L 96 300.0 L 100 300.0 L 104 300.0 L 108 300.0 L 112 300.0 L 116 300.0 L 120 300.0 L 124 300.0 L 128 300.0 L 132 300.0 L 136 300.0 L 140 299.9 L 144 299.9 L 148 299.8 L 152 299.8 L 156 299.7 L 160 299.5 L 164 299.3 L 168 299.0 L 172 298.6 L 176 298.1 L 180 297.4 L 184 296.5 L 188 295.4 L 192 293.9 L 196 292.0 L 200 289.7 L 204 286.9 L 208 283.4 L 212 279.3 L 216 274.5 L 220 268.8 L 224 262.4 L 228 255.1 L 232 247.0 L 236 238.1 L 240 228.5 L 244 218.3 L 248 207.7 L 252 196.9 L 256 186.1 L 260 175.5 L 264 165.5 L 268 156.2 L 272 148.0 L 276 141.2 L 280 135.8 L 284 132.1 L 288 130.2 L 292 130.2 L 296 132.1 L 300 135.8 L 304 141.2 L 308 148.0 L 312 156.2 L 316 165.5 L 320 175.5 L 324 186.1 L 328 196.9 L 332 207.7 L 336 218.3 L 340 228.5 L 344 238.1 L 348 247.0 L 352 255.1 L 356 262.4 L 360 268.8 L 364 274.5 L 368 279.3 L 372 283.4 L 376 286.9 L 380 289.7 L 384 292.0 L 388 293.9 L 392 295.4 L 396 296.5 L 400 297.4 L 404 298.1 L 408 298.6 L 412 299.0 L 416 299.3 L 420 299.5 L 424 299.7 L 428 299.8 L 432 299.8 L 436 299.9 L 440 299.9 L 444 300.0 L 448 300.0 L 452 300.0 L 456 300.0 L 460 300.0 L 464 300.0 L 468 300.0 L 472 300.0 L 476 300.0 L 480 300.0 L 484 300.0 L 488 300.0 L 492 300.0 L 496 300.0 L 500 300.0 L 504 300.0 L 508 300.0 L 512 300.0 L 516 300.0 L 520 300.0 L 524 300.0 L 528 300.0 L 532 300.0 L 536 300.0 L 540 300.0 L 544 300.0" fill="none" stroke="#2A5D9F" stroke-width="2.6"/>
+<line x1="36" y1="300" x2="544" y2="300" stroke="#0A2342" stroke-width="2"/>
+<line x1="290.0" y1="122" x2="290.0" y2="300" stroke="#2A5D9F" stroke-width="1.6" stroke-dasharray="4 4"/>
+<text x="290.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#2A5D9F" text-anchor="middle" font-weight="700">process mean</text>
+<line x1="176.0" y1="322" x2="404.0" y2="322" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="176.0" y1="316" x2="176.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="404.0" y1="316" x2="404.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<text x="290.0" y="342.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#56687C" text-anchor="middle" font-weight="400">6σ — the voice of the process</text>
+<text x="20" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>p</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="150" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>pk</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="20.0" y="400.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">The spread fits the tolerance and sits where it should.</text>
+<text x="600.0" y="38.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Same spread, shifted mean</text>
+<rect x="642.0" y="80" width="304.0" height="220" fill="#EAF0F6" opacity=".75"/>
+<line x1="642.0" y1="78" x2="642.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="642.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">LSL</text>
+<line x1="946.0" y1="78" x2="946.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="946.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">USL</text>
+<path d="M 946 300 L 948 279.3 L 952 283.4 L 956 286.9 L 960 289.7 L 964 292.0 L 968 293.9 L 972 295.4 L 976 296.5 L 980 297.4 L 984 298.1 L 988 298.6 L 992 299.0 L 996 299.3 L 1000 299.5 L 1004 299.7 L 1008 299.8 L 1012 299.8 L 1016 299.9 L 1020 299.9 L 1024 300.0 L 1028 300.0 L 1032 300.0 L 1036 300.0 L 1040 300.0 L 1044 300.0 L 1048 300.0 L 1052 300.0 L 1056 300.0 L 1060 300.0 L 1064 300.0 L 1068 300.0 L 1072 300.0 L 1076 300.0 L 1080 300.0 L 1084 300.0 L 1088 300.0 L 1092 300.0 L 1096 300.0 L 1100 300.0 L 1104 300.0 L 1108 300.0 L 1112 300.0 L 1116 300.0 L 1120 300.0 L 1124 300.0 L 1124 300 Z" fill="#B8820F" opacity=".85"/>
+<path d="M 616 300.0 L 620 300.0 L 624 300.0 L 628 300.0 L 632 300.0 L 636 300.0 L 640 300.0 L 644 300.0 L 648 300.0 L 652 300.0 L 656 300.0 L 660 300.0 L 664 300.0 L 668 300.0 L 672 300.0 L 676 300.0 L 680 300.0 L 684 300.0 L 688 300.0 L 692 300.0 L 696 300.0 L 700 300.0 L 704 300.0 L 708 300.0 L 712 300.0 L 716 300.0 L 720 299.9 L 724 299.9 L 728 299.8 L 732 299.8 L 736 299.7 L 740 299.5 L 744 299.3 L 748 299.0 L 752 298.6 L 756 298.1 L 760 297.4 L 764 296.5 L 768 295.4 L 772 293.9 L 776 292.0 L 780 289.7 L 784 286.9 L 788 283.4 L 792 279.3 L 796 274.5 L 800 268.8 L 804 262.4 L 808 255.1 L 812 247.0 L 816 238.1 L 820 228.5 L 824 218.3 L 828 207.7 L 832 196.9 L 836 186.1 L 840 175.5 L 844 165.5 L 848 156.2 L 852 148.0 L 856 141.2 L 860 135.8 L 864 132.1 L 868 130.2 L 872 130.2 L 876 132.1 L 880 135.8 L 884 141.2 L 888 148.0 L 892 156.2 L 896 165.5 L 900 175.5 L 904 186.1 L 908 196.9 L 912 207.7 L 916 218.3 L 920 228.5 L 924 238.1 L 928 247.0 L 932 255.1 L 936 262.4 L 940 268.8 L 944 274.5 L 948 279.3 L 952 283.4 L 956 286.9 L 960 289.7 L 964 292.0 L 968 293.9 L 972 295.4 L 976 296.5 L 980 297.4 L 984 298.1 L 988 298.6 L 992 299.0 L 996 299.3 L 1000 299.5 L 1004 299.7 L 1008 299.8 L 1012 299.8 L 1016 299.9 L 1020 299.9 L 1024 300.0 L 1028 300.0 L 1032 300.0 L 1036 300.0 L 1040 300.0 L 1044 300.0 L 1048 300.0 L 1052 300.0 L 1056 300.0 L 1060 300.0 L 1064 300.0 L 1068 300.0 L 1072 300.0 L 1076 300.0 L 1080 300.0 L 1084 300.0 L 1088 300.0 L 1092 300.0 L 1096 300.0 L 1100 300.0 L 1104 300.0 L 1108 300.0 L 1112 300.0 L 1116 300.0 L 1120 300.0 L 1124 300.0" fill="none" stroke="#2A5D9F" stroke-width="2.6"/>
+<line x1="616" y1="300" x2="1124" y2="300" stroke="#0A2342" stroke-width="2"/>
+<line x1="870.0" y1="122" x2="870.0" y2="300" stroke="#2A5D9F" stroke-width="1.6" stroke-dasharray="4 4"/>
+<text x="870.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#2A5D9F" text-anchor="middle" font-weight="700">process mean</text>
+<line x1="756.0" y1="322" x2="984.0" y2="322" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="756.0" y1="316" x2="756.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="984.0" y1="316" x2="984.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<text x="870.0" y="342.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#56687C" text-anchor="middle" font-weight="400">6σ — the voice of the process</text>
+<text x="600" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>p</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="730" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#B8820F" font-weight="700">C<tspan dy='4' font-size='11'>pk</tspan><tspan dy='-4'> = 0.67</tspan></text>
+<text x="600.0" y="400.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Identically capable on paper. Reliably in the wrong place.</text>
+<line x1="570" y1="30" x2="570" y2="400" stroke="#D3DCE6" stroke-width="1.5"/>
+</svg>
+<figcaption><b>Figure 4.</b> Two processes with identical spread and opposite fates. On the left the mean sits on target and the tolerance is comfortable. On the right nothing about the process changed except where it is centred — C<sub>p</sub> is unmoved, C<sub>pk</sub> halves, and the shaded tail is the share of output the customer will reject. This is why the average is a poor promise and the spread, read against the tolerance, is the real one.</figcaption>
+</figure>
     <h4>What a sigma level actually says</h4>
     <table>
       <tr><th style="width:20%">Sigma level</th><th style="width:22%">Defects per million</th><th style="width:20%">Right first time</th><th>What it means in practice</th></tr>
@@ -489,6 +718,77 @@ footer b{color:var(--gold-soft)}
       <p>This is the counter-intuitive law every steering committee eventually rediscovers at cost: <strong>starting less finishes more.</strong></p>
     </div>
 
+<figure class="fig sim" id="sim-little">
+  <div class="simhead">
+    <b>Little's Law, as a portfolio instrument</b>
+    <span>Move the sliders. The chart and the sentence below update together.</span>
+  </div>
+  <div class="simctl">
+    <label for="ll-wip">Projects in flight <output id="ll-wip-v">36</output></label>
+    <input type="range" id="ll-wip" min="4" max="60" step="1" value="36">
+    <label for="ll-thr">Projects completed per year <output id="ll-thr-v">24</output></label>
+    <input type="range" id="ll-thr" min="4" max="60" step="1" value="24">
+  </div>
+  <svg viewBox="0 0 1000 440" role="img" aria-labelledby="ll-desc">
+    <rect width="1000" height="440" fill="#FFFFFF"/>
+    <g id="ll-grid"></g>
+    <path id="ll-line" fill="none" stroke="#2A5D9F" stroke-width="3"/>
+    <line id="ll-vx" stroke="#B8820F" stroke-width="1.8" stroke-dasharray="5 4"/>
+    <line id="ll-hy" stroke="#B8820F" stroke-width="1.8" stroke-dasharray="5 4"/>
+    <circle id="ll-dot" r="9" fill="#B8820F" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text id="ll-dotlab" font-family="'JetBrains Mono',monospace" font-size="15" font-weight="700" fill="#7E5B0C"></text>
+    <line x1="90" y1="360" x2="960" y2="360" stroke="#0A2342" stroke-width="2"/>
+    <line x1="90" y1="40" x2="90" y2="360" stroke="#0A2342" stroke-width="2"/>
+    <text x="525" y="400" font-family="'Source Sans 3',sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Projects in flight</text>
+    <text transform="translate(40,200) rotate(-90)" font-family="'Source Sans 3',sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Average months a project is open</text>
+  </svg>
+  <p class="simout" id="ll-out"></p>
+  <figcaption id="ll-desc"><b>Figure 5.</b> Little's Law applied to a portfolio: the average time a project stays open is the
+  number in flight divided by the number finished per year. Throughput is set by capacity and is hard to move quickly;
+  the number in flight is a decision somebody takes every week. The line is straight because the law is an identity, not a
+  forecast — it holds on averages, for a system that is stable and where what starts eventually finishes.</figcaption>
+</figure>
+<script>
+(function(){
+  var wip=document.getElementById('ll-wip'), thr=document.getElementById('ll-thr');
+  if(!wip) return;
+  var L=90,R=960,T=40,B=360,XMAX=60,YMAX=36;
+  function X(v){return L+(R-L)*v/XMAX;} function Y(v){return B-(B-T)*Math.min(v,YMAX)/YMAX;}
+  var g=document.getElementById('ll-grid'),gh='';
+  for(var y=0;y<=YMAX;y+=6){gh+='<line x1="'+L+'" y1="'+Y(y)+'" x2="'+R+'" y2="'+Y(y)+'" stroke="#D3DCE6" stroke-width="1"/>'
+    +'<text x="'+(L-12)+'" y="'+(Y(y)+5)+'" font-family="\'JetBrains Mono\',monospace" font-size="12.5" fill="#56687C" text-anchor="end">'+y+'</text>';}
+  for(var x=0;x<=XMAX;x+=10){gh+='<text x="'+X(x)+'" y="'+(B+24)+'" font-family="\'JetBrains Mono\',monospace" font-size="12.5" fill="#56687C" text-anchor="middle">'+x+'</text>';}
+  g.innerHTML=gh;
+  function draw(){
+    var w=+wip.value, th=+thr.value;
+    document.getElementById('ll-wip-v').textContent=w;
+    document.getElementById('ll-thr-v').textContent=th;
+    var months=w/th*12;
+    var yEnd=XMAX/th*12;
+    document.getElementById('ll-line').setAttribute('d','M '+X(0)+' '+Y(0)+' L '+X(XMAX)+' '+Y(yEnd));
+    var dx=X(w), dy=Y(months);
+    var d=document.getElementById('ll-dot'); d.setAttribute('cx',dx); d.setAttribute('cy',dy);
+    var vx=document.getElementById('ll-vx'); vx.setAttribute('x1',dx); vx.setAttribute('x2',dx); vx.setAttribute('y1',dy); vx.setAttribute('y2',B);
+    var hy=document.getElementById('ll-hy'); hy.setAttribute('x1',L); hy.setAttribute('x2',dx); hy.setAttribute('y1',dy); hy.setAttribute('y2',dy);
+    var lab=document.getElementById('ll-dotlab');
+    lab.setAttribute('x', dx<700? dx+16 : dx-16); lab.setAttribute('y', dy-14);
+    lab.setAttribute('text-anchor', dx<700? 'start':'end');
+    lab.textContent=months.toFixed(1)+' months';
+    var cut=Math.round(w*0.6), cutM=cut/th*12;
+    document.getElementById('ll-out').innerHTML='With <b>'+w+'</b> projects in flight and <b>'+th+
+      '</b> finished a year, the average project is open for <b>'+months.toFixed(1)+' months</b>. '+
+      'Cutting the number in flight to '+cut+' — with no change to capacity, no new tool and nobody working faster — '+
+      'brings that to <b>'+cutM.toFixed(1)+' months</b>.';
+  }
+  wip.addEventListener('input',draw); thr.addEventListener('input',draw); draw();
+})();
+</script>
+
+    <div class="bridge" style="margin-top:20px">
+      <span class="lbl">Reading the chart honestly</span>
+      <p style="margin-bottom:0">The relationship is an identity, so there is nothing to forecast and nothing to dispute. What it does require is a stable system in which what starts eventually finishes: a portfolio that quietly abandons a third of what it begins is not described by this line, and the first useful thing such an organisation can do is count the abandonments.</p>
+    </div>
+
     <div class="note">
       <span class="lbl">We do this calculation live in the session</span>
       <p style="margin-bottom:8px"><strong>A.</strong> Projects currently in flight in your organisation or unit. Count everything authorised and not yet closed, including the ones nobody has touched this month. Those count — they are WIP.<br>
@@ -497,6 +797,50 @@ footer b{color:var(--gold-soft)}
     </div>
 
     <h3>Where lean shows up in return on invested capital</h3>
+<figure class="fig">
+<svg viewBox="0 0 1160 470" role="img" aria-label="A DuPont-style tree decomposing ROIC into operating margin and capital turnover, with lean levers attached">
+<rect width="1160" height="470" fill="#FFFFFF"/>
+<rect x="470" y="20" width="220" height="62" rx="6" fill="#0A2342" stroke="#0A2342" stroke-width="2"/>
+<text x="580.0" y="46.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">ROIC</text>
+<text x="580.0" y="68.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#9FB6CE" text-anchor="middle" font-weight="400">NOPAT / invested capital</text>
+<path d="M 580 82 L 580 106.0 L 320 106.0 L 320 130" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 580 82 L 580 106.0 L 840 106.0 L 840 130" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<text x="580.0" y="112.0" font-family="'Fraunces',serif" font-size="22" fill="#0A2342" text-anchor="middle" font-weight="700">×</text>
+<rect x="200" y="130" width="240" height="62" rx="6" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<text x="320.0" y="156.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Operating margin</text>
+<text x="320.0" y="178.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">NOPAT / revenue</text>
+<rect x="720" y="130" width="240" height="62" rx="6" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<text x="840.0" y="156.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Capital turnover</text>
+<text x="840.0" y="178.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">revenue / capital</text>
+<path d="M 320 192 L 320 221.0 L 190 221.0 L 190 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 320 192 L 320 221.0 L 450 221.0 L 450 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 840 192 L 840 221.0 L 710 221.0 L 710 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 840 192 L 840 221.0 L 970 221.0 L 970 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<rect x="90" y="250" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="190.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Revenue</text>
+<text x="190.0" y="298.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">price × volume</text>
+<rect x="350" y="250" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="450.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Operating cost</text>
+<text x="450.0" y="298.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">rework · overtime · expediting</text>
+<rect x="610" y="250" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="710.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Working capital</text>
+<text x="710.0" y="298.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">inventory · WIP · receivables</text>
+<rect x="870" y="250" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="970.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Fixed assets</text>
+<text x="970.0" y="298.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">plant · equipment · systems</text>
+<rect x="20" y="350" width="1120" height="100" rx="7" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="42.0" y="378.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#7E5B0C" text-anchor="start" font-weight="700" letter-spacing="1.6">WHERE THE MORNING'S LEVERS ATTACH</text>
+<text x="42.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Defects ↓</text>
+<text x="42.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">rework and scrap leave operating cost</text>
+<text x="322.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Lead time ↓</text>
+<text x="322.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">inventory and WIP leave invested capital</text>
+<text x="602.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Flow ↑</text>
+<text x="602.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">overtime and expediting stop being normal</text>
+<text x="882.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Reliability ↑</text>
+<text x="882.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">the WTP edge, so revenue moves too</text>
+</svg>
+<figcaption><b>Figure 6.</b> Return on invested capital, decomposed. The identity has two branches and the morning's work lands on both: removing defects and expediting lifts the left branch, and removing lead time lifts the right one by taking capital out of the denominator. A programme argued only as cost saving is claiming half of what it does.</figcaption>
+</figure>
     <p>ROIC is NOPAT divided by invested capital, and it splits into two independent levers:</p>
     <div class="grid2">
       <div class="card">
@@ -523,6 +867,77 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Economic profit</td><td class="n">0</td><td class="n">38</td></tr>
     </table>
     <p>Margin improved by 25%. Capital turnover improved by 29%. <strong>The denominator did more work than the numerator</strong> — and the denominator is the half of the equation that operational business cases almost never mention. A firm that was exactly earning its cost of capital is now creating economic profit, without a single additional unit of revenue.</p>
+
+<figure class="fig sim" id="sim-roic">
+  <div class="simhead">
+    <b>What an operational improvement does to return on capital</b>
+    <span>Revenue held at 1,000 and fixed assets at 500, so only the operational levers move. Inventory is carried at 15 per day of lead time.</span>
+  </div>
+  <div class="simctl">
+    <label for="rc-lt">Lead time, days <output id="rc-lt-v">20</output></label>
+    <input type="range" id="rc-lt" min="5" max="30" step="1" value="20">
+    <label for="rc-mg">Operating margin <output id="rc-mg-v">8%</output></label>
+    <input type="range" id="rc-mg" min="6" max="14" step="0.5" value="8">
+  </div>
+  <svg viewBox="0 0 1000 300" role="img" aria-labelledby="rc-desc">
+    <rect width="1000" height="300" fill="#FFFFFF"/>
+    <g id="rc-grid"></g>
+    <rect id="rc-bar" x="150" y="60" height="54" rx="4" fill="#2A5D9F"/>
+    <rect id="rc-base" x="150" y="140" height="54" rx="4" fill="#B5C3D3"/>
+    <line id="rc-wacc" y1="40" y2="230" stroke="#B8820F" stroke-width="3"/>
+    <text id="rc-waccl" y="30" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="#7E5B0C" text-anchor="middle">WACC 10%</text>
+    <text x="138" y="94" font-family="'Source Sans 3',sans-serif" font-size="15" fill="#0A2342" text-anchor="end" font-weight="700">ROIC now</text>
+    <text x="138" y="174" font-family="'Source Sans 3',sans-serif" font-size="15" fill="#56687C" text-anchor="end">Baseline</text>
+    <text id="rc-barl" y="94" font-family="'JetBrains Mono',monospace" font-size="17" font-weight="700" fill="#0A2342"></text>
+    <text id="rc-basel" y="174" font-family="'JetBrains Mono',monospace" font-size="15" fill="#56687C">10.0%</text>
+  </svg>
+  <div class="simgrid" id="rc-nums"></div>
+  <p class="simout" id="rc-out"></p>
+  <figcaption id="rc-desc"><b>Figure 7.</b> The same improvement, read as a return on capital. Shortening lead time releases
+  inventory, which leaves the denominator; removing rework and expediting lifts the margin, which raises the numerator.
+  The grey bar is the starting position, where return exactly equals the cost of capital and the business creates no economic
+  value at all. The gold line is the only threshold that matters.</figcaption>
+</figure>
+<script>
+(function(){
+  var lt=document.getElementById('rc-lt'), mg=document.getElementById('rc-mg');
+  if(!lt) return;
+  var L=150,R=960,XMAX=24,WACC=10,REV=1000,FIXED=500;
+  function X(v){return L+(R-L)*v/XMAX;}
+  var g=document.getElementById('rc-grid'),gh='';
+  for(var x=0;x<=XMAX;x+=4){gh+='<line x1="'+X(x)+'" y1="40" x2="'+X(x)+'" y2="230" stroke="#D3DCE6" stroke-width="1"/>'
+    +'<text x="'+X(x)+'" y="252" font-family="\'JetBrains Mono\',monospace" font-size="12.5" fill="#56687C" text-anchor="middle">'+x+'%</text>';}
+  g.innerHTML=gh;
+  document.getElementById('rc-wacc').setAttribute('x1',X(WACC));
+  document.getElementById('rc-wacc').setAttribute('x2',X(WACC));
+  document.getElementById('rc-waccl').setAttribute('x',X(WACC));
+  document.getElementById('rc-base').setAttribute('width',X(10)-L);
+  document.getElementById('rc-basel').setAttribute('x',X(10)+12);
+  function draw(){
+    var days=+lt.value, m=+mg.value/100;
+    document.getElementById('rc-lt-v').textContent=days;
+    document.getElementById('rc-mg-v').textContent=(m*100).toFixed(1).replace('.0','')+'%';
+    var inv=15*days, ic=FIXED+inv, nopat=REV*m, roic=nopat/ic*100, ep=nopat-0.10*ic;
+    var bar=document.getElementById('rc-bar');
+    bar.setAttribute('width',Math.max(2,X(Math.min(roic,XMAX))-L));
+    var lab=document.getElementById('rc-barl');
+    lab.setAttribute('x',X(Math.min(roic,XMAX))+12); lab.textContent=roic.toFixed(1)+'%';
+    var cells=[['Inventory',inv.toFixed(0)],['Invested capital',ic.toFixed(0)],['NOPAT',nopat.toFixed(0)],
+               ['ROIC',roic.toFixed(1)+'%'],['Economic profit',(ep>=0?'+':'')+ep.toFixed(0)]];
+    document.getElementById('rc-nums').innerHTML=cells.map(function(c,i){
+      return '<div'+(i>2?' class="hi"':'')+'><span>'+c[0]+'</span><b>'+c[1]+'</b></div>';}).join('');
+    var msg;
+    if(ep>0.5) msg='Return now exceeds the cost of capital. The business is creating <b>'+ep.toFixed(0)+
+      '</b> of economic profit a year that it was not creating before — none of it from a price rise.';
+    else if(ep<-0.5) msg='Return sits <b>below</b> the cost of capital. The operation is consuming value, however healthy the margin looks on its own.';
+    else msg='Return equals the cost of capital exactly. The accounting profit is real and the economic profit is zero.';
+    document.getElementById('rc-out').innerHTML=msg;
+  }
+  lt.addEventListener('input',draw); mg.addEventListener('input',draw); draw();
+})();
+</script>
+
+    <p>The two inputs are the morning's two mechanisms, and the figure is worth operating at least once with a deliberately unhelpful setting: raise the margin as far as it goes while leaving lead time at thirty days, and watch how much of the improvement the denominator eats. That is the shape of a cost-reduction programme that never touched flow.</p>
 
     <h3>Both pillars move both edges of value</h3>
     <table>
@@ -594,7 +1009,7 @@ footer b{color:var(--gold-soft)}
 <div class="partbar"><div class="wrap"><div class="n">EIGHT</div><h2>The third equation</h2></div></div>
 <section>
   <div class="wrap">
-    <p>Operations strategy is usually taught as a list of practices. Van Mieghem and Allon organise it instead around four linked elements — value, capabilities, assets and processes — and the relationship between them is where this session arrives.</p>
+    <p>The identity was stated in Part Two, before there was anything to test it against. Everything since has been that test: the waste, the queues, the variation, the system of complementarities, the method for improving it. This part puts the three terms back together.</p>
 
     <div class="eq">
       <div class="f">V = C × ( A + P )</div>
@@ -847,6 +1262,33 @@ footer b{color:var(--gold-soft)}
     <p>The learning curve — unit cost falling with cumulative output — has been documented since Wright's 1936 study of aircraft manufacturing. But the later literature found it is not a uniform law. Argote and Epple (1990) showed that organisations vary widely in how fast they learn, and attributed the variation to organisational forgetting, personnel turnover, knowledge transfer from elsewhere, and scale.</p>
     <p>That finding moves the question. If accumulated experience does not determine learning speed, and organisations with comparable experience learn at different rates, the explanation lies in <strong>what organisations do with the experience</strong> — the deliberate component, not the automatic one.</p>
 
+<figure class="fig">
+<svg viewBox="0 0 1160 400" role="img" aria-label="Stock and flow diagram of capability, with a valve on the inflow and an outflow of turnover and disuse">
+<rect width="1160" height="400" fill="#FFFFFF"/>
+<rect x="420" y="120" width="320" height="140" rx="8" fill="#0A2342"/>
+<text x="580.0" y="170.0" font-family="'Fraunces',serif" font-size="36" fill="#FFFFFF" text-anchor="middle" font-weight="600">C</text>
+<text x="580.0" y="200.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#C6D4E4" text-anchor="middle" font-weight="400">the capability to improve</text>
+<text x="580.0" y="224.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#F2DFB4" text-anchor="middle" font-weight="700">a stock, not a state</text>
+<path d="M 60 170 L 400 170 L 400 210 L 60 210 Z" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<path d="M 360 178 L 392 190 L 360 202 Z" fill="#2A5D9F"/>
+<text x="70.0" y="150.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">INFLOW</text>
+<text x="70.0" y="196.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">improvement that produces know-why and know-how together</text>
+<circle cx="300" cy="190" r="26" fill="#FFFFFF" stroke="#B8820F" stroke-width="3"/>
+<path d="M 286 178 L 314 202 M 286 202 L 314 178" stroke="#B8820F" stroke-width="3"/>
+<text x="300.0" y="254.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#7E5B0C" text-anchor="middle" font-weight="700">the valve</text>
+<text x="300.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">psychological safety</text>
+<text x="300.0" y="294.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">and credible promises</text>
+<text x="300.0" y="316.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">close it and the flow stops</text>
+<path d="M 760 170 L 1100 170 L 1100 210 L 760 210 Z" fill="#EAF0F6" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 1062 178 L 1094 190 L 1062 202 Z" fill="#56687C"/>
+<text x="770.0" y="150.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">OUTFLOW</text>
+<text x="770.0" y="196.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">turnover, disuse, reorganisation</text>
+<rect x="60" y="334" width="1040" height="48" rx="6" fill="#EAF0F6" stroke="#A9BACB"/>
+<text x="80.0" y="364.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">A stock adjusts slowly and drains quietly. An organisation that was good at improving five years ago may no longer be, and nothing on its balance sheet will say so.</text>
+<text x="580.0" y="100.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#56687C" text-anchor="middle" font-weight="400">Volume of improvement activity is not the inflow. Only the part that produces both kinds of knowledge is.</text>
+</svg>
+<figcaption><b>Figure 8.</b> Capability as a stock with a regulated inflow and an unregulated outflow. The valve is the part most improvement programmes leave out: where surfacing a problem is costly, the measured performance improves and the real performance does not.</figcaption>
+</figure>
     <h3>The finding worth remembering</h3>
     <p>Two studies of the same factory, a decade apart, give the sharpest decomposition available. Mukherjee and colleagues (1998), across 62 quality improvement projects, separated <strong>conceptual learning</strong> — understanding the cause-and-effect relationships, the <em>know-why</em> — from <strong>operational learning</strong> — validating the actions that produce the result, the <em>know-how</em>.</p>
     <p>Lapré and colleagues (2000) then linked the learning activity of those projects to the factory's actual waste rate. The result is uncomfortable and precise:</p>
@@ -854,6 +1296,36 @@ footer b{color:var(--gold-soft)}
       <span class="lbl">Lapré et al. (2000)</span>
       <strong>Only about a quarter of the improvement projects accelerated the reduction of waste</strong> — and they were the ones that produced know-why and know-how <em>simultaneously</em>. The remainder either slowed the reduction down or had no measurable effect at all.
     </div>
+<figure class="fig">
+<svg viewBox="0 0 980 620" role="img" aria-label="Two-by-two matrix of conceptual learning against operational learning with four project types">
+<rect width="980" height="620" fill="#FFFFFF"/>
+<rect x="120" y="40" width="810" height="430" fill="#EAF0F6" opacity=".45"/>
+<rect x="525.0" y="40" width="405.0" height="215.0" fill="#F6E9CB"/>
+<line x1="525.0" y1="40" x2="525.0" y2="470" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="255.0" x2="930" y2="255.0" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="470" x2="930" y2="470" stroke="#0A2342" stroke-width="2"/>
+<line x1="120" y1="40" x2="120" y2="470" stroke="#0A2342" stroke-width="2"/>
+<text x="148.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Firefighting</text>
+<text x="148.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">neither why nor how</text>
+<text x="148.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Artisan skills</text>
+<text x="553.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">how, without why</text>
+<text x="553.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="148.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Nonvalidated theories</text>
+<text x="148.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why, never tested in the work</text>
+<text x="148.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Operationally validated theories</text>
+<text x="553.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why and how, acquired together</text>
+<text x="553.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="start" font-weight="700">The only group that accelerated</text>
+<text x="525.0" y="508.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Operational learning  →  know-how: what actually works here</text>
+<text transform="translate(70,255.0) rotate(-90)" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Conceptual learning  →  know-why: the mechanism</text>
+<rect x="120" y="532" width="810" height="96" rx="6" fill="#0A2342"/>
+<text x="144.0" y="564.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#F2DFB4" text-anchor="start" font-weight="700" letter-spacing="1.8">THE FINDING</text>
+<text x="144.0" y="594.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">Across 62 improvement projects in one factory, only about a quarter accelerated waste reduction —</text>
+<text x="144.0" y="616.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">and they were the ones in the top-right cell. The rest slowed it, or did nothing at all.</text>
+</svg>
+<figcaption><b>Figure 9.</b> The classification behind the finding, after Lapré, Mukherjee and Van Wassenhove (2000). Projects were sorted by whether they produced an understanding of the mechanism and whether that understanding was validated in the work. Only the cell that produced both accelerated the reduction of waste.</figcaption>
+</figure>
     <p>A project that produces know-how without know-why leaves the organisation able to repeat an action it does not understand. A project that produces know-why without know-how leaves it with a diagnosis nobody implemented. Neither accumulates anything. This is the empirical core of the DMAIC argument in Part Seven, and it explains why the Analyze phase is not a formality.</p>
     <p>Pisano (1994) adds a boundary condition from 23 pharmaceutical process-development projects: where the underlying science is deep and well understood, learning <em>before</em> execution — laboratory experimentation — speeds development. Where it is not, as in biotechnology, it does not. The effective form of learning depends on how much is already known about the process.</p>
 
