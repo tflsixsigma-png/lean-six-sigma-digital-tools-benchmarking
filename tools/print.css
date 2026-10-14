@@ -1,0 +1,86 @@
+@font-face{font-family:'Fraunces';src:url('FONTDIR/fraunces-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'Fraunces';src:url('FONTDIR/fraunces-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block}
+@font-face{font-family:'Fraunces';src:url('FONTDIR/fraunces-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:block}
+@font-face{font-family:'Source Sans 3';src:url('FONTDIR/source-sans-3-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'Source Sans 3';src:url('FONTDIR/source-sans-3-latin-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:block}
+@font-face{font-family:'Source Sans 3';src:url('FONTDIR/source-sans-3-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block}
+@font-face{font-family:'Source Sans 3';src:url('FONTDIR/source-sans-3-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'JetBrains Mono';src:url('FONTDIR/jetbrains-mono-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'JetBrains Mono';src:url('FONTDIR/jetbrains-mono-latin-700-normal.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+
+@page{size:A4;margin:17mm 0 20mm 0}
+
+html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-size:10.6pt;line-height:1.58}
+.wrap{max-width:none;padding:0 20mm}
+p{max-width:none}
+section{padding:14pt 0 8pt}
+
+/* ---------- cover ---------- */
+.ap-cover{
+  background:var(--ink);color:#F3F7FB;height:257mm;
+  display:flex;flex-direction:column;justify-content:space-between;
+  break-after:page;padding:28mm 20mm 20mm;box-sizing:border-box;
+  border-bottom:7px solid var(--gold)
+}
+.ap-cover .ap-top .eyebrow{font-size:9pt;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:12mm}
+.ap-cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:34pt;line-height:1.1;max-width:16ch;margin:0 0 7mm;color:#fff}
+.ap-cover .ap-sub{font-size:13pt;color:#C6D4E4;max-width:46ch;line-height:1.5}
+.ap-cover .ap-rule{width:52mm;height:3px;background:var(--gold);margin:9mm 0}
+.ap-cover .ap-meta{font-size:10.5pt;color:#9FB6CE;line-height:1.85}
+.ap-cover .ap-meta b{color:var(--gold-soft);font-weight:600}
+.ap-cover .ap-foot{font-size:9.5pt;color:#7E96B0;border-top:1px solid rgba(255,255,255,.18);padding-top:5mm}
+
+/* ---------- contents ---------- */
+.ap-toc{break-after:page;padding:0 20mm}
+.ap-toc h2{font-family:'Fraunces',serif;color:var(--navy);font-size:22pt;font-weight:600;margin:0 0 3mm}
+.ap-toc .ap-kick{font-size:10pt;color:#56687C;margin-bottom:8mm;max-width:62ch}
+.ap-toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.ap-toc li{display:flex;align-items:baseline;gap:4mm;padding:3.1mm 0;border-bottom:1px dotted #B9C7D7;font-size:11.5pt}
+.ap-toc li .ap-n{font-family:'JetBrains Mono',monospace;font-size:9pt;font-weight:700;color:var(--gold);min-width:16mm;letter-spacing:.06em}
+.ap-toc li .ap-t{flex:1;color:var(--navy);font-family:'Fraunces',serif;font-weight:600}
+.ap-toc li .ap-p{font-family:'JetBrains Mono',monospace;font-size:10pt;color:#44566B;min-width:9mm;text-align:right}
+.ap-toc .ap-note{margin-top:9mm;font-size:10pt;color:#44566B;border-left:4px solid var(--gold);background:#FEF8EA;padding:4mm 6mm}
+
+/* ---------- flow ---------- */
+.partbar{break-before:page;break-after:avoid;padding:9pt 0}
+.partbar .wrap{padding:0 20mm}
+h2,h3,h4{break-after:avoid}
+h3{margin-top:15pt}
+table{break-inside:auto;font-size:9.4pt}
+tr{break-inside:avoid}
+thead{display:table-header-group}
+th,td{padding:5pt 8pt}
+.note,.bridge,.eq,.puzzle,.card,.activity .ah,.chainkey,.sixchain,.house,.grid2,.grid3,figure,svg{break-inside:avoid}
+.eq{padding:15pt 14pt;margin:14pt 0}
+.eq .f{font-size:19pt}
+.eq .c{font-size:9pt}
+.note,.bridge{padding:9pt 12pt;margin:12pt 0}
+ul.tight li,ol.tight li{break-inside:avoid}
+.refs li{font-size:9.6pt}
+a{color:inherit;text-decoration:none}
+
+/* ---------- worksheet fields for writing on ---------- */
+.ap-write{border:1.2px solid #8FA3B8;border-radius:4px;background:#fff;min-height:9mm;margin-top:2mm}
+.ap-write.ap-tall{min-height:20mm}
+.ap-opts{margin:2mm 0 0;padding:0;list-style:none}
+.ap-opts li{display:flex;align-items:flex-start;gap:3mm;font-size:9.8pt;padding:1.1mm 0;color:#1B2B3C}
+.ap-opts li .ap-box{flex:0 0 auto;width:3.4mm;height:3.4mm;border:1.2px solid #56687C;border-radius:1px;margin-top:1.1mm}
+.exportbar,.savenote,.readout,.ap-hide{display:none !important}
+input,select,textarea{display:none !important}
+.field{padding:7pt 0}
+.field label{font-size:10.6pt}
+.field .hint{font-size:9.4pt}
+.gate{font-size:9.6pt}
+
+/* containers that legitimately span pages must not draw a running border */
+.block{border:none !important;background:#F4F7FA;border-radius:0;padding:9pt 12pt;margin:10pt 0}
+.worksheet{border:none !important;background:#F4F7FA;border-radius:0;padding:9pt 12pt}
+.activity{border:none !important}
+.activity .ab{padding:0}
+.gate{display:none !important}
+.ap-printnote{background:#EAF1F8;border-left:5px solid var(--navy);padding:8pt 12pt;margin:12pt 0;font-size:9.8pt}
+.ap-cover{height:280mm;margin:0;border-bottom:none}
+.inst{border:none !important;border-radius:0;margin:14pt 0}
+.inst .ib{padding:0}
+.inst .ih{border-bottom:3px solid var(--gold)}

@@ -13,6 +13,8 @@ Reading notes for Module 3, Session 4 of the **International Certificate in Proj
 
 Open `index.html` for the landing page, or browse the published site once GitHub Pages is enabled.
 
+Printable versions live in [`pdf/`](pdf) — cover, contents with page numbers, running footers, and the worksheets laid out for writing on by hand. They are built from the same HTML by `tools/driver.py`, which drives headless Chromium through `tools/build.mjs` in two passes: the first to discover where each part lands, the second to print the contents with real page numbers. Fonts are embedded from `@fontsource` packages, so the build needs no network access to Google Fonts.
+
 Both group activities are fillable in the page: the canvases are forms, answers persist in the browser as a group types, and a button exports the completed canvas as Markdown for the Execution Optimization Challenge. Everything runs client-side; nothing is transmitted.
 
 ## Further reading
