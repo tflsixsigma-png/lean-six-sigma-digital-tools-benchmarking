@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Tool Appraisal — VCAP fit and philosophical debt</title>
+<title>Digital Tool Appraisal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -154,7 +154,7 @@ footer b{color:var(--gold-soft)}
       <tr><td class="k">Epistemology</td><td>What is it allowed to count as knowing — and does it know when it does not know?</td><td>It returns an answer with high confidence in conditions that no longer resemble its training data</td></tr>
       <tr><td class="k">Ontology</td><td>What is it able to see — and which variable that matters does not exist for it?</td><td>A supplier represented by price and lead time alone, in a decision that turned on geopolitics</td></tr>
     </table>
-    <p>After Schrage and Kiron. An assumption nobody wrote down is one nobody can audit or improve — which is why the audit in section 4 asks not whether the system is good, but whether the assumption was <em>articulated</em>.</p>
+    <p>The three questions are Schrage and Kiron's (<em>Philosophy Eats AI</em>, MIT Sloan Management Review, 2025); "philosophical debt", the name this course gives to what accumulates when they go unasked, is from <em>Excelência Operacional</em>, Chapter 5. An assumption nobody wrote down is one nobody can audit or improve — which is why section 4 asks not whether the system is good, but whether the assumption was <em>articulated</em>.</p>
   </div>
 </section>
 
@@ -233,13 +233,13 @@ footer b{color:var(--gold-soft)}
             </select>
           </div>
           <div class="field">
-            <label for="t-truth">Where will each fact live afterwards?</label>
-            <div class="hint">Every type of fact — a schedule date, a risk, a cost figure — needs exactly one authoritative home, with everything else reading from it. The moment the same fact lives in two systems, somebody reconciles them forever and the dashboards become negotiations.</div>
-            <select id="t-truth" data-section="VCAP triage" data-label="Source of truth">
+            <label for="t-truth">Does it become the one place this information is kept — or one more copy?</label>
+            <div class="hint">Take the main thing the tool records: a schedule date, a risk, a cost, a customer. Afterwards, is there a single place to look for it, with every other system reading from there? If the same information also keeps living in a spreadsheet or in the old system, somebody reconciles the copies forever, and the dashboards become negotiations.</div>
+            <select id="t-truth" data-section="VCAP triage" data-label="Single source, or one more copy">
               <option value="">Select one</option>
-              <option>It replaces existing sources — one authoritative home afterwards</option>
-              <option value="flag-truth">It adds another place where the same fact lives</option>
-              <option>It consumes from an existing authoritative source</option>
+              <option>The one place — it replaces the current sources, and the others are switched off</option>
+              <option value="flag-truth">One more copy — the same information keeps living elsewhere too</option>
+              <option>Neither — it reads from an existing system and keeps no copy of its own</option>
             </select>
           </div>
           <div class="field">
@@ -410,9 +410,9 @@ footer b{color:var(--gold-soft)}
           </div>
           <div class="block">
             <div class="field">
-              <label for="p-missing">Name one variable that matters to this decision and that the system cannot see.</label>
-              <div class="hint">Geopolitical exposure, a relationship, a regulatory change, a supplier's own fragility. If nothing comes to mind in sixty seconds, that is worth noting as an answer.</div>
-              <textarea id="p-missing" data-section="Ontology" data-label="A variable it cannot see"></textarea>
+              <label for="p-missing">What has the system been given as a stand-in for the thing you actually care about — and what does the stand-in leave out?</label>
+              <div class="hint">Schrage and Kiron's example: a company wants loyal customers and hands the system recency, frequency, spend and NPS. Those are proxies, not loyalty, and the system optimises the proxies. Write the thing you care about, the measure the system was given instead, and one thing that matters to the decision which that measure cannot see — a relationship, a regulatory change, a supplier's own fragility. The map is not the territory.</div>
+              <textarea id="p-missing" data-section="Ontology" data-label="What you care about, the stand-in it was given, and what the stand-in misses"></textarea>
             </div>
             <div class="field">
               <label for="p-review">Who reviews what the system represents, and when?</label>
@@ -430,15 +430,23 @@ footer b{color:var(--gold-soft)}
         <h4>5 · The verdict</h4>
         <div class="block">
           <div class="field">
-            <label for="t-debt">Where is the largest debt?</label>
-            <select id="t-debt" data-section="The verdict" data-label="Largest debt">
-              <option value="">Select one</option>
-              <option>Technical — the artefact itself</option>
-              <option>Philosophical — unarticulated purpose, knowledge or representation</option>
-              <option>Adoption — it works and people do not use it</option>
-              <option>Capability — we would not be able to improve it after buying it</option>
-              <option>None that we can see</option>
-            </select>
+            <label for="t-debt">Rank the debts, largest first</label>
+            <div class="hint">More than one is usually present. Put the one that would do most damage if left alone at the top; leave the lower ranks blank if only one or two apply. <em>Technical</em> is a shortcut in the artefact itself. <em>Philosophical</em> is purpose, knowledge or representation that nobody wrote down. <em>Adoption</em> is a tool that works and is not used. <em>Capability</em> is a tool the organisation could not improve after buying it.</div>
+            <div class="grid3">
+              <select id="t-debt" data-section="The verdict" data-label="Largest debt">
+                <option value="">1st —</option>
+                <option>Technical</option><option>Philosophical</option><option>Adoption</option><option>Capability</option>
+                <option>None that we can see</option>
+              </select>
+              <select id="t-debt2" data-section="The verdict" data-label="Second debt">
+                <option value="">2nd —</option>
+                <option>Technical</option><option>Philosophical</option><option>Adoption</option><option>Capability</option>
+              </select>
+              <select id="t-debt3" data-section="The verdict" data-label="Third debt">
+                <option value="">3rd —</option>
+                <option>Technical</option><option>Philosophical</option><option>Adoption</option><option>Capability</option>
+              </select>
+            </div>
           </div>
           <div class="field">
             <label for="t-decision">The decision</label>
@@ -457,15 +465,15 @@ footer b{color:var(--gold-soft)}
         </div>
 
         <div class="after">
-          <b>After the session</b>
-          <span>Sections 6 and 7 take the appraisal from one tool to the organisation. They are the module's follow-up assignment, and they are better done with a week of thought than with ten minutes of room time.</span>
+          <b>After the session — the benchmarking exercise and the roadmap</b>
+          <span>Section 6 is the benchmarking exercise: one organisation or standard that already does this well, and what it would take to do it here. Section 7 is the six-month roadmap across the organisation's three largest capability gaps. Together they are the module's follow-up assignment, and they are better done with a week of thought than with ten minutes of room time.</span>
         </div>
 
-        <h4>6 · The reference</h4>
-        <p style="font-size:15.5px;color:#4A5B70">Somebody already does this well. The question is not what their number is, but what routine produces it — and what you would have to accumulate before that routine would work here.</p>
+        <h4>6 · Benchmarking — who already does this well, and what it would take to do it here</h4>
+        <p style="font-size:15.5px;color:#4A5B70">This is the benchmarking exercise. Pick one organisation, or one published standard, that does what this tool is meant to achieve better than you do. The question is not what their number is, but what routine produces it — and what you would have to build before that routine would work here.</p>
         <div class="block">
           <div class="field">
-            <label for="b-ref">Who, or what standard?</label>
+            <label for="b-ref">The benchmark — which organisation, or which standard?</label>
             <div class="hint">The most useful reference is often outside your industry. Xerox fixed its warehouse by studying a catalogue retailer, not a competitor.</div>
             <input type="text" id="b-ref" data-section="The reference" data-label="The reference" placeholder="An organisation, or a published standard">
           </div>
@@ -510,23 +518,23 @@ footer b{color:var(--gold-soft)}
         </div>
 
         <h4>7 · Capability gaps and the six-month roadmap</h4>
-        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one on the two axes that decide sequence. <strong>Strategic value</strong>: how much it moves something customers choose you for, or removes a constraint that keeps recurring. <strong>Feasibility</strong>: whether the conditions to build it exist today — the people, the data, and the authority to change the process.</p>
+        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one on the two axes that decide sequence. For each gap, answer three questions. <strong>How much does closing it matter?</strong> High if it moves something customers choose you for, or removes a constraint that keeps recurring; low if it is tidier but changes no result. <strong>Can it be closed with what exists today?</strong> High if the people, the data and the authority to change the process are already in hand; low if one of the three has to be built first. <strong>When would work on it start?</strong> — not finish: a roadmap is sequenced by starts.</p>
         <div class="block">
           <div class="field">
             <label for="r-g1">Gap 1</label>
             <input type="text" id="r-g1" data-section="The roadmap" data-label="Gap 1" placeholder="The capability that is missing, in one line">
           </div>
           <div class="field">
-            <label for="r-v1">Gap 1 — strategic value, feasibility, and when</label>
+            <label for="r-v1">Gap 1 — how much it matters, whether it can be closed now, and when it starts</label>
             <div class="grid3">
-              <select id="r-v1" data-section="The roadmap" data-label="Gap 1 strategic value">
-                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-v1" data-section="The roadmap" data-label="Gap 1 — how much it matters">
+                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-f1" data-section="The roadmap" data-label="Gap 1 feasibility">
-                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-f1" data-section="The roadmap" data-label="Gap 1 — can it be closed now">
+                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-h1" data-section="The roadmap" data-label="Gap 1 horizon">
-                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              <select id="r-h1" data-section="The roadmap" data-label="Gap 1 — when it starts">
+                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
               </select>
             </div>
           </div>
@@ -535,16 +543,16 @@ footer b{color:var(--gold-soft)}
             <input type="text" id="r-g2" data-section="The roadmap" data-label="Gap 2" placeholder="The capability that is missing, in one line">
           </div>
           <div class="field">
-            <label for="r-v2">Gap 2 — strategic value, feasibility, and when</label>
+            <label for="r-v2">Gap 2 — how much it matters, whether it can be closed now, and when it starts</label>
             <div class="grid3">
-              <select id="r-v2" data-section="The roadmap" data-label="Gap 2 strategic value">
-                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-v2" data-section="The roadmap" data-label="Gap 2 — how much it matters">
+                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-f2" data-section="The roadmap" data-label="Gap 2 feasibility">
-                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-f2" data-section="The roadmap" data-label="Gap 2 — can it be closed now">
+                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-h2" data-section="The roadmap" data-label="Gap 2 horizon">
-                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              <select id="r-h2" data-section="The roadmap" data-label="Gap 2 — when it starts">
+                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
               </select>
             </div>
           </div>
@@ -553,16 +561,16 @@ footer b{color:var(--gold-soft)}
             <input type="text" id="r-g3" data-section="The roadmap" data-label="Gap 3" placeholder="The capability that is missing, in one line">
           </div>
           <div class="field">
-            <label for="r-v3">Gap 3 — strategic value, feasibility, and when</label>
+            <label for="r-v3">Gap 3 — how much it matters, whether it can be closed now, and when it starts</label>
             <div class="grid3">
-              <select id="r-v3" data-section="The roadmap" data-label="Gap 3 strategic value">
-                <option value="">Strategic value —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-v3" data-section="The roadmap" data-label="Gap 3 — how much it matters">
+                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-f3" data-section="The roadmap" data-label="Gap 3 feasibility">
-                <option value="">Feasibility —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
+              <select id="r-f3" data-section="The roadmap" data-label="Gap 3 — can it be closed now">
+                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
               </select>
-              <select id="r-h3" data-section="The roadmap" data-label="Gap 3 horizon">
-                <option value="">Horizon —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
+              <select id="r-h3" data-section="The roadmap" data-label="Gap 3 — when it starts">
+                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
               </select>
             </div>
           </div>
