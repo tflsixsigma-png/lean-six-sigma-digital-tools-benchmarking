@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session Programme — Methods, Tools and Operational Efficiency, Session 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#04121F;--gold:#B8820F;--gold-soft:#F2DFB4;--paper:#FBFAF7;--card:#FFFFFF;--body:#101B25;--line:#B5C3D3;--muted:#44566B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.6;font-size:17px}
+.wrap{max-width:880px;margin:0 auto;padding:0 28px}
+.cover{background:var(--ink);color:#F3F7FB;padding:56px 0 44px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:14px}
+h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4.4vw,40px);line-height:1.12;max-width:22ch;margin-bottom:12px}
+.sub{font-size:18px;color:#C6D4E4;max-width:62ch}
+.meta{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px 22px;font-size:15px;color:#C6D4E4}
+.meta b{display:block;color:var(--gold-soft);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+.topnav{font-size:14px;color:#A3B7CD;margin-top:26px}
+.topnav a{color:#F3F7FB;text-decoration:none;border-bottom:1px solid var(--gold);margin-right:14px}
+section{padding:40px 0 10px}
+h2{font-family:'Fraunces',serif;color:var(--navy);font-size:25px;font-weight:600;margin-bottom:14px;padding-top:6px}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:19px;font-weight:600;margin:22px 0 8px}
+p{margin-bottom:13px;max-width:74ch}
+ul,ol{margin:0 0 14px 22px;max-width:74ch}
+li{margin-bottom:6px}
+.prof{display:flex;align-items:flex-start;gap:22px;margin:6px 0 18px}
+.prof img{width:112px;height:112px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);flex:none}
+.prof .who{font-family:'Fraunces',serif;font-size:21px;color:var(--navy);font-weight:600;margin:4px 0 2px}
+.prof .role{font-size:15px;color:var(--muted);margin-bottom:8px}
+.prof .links a{color:var(--gold);font-weight:700;text-decoration:none;margin-right:14px}
+.prof .links a:hover{text-decoration:underline}
+table{width:100%;border-collapse:collapse;margin:10px 0 22px;font-size:15.5px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7E5B0C;background:#FEF8EA}
+td.t{font-family:'JetBrains Mono',monospace;font-size:13.5px;white-space:nowrap;color:var(--navy);font-weight:700}
+td.m{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);white-space:nowrap;text-align:right}
+tr.brk td{background:#F4F7FA;color:var(--muted);font-style:italic}
+tr.tot td{border-top:2px solid var(--navy);border-bottom:none;font-weight:700}
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:16px 20px;margin:18px 0;font-size:16px;max-width:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:12px 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-left:7px solid var(--gold);border-radius:10px;padding:20px 22px}
+.card h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin-bottom:8px}
+.card p,.card li{font-size:15.5px}
+.card ol{margin-left:20px}
+.lvl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:10px 0 18px;font-size:15.5px;max-width:none}
+.lvl b{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7E5B0C;padding-top:3px}
+.refs{font-size:15px;list-style:none;margin-left:0}
+.refs li{padding-left:1.4em;text-indent:-1.4em;margin-bottom:7px}
+footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px;margin-top:40px}
+footer b{color:var(--gold-soft)}
+a{color:var(--navy)}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}.lvl{grid-template-columns:1fr}.prof{flex-direction:column}}
+@media print{
+  body{font-size:10.6pt;background:#fff}
+  .wrap{max-width:none;padding:0 20mm}
+  .cover{padding:16mm 0 12mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .topnav{display:none}
+  section{padding:8mm 0 2mm}
+  h2{break-after:avoid;font-size:17pt}
+  h3{break-after:avoid}
+  .card,.note,.prof,tr{break-inside:avoid}
+  table{break-inside:auto}
+  thead{display:table-header-group}
+  .pb{break-before:page}
+  footer{display:none}
+}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy</div>
+    <h1>Session Programme — Methods, Tools and Operational Efficiency</h1>
+    <p class="sub">International Certificate in Project Management and Organizational Performance. Module 3, Session 4: <em>Lean Six Sigma &amp; Continuous Improvement</em> and <em>Digital Tools &amp; Benchmarking</em>.</p>
+    <div class="meta">
+      <div><b>Date</b>Saturday, 17 October 2026</div>
+      <div><b>Times</b>09:00–12:00 · 14:00–17:00 (Paris)</div>
+      <div><b>Format</b>Online, synchronous</div>
+      <div><b>Instructor</b>Prof. Dr. Thiago Lima</div>
+      <div><b>Module coordinator</b>Prof. Raphael Albergarias</div>
+      <div><b>Workload</b>6 contact hours + 3 h structured activity</div>
+    </div>
+    <div class="topnav">
+      <a href="#instructor">Instructor</a><a href="#objectives">Objectives</a><a href="#method">Method</a><a href="#schedule">Schedule</a><a href="#activities">Activities</a><a href="#assessment">Assessment</a><a href="#materials">Materials</a>
+    </div>
+  </div>
+</header>
+
+<section id="instructor">
+  <div class="wrap">
+    <h2>Instructor</h2>
+    <div class="prof">
+      <img src="img/thiago-lima.jpg" alt="Photo of Prof. Dr. Thiago Lima" width="112" height="112">
+      <div>
+        <p class="who">Prof. Dr. Thiago Fernandes Lima</p>
+        <p class="role">Visiting faculty, IAE Paris – Sorbonne Business School · Postdoctoral researcher, COPPEAD/UFRJ · Head of the Centre for Social Sciences, Brazilian Naval Academy</p>
+        <p class="links"><a href="https://www.linkedin.com/in/thiago-lima-phd-8b69012a/" target="_blank" rel="noopener">LinkedIn</a><a href="http://lattes.cnpq.br/0204895344524909" target="_blank" rel="noopener">Lattes CV</a><a href="mailto:thiago.lima@coppead.ufrj.br">thiago.lima@coppead.ufrj.br</a></p>
+      </div>
+    </div>
+    <p>Thiago Lima works at the meeting point of academic rigour and operational practice. He holds a doctorate in management from the Université de Bordeaux and a master's degree from National University (California), revalidated by UFRJ, with an MBA from FGV and further education at Harvard, Cambridge and MIT. He is a postdoctoral researcher at COPPEAD/UFRJ, where he studies artificial intelligence applied to organisational management, and heads the Centre for Social Sciences at the Brazilian Naval Academy, the oldest higher-education institution in Brazil.</p>
+    <p>His 31-year career in the Brazilian Navy — in Brazil, the United States and Europe — included leading strategic projects in logistics, procurement and operations, among them the automation of distribution centres and the implementation of complex asset-management systems. He directed the organisation responsible for the Navy's fuel supply chain and won the GS1 Brazil Automation Award 2021 for the modernisation of the Navy's uniform distribution centre.</p>
+    <p>He has published in international journals including IEEE and Emerald titles and the <em>Journal of Business &amp; Industrial Marketing</em>, where he has served as ad hoc reviewer since 2025, and holds six software registrations at the Brazilian patent office (INPI, 2025–2026) — among them a bullwhip-effect simulator, a Lean Kata application tool, a simulator of the effect of operations management on ROIC, and the Scientific Writing Laboratory (LEC). He is the author of <em>Excelência Operacional: da Estratégia à Execução</em> (Atena Editora, 2026), the source of the VCAP framework used throughout this session.</p>
+    <p>In executive education he has taught for more than thirteen years as visiting professor at IAE Bordeaux, IAE Paris – Sorbonne Business School, IBMEC, COPPEAD and Alumni COPPEAD, where he coordinates the Procurement and Supply Chain programme, and has delivered corporate training for Bradesco, Caixa Econômica Federal, Mapfre, Vibra, Metrô Rio, Komatsu and A.C. Camargo Cancer Center, among others. Certifications include the Harvard Higher Education Teaching Certificate, Lean Six Sigma Black Belt (QSP and US DoD), IFPSM Advanced Procurement Professional and IPMA-D, with specialisations in integrated logistic support at DCNS (France), Cranfield University (UK) and the Naval Postgraduate School (USA).</p>
+  </div>
+</section>
+
+<section id="objectives">
+  <div class="wrap">
+    <h2>Objectives</h2>
+    <p>The session closes Module 3 — <em>Methods, Tools and Operational Efficiency</em> — by asking where operational efficiency actually comes from. One argument runs across the day: efficiency is a consequence of strategic choice and of flow, not of utilisation, and the capability that produces it cannot be bought. The morning builds the argument from operations; the afternoon tests it against the two things organisations buy when they want capability and cannot build it — technology, and other people's practices.</p>
+    <p>By the end of the day participants should be able to:</p>
+    <div class="lvl">
+      <b>Understand</b><span>Explain value from the customer backwards (V = C × (A + P)), the five Lean principles, the eight wastes, the efficiency paradox and the logic of Six Sigma as variation reduction.</span>
+      <b>Diagnose</b><span>Map a value stream (process time, lead time, %C&amp;A), read a control chart for common and special cause, and place a digital tool on the six-condition chain from a working model to an organisational result.</span>
+      <b>Apply</b><span>Run a DMAIC improvement cycle, use Little's Law to size portfolio lead time, trace a lead-time reduction to ROIC, and conduct a benchmarking study with Camp's method.</span>
+      <b>Judge</b><span>Decide whether a digital investment changes what the organisation owns or what it is able to do; audit an AI system for philosophical debt; and choose which capability gaps to close first, and in what order, under Cynefin and Kata.</span>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>Morning — Lean Six Sigma &amp; Continuous Improvement</h4>
+        <p>Efficiency, waste reduction and performance optimisation. Examinable concepts:</p>
+        <ol>
+          <li>VCAP — V = C × (A + P) — and the value stick</li>
+          <li>The five Lean principles and the eight wastes</li>
+          <li>Value stream mapping: process time, lead time, %C&amp;A</li>
+          <li>The efficiency paradox: resource vs flow efficiency</li>
+          <li>Process capability (Cp/Cpk) and common vs special cause</li>
+          <li>DMAIC as the method for conducting improvement</li>
+          <li>Little's Law and the effect of lead time on ROIC</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h4>Afternoon — Digital Tools &amp; Benchmarking</h4>
+        <p>Integration of digital platforms and international best practice. Examinable concepts:</p>
+        <ol>
+          <li>What a digital investment buys: ownership vs capability</li>
+          <li>Philosophy eats AI — teleology, epistemology, ontology — and philosophical debt</li>
+          <li>The six-condition chain from a working model to net value</li>
+          <li>Benchmarking method (Camp) and comparator types</li>
+          <li>Why best practice resists transfer: stickiness and causal ambiguity</li>
+          <li>Cynefin and Toyota Kata as the transformation vector</li>
+          <li>Operational Excellence = Design(VCAP) × Culture</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <h2>Method</h2>
+    <p>Each half-day combines plenary exposition with short applied exercises and one structured group activity, so that the concepts are used on the participants' own organisations within the same session. The theory is introduced deductively and immediately tested inductively against examples the participants bring.</p>
+    <p><strong>No preparation is required.</strong> The reading notes for both sessions are delivered with the class, carry every definition, figure and source, and are written to stand on their own — they remain the primary reference for the module assessment. Participants are asked only to have in mind one recurring process in their organisation that takes longer than it should, two rough figures (projects in flight and projects closed in the last twelve months), and one digital tool they are evaluating or have already bought.</p>
+    <h3>Dynamics of each half-day</h3>
+    <table>
+      <thead><tr><th>Block</th><th>Purpose</th><th style="text-align:right">Share</th></tr></thead>
+      <tbody>
+        <tr><td>Plenary</td><td>Concepts, figures and worked examples, with the simulators run live</td><td class="m">≈ 55 %</td></tr>
+        <tr><td>Group work</td><td>One structured activity on a real case from a participant's organisation</td><td class="m">≈ 20 %</td></tr>
+        <tr><td>Readouts and closing</td><td>Groups present; the argument of the half-day is restated against their findings</td><td class="m">≈ 15 %</td></tr>
+        <tr><td>Break</td><td></td><td class="m">≈ 10 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="wrap">
+    <h2>Schedule</h2>
+    <h3>Morning · Lean Six Sigma &amp; Continuous Improvement · 09:00–12:00</h3>
+    <table>
+      <thead><tr><th>Time</th><th>Block</th><th>Reading notes</th><th style="text-align:right">Min</th></tr></thead>
+      <tbody>
+        <tr><td class="t">09:00–09:15</td><td>Opening — the puzzle: a team at 95 % utilisation that delivers late</td><td>Part One</td><td class="m">15</td></tr>
+        <tr><td class="t">09:15–09:50</td><td>Value from the customer backwards: VCAP, the value stick, order winners and qualifiers, the five principles and the anatomy of waste</td><td>Parts Two–Three</td><td class="m">35</td></tr>
+        <tr><td class="t">09:50–10:25</td><td>Value stream mapping and the efficiency paradox; process capability, control charts and the Six Sigma logic</td><td>Part Four</td><td class="m">35</td></tr>
+        <tr class="brk"><td class="t">10:25–10:40</td><td>Break</td><td></td><td class="m">15</td></tr>
+        <tr><td class="t">10:40–11:10</td><td>The Toyota Production System as a system; Lean in the language of capital: Little's Law and the ROIC tree (simulators)</td><td>Parts Five–Six</td><td class="m">30</td></tr>
+        <tr><td class="t">11:10–11:25</td><td>DMAIC — conducting improvement; the third equation</td><td>Parts Seven–Eight</td><td class="m">15</td></tr>
+        <tr><td class="t">11:25–11:50</td><td>Group activity — the Value Case Canvas on one authorised project</td><td>Part Nine</td><td class="m">25</td></tr>
+        <tr><td class="t">11:50–12:00</td><td>Readouts and conclusion — where the morning ends</td><td>Part Ten</td><td class="m">10</td></tr>
+        <tr class="tot"><td></td><td>Total</td><td></td><td class="m">180</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Afternoon · Digital Tools &amp; Benchmarking · 14:00–17:00</h3>
+    <table>
+      <thead><tr><th>Time</th><th>Block</th><th>Reading notes</th><th style="text-align:right">Min</th></tr></thead>
+      <tbody>
+        <tr><td class="t">14:00–14:10</td><td>Opening — the digital puzzle: the platform that was bought and the capability that was not</td><td>Part One</td><td class="m">10</td></tr>
+        <tr><td class="t">14:10–14:40</td><td>What a digital investment actually buys; the tool landscape (illustrative); the dashboard caution</td><td>Part Two</td><td class="m">30</td></tr>
+        <tr><td class="t">14:40–15:10</td><td>Philosophy eats AI — the three questions; from a working model to an organisational result: the six-condition chain</td><td>Parts Three–Four</td><td class="m">30</td></tr>
+        <tr><td class="t">15:10–15:35</td><td>Benchmarking: Camp's method, comparator types, and why best practice resists transfer</td><td>Part Five</td><td class="m">25</td></tr>
+        <tr class="brk"><td class="t">15:35–15:50</td><td>Break</td><td></td><td class="m">15</td></tr>
+        <tr><td class="t">15:50–16:05</td><td>The transformation vector — Cynefin and Toyota Kata</td><td>Part Six</td><td class="m">15</td></tr>
+        <tr><td class="t">16:05–16:40</td><td>Group activity — the Digital Tool Appraisal on one tool</td><td>Part Seven</td><td class="m">35</td></tr>
+        <tr><td class="t">16:40–17:00</td><td>Readouts and closing — building the multiplier: Operational Excellence = Design(VCAP) × Culture</td><td>Part Eight</td><td class="m">20</td></tr>
+        <tr class="tot"><td></td><td>Total</td><td></td><td class="m">180</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="wrap">
+    <h2>Structured activities</h2>
+    <div class="grid2">
+      <div class="card">
+        <h4>Morning · The Value Case Canvas</h4>
+        <p>In groups, on one authorised project a member knows well enough to defend. Six steps: the project and the competitive priority it affects; the WTP edge — does the customer notice?; a map of the stream it touches (process time, lead time, where the gap sits); the cost edge — the waste removed; what the project actually builds in A, P and C, and how long a competitor would need to replicate it; and the verdict.</p>
+        <p>Fillable online and printed in the reading notes. Twenty-five minutes, then readouts.</p>
+      </div>
+      <div class="card">
+        <h4>Afternoon · The Digital Tool Appraisal</h4>
+        <p>In groups, on one tool a member is evaluating or has already bought. In the room: VCAP triage (does it change what the organisation owns or what it is able to do?), the six-condition maturity chain, and — where the tool contains AI — a philosophical debt audit on the three questions, ending in a ranked verdict. After the session: a benchmarking reference and a six-month roadmap across the three capability gaps.</p>
+        <p>Fillable, exportable instrument, also printed as a booklet. Thirty-five minutes, then readouts.</p>
+      </div>
+    </div>
+    <div class="note"><strong>Execution Optimization Challenge.</strong> Module 3's structured activity (3 h, group) is run by the module coordination. Both canvases produce material of the kind the Challenge draws on — a mapped value stream, a quantified lead-time case, and an appraised digital tool — and groups are encouraged to keep their completed worksheets for it.</div>
+  </div>
+</section>
+
+<section id="assessment">
+  <div class="wrap">
+    <h2>Assessment</h2>
+    <p>Module 3 is assessed through the <strong>Execution Optimization Challenge</strong>, a group assignment, and through the written assessment prepared by the module coordination on the basis of the session materials. The reading notes are therefore the reference text: every examinable concept listed under <em>Objectives</em> is defined, illustrated and sourced in them.</p>
+    <p>Evaluation criteria, as set for the programme:</p>
+    <ul>
+      <li><strong>Conceptual understanding</strong> — the definitions are used correctly and the argument that links them is reproduced, not just the vocabulary.</li>
+      <li><strong>Practical application</strong> — the tools are applied to a real process, project or digital investment, with figures.</li>
+      <li><strong>Strategic coherence</strong> — the improvement proposed is traced to the value term it moves and to the competitive advantage it serves.</li>
+      <li><strong>Clarity of communication</strong> — the case can be read and defended by someone who was not in the room.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="materials">
+  <div class="wrap">
+    <h2>Materials</h2>
+    <p>Everything is on the session platform, in English, and needs no login: <a href="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/">tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking</a></p>
+    <ul>
+      <li><strong>Reading notes — Session 1</strong>, Lean Six Sigma &amp; Continuous Improvement: web page and printed booklet (48 pages, 9 figures, two simulators).</li>
+      <li><strong>Reading notes — Session 2</strong>, Digital Tools &amp; Benchmarking: web page and printed booklet (29 pages).</li>
+      <li><strong>Digital Tool Appraisal</strong>: fillable and exportable instrument, and a printed booklet (17 pages).</li>
+    </ul>
+
+    <h3>Core references</h3>
+    <ul class="refs">
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução — operações, serviços, melhoria contínua e inteligência artificial</em>. Ponta Grossa: Atena Editora. ISBN 978-65-258-4105-2. Open access. (Source of VCAP, of the Kata–Cynefin reading of improvement and of the Philosophy-Eats-AI chapter.)</li>
+      <li>Womack, J. P., &amp; Jones, D. T. (1996). <em>Lean Thinking: Banish Waste and Create Wealth in Your Corporation</em>. Simon &amp; Schuster.</li>
+      <li>Rother, M., &amp; Shook, J. (2003). <em>Learning to See: Value Stream Mapping to Add Value and Eliminate Muda</em>. Lean Enterprise Institute.</li>
+      <li>Modig, N., &amp; Åhlström, P. (2012). <em>This Is Lean: Resolving the Efficiency Paradox</em>. Rheologica.</li>
+      <li>George, M. L. (2002). <em>Lean Six Sigma: Combining Six Sigma Quality with Lean Speed</em>. McGraw-Hill.</li>
+      <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
+      <li>Camp, R. C. (1989). <em>Benchmarking: The Search for Industry Best Practices That Lead to Superior Performance</em>. ASQC Quality Press.</li>
+      <li>Szulanski, G. (1996). Exploring internal stickiness: Impediments to the transfer of best practice within the firm. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
+      <li>Schrage, M., &amp; Kiron, D. (2025). Philosophy eats AI. <em>MIT Sloan Management Review</em>, 16 January 2025.</li>
+      <li>Snowden, D. J., &amp; Boone, M. E. (2007). A leader's framework for decision making. <em>Harvard Business Review</em>, 85(11), 68–76.</li>
+      <li>Rother, M. (2009). <em>Toyota Kata: Managing People for Improvement, Adaptiveness and Superior Results</em>. McGraw-Hill.</li>
+    </ul>
+    <p>The complete source lists — twenty-nine titles for the morning, twenty-seven for the afternoon — close each set of reading notes.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    IAE Paris — Sorbonne Business School · IDGP Academy · Module 3, Session 4 · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+</body>
+</html>
