@@ -15,7 +15,7 @@ os.makedirs(OUT, exist_ok=True)
 JOBS = [
     {
         "src": f"{REPO}/session-1-lean-six-sigma.html",
-        "out": f"{OUT}/Apostila_Sessao_1_Lean_Six_Sigma.pdf",
+        "out": f"{OUT}/Reading_Notes_Session_1_Lean_Six_Sigma.pdf",
         "meta": {
             "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
             "title": "Lean Six Sigma &amp; Continuous Improvement",
@@ -30,7 +30,7 @@ JOBS = [
     },
     {
         "src": f"{REPO}/session-2-digital-tools-benchmarking.html",
-        "out": f"{OUT}/Apostila_Sessao_2_Digital_Tools_e_Benchmarking.pdf",
+        "out": f"{OUT}/Reading_Notes_Session_2_Digital_Tools_and_Benchmarking.pdf",
         "meta": {
             "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
             "title": "Digital Tools &amp; Benchmarking",
@@ -45,7 +45,7 @@ JOBS = [
     },
     {
         "src": f"{REPO}/digital-tool-appraisal.html",
-        "out": f"{OUT}/Instrumento_Digital_Tool_Appraisal.pdf",
+        "out": f"{OUT}/Digital_Tool_Appraisal_Printable.pdf",
         "meta": {
             "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
             "title": "Digital Tool Appraisal",

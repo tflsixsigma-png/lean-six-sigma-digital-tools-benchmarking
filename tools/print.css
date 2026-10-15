@@ -90,3 +90,10 @@ input,select,textarea{display:none !important}
 .simgrid{gap:6pt;margin-top:10pt}
 .simgrid b{font-size:14pt}
 .simgrid span{font-size:8.4pt}
+
+/* keep each question whole: label, hint, options and writing box on one page */
+.field{break-inside:avoid;page-break-inside:avoid}
+.field label,.field .hint{break-after:avoid}
+.pillar{break-inside:avoid;break-after:avoid}
+.ap-opts{break-before:avoid}
+h4{break-after:avoid;page-break-after:avoid}
