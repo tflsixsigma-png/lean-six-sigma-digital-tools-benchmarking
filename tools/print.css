@@ -97,3 +97,8 @@ input,select,textarea{display:none !important}
 .pillar{break-inside:avoid;break-after:avoid}
 .ap-opts{break-before:avoid}
 h4{break-after:avoid;page-break-after:avoid}
+.simpre,.simhow{display:none !important}
+.simcalc{padding:9pt 12pt;margin-bottom:10pt}
+.simcalc .n{font-size:13pt}.simcalc .n.hi{font-size:15pt}.simcalc .t{font-size:10.5pt;min-width:60pt}
+.simcmp{gap:6pt;margin-top:10pt}.simcmp b{font-size:14pt}
+.simtbl{font-size:9.4pt}
