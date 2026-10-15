@@ -305,7 +305,10 @@ def roic_tree():
     leaves = [(90, "Revenue", "price × volume"), (350, "Operating cost", "rework · overtime · expediting"),
               (610, "Working capital", "inventory · WIP · receivables"), (870, "Fixed assets", "plant · equipment · systems")]
     for x, a, b in leaves:
-        o.append(node(x, 250, 200, 62, a, b, PAPER, LINE))
+        cx = x + 100
+        o.append(f'<rect x="{cx-115}" y="250" width="230" height="62" rx="6" fill="{PAPER}" stroke="{LINE}" stroke-width="2"/>')
+        o.append(t(cx, 276, a, 15.5, INK, "middle", "700"))
+        o.append(t(cx, 298, b, 13, MUT, "middle"))
 
     # lean levers
     ly = 350
@@ -335,26 +338,28 @@ def stock_flow():
     # inflow pipe
     o.append(f'<path d="M 60 170 L 400 170 L 400 210 L 60 210 Z" fill="{SOFT}" stroke="{C1}" stroke-width="2"/>')
     o.append(f'<path d="M 360 178 L 392 190 L 360 202 Z" fill="{C1}"/>')
-    o.append(t(70, 150, "INFLOW", 11.5, MUT, weight="700", fam=MONO, extra=' letter-spacing="1.6"'))
-    o.append(t(70, 196, "improvement that produces know-why and know-how together", 14, INK))
+    o.append(t(60, 112, "INFLOW", 11.5, MUT, weight="700", fam=MONO, extra=' letter-spacing="1.6"'))
+    o.append(t(60, 136, "improvement that produces", 14, INK))
+    o.append(t(60, 155, "know-why and know-how together", 14, INK))
     # valve
-    o.append(f'<circle cx="300" cy="190" r="26" fill="{PAPER}" stroke="{C2}" stroke-width="3"/>')
-    o.append(f'<path d="M 286 178 L 314 202 M 286 202 L 314 178" stroke="{C2}" stroke-width="3"/>')
-    o.append(t(300, 254, "the valve", 13, "#7E5B0C", "middle", "700", fam=MONO))
-    o.append(t(300, 276, "psychological safety", 13, MUT, "middle"))
-    o.append(t(300, 294, "and credible promises", 13, MUT, "middle"))
-    o.append(t(300, 316, "close it and the flow stops", 12.5, "#7E5B0C", "middle", "700"))
+    o.append(f'<circle cx="220" cy="190" r="26" fill="{PAPER}" stroke="{C2}" stroke-width="3"/>')
+    o.append(f'<path d="M 206 178 L 234 202 M 206 202 L 234 178" stroke="{C2}" stroke-width="3"/>')
+    o.append(t(220, 240, "the valve", 13, "#7E5B0C", "middle", "700", fam=MONO))
+    o.append(t(220, 260, "psychological safety", 13, MUT, "middle"))
+    o.append(t(220, 278, "and credible promises", 13, MUT, "middle"))
+    o.append(t(220, 300, "close it and the flow stops", 12.5, "#7E5B0C", "middle", "700"))
 
     # outflow
     o.append(f'<path d="M 760 170 L 1100 170 L 1100 210 L 760 210 Z" fill="{SOFT}" stroke="{LINE}" stroke-width="2"/>')
     o.append(f'<path d="M 1062 178 L 1094 190 L 1062 202 Z" fill="{MUT}"/>')
-    o.append(t(770, 150, "OUTFLOW", 11.5, MUT, weight="700", fam=MONO, extra=' letter-spacing="1.6"'))
-    o.append(t(770, 196, "turnover, disuse, reorganisation", 14, INK))
+    o.append(t(760, 112, "OUTFLOW", 11.5, MUT, weight="700", fam=MONO, extra=' letter-spacing="1.6"'))
+    o.append(t(760, 136, "turnover, disuse,", 14, INK))
+    o.append(t(760, 155, "reorganisation", 14, INK))
 
-    o.append(f'<rect x="60" y="334" width="{W-120}" height="48" rx="6" fill="{SOFT}" stroke="{LINE}"/>')
-    o.append(t(80, 364, "A stock adjusts slowly and drains quietly. An organisation that was good at improving five years ago "
-                        "may no longer be, and nothing on its balance sheet will say so.", 14, INK))
-    o.append(t(580, 100, "Volume of improvement activity is not the inflow. Only the part that produces both kinds of knowledge is.",
+    o.append(f'<rect x="60" y="326" width="{W-120}" height="66" rx="6" fill="{SOFT}" stroke="{LINE}"/>')
+    o.append(t(W / 2, 352, "A stock adjusts slowly and drains quietly. An organisation that was good at improving five years ago", 14, INK, "middle"))
+    o.append(t(W / 2, 374, "may no longer be, and nothing on its balance sheet will say so.", 14, INK, "middle"))
+    o.append(t(580, 60, "Volume of improvement activity is not the inflow. Only the part that produces both kinds of knowledge is.",
                14, MUT, "middle"))
     return {"vb": f"0 0 {W} {H}", "body": "\n".join(o)}
 
