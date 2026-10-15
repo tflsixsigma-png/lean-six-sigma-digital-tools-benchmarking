@@ -46,6 +46,10 @@ tr.tot td{border-top:2px solid var(--navy);border-bottom:none;font-weight:700}
 .card ol{margin-left:20px}
 .lvl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:10px 0 18px;font-size:15.5px;max-width:none}
 .lvl b{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7E5B0C;padding-top:3px}
+.blocks{list-style:none;margin:8px 0 22px;max-width:none}
+.blocks li{display:flex;gap:16px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+.blocks li span{flex:1}
+.blocks li em{font-family:'JetBrains Mono',monospace;font-style:normal;font-size:12.5px;color:#7E5B0C;white-space:nowrap}
 .refs{font-size:15px;list-style:none;margin-left:0}
 .refs li{padding-left:1.4em;text-indent:-1.4em;margin-bottom:7px}
 footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px;margin-top:40px}
@@ -60,7 +64,7 @@ a{color:var(--navy)}
   section{padding:8mm 0 2mm}
   h2{break-after:avoid;font-size:17pt}
   h3{break-after:avoid}
-  .card,.note,.prof,tr{break-inside:avoid}
+  .card,.note,.prof,tr,.blocks li{break-inside:avoid}
   table{break-inside:auto}
   thead{display:table-header-group}
   .pb{break-before:page}
@@ -76,7 +80,7 @@ a{color:var(--navy)}
     <p class="sub">International Certificate in Project Management and Organizational Performance. Module 3, Session 4: <em>Lean Six Sigma &amp; Continuous Improvement</em> and <em>Digital Tools &amp; Benchmarking</em>.</p>
     <div class="meta">
       <div><b>Date</b>Saturday, 17 October 2026</div>
-      <div><b>Times</b>09:00–12:00 · 14:00–17:00 (Paris)</div>
+      <div><b>Times</b>09:00–12:00 · 14:00–17:00 (Brasília time)</div>
       <div><b>Format</b>Online, synchronous</div>
       <div><b>Instructor</b>Prof. Dr. Thiago Lima</div>
       <div><b>Module coordinator</b>Prof. Raphael Albergarias</div>
@@ -96,7 +100,7 @@ a{color:var(--navy)}
       <div>
         <p class="who">Prof. Dr. Thiago Fernandes Lima</p>
         <p class="role">Visiting faculty, IAE Paris – Sorbonne Business School · Postdoctoral researcher, COPPEAD/UFRJ · Head of the Centre for Social Sciences, Brazilian Naval Academy</p>
-        <p class="links"><a href="https://www.linkedin.com/in/thiago-lima-phd-8b69012a/" target="_blank" rel="noopener">LinkedIn</a><a href="http://lattes.cnpq.br/0204895344524909" target="_blank" rel="noopener">Lattes CV</a><a href="mailto:thiago.lima@coppead.ufrj.br">thiago.lima@coppead.ufrj.br</a></p>
+        <p class="links"><a href="https://www.linkedin.com/in/thiago-lima-phd-8b69012a/" target="_blank" rel="noopener">LinkedIn</a><a href="http://lattes.cnpq.br/0204895344524909" target="_blank" rel="noopener">Lattes CV</a><a href="mailto:tflsixsigma@gmail.com">tflsixsigma@gmail.com</a></p>
       </div>
     </div>
     <p>Thiago Lima works at the meeting point of academic rigour and operational practice. He holds a doctorate in management from the Université de Bordeaux and a master's degree from National University (California), revalidated by UFRJ, with an MBA from FGV and further education at Harvard, Cambridge and MIT. He is a postdoctoral researcher at COPPEAD/UFRJ, where he studies artificial intelligence applied to organisational management, and heads the Centre for Social Sciences at the Brazilian Naval Academy, the oldest higher-education institution in Brazil.</p>
@@ -170,37 +174,28 @@ a{color:var(--navy)}
 <section id="schedule">
   <div class="wrap">
     <h2>Schedule</h2>
+    <p>Each half-day has a fifteen-minute break around its midpoint. The right-hand label points to the part of the reading notes that covers the block.</p>
     <h3>Morning · Lean Six Sigma &amp; Continuous Improvement · 09:00–12:00</h3>
-    <table>
-      <thead><tr><th>Time</th><th>Block</th><th>Reading notes</th><th style="text-align:right">Min</th></tr></thead>
-      <tbody>
-        <tr><td class="t">09:00–09:15</td><td>Opening — the puzzle: a team at 95 % utilisation that delivers late</td><td>Part One</td><td class="m">15</td></tr>
-        <tr><td class="t">09:15–09:50</td><td>Value from the customer backwards: VCAP, the value stick, order winners and qualifiers, the five principles and the anatomy of waste</td><td>Parts Two–Three</td><td class="m">35</td></tr>
-        <tr><td class="t">09:50–10:25</td><td>Value stream mapping and the efficiency paradox; process capability, control charts and the Six Sigma logic</td><td>Part Four</td><td class="m">35</td></tr>
-        <tr class="brk"><td class="t">10:25–10:40</td><td>Break</td><td></td><td class="m">15</td></tr>
-        <tr><td class="t">10:40–11:10</td><td>The Toyota Production System as a system; Lean in the language of capital: Little's Law and the ROIC tree (simulators)</td><td>Parts Five–Six</td><td class="m">30</td></tr>
-        <tr><td class="t">11:10–11:25</td><td>DMAIC — conducting improvement; the third equation</td><td>Parts Seven–Eight</td><td class="m">15</td></tr>
-        <tr><td class="t">11:25–11:50</td><td>Group activity — the Value Case Canvas on one authorised project</td><td>Part Nine</td><td class="m">25</td></tr>
-        <tr><td class="t">11:50–12:00</td><td>Readouts and conclusion — where the morning ends</td><td>Part Ten</td><td class="m">10</td></tr>
-        <tr class="tot"><td></td><td>Total</td><td></td><td class="m">180</td></tr>
-      </tbody>
-    </table>
+    <ol class="blocks">
+      <li><span>Opening — the puzzle: a team at 95 % utilisation that delivers late</span><em>Part One</em></li>
+      <li><span>Value from the customer backwards: VCAP, the value stick, order winners and qualifiers, the five principles and the anatomy of waste</span><em>Parts Two–Three</em></li>
+      <li><span>Value stream mapping and the efficiency paradox; process capability, control charts and the Six Sigma logic</span><em>Part Four</em></li>
+      <li><span>The Toyota Production System as a system; Lean in the language of capital: Little's Law and the ROIC tree (simulators)</span><em>Parts Five–Six</em></li>
+      <li><span>DMAIC — conducting improvement; the third equation</span><em>Parts Seven–Eight</em></li>
+      <li><span>Group activity — the Value Case Canvas on one authorised project</span><em>Part Nine</em></li>
+      <li><span>Readouts and conclusion — where the morning ends</span><em>Part Ten</em></li>
+    </ol>
 
     <h3>Afternoon · Digital Tools &amp; Benchmarking · 14:00–17:00</h3>
-    <table>
-      <thead><tr><th>Time</th><th>Block</th><th>Reading notes</th><th style="text-align:right">Min</th></tr></thead>
-      <tbody>
-        <tr><td class="t">14:00–14:10</td><td>Opening — the digital puzzle: the platform that was bought and the capability that was not</td><td>Part One</td><td class="m">10</td></tr>
-        <tr><td class="t">14:10–14:40</td><td>What a digital investment actually buys; the tool landscape (illustrative); the dashboard caution</td><td>Part Two</td><td class="m">30</td></tr>
-        <tr><td class="t">14:40–15:10</td><td>Philosophy eats AI — the three questions; from a working model to an organisational result: the six-condition chain</td><td>Parts Three–Four</td><td class="m">30</td></tr>
-        <tr><td class="t">15:10–15:35</td><td>Benchmarking: Camp's method, comparator types, and why best practice resists transfer</td><td>Part Five</td><td class="m">25</td></tr>
-        <tr class="brk"><td class="t">15:35–15:50</td><td>Break</td><td></td><td class="m">15</td></tr>
-        <tr><td class="t">15:50–16:05</td><td>The transformation vector — Cynefin and Toyota Kata</td><td>Part Six</td><td class="m">15</td></tr>
-        <tr><td class="t">16:05–16:40</td><td>Group activity — the Digital Tool Appraisal on one tool</td><td>Part Seven</td><td class="m">35</td></tr>
-        <tr><td class="t">16:40–17:00</td><td>Readouts and closing — building the multiplier: Operational Excellence = Design(VCAP) × Culture</td><td>Part Eight</td><td class="m">20</td></tr>
-        <tr class="tot"><td></td><td>Total</td><td></td><td class="m">180</td></tr>
-      </tbody>
-    </table>
+    <ol class="blocks">
+      <li><span>Opening — the digital puzzle: the platform that was bought and the capability that was not</span><em>Part One</em></li>
+      <li><span>What a digital investment actually buys; the tool landscape (illustrative); the dashboard caution</span><em>Part Two</em></li>
+      <li><span>Philosophy eats AI — the three questions; from a working model to an organisational result: the six-condition chain</span><em>Parts Three–Four</em></li>
+      <li><span>Benchmarking: Camp's method, comparator types, and why best practice resists transfer</span><em>Part Five</em></li>
+      <li><span>The transformation vector — Cynefin and Toyota Kata</span><em>Part Six</em></li>
+      <li><span>Group activity — the Digital Tool Appraisal on one tool</span><em>Part Seven</em></li>
+      <li><span>Readouts and closing — building the multiplier: Operational Excellence = Design(VCAP) × Culture</span><em>Part Eight</em></li>
+    </ol>
   </div>
 </section>
 
