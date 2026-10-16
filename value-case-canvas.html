@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Value Case Canvas — Lean Six Sigma &amp; Continuous Improvement</title>
+<!-- share -->
+<meta name="description" content="The morning instrument: appraise one authorised project by the value edge it moves, the waste it removes and what it actually builds. 17 October 2026.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IAE Paris — Sorbonne Business School · IDGP Academy">
+<meta property="og:title" content="The Value Case Canvas — Lean Six Sigma &amp; Continuous Improvement">
+<meta property="og:description" content="The morning instrument: appraise one authorised project by the value edge it moves, the waste it removes and what it actually builds. 17 October 2026.">
+<meta property="og:url" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/value-case-canvas.html">
+<meta property="og:image" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /share -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2342; --ink:#04121F; --gold:#B8820F; --gold-soft:#F2DFB4;
+  --paper:#FBFAF7; --card:#FFFFFF; --body:#101B25;
+  --line:#B5C3D3; --line-soft:#DFE6EE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:58px 0 46px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.8vw,46px);line-height:1.1;max-width:19ch;margin-bottom:16px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch;margin-bottom:28px}
+.budget{display:flex;flex-wrap:wrap;border-top:1px solid rgba(242,223,180,.35)}
+.budget div{padding:14px 24px 6px 0;border-right:1px solid rgba(242,223,180,.18)}
+.budget div:last-child{border-right:none}
+.budget .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+.budget .v{font-size:15.5px;color:#F3F7FB;margin-top:2px}
+
+.partbar{background:var(--navy);color:#fff;padding:22px 0}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;margin-top:4px}
+
+section{padding:38px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:22px;font-weight:600;margin:30px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+td.n{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
+
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:24px 20px;margin:22px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:30px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:9px;font-family:'JetBrains Mono',monospace}
+
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.puzzle{background:var(--navy);color:#E6EDF6;border-radius:10px;padding:26px 28px;margin:22px 0;border-left:6px solid var(--gold)}
+.puzzle h4{color:#fff;margin-top:0;font-size:20px}
+.puzzle p{color:#C8D6E6}
+.puzzle .q{margin-top:16px;padding-top:15px;border-top:1px solid rgba(242,223,180,.3);color:var(--gold-soft);font-size:16.5px}
+
+/* Dark surfaces: strong and em must never inherit the near-black body colour */
+.puzzle strong,.eq strong,.cover strong,.partbar strong,.chain strong,footer strong,
+.house .roof strong,th strong{color:#FFFFFF}
+.puzzle em,.eq em,.cover em,.partbar em,footer em,.house .roof em{color:var(--gold-soft)}
+.puzzle .q strong{color:#FFFFFF}
+
+/* Bridge to project management */
+.bridge{background:#EAF1F8;border:1px solid #A9BFD8;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0}
+section:nth-of-type(even) .bridge{background:#EDF3F9}
+.bridge .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);display:block;margin-bottom:6px}
+.bridge p{font-size:16px;margin-bottom:8px}
+.bridge p:last-child{margin-bottom:0}
+
+/* Activity */
+.bridge .k{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7E5B0C;font-weight:700;margin-right:6px}
+.bridge ol,.bridge ul{margin:6px 0 8px 20px;font-size:16px}
+.activity{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:24px 0}
+.activity .ah{background:var(--navy);color:#fff;padding:14px 20px}
+.activity .ah b{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}
+.activity .ah span{display:block;font-size:14px;color:#C2D3E6;margin-top:2px}
+.activity .ab{padding:18px 20px;background:var(--card)}
+section:nth-of-type(even) .activity .ab{background:var(--paper)}
+.worksheet{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:14px 0}
+.worksheet .wl{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dotted #B6C5D6;font-size:15.5px}
+.worksheet .wl:last-child{border-bottom:none}
+.worksheet .wl b{color:var(--navy);font-weight:700}
+.worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
+
+/* Fillable canvas */
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:64px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;
+  padding:12px 22px;border-radius:6px;border:2px solid var(--gold);
+}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
+section:nth-of-type(even) .card{background:var(--paper)}
+.card h4{margin-top:0}
+.card p,.card li{font-size:15.5px}
+.card ul{margin-left:18px}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+ol.tight{margin:8px 0 14px 21px}
+ol.tight li{margin-bottom:8px}
+
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;font-family:'JetBrains Mono',monospace;font-size:14px}
+.chain span{background:var(--navy);color:#fff;padding:8px 13px;border-radius:5px;white-space:nowrap}
+.chain span.end{background:var(--gold);color:var(--ink);font-weight:700}
+.chain i{color:var(--navy);font-style:normal;font-weight:700}
+
+.house{border:2px solid var(--navy);border-radius:9px;overflow:hidden;margin:20px 0}
+.house .roof{background:var(--navy);color:#fff;padding:12px 18px;text-align:center;font-family:'Fraunces',serif;font-size:17px}
+.house .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+.house .col{background:var(--card);padding:15px 16px}
+section:nth-of-type(even) .house .col{background:var(--paper)}
+.house .col.mid{background:#FEF8EA}
+.house .col h5{font-family:'Fraunces',serif;color:var(--navy);font-size:16px;margin-bottom:6px}
+.house .col p{font-size:14.5px;margin-bottom:0}
+.house .base{background:#E9EFF6;padding:12px 18px;text-align:center;font-size:15px;border-top:1px solid var(--line)}
+
+/* ---------- figures ---------- */
+.fig{margin:24px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px}
+section:nth-of-type(even) .fig{background:#FFFFFF}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{font-size:14.5px;color:#44566B;margin-top:12px;line-height:1.52;border-top:1px solid #DFE6EE;padding-top:10px}
+.fig figcaption b{color:var(--navy)}
+.sim .simhead{margin-bottom:14px}
+.sim .simhead b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.sim .simhead span{font-size:14.5px;color:#56687C;display:block;margin-top:3px}
+.simctl{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;align-items:center;
+  background:#F3F6FA;border:1px solid #C6D2DF;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.simctl label{font-size:14.5px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;gap:10px}
+.simctl output{font-family:'JetBrains Mono',monospace;color:#7E5B0C;font-weight:700}
+.simctl input[type=range]{width:100%;accent-color:#B8820F;height:26px}
+.simout{font-size:16px;color:var(--body);margin:14px 0 0;max-width:none;
+  border-left:5px solid var(--gold);background:#FEF8EA;padding:12px 16px}
+.simout b{color:var(--navy)}
+.simgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.simgrid div{background:#F3F6FA;border:1px solid #C6D2DF;border-radius:7px;padding:10px 12px}
+.simgrid div.hi{background:var(--ink);border-color:var(--ink)}
+.simgrid span{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#56687C;font-weight:700}
+.simgrid div.hi span{color:#9FB6CE}
+.simgrid b{font-family:'JetBrains Mono',monospace;font-size:19px;color:var(--navy)}
+.simgrid div.hi b{color:#F2DFB4}
+@media(max-width:700px){.simctl{grid-template-columns:1fr}.simgrid{grid-template-columns:repeat(2,1fr)}}
+.simpre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.simpre-l{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7E5B0C;font-weight:700;margin-right:4px}
+.simpre button{font-family:'Source Sans 3',sans-serif;font-size:14.5px;font-weight:600;color:var(--navy);background:#fff;border:1.5px solid #B5C3D3;border-radius:999px;padding:7px 14px;cursor:pointer}
+.simpre button:hover{border-color:var(--navy)}
+.simpre button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.simpre button:focus{outline:3px solid var(--gold);outline-offset:2px}
+.simcalc{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;background:var(--ink);color:#fff;border-radius:8px;padding:14px 18px;margin:0 0 14px;font-family:'JetBrains Mono',monospace}
+.simcalc.two{flex-direction:column;align-items:stretch;gap:6px;padding:10px 18px}
+.simcalc.two>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
+.simcalc .t{font-family:'Source Sans 3',sans-serif;font-weight:700;color:#F2DFB4;font-size:15px;min-width:86px}
+.simcalc .eq{color:#9FB6CE;font-size:18px}
+.simcalc .n{font-size:19px;color:#fff;display:inline-flex;flex-direction:column;line-height:1}
+.simcalc .n small{font-family:'Source Sans 3',sans-serif;font-size:11.5px;color:#9FB6CE;font-weight:400;letter-spacing:.04em}
+.simcalc .n.hi{color:#F2DFB4;font-weight:700;font-size:22px}
+.simcmp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.simcmp div{background:#F3F6FA;border:1px solid #C6D2DF;border-radius:7px;padding:10px 12px}
+.simcmp div.hi{background:#FEF8EA;border-color:var(--gold)}
+.simcmp span{display:block;font-size:13px;color:#56687C;font-weight:700}
+.simcmp b{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--navy);display:block;margin:3px 0}
+.simcmp small{font-size:12.5px;color:#56687C}
+.simtbl{margin:14px 0 0;font-size:15px}
+.simtbl td,.simtbl th{padding:7px 11px}
+.simtbl tr.cur td{background:#FEF8EA;font-weight:600}
+.simhow{margin-top:16px;border-top:1px solid #DFE6EE;padding-top:12px}
+.simhow b{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7E5B0C;display:block;margin-bottom:6px}
+.simhow ol{margin:0 0 0 20px;font-size:15.5px;color:#2E3F52}
+.simhow li{margin-bottom:5px}
+@media(max-width:700px){.simcmp{grid-template-columns:1fr}}
+
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+
+@media(max-width:720px){.grid2,.house .cols{grid-template-columns:1fr}}
+@media print{.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact} section{padding:20px 0}}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>The Value Case Canvas</h1>
+    <p class="sub">An instrument for appraising one authorised project by what a business case usually leaves out: which edge of value it moves, which named waste it removes, and whether the organisation ends up more capable or only better equipped.</p>
+    <a class="back" href="index.html">← Back to the 17 October material</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">A conventional business case answers one question: does the return exceed the cost? That question is necessary and it is not sufficient, because it is silent on three things that decide whether the return survives — and the canvas asks exactly those three.</p>
+    <p>It is the group activity that closes the morning session, <a href="session-1-lean-six-sigma.html">Lean Six Sigma &amp; Continuous Improvement</a>. It is worked in groups of three or four on <strong>one real project</strong> chosen from those the members bring, and it is designed so that it can be filled in without the instructor: Part One below sets out the few ideas each field relies on, Part Two is the canvas itself, and Part Three says how to read what comes out.</p>
+  </div>
+</section>
+
+<!-- 1 -->
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>What you need in order to answer</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Each field of the canvas uses one idea from the morning. If any of them is unfamiliar, the reading notes treat it in full in the part shown.</p>
+    <table>
+      <tr><th style="width:20%">Field</th><th style="width:56%">The idea it relies on</th><th style="width:24%">In the reading notes</th></tr>
+      <tr><td class="k">2 · The WTP edge</td><td>Value is created on two edges only: raising what the customer is <strong>willing to pay</strong> (WTP), or lowering what it costs to serve them. WTP is moved through four competitive priorities — cost, quality, delivery speed, flexibility. An <strong>order winner</strong> creates preference; a <strong>qualifier</strong> only avoids elimination, and effort above its threshold buys nothing. Quality is not one variable: conformance lowers cost, while reliability, durability and serviceability raise WTP.</td><td>Part Two</td></tr>
+      <tr><td class="k">3 · Map the stream</td><td><strong>Process time</strong> is the time anyone is actually working on the unit; <strong>lead time</strong> is the elapsed time from first step to last. Their ratio is flow efficiency — usually between two and ten per cent in administrative processes. The gap between the two numbers is queue, and it is where the project should be aimed.</td><td>Parts Three and Four</td></tr>
+      <tr><td class="k">4 · The cost edge</td><td>The eight wastes: overproduction (the root), waiting, transport, over-processing, inventory, motion, defects, unused talent. "Reduces costs" is a consequence, not a waste. A saving that cannot be named as one of the eight is an aspiration until somebody defines it.</td><td>Part Three</td></tr>
+      <tr><td class="k">5 · What it builds</td><td><strong>V = C × (A + P)</strong>. A is what the organisation owns; P is how work flows across it; C is its repeated ability to improve P. A and P are purchasable by any competitor; C is the coefficient. The test for C is strict: training people to operate a new system is part of delivering the asset, not capability.</td><td>Parts Two and Eight</td></tr>
+      <tr><td class="k">6 · The verdict</td><td>Advantage is a comparison: <strong>VC = (WTP<sub>A</sub> − Cost<sub>A</sub>) − (WTP<sub>B</sub> − Cost<sub>B</sub>)</strong>. If a competitor can make the same move, the two brackets converge and the advantage returns to zero. So the verdict asks how long replication would take — and what would have to be added for the project to build C.</td><td>Part Two</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 2 -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>Filling in the canvas</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="note">
+      <span class="lbl">The raw material</span>
+      <strong>One authorised project from your own organisation</strong> — in flight or recently approved — that you know well enough to defend. It does not need to be large, successful, or yours. Groups choose one project from among those their members propose, and the choice takes ninety seconds: pick the one the group disagrees about, not the one with the best business case.
+    </div>
+
+    <h3>Why this appraisal differs from a standard business case</h3>
+    <ul class="tight">
+      <li><strong>Which edge of value does this move?</strong> A project that only lowers cost is competing on the edge where every rival is also working. A project that raises willingness to pay is harder, rarer, and usually under-argued because the number is harder to produce.</li>
+      <li><strong>Is the cost saving a named waste, or an aspiration?</strong> "Improves efficiency by 15%" is a target. "Eliminates the three re-approvals caused by incomplete submissions" is a waste with a name, and only the second can be verified afterwards.</li>
+      <li><strong>Does the organisation end up more capable, or only better equipped?</strong> A project that delivers assets and processes can be replicated by any competitor willing to spend the same money. A project that leaves the organisation better at improving cannot.</li>
+    </ul>
+    <p>Those three questions are one question in disguise, and VC states it: a project is worth defending to the extent that it widens the gap between <em>(WTP − cost)</em> for your firm and the same quantity for the competitor you are actually losing deals to. Field 6 is where that is settled.</p>
+
+    <div class="activity">
+      <div class="ah">
+        <b>The Value Case Canvas</b>
+        <span>Groups of three or four · 15 minutes to complete · 3 minutes to defend</span>
+      </div>
+      <div class="ab" id="canvas">
+        <p>The group picks <strong>one</strong> of the projects brought by its members and completes six fields, one of which is a short value stream sketch. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
+
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-project">1 · The project</label>
+            <div class="hint">What it is, who sponsors it, and what it was approved to achieve.</div>
+            <input type="text" id="c-project" data-section="The project" data-label="The project" placeholder="One line">
+          </div>
+        </div>
+
+        <h4>2 · The WTP edge — does the customer notice?</h4>
+        <p>Identify whether this project raises what someone would be willing to pay, and be precise about the mechanism.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-priority">Competitive priority affected</label>
+            <div class="hint">The four operational things a customer can be paying for, from Part Two. Pick the one this project moves most.</div>
+            <select id="c-priority" data-section="The WTP edge" data-label="Competitive priority">
+              <option value="">Select one</option>
+              <option>Cost</option><option>Quality</option><option>Delivery speed</option><option>Flexibility</option>
+              <option>None — this project does not move any of them</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-garvin">Quality dimension, if any</label>
+            <div class="hint">Conformance lowers cost. Reliability, durability and serviceability raise willingness to pay.</div>
+            <select id="c-garvin" data-section="The WTP edge" data-label="Quality dimension (Garvin)">
+              <option value="">Select one, or leave blank</option>
+              <option>Performance</option><option>Features</option><option>Reliability</option><option>Conformance</option>
+              <option>Durability</option><option>Serviceability</option><option>Aesthetics</option><option>Perceived quality</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-winner">Order winner or qualifier?</label>
+            <select id="c-winner" data-section="The WTP edge" data-label="Winner or qualifier">
+              <option value="">Select one</option>
+              <option>Order winner — it produces preference</option>
+              <option>Qualifier — its absence eliminates us, its presence attracts nobody</option>
+              <option>Neither</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-customer">Who is the customer here — and would they notice?</label>
+            <div class="hint">If the honest answer is that nobody outside would notice, say so. Many sound projects move only the cost edge.</div>
+            <input type="text" id="c-customer" data-section="The WTP edge" data-label="The customer, and whether they would notice" placeholder="The customer, and yes or no">
+          </div>
+        </div>
+
+        <h4>3 · Map the stream — where the time actually goes</h4>
+        <p>Sketch the process the project touches, at the level of three to six steps. You are not drawing a full value stream map in ten minutes; you are producing the two numbers a map exists to produce, and locating the gap between them.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-steps">The steps, in sequence</label>
+            <div class="hint">Three to six, each with who performs it. Separate them with arrows: request → triage → approval → execution.</div>
+            <input type="text" id="c-steps" data-section="The value stream" data-label="The steps in sequence" placeholder="step (who) → step (who) → step (who)">
+          </div>
+          <div class="field">
+            <label for="c-pt">Process time — the time anyone is actually working on it</label>
+            <div class="hint">Add up the hands-on time across the steps. An estimate the group can defend is enough.</div>
+            <input type="text" id="c-pt" data-section="The value stream" data-label="Process time" placeholder="e.g. about 4 hours">
+          </div>
+          <div class="field">
+            <label for="c-lt">Lead time — elapsed time from first step to last</label>
+            <div class="hint">Calendar time, not working time. The ratio of the two is your flow efficiency, and it is usually between two and ten per cent.</div>
+            <input type="text" id="c-lt" data-section="The value stream" data-label="Lead time" placeholder="e.g. about 3 weeks">
+          </div>
+          <div class="field">
+            <label for="c-gap">Where the gap sits</label>
+            <div class="hint">Name the one or two places that hold most of the elapsed time. That is where the project should be aimed, and it is frequently not where it is aimed today.</div>
+            <input type="text" id="c-gap" data-section="The value stream" data-label="Where the elapsed time sits" placeholder="The queue, the approval, the handoff">
+          </div>
+        </div>
+
+        <h4>4 · The cost edge — name the waste</h4>
+        <p>Now name which of the wastes lives in the gap you just located. Name it from the list; do not substitute a benefit for a waste.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-waste">Primary waste removed</label>
+            <select id="c-waste" data-section="The cost edge" data-label="Primary waste removed">
+              <option value="">Select one of the eight</option>
+              <option>Overproduction — the root waste</option><option>Waiting</option><option>Transport</option>
+              <option>Over-processing</option><option>Inventory</option><option>Motion</option>
+              <option>Defects</option><option>Unused talent</option>
+              <option>None of the eight — then the project does not move the cost edge, and the verdict should say so</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-where">Where in the process it occurs today</label>
+            <input type="text" id="c-where" data-section="The cost edge" data-label="Where the waste occurs" placeholder="The step or the queue">
+          </div>
+          <div class="field">
+            <label for="c-secondary">Secondary wastes affected</label>
+            <div class="hint">Optional.</div>
+            <input type="text" id="c-secondary" data-section="The cost edge" data-label="Secondary wastes" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label for="c-magnitude">Order of magnitude, if you can estimate it</label>
+            <div class="hint">Optional. Days, hours, percentage — whatever you can defend.</div>
+            <input type="text" id="c-magnitude" data-section="The cost edge" data-label="Order of magnitude" placeholder="Optional">
+          </div>
+        </div>
+        <p style="font-size:15.5px"><strong>The test:</strong> "reduces costs" and "improves productivity" are not wastes — they are consequences. If the group cannot name a waste from the list, the project may be removing something real that nobody has yet defined, which is itself a finding worth reporting. And if the waste removed is <em>overproduction</em>, note it: that is the root waste, and the project is probably worth more than its business case claims.</p>
+
+        <h4>5 · What the project actually builds</h4>
+        <p>Decompose the deliverable into the three terms. Most projects touch more than one; few touch all three.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-assets">A — Assets</label>
+            <div class="hint">What is bought or built?</div>
+            <textarea id="c-assets" data-section="What the project builds" data-label="A — Assets"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-processes">P — Processes</label>
+            <div class="hint">What flow changes, and how?</div>
+            <textarea id="c-processes" data-section="What the project builds" data-label="P — Processes"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-capability">C — Capability</label>
+            <div class="hint">What will this organisation be able to do afterwards that it could not do before — and that does not depend on the new system?</div>
+            <textarea id="c-capability" data-section="What the project builds" data-label="C — Capability"></textarea>
+          </div>
+        </div>
+        <p style="font-size:15.5px"><strong>The test for C is strict.</strong> Training people to operate the new system is not capability — it is part of delivering the asset. Capability means the organisation ends the project <em>better at improving processes than it was before</em>: a routine that survives, a standard that is now owned, a group that can now run the next improvement without external help. Most projects leave C untouched, and that is a legitimate answer.</p>
+
+        <h4>6 · The verdict</h4>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-replicate">How long before a competitor could replicate this?</label>
+            <select id="c-replicate" data-section="The verdict" data-label="Time to replicate">
+              <option value="">Select one</option>
+              <option>Months</option><option>A year or two</option><option>Years</option>
+              <option>They could not — and here is why</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-verdict">The decision</label>
+            <select id="c-verdict" data-section="The verdict" data-label="Decision">
+              <option value="">Select one</option>
+              <option>Fund</option><option>Fund with conditions</option><option>Do not fund</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-conditions">If conditions: what would have to be added to build C? If you chose "they could not", say here why.</label>
+            <input type="text" id="c-conditions" data-section="The verdict" data-label="Conditions to build C" placeholder="One line">
+          </div>
+        </div>
+        <p style="margin-bottom:0;font-size:15.5px">The group presents field 1 and field 6, with the reasoning that connects them. Three minutes, one spokesperson.</p>
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="c-group">Group</label>
+          <input type="text" id="c-group" data-label="Group" placeholder="Names, or a group number">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="c-download">Download the canvas</button>
+          <button type="button" class="ghost" id="c-copy">Copy as text</button>
+          <button type="button" class="ghost" id="c-clear">Clear</button>
+        </div>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download before closing the tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>How to read the result</h2></div></div>
+<section>
+  <div class="wrap">
+    <h3>What to expect</h3>
+    <p>Two results are common enough to be worth naming in advance, and neither is a failure of the project you chose.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Only one edge moves</h4>
+        <p style="margin-bottom:0">Most project portfolios are built almost entirely of cost-edge projects. That is not wrong, but it is a choice, and usually an unexamined one. The question it raises: what would it take for this same project to also move willingness to pay — and would that cost much more?</p>
+      </div>
+      <div class="card">
+        <h4>C is empty</h4>
+        <p style="margin-bottom:0">Projects deliver assets and processes because those are what can be specified, scheduled and signed off. Capability resists all three. The question it raises: if A and P are purchasable by any competitor, what in this portfolio is actually building advantage?</p>
+      </div>
+    </div>
+    <h3>After the session</h3>
+    <p>Download the canvas before closing the tab and bring it to the afternoon session, <a href="session-2-digital-tools-benchmarking.html">Digital Tools &amp; Benchmarking</a>, which examines the digital tooling the same project depends on with a second instrument, the <a href="digital-tool-appraisal.html">Digital Tool Appraisal</a>. Keep the export: Module 3 closes with a group Execution Optimization Challenge, and an appraised project of your own is the kind of material it draws on.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Sources</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Brandenburger, A. M., &amp; Stuart, H. W. (1996). Value-based business strategy. <em>Journal of Economics &amp; Management Strategy</em>, 5(1), 5–24.</li>
+      <li>Garvin, D. A. (1987). Competing on the eight dimensions of quality. <em>Harvard Business Review</em>, 65(6), 101–109.</li>
+      <li>Hill, T. (2000). <em>Manufacturing Strategy: Text and Cases</em> (3rd ed.). McGraw-Hill.</li>
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Open access.</li>
+      <li>Ohno, T. (1988). <em>Toyota Production System: Beyond Large-Scale Production</em>. Productivity Press.</li>
+      <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Rother, M., &amp; Shook, J. (2003). <em>Learning to See</em>. Lean Enterprise Institute.</li>
+      <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Session 1 instrument · 17 October 2026<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.getElementById('canvas');
+  if (!root) return;
+  var KEY = 'sorbonne-value-case-v1';
+  var group = document.getElementById('c-group');
+  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
+  var all = group ? fields.concat([group]) : fields;
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
+  } catch (e) {}
+
+  function save(){
+    try {
+      var o = {};
+      all.forEach(function(f){ o[f.id] = f.value; });
+      localStorage.setItem(KEY, JSON.stringify(o));
+    } catch (e) {}
+  }
+  all.forEach(function(f){
+    f.addEventListener('input', save);
+    f.addEventListener('change', save);
+  });
+
+  function build(){
+    var out = ['# The Value Case', '', 'Lean Six Sigma & Continuous Improvement — Module 3, Session 4', '17 October 2026 · Sorbonne Business School / IDGP Academy', ''];
+    out.push('**Group:** ' + ((group && group.value.trim()) || '—'));
+    var section = '';
+    fields.forEach(function(f){
+      var sec = f.getAttribute('data-section') || '';
+      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
+      out.push('- **' + f.getAttribute('data-label') + ':** ' + (f.value.trim() || '—'));
+    });
+    out.push('');
+    return out.join('\n');
+  }
+
+  function slug(){
+    var g = (group && group.value.trim()) || 'group';
+    return g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'group';
+  }
+
+  function flash(btn, msg){
+    var old = btn.textContent;
+    btn.textContent = msg;
+    setTimeout(function(){ btn.textContent = old; }, 2200);
+  }
+
+  document.getElementById('c-download').addEventListener('click', function(){
+    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'value-case-' + slug() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById('c-copy').addEventListener('click', function(){
+    var btn = this, text = build();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ flash(btn, 'Copied'); })
+        .catch(function(){ window.prompt('Copy the canvas:', text); });
+    } else {
+      window.prompt('Copy the canvas:', text);
+    }
+  });
+
+  document.getElementById('c-clear').addEventListener('click', function(){
+    if (!window.confirm('Clear every field on this canvas?')) return;
+    all.forEach(function(f){ f.value = ''; });
+    save();
+  });
+})();
+</script>
+
+</body>
+</html>

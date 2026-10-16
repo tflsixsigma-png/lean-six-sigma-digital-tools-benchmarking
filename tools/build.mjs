@@ -26,14 +26,14 @@ const parts = await page.evaluate(({ meta, tocnum }) => {
   document.querySelectorAll('.sim').forEach(f => {
     var c = f.querySelector('.simctl'); if (c) c.remove();
     var s = f.querySelector('.simhead span');
-    if (s) s.textContent = 'Shown here at its default setting. The version on the course page has sliders, and the chart and the sentence below move with them.';
+    if (s) s.textContent = meta.simNote || 'Shown here at its default setting. The version on the course page has sliders, and the chart and the sentence below move with them.';
   });
 
   document.querySelectorAll('.gate').forEach(g => {
     const d = document.createElement('div');
     d.className = 'ap-printnote';
-    d.innerHTML = '<b>Section 4 applies only where the tool contains AI or machine learning.</b> ' +
-      'If the last question of section 1 is answered no, go straight to section 5. In the online version the section appears and disappears on its own.';
+    d.innerHTML = meta.gateNote || ('<b>Section 4 applies only where the tool contains AI or machine learning.</b> ' +
+      'If the last question of section 1 is answered no, go straight to section 5. In the online version the section appears and disappears on its own.');
     g.replaceWith(d);
   });
 

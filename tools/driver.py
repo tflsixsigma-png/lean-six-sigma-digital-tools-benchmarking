@@ -44,6 +44,21 @@ JOBS = [
         },
     },
     {
+        "src": f"{REPO}/value-case-canvas.html",
+        "out": f"{OUT}/Value_Case_Canvas_Printable.pdf",
+        "meta": {
+            "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
+            "title": "The Value Case Canvas",
+            "sub": "The instrument for the morning's group activity. One authorised project, appraised by the people who know it well enough to defend it.",
+            "meta": "<b>17 October 2026</b> &nbsp;·&nbsp; 09:00–12:00<br><b>Prof. Dr. Thiago Lima</b><br>Companion to the Lean Six Sigma &amp; Continuous Improvement reading notes",
+            "foot": "This printed version is for working in the room. The same canvas is fillable and exportable online, which is the version to use when the appraisal has to leave the session.",
+            "tocTitle": "Contents",
+            "tocKick": "Which edge of value the project moves, which named waste it removes, where the time in its value stream actually goes, and whether the organisation ends up more capable or only better equipped.",
+            "tocNote": "<b>Two results are common.</b> Only one edge moves, and C is empty. Neither is a failure of the project you chose; both are findings worth reporting.",
+            "runningFoot": "The Value Case Canvas · 17 October 2026 · Prof. Dr. Thiago Lima",
+        },
+    },
+    {
         "src": f"{REPO}/digital-tool-appraisal.html",
         "out": f"{OUT}/Digital_Tool_Appraisal_Printable.pdf",
         "meta": {
