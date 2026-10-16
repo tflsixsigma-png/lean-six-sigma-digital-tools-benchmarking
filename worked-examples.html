@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worked Examples — The Value Case Canvas and the Digital Tool Appraisal</title>
+<!-- share -->
+<meta name="description" content="Both instruments filled in on well-documented cases: Virginia Mason's spine clinic on the Value Case Canvas, Zillow Offers on the Digital Tool Appraisal — with the places where a group would disagree.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IAE Paris — Sorbonne Business School · IDGP Academy">
+<meta property="og:title" content="Worked Examples — The Value Case Canvas and the Digital Tool Appraisal">
+<meta property="og:description" content="Both instruments filled in on well-documented cases: Virginia Mason's spine clinic on the Value Case Canvas, Zillow Offers on the Digital Tool Appraisal — with the places where a group would disagree.">
+<meta property="og:url" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/worked-examples.html">
+<meta property="og:image" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /share -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#04121F;--gold:#B8820F;--gold-soft:#F2DFB4;--paper:#FBFAF7;--card:#FFFFFF;--body:#101B25;--line:#B5C3D3;--line-soft:#DFE6EE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:56px 0 44px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(29px,4.4vw,42px);line-height:1.12;max-width:20ch;margin-bottom:15px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+
+.partbar{background:var(--navy);color:#fff;padding:20px 0;margin-top:6px}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:25px;font-weight:600;margin-top:3px}
+section{padding:36px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:21px;font-weight:600;margin:26px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+
+.sixchain{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:22px 0 14px}
+.sixchain .st{background:var(--navy);color:#fff;border-radius:7px;padding:13px 11px;border-top:5px solid #8BA4C0}
+.sixchain .st.cap{background:var(--ink);border-top-color:var(--gold)}
+.sixchain .st .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-soft);font-weight:700;display:block}
+.sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
+.sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+.after{margin:30px 0 8px;padding:16px 20px;border-top:3px solid var(--gold);border-bottom:1px solid var(--line);background:#FEF8EA}
+.after b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.after span{display:block;font-size:15px;color:#4A5B70;margin-top:4px;line-height:1.5}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.grid3{grid-template-columns:1fr}}
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:22px;margin:20px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:27px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:8px;font-family:'JetBrains Mono',monospace}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+
+/* instrument */
+.inst{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:26px 0}
+.inst .ih{background:var(--navy);color:#fff;padding:16px 22px}
+.inst .ih b{font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+.inst .ih span{display:block;font-size:14.5px;color:#C2D3E6;margin-top:2px}
+.inst .ib{padding:20px 22px;background:var(--card)}
+.block{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:16px 0}
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:62px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.pillar{border-left:7px solid var(--gold);padding-left:18px;margin:22px 0 6px}
+.pillar h4{margin-top:0}
+.pillar .map{font-size:15px;color:#4A5B70;margin-bottom:4px}
+#ai-layer[hidden]{display:none}
+.gate{background:#EAF1F8;border:1px solid #A9BFD8;border-radius:8px;padding:16px 20px;margin:18px 0;font-size:16px}
+
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:20px 0}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;padding:12px 22px;border-radius:6px;border:2px solid var(--gold)}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}#ai-layer[hidden]{display:block}}
+
+/* worked examples */
+.ans{background:#F3F6FA;border:1px solid #CBD6E2;border-radius:6px;padding:10px 13px;font-size:16px;line-height:1.5;color:var(--ink)}
+.ans .pick{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--navy);color:#fff;border-radius:4px;padding:2px 8px;margin-right:6px}
+.split{border-left:5px solid var(--gold);background:#FEF8EA;padding:10px 14px;margin:10px 0 2px;font-size:15px;line-height:1.5}
+.split b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7E5B0C;display:block;margin-bottom:3px}
+.facts{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin:18px 0}
+.facts h4{margin-top:0}
+.facts ul{margin:6px 0 0 20px;font-size:15.5px}
+.facts li{margin-bottom:5px}
+section:nth-of-type(even) .facts{background:var(--paper)}
+section:nth-of-type(even) .ans{background:#fff}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>Worked Examples</h1>
+    <p class="sub">Both instruments filled in on well-documented cases — a hospital pathway on the Value Case Canvas, an algorithmic home-buying business on the Digital Tool Appraisal — with the lines where a group would disagree marked, because the disagreement is what the instruments are for.</p>
+    <a class="back" href="index.html">← Back to the 17 October material</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">A filled-in canvas is not an answer key. The two cases below were chosen from sectors most participants do not work in, so that nothing here can be copied into your own project — only the way of answering can.</p>
+    <p>Each field shows one defensible answer and, where it matters, the alternative a group typically argues for. Read the <em>Where a group would split</em> notes before your own session: they are the places where fifteen minutes of disagreement does the most work. Figures come from public sources listed at the end; where sources differ, both are given.</p>
+    <div class="grid2">
+      <div class="card"><h4>Example 1 · The Value Case Canvas</h4><p style="margin-bottom:0">Virginia Mason Medical Center, Seattle, 2004–2005: redesigning the back-pain pathway after a payer threatened to leave. A project that moved both edges of value — and lost the clinic money.</p></div>
+      <div class="card"><h4>Example 2 · The Digital Tool Appraisal</h4><p style="margin-bottom:0">Zillow Offers, 2018–2021: a machine-learning valuation model that bought houses. An implementation that passed workflow integration and failed everywhere else — for reasons that were never technical.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 1 -->
+<div class="partbar" id="one"><div class="wrap"><div class="n">ONE</div><h2>Example 1 — The Value Case Canvas: Virginia Mason's spine clinic</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="facts">
+      <h4>The case in five facts</h4>
+      <ul>
+        <li>In the mid-2000s the insurer Aetna told Virginia Mason it cost more than comparable Seattle providers for the same quality, and Starbucks — an Aetna client — complained about the cost and delay of treating employees' back pain.</li>
+        <li>Before the redesign a patient with uncomplicated low-back pain waited about a month for an appointment, often had an MRI, and was passed between specialists before physical therapy was prescribed.</li>
+        <li>The redesigned pathway puts a physical therapist first, a physician alongside to separate complicated cases, and starts therapy the same day; imaging is reserved for clinical red flags, and the order-entry system blocks an MRI without indication.</li>
+        <li>Within a year MRI use fell from 15.4% to 10% of patients, waits fell to a day, and only 6% of patients lost time from work. Each avoided MRI saved the payer and employer about $850.</li>
+        <li>The clinic's own income per case went from a profit of about $100 to a loss of about $200, because it was paid for procedures it no longer performed. Virginia Mason then negotiated with Aetna to share the saving; patient volume roughly doubled.</li>
+      </ul>
+    </div>
+    <div class="inst">
+      <div class="ih"><b>The Value Case Canvas — filled in</b><span>Written as the project would have been appraised at approval, in 2004, by a group that knew the pathway and the payer's position</span></div>
+      <div class="ib">
+<div class="field"><label>1 · The project</label><div class="ans">Redesign the back-pain pathway at Virginia Mason's spine clinic, Seattle (2004–2005). Sponsored by the medical center's leadership under the Virginia Mason Production System, after the payer Aetna signalled it might drop the hospital for costing more than comparable providers, and the employer Starbucks complained about the cost and the delays of back-pain treatment. Approved to achieve: faster access and lower cost per episode for uncomplicated low-back pain.</div></div>
+<h4>2 · The WTP edge — does the customer notice?</h4><div class="field"><label>Competitive priority affected</label><div class="ans"><span class="pick">Delivery speed</span>From a wait of about a month to a same-day appointment. Cost is moved too, but for the payer, not for the clinic.</div><div class="split"><b>Where a group would split</b>Half the groups pick <em>Cost</em>. The test is who pays: the saving lands on Aetna and Starbucks, the speed lands on the patient and the employer. Both are real; the canvas asks for the one the project moves <em>most</em>, and speed is the one every party noticed first.</div></div>
+<div class="field"><label>Quality dimension, if any</label><div class="ans"><span class="pick">Conformance</span>Care that follows the evidence (physical therapy first; imaging only on red flags) instead of varying by physician. Conformance lowers cost, which is why this project pays on both edges.</div></div>
+<div class="field"><label>Order winner or qualifier?</label><div class="ans"><span class="pick">Order winner</span>For the payer: an order winner — Aetna had no other Seattle provider offering this pathway, so it produced preference. For the patient alone it would be a qualifier (nobody chooses a hospital for its back-pain queue, but they leave over it).</div><div class="split"><b>Where a group would split</b>The answer depends on who the customer is — the next line. Groups that write "the patient" here will call it a qualifier; groups that write "the payer" will call it a winner. Make the group settle the customer first, then return to this line.</div></div>
+<div class="field"><label>Who is the customer here — and would they notice?</label><div class="ans">Three candidates: the patient, the employer (Starbucks, which loses workdays) and the payer (Aetna, which pays for MRIs). The one who decides whether the hospital keeps the business is the payer, so the canvas is written to Aetna. All three noticed: wait fell from about a month to a day; only 6% of patients lost time from work.</div><div class="split"><b>Where a group would split</b>This is the hardest line on the canvas and the one that decides the verdict. A group that answers "the patient" writes a good clinical project; a group that answers "the payer" writes a strategic one. Neither is wrong — but they lead to different field-6 decisions.</div></div>
+<h4>3 · Map the stream — where the time actually goes</h4><div class="field"><label>The steps, in sequence</label><div class="ans">call for appointment → wait → physician visit → MRI ordered (for many) → wait for imaging → specialist referral → wait → physical therapy prescribed → therapy starts</div></div>
+<div class="field"><label>Process time</label><div class="ans">Roughly two to three hours of clinical contact across the episode: a physician visit, an imaging slot, a specialist visit, a first therapy session.</div></div>
+<div class="field"><label>Lead time</label><div class="ans">About a month from first call to the start of treatment, in the pre-redesign pathway reported by the <em>Wall Street Journal</em>; Kenney's account of the same clinic gives waits of up to 45 days.</div></div>
+<div class="field"><label>Where the gap sits</label><div class="ans">In two queues: the wait for the first appointment, and the loop through imaging and specialist referral before therapy — which, for about 80% of patients, changed nothing in the treatment eventually prescribed.</div><div class="split"><b>Where a group would split</b>Groups want to put the gap at "the MRI". The MRI is a step with a cost; the <em>gap</em> is the waiting around it. Separating the two is the point of asking for process time and lead time as different numbers.</div></div>
+<h4>4 · The cost edge — name the waste</h4><div class="field"><label>Primary waste removed</label><div class="ans"><span class="pick">Over-processing</span>Imaging and specialist consultation beyond what the clinical evidence requires for uncomplicated back pain. MRI use fell from 15.4% to 10% of patients within a year (WSJ); Kenney reports a larger fall over a longer period.</div><div class="split"><b>Where a group would split</b>The obvious answer is <em>Waiting</em>, because the wait is what the patient feels. But the waiting was produced by the over-processing: remove the unnecessary imaging loop and the queue behind it disappears. The canvas asks for the waste that causes the others.</div></div>
+<div class="field"><label>Where in the process it occurs today</label><div class="ans">At the physician visit, where an MRI was ordered by habit rather than by indication, and in the referral to a specialist before conservative treatment had been tried.</div></div>
+<div class="field"><label>Secondary wastes affected</label><div class="ans">Waiting (both queues); transport (handoffs between primary care, imaging and specialists); defects, in the sense of care that did not match the evidence.</div></div>
+<div class="field"><label>Order of magnitude</label><div class="ans">About $850 per avoided MRI for the payer and employer; return to a same-day first appointment; patient volume at the clinic roughly doubled after the redesign.</div></div>
+<h4>5 · What the project actually builds</h4><div class="field"><label>A — Assets</label><div class="ans">Almost nothing new. The same clinic, the same imaging equipment. One addition: an order-entry rule in the IT system that blocks an MRI order when the evidence-based indication is absent.</div></div>
+<div class="field"><label>P — Processes</label><div class="ans">The whole change is here: a physical therapist sees the patient first, a physician joins to separate complicated from uncomplicated cases, therapy starts the same day, imaging is reserved for red flags.</div></div>
+<div class="field"><label>C — Capability</label><div class="ans">The ability to redesign a care pathway against a payer's complaint and hold the new standard — demonstrated here, and reused later on other pathways. But note the strict test: the pathway itself is P. C is only what the organisation can now do again without this team.</div><div class="split"><b>Where a group would split</b>Most groups leave C empty for this project, and that is defensible. The case for C rests on what Virginia Mason did next with the same method, not on this project alone. Ask the group: if the people who ran this left, would the next pathway be redesigned?</div></div>
+<h4>6 · The verdict</h4><div class="field"><label>How long before a competitor could replicate this?</label><div class="ans"><span class="pick">A year or two</span>The pathway was published; any clinic could copy the sequence. What is harder to copy is the willingness to lose money per case while the payment model catches up.</div></div>
+<div class="field"><label>The decision</label><div class="ans"><span class="pick">Fund with conditions</span>The project destroyed the clinic's own margin: per case, roughly a $100 profit became a $200 loss, and each avoided MRI removed about $450 of the hospital's profit. It only makes sense if the payer shares the saving — which is the condition Virginia Mason then negotiated with Aetna.</div><div class="split"><b>Where a group would split</b>This is where the customer line pays off. A group that wrote "the patient" in field 2 will vote <em>Fund</em> and miss the margin problem. A group that wrote "the payer" sees that the project is a value transfer and that the condition is a contract, not a process. The canvas was built to make that difference visible.</div></div>
+<div class="field"><label>If conditions: what would have to be added to build C?</label><div class="ans">A payment arrangement that returns part of the payer's saving to the clinic; a standard that survives the physicians who designed it; and the same method applied to a second pathway within a year — the only evidence that C, rather than P, was built.</div></div>
+
+      </div>
+    </div>
+    <div class="note">
+      <span class="lbl">What this example teaches</span>
+      The canvas forced one decision the business case did not: <strong>who the customer is</strong>. Written to the patient, the project is an unambiguous improvement. Written to the payer, it is a value transfer that the clinic cannot afford unless the contract changes. Both readings are true; only the second produces a condition that can be acted on. The second lesson is quieter: every number in fields 3 and 4 was available before the project started, and nobody had put process time and lead time on the same line.
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<div class="partbar" id="two"><div class="wrap"><div class="n">TWO</div><h2>Example 2 — The Digital Tool Appraisal: Zillow Offers</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="facts">
+      <h4>The case in five facts</h4>
+      <ul>
+        <li>Zillow Offers, launched in 2018, bought homes directly from sellers at prices generated by Zillow's machine-learning valuation model, renovated them and resold them — "iBuying".</li>
+        <li>In 2021, under an internal push employees called Project Ketchup (to catch up with Opendoor), offers were adjusted upward. Zillow ended up buying about 74% of the homes it made offers on, against a target of 50–60%, and acquired roughly 15,000 homes in nine months after 4,162 in all of 2020.</li>
+        <li>Renovation and resale did not scale with purchases: repair budgets were squeezed by the higher offers, and contractors reported deprioritising Zillow's jobs.</li>
+        <li>On 2 November 2021 Zillow announced it would wind the business down, taking a write-down of about $304 million on inventory in the third quarter, a Homes-segment pre-tax loss of $422 million, a further $240–265 million of expected losses in the fourth quarter, and a 25% reduction of its workforce.</li>
+        <li>The CEO's explanation: "the unpredictability in forecasting home prices far exceeds what we anticipated."</li>
+      </ul>
+    </div>
+    <div class="inst">
+      <div class="ih"><b>The Digital Tool Appraisal — filled in</b><span>Written as the tool would have been appraised in mid-2021, by a group with access to what the company itself knew at the time</span></div>
+      <div class="ib">
+<h4>1 · The tool</h4><div class="field"><label>Tool or platform</label><div class="ans">Zillow Offers' automated pricing — the Zestimate-based valuation model used to make cash offers on homes, plus the "Project Ketchup" adjustments that raised offers to win more of them (2018–2021).</div></div>
+<div class="field"><label>The workflow it automates</label><div class="ans">Pricing and acquisition: the model estimated a home's value and its expected resale price; offers were generated from that estimate; homes were bought, renovated and resold.</div></div>
+<div class="field"><label>Where it stands</label><div class="ans"><span class="pick">In production more than a year</span>Appraised here as it stood in the third quarter of 2021, when the business was wound down.</div></div>
+<div class="field"><label>Does it include AI or machine learning?</label><div class="ans"><span class="pick">Yes</span>A machine-learning valuation model, so section 4 applies.</div></div>
+<h4>2 · VCAP triage — what does it actually change?</h4><div class="field"><label>Which term does it move?</label><div class="ans"><span class="pick">A and P</span>The model was an asset, and it changed the flow of work: offers were set by the algorithm at a volume no human pricing team could have produced. It did not make the organisation better at improving its own pricing — the opposite, as the second half of 2021 showed.</div><div class="split"><b>Where a group would split</b>Some groups argue for A, P and C because Zillow had a decade of data and talent. Apply the test: what could the organisation do afterwards that it could not do before, <em>that did not depend on the system</em>? Nothing visible — the capability was the system.</div></div>
+<div class="field"><label>If you claimed C</label><div class="ans">Not claimed.</div></div>
+<div class="field"><label>Does it limit work in progress?</label><div class="ans"><span class="pick">No — it only makes starting work easier</span>No — it only made starting work easier. Zillow bought about 15,000 homes in the first nine months of 2021 against 4,162 in all of 2020; renovation and resale capacity did not scale with the purchases, and contractors reported deprioritising Zillow jobs. Little's Law did not stop at the screen.</div></div>
+<div class="field"><label>Does it become the one place this information is kept?</label><div class="ans"><span class="pick">The one place</span>The estimate replaced human pricing judgement rather than sitting beside it. That is what made the failure systematic rather than local.</div></div>
+<div class="field"><label>Adoption — expected against actual</label><div class="ans">Fully adopted: by late 2021 Zillow was buying about 74% of the homes it made offers on, against an internal target of 50–60%. Adoption was not the problem. It was the mechanism.</div></div>
+<div class="field"><label>How long before a competitor with the same budget has the same thing?</label><div class="ans"><span class="pick">Months</span>Opendoor and Offerpad ran comparable models. The model was never the advantage; the capital was.</div></div>
+<h4>3 · Capability maturity — the six conditions</h4><div class="field"><label>0 · Evidence base</label><div class="ans"><span class="pick">No, only modelling or vendor material</span>In 2018 no organisation had a measured result for algorithmic home-buying at scale; the evidence was the model's own back-tests.</div></div>
+<div class="field"><label>1 · Technical capability in operation</label><div class="ans"><span class="pick">No, or performance has drifted</span>The estimate was adequate for its original purpose — informing a listing — and was pushed into a different one: forecasting a resale price months ahead in a market that changed regime in 2021. The CEO's own words: "the unpredictability in forecasting home prices far exceeds what we anticipated."</div><div class="split"><b>Where a group would split</b>A group will say "Yes — the Zestimate was accurate". Ask: accurate at what, and for which decision? The condition is about the threshold actually in use — a cash offer — not about a median error on a website.</div></div>
+<div class="field"><label>2 · Workflow integration</label><div class="ans"><span class="pick">Yes — named recipient, inside the decision window</span>The output went straight into the offer. The condition is met, and that is precisely what removed the human check.</div><div class="split"><b>Where a group would split</b>The surprising reading. Groups expect a failed implementation to fail at integration. This one succeeded at integration and failed because nothing stood between the estimate and the money.</div></div>
+<div class="field"><label>Who receives the output, at which step, and is it in fact used?</label><div class="ans">The offer engine, at the point of offer. Used on every offer; adjusted upward under Project Ketchup to win more of them.</div></div>
+<div class="field"><label>3 · Translation into action</label><div class="ans"><span class="pick">No — identification without capacity to act</span>The action after purchase is renovation and resale, and the organisation could not act at the rate the model was buying: repairs were under-budgeted, contractors walked, homes sat.</div></div>
+<div class="field"><label>The action, its owner, and what it depends on</label><div class="ans">Renovate and relist within the holding period. Owned by local operations teams; dependent on contractor capacity, repair budgets and resale demand — none of which the model saw.</div></div>
+<div class="field"><label>4 · Organisational outcome</label><div class="ans"><span class="pick">Partly — indicator named, no baseline</span>The indicator in use was growth: homes acquired and revenue toward a $20 billion ambition. Unit margin, the indicator that would have shown the problem early, was not the one being steered.</div></div>
+<div class="field"><label>5 · Net value</label><div class="ans"><span class="pick">No — only the gain has been counted</span>No — only the gain had been counted. The write-down on inventory was about $304 million in a single quarter, with a Homes-segment pre-tax loss of $422 million, a further $240–265 million expected the next quarter, and a 25% reduction of the workforce.</div></div>
+<div class="field"><label>How good is the evidence you just used?</label><div class="ans"><span class="pick">No comparison group</span>The company's own before-and-after, plus a regulatory filing and press reporting. Good enough to locate the break; not an experiment.</div></div>
+<h4>4 · Philosophical debt audit — AI only</h4><div class="pillar"><h4>Teleology — what it is told to want</h4><div class="field"><label>What is it optimising for, precisely?</label><div class="ans">Formally: an accurate resale estimate. In practice, under Project Ketchup: offers high enough to win 50–60% of them. Two objectives — accuracy and volume — with no written rule for the moment they conflicted. They conflicted in mid-2021.</div></div>
+<div class="field"><label>Is the hierarchy of objectives documented?</label><div class="ans"><span class="pick">Not documented</span>It was implicit in the configuration: the upward adjustment was applied to the estimate without anyone writing down what it was allowed to cost in margin.</div><div class="split"><b>Where a group would split</b>This is the field that makes the case worth teaching. Groups look for a model error. The model behaved as configured; the organisation had never stated what it wanted more — to be right or to be big.</div></div>
+</div><div class="pillar"><h4>Epistemology — what it is allowed to count as knowing</h4><div class="field"><label>Does it express uncertainty, and does anything happen when it is high?</label><div class="ans"><span class="pick">It returns an answer with no stated confidence</span>It returned an answer with no stated confidence that reached the decision. A valuation model knows its own error distribution; nothing in the offer process widened the margin or escalated when the market left the training regime.</div></div>
+<div class="field"><label>What would invalidate its training data?</label><div class="ans">A change in the relationship between today's price and the price in three months — exactly what the 2021 market did. The data was invalidated; the system kept answering.</div></div>
+</div><div class="pillar"><h4>Ontology — what it is able to see</h4><div class="field"><label>What has the system been given as a stand-in for the thing you actually care about?</label><div class="ans">The thing cared about was profit per home. The stand-in was estimated resale value. Missing from the representation: renovation cost and capacity, contractor availability, holding time, and the behaviour of other iBuyers bidding on the same houses.</div></div>
+<div class="field"><label>Who reviews what the system represents, and when?</label><div class="ans"><span class="pick">Only when something goes wrong</span>Only when something went wrong — and by then the inventory was bought.</div></div>
+</div><h4>5 · The verdict</h4><div class="field"><label>Rank the debts, largest first</label><div class="ans"><span class="pick">Philosophical · Capability · Technical</span>1 · Philosophical — no hierarchy between accuracy and volume. 2 · Capability — conditions 3 and 5: no capacity to act on what was bought, and no count of what the gain cost. 3 · Technical — the model drifted, but it was the last of the three to break.</div><div class="split"><b>Where a group would split</b>Groups rank Technical first because the CEO blamed forecasting. Push back: the forecasting error was survivable at 4,000 homes a year; it was fatal at 15,000 with the offers raised. The debt that killed the business was the one nobody had written down.</div></div>
+<div class="field"><label>The decision</label><div class="ans"><span class="pick">Pause</span>The debt has to be paid first. Appraised in mid-2021, the instrument says: stop raising offers until the objective hierarchy is written and the unit margin is the indicator being steered. The company chose "do not proceed" in November 2021, at a higher price.</div></div>
+<div class="field"><label>The first step, and who owns it</label><div class="ans">Write the rule for the conflict between accuracy and volume, and put a margin floor under the adjustment. Owner: the executive who owns the Homes P&L, not the data-science team.</div></div>
+<h4>6 · Benchmarking — after the session</h4><div class="field"><label>The benchmark</label><div class="ans">Not a competitor: Opendoor ran the same model and the same race. A functional comparator — a bank's credit-risk governance, where the hierarchy between volume and loss is written, owned and reviewed.</div></div>
+<div class="field"><label>What does the reference do that you do not?</label><div class="ans">Separates the people who build the model from the people who set the risk appetite, and makes the second group write the trade-off down.</div></div>
+<div class="field"><label>Would you be copying an asset, a process, or a rule-in-use?</label><div class="ans"><span class="pick">C</span>A way of working: a model-risk function with authority over deployment is a habit, not a document.</div></div>
+<div class="field"><label>How long did the reference take to build it?</label><div class="ans"><span class="pick">A decade or more</span>Bank model-risk governance was built after losses, under regulation.</div></div>
+<div class="field"><label>Adopt, adapt or discard</label><div class="ans"><span class="pick">Adapt</span>The rule-in-use transfers; the regulatory scaffolding does not.</div></div>
+<h4>7 · Capability gaps and the six-month roadmap</h4><div class="field"><label>Gap 1</label><div class="ans"><span class="pick">High value · High feasibility · Months 0–2</span>A written hierarchy of objectives, with a margin floor on any adjustment to the model's estimate.</div></div>
+<div class="field"><label>Gap 2</label><div class="ans"><span class="pick">High value · Medium feasibility · Months 0–2</span>A cap on work in progress: homes under contract limited to renovation and resale capacity.</div></div>
+<div class="field"><label>Gap 3</label><div class="ans"><span class="pick">Medium value · Medium feasibility · Months 2–4</span>Uncertainty that reaches the decision — offers widen or escalate when the model's error on recent sales exceeds a threshold.</div></div>
+<div class="field"><label>What has to be true by the end of month two?</label><div class="ans">Every offer carries a margin floor; purchases are capped at the capacity to renovate them; and the Homes P&L reads unit margin, not units.</div></div>
+
+      </div>
+    </div>
+    <div class="note">
+      <span class="lbl">What this example teaches</span>
+      The instrument does not find a model error, and that is the finding. Condition 2 was met — the estimate reached the decision — and conditions 3 and 5 were not: nobody could act on what was bought at that rate, and nobody counted what the growth cost. Underneath both sat an unwritten hierarchy of purposes. <strong>Philosophical debt accumulated where C should have been</strong>: an organisation that cannot say whether it wants to be right or to be big has no object on which to run an improvement routine. The CEO's explanation names the symptom; the appraisal locates the cause two links upstream.
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>What the two examples have in common</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="tight">
+      <li><strong>Both turn on a definition nobody had written down.</strong> At Virginia Mason, who the customer is. At Zillow, what the system is for when its objectives conflict. The instruments are built to force those two sentences onto paper.</li>
+      <li><strong>Both locate the gap away from where the organisation was looking.</strong> The hospital looked at the MRI; the gap was the queue around it. Zillow looked at forecasting error; the gap was capacity to act and an uncounted cost.</li>
+      <li><strong>Neither verdict is "fund" or "do not fund".</strong> Both are conditional — a contract in one case, a written rule and a cap in the other. That is the characteristic output of both instruments, and the reason they produce no score.</li>
+    </ul>
+    <p>Your own project and your own tool will be less dramatic than these two, which is why they were chosen: the discipline is easier to see at full scale. Open the <a href="value-case-canvas.html">Value Case Canvas</a> and the <a href="digital-tool-appraisal.html">Digital Tool Appraisal</a> with the <em>Where a group would split</em> notes in mind.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Sources</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Fuhrmans, V. (2007, January 12). A novel plan helps hospital wean itself off pricey tests. <em>The Wall Street Journal</em>. Source of the wait, MRI, lost-work and per-case income figures for Virginia Mason's spine clinic.</li>
+      <li>Kenney, C. (2011). <em>Transforming Health Care: Virginia Mason Medical Center's Pursuit of the Perfect Patient Experience</em>. CRC Press. Source of the Aetna and Starbucks background, the pathway design and the volume figures; reports a larger fall in MRI use over a longer period than the 2007 article.</li>
+      <li>Zillow Group, Inc. (2021, November 2). <em>Zillow Group reports third-quarter 2021 financial results; shares plan to wind down Zillow Offers operations</em> (Form 8-K, Exhibit 99.1). U.S. Securities and Exchange Commission. Source of the write-down, segment loss, workforce reduction and the CEO quotation.</li>
+      <li>Business Insider (2021, November). Zillow insiders blame "Project Ketchup" for the firm's home-buying failures; as reported by Inman, 9 November 2021. Source of the 74% acceptance rate, the 50–60% target, the purchase volumes and the contractor accounts.</li>
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Open access — the VCAP identity and philosophical debt (Ch. 1 and Ch. 5).</li>
+      <li>Schrage, M., &amp; Kiron, D. (2025). <a href="https://sloanreview.mit.edu/article/philosophy-eats-ai/" target="_blank" rel="noopener">Philosophy eats AI</a>. <em>MIT Sloan Management Review</em>. The three questions of section 4.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Worked examples for both instruments · 17 October 2026<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+</body>
+</html>
