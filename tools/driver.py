@@ -68,12 +68,76 @@ JOBS = [
             "meta": "<b>17 October 2026</b> &nbsp;·&nbsp; 14:00–17:00<br><b>Prof. Dr. Thiago Lima</b><br>Companion to the Digital Tools &amp; Benchmarking reading notes",
             "foot": "This printed version is for working in the room. The same instrument is fillable and exportable online, which is the version to use when the appraisal has to leave the session.",
             "tocTitle": "Contents",
-            "tocKick": "Does the tool change what the organisation owns or what it is able to do; where it contains AI, what the system was told to want, to know and to see, and at which link the chain from a working model to a result breaks; and which capability gaps to close first.",
+            "tocKick": "Does the tool change what the organisation owns or what it is able to do; where it contains AI, what the system was told to want, to know and to see; and at which link the chain from a working model to a result breaks. The follow-up — the reference and the roadmap — is the Benchmarking Study.",
             "tocNote": "<b>There is no score.</b> The instrument restates your own answers and locates the gap. A composite figure would hide the only thing worth knowing, which is where the chain stops.",
             "runningFoot": "Digital Tool Appraisal · 17 October 2026 · Prof. Dr. Thiago Lima",
         },
     },
+    {
+        "src": f"{REPO}/benchmarking-study.html",
+        "out": f"{OUT}/Benchmarking_Study_Printable.pdf",
+        "meta": {
+            "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
+            "title": "Benchmarking Study",
+            "sub": "The follow-up to the Digital Tool Appraisal: one reference decoded, and the six-month roadmap across the three capability gaps.",
+            "meta": "<b>17 October 2026</b> &nbsp;·&nbsp; follow-up assignment<br><b>Prof. Dr. Thiago Lima</b><br>Companion to the Digital Tools &amp; Benchmarking reading notes",
+            "foot": "This printed version is for working by hand. The same study is fillable online and exports to PDF, which is the version to hand in.",
+            "tocTitle": "Contents",
+            "tocKick": "Not what the reference's number is, but what routine produces it — and what this organisation would have to accumulate before that routine could run here.",
+            "tocNote": "<b>“Nobody here knows” is a finding.</b> The study restates your answers; it does not score them.",
+            "runningFoot": "Benchmarking Study · 17 October 2026 · Prof. Dr. Thiago Lima",
+        },
+    },
+    {
+        "src": f"{REPO}/canvas-caso-de-valor.html",
+        "out": f"{OUT}/pt-1.pdf",
+        "meta": {
+            "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
+            "title": "Canvas do Caso de Valor",
+            "sub": "O instrumento da atividade em grupo da manhã. Um projeto autorizado, quinze minutos, três para defender.",
+            "meta": "<b>17 de outubro de 2026</b> &nbsp;·&nbsp; 09:00–12:00<br><b>Prof. Dr. Thiago Lima</b><br>Acompanha as notas de leitura de Lean Six Sigma &amp; Continuous Improvement",
+            "foot": "Esta versão impressa é para trabalhar em sala. O mesmo canvas é preenchível online e exporta em PDF — é a versão a usar quando a avaliação precisa sair da sessão.",
+            "tocTitle": "Sumário",
+            "tocKick": "Qual borda do valor o projeto move, qual desperdício nomeado ele remove, e se a organização termina mais capaz ou apenas mais bem equipada.",
+            "tocNote": "<b>Não há nota.</b> O canvas devolve as respostas do grupo e mostra onde o argumento ainda está em aberto.",
+            "runningFoot": "Canvas do Caso de Valor · 17 de outubro de 2026 · Prof. Dr. Thiago Lima",
+        },
+    },
+    {
+        "src": f"{REPO}/avaliacao-ferramenta-digital.html",
+        "out": f"{OUT}/pt-2.pdf",
+        "meta": {
+            "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
+            "title": "Avaliação de Ferramenta Digital",
+            "sub": "O instrumento da atividade em grupo da tarde. Uma ferramenta, cerca de vinte minutos, preenchida por quem vai conviver com a decisão.",
+            "meta": "<b>17 de outubro de 2026</b> &nbsp;·&nbsp; 14:00–17:00<br><b>Prof. Dr. Thiago Lima</b><br>Acompanha as notas de leitura de Digital Tools &amp; Benchmarking",
+            "foot": "Esta versão impressa é para trabalhar em sala. A mesma avaliação é preenchível online e exporta em PDF — é a versão a usar quando a avaliação precisa sair da sessão.",
+            "tocTitle": "Sumário",
+            "tocKick": "A ferramenta muda o que a organização possui ou o que ela é capaz de fazer; quando contém IA, o que o sistema foi instruído a querer, a saber e a enxergar; e em que elo a cadeia entre um modelo que funciona e um resultado se rompe.",
+            "tocNote": "<b>Não há nota.</b> O instrumento devolve as respostas e localiza a lacuna. Um número único esconderia a única coisa que vale saber: onde a cadeia para.",
+            "gateNote": "<b>A seção 4 se aplica só quando a ferramenta contém IA ou aprendizado de máquina.</b> Se a última pergunta da seção 1 for respondida com não, passem direto para a seção 5. Na versão online a seção aparece e desaparece sozinha.",
+            "runningFoot": "Avaliação de Ferramenta Digital · 17 de outubro de 2026 · Prof. Dr. Thiago Lima",
+        },
+    },
+    {
+        "src": f"{REPO}/estudo-de-benchmarking.html",
+        "out": f"{OUT}/pt-3.pdf",
+        "meta": {
+            "eyebrow": "IAE Paris — Sorbonne Business School · IDGP Academy",
+            "title": "Estudo de Benchmarking",
+            "sub": "O desdobramento da Avaliação de Ferramenta Digital: uma referência decodificada, e o roteiro de seis meses para as três lacunas de capacidade.",
+            "meta": "<b>17 de outubro de 2026</b> &nbsp;·&nbsp; tarefa de desdobramento<br><b>Prof. Dr. Thiago Lima</b><br>Acompanha as notas de leitura de Digital Tools &amp; Benchmarking",
+            "foot": "Esta versão impressa é para trabalhar à mão. O mesmo estudo é preenchível online e exporta em PDF — é a versão a entregar.",
+            "tocTitle": "Sumário",
+            "tocKick": "Não qual é o número da referência, e sim que rotina o produz — e o que esta organização teria de acumular antes que essa rotina pudesse funcionar aqui.",
+            "tocNote": "<b>“Ninguém aqui sabe” é um achado.</b> O estudo devolve as respostas; não dá nota.",
+            "runningFoot": "Estudo de Benchmarking · 17 de outubro de 2026 · Prof. Dr. Thiago Lima",
+        },
+    },
 ]
+
+if len(sys.argv) > 1:
+    JOBS = [j for j in JOBS if any(k in j["out"] for k in sys.argv[1:])]
 
 
 def run(src, out, meta_file, mode="body", toc_file=None):

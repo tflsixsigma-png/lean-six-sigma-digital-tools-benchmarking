@@ -108,6 +108,7 @@ ul.tight li{margin-bottom:6px}
 .btnrow button.primary{background:var(--gold);color:var(--ink)}
 .btnrow button.ghost{background:transparent;color:var(--gold-soft)}
 .btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button[disabled]{opacity:.6;cursor:wait}
 .btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
 .savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
 
@@ -123,15 +124,16 @@ footer b{color:var(--gold-soft)}
   <div class="wrap">
     <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
     <h1>Digital Tool Appraisal</h1>
-    <p class="sub">An instrument for deciding what a digital tool — including an AI system — actually changes in your organisation, what it quietly leaves undone, and which capability gaps to close first.</p>
+    <p class="sub">An instrument for deciding what a digital tool — including an AI system — actually changes in your organisation, and what it quietly leaves undone.</p>
     <a class="back" href="index.html">← Back to the 17 October material</a>
+    <a class="back" href="avaliacao-ferramenta-digital.html" style="margin-left:18px">Versão em português</a>
   </div>
 </header>
 
 <section>
   <div class="wrap">
     <p class="lead">Three questions decide whether a digital investment returns anything. Does it change what the organisation <em>owns</em>, or what it is <em>able to do</em>? At which link does the chain from a working tool to an organisational result break — or go unmeasured? And, where the tool contains AI, what has the system been told to want, to know and to see?</p>
-    <p>The instrument asks all three in the room, in about twenty minutes for one tool, and then turns outward in two follow-up sections: what a reference organisation does that you do not, and which capability gaps to close first over six months. It is designed to be filled in by the people who will live with the decision rather than by the people selling it, and <strong>"not documented" and "nobody knows" are its most useful answers.</strong></p>
+    <p>The instrument asks all three in the room, in about twenty minutes for one tool. The follow-up turns outward and is a separate instrument, the <a href="benchmarking-study.html">Benchmarking Study</a>: what a reference organisation does that you do not, and which capability gaps to close first over six months. It is designed to be filled in by the people who will live with the decision rather than by the people selling it, and <strong>"not documented" and "nobody knows" are its most useful answers.</strong></p>
     <p>A filled-in example on a documented case — Zillow Offers, 2018–2021 — is on the <a href="worked-examples.html#two">Worked examples</a> page, with the lines where a group typically disagrees marked.</p>
   </div>
 </section>
@@ -180,7 +182,7 @@ footer b{color:var(--gold-soft)}
     <div class="inst">
       <div class="ih">
         <b>Digital Tool Appraisal</b>
-        <span>In the room: sections 1 to 5, about twenty minutes for one tool. Sections 6 and 7 are the follow-up assignment.</span>
+        <span>Five sections, about twenty minutes for one tool. The follow-up — the reference and the roadmap — is the <a href="benchmarking-study.html" style="color:#F2DFB4">Benchmarking Study</a>.</span>
       </div>
       <div class="ib" id="canvas">
 
@@ -478,120 +480,8 @@ footer b{color:var(--gold-soft)}
         </div>
 
         <div class="after">
-          <b>After the session — the benchmarking exercise and the roadmap</b>
-          <span>Section 6 is the benchmarking exercise: one organisation or standard that already does this well, and what it would take to do it here. Section 7 is the six-month roadmap across the organisation's three largest capability gaps. Together they are the module's follow-up assignment, and they are better done with a week of thought than with ten minutes of room time.</span>
-        </div>
-
-        <h4>6 · Benchmarking — who already does this well, and what it would take to do it here</h4>
-        <p style="font-size:15.5px;color:#4A5B70">This is the benchmarking exercise. Pick one organisation, or one published standard, that does what this tool is meant to achieve better than you do. The question is not what their number is, but what routine produces it — and what you would have to build before that routine would work here.</p>
-        <div class="block">
-          <div class="field">
-            <label for="b-ref">The benchmark — which organisation, or which standard?</label>
-            <div class="hint">The most useful reference is often outside your industry. Xerox fixed its warehouse by studying a catalogue retailer, not a competitor.</div>
-            <input type="text" id="b-ref" data-section="The reference" data-label="The reference" placeholder="An organisation, or a published standard">
-          </div>
-          <div class="field">
-            <label for="b-what">What does the reference do that you do not?</label>
-            <div class="hint">The practice, not the indicator. "They are 30% faster" is a number; "they review the representation quarterly with a named owner" is a practice.</div>
-            <textarea id="b-what" data-section="The reference" data-label="What the reference does that we do not"></textarea>
-          </div>
-          <div class="field">
-            <label for="b-term">Would you be copying an asset, a process, or a rule-in-use?</label>
-            <select id="b-term" data-section="The reference" data-label="What would be copied">
-              <option value="">Select one</option>
-              <option>A — an asset we would buy</option>
-              <option>P — a process we would document and copy</option>
-              <option>C — a way of working that lives in people's habits, which we would have to build</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="b-condition">What would have to be true here for that practice to work?</label>
-            <div class="hint">What would our people need to already know, or already be able to do, for this to take here? Practices fail to transfer for reasons of knowledge far more often than of motivation — including between two units of the same company.</div>
-            <textarea id="b-condition" data-section="The reference" data-label="Absorption condition"></textarea>
-          </div>
-          <div class="field">
-            <label for="b-howlong">How long did the reference take to build it?</label>
-            <select id="b-howlong" data-section="The reference" data-label="Time the reference took">
-              <option value="">Select one</option>
-              <option>Months</option>
-              <option>A few years</option>
-              <option>A decade or more</option>
-              <option value="flag-howlong">Unknown — nobody here knows</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="b-decision">Adopt, adapt or discard</label>
-            <select id="b-decision" data-section="The reference" data-label="Adopt, adapt or discard">
-              <option value="">Select one</option>
-              <option>Adopt — conditions are already in place</option>
-              <option>Adapt — translate it to our context</option>
-              <option>Discard — it depends on conditions we do not have and cannot reasonably accumulate</option>
-            </select>
-          </div>
-        </div>
-
-        <h4>7 · Capability gaps and the six-month roadmap</h4>
-        <p style="font-size:15.5px;color:#4A5B70">The appraisal above concerns one tool. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each one on the two axes that decide sequence. For each gap, answer three questions. <strong>How much does closing it matter?</strong> High if it moves something customers choose you for, or removes a constraint that keeps recurring; low if it is tidier but changes no result. <strong>Can it be closed with what exists today?</strong> High if the people, the data and the authority to change the process are already in hand; low if one of the three has to be built first. <strong>When would work on it start?</strong> — not finish: a roadmap is sequenced by starts.</p>
-        <div class="block">
-          <div class="field">
-            <label for="r-g1">Gap 1</label>
-            <input type="text" id="r-g1" data-section="The roadmap" data-label="Gap 1" placeholder="The capability that is missing, in one line">
-          </div>
-          <div class="field">
-            <label for="r-v1">Gap 1 — how much it matters, whether it can be closed now, and when it starts</label>
-            <div class="grid3">
-              <select id="r-v1" data-section="The roadmap" data-label="Gap 1 — how much it matters">
-                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-f1" data-section="The roadmap" data-label="Gap 1 — can it be closed now">
-                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-h1" data-section="The roadmap" data-label="Gap 1 — when it starts">
-                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="r-g2">Gap 2</label>
-            <input type="text" id="r-g2" data-section="The roadmap" data-label="Gap 2" placeholder="The capability that is missing, in one line">
-          </div>
-          <div class="field">
-            <label for="r-v2">Gap 2 — how much it matters, whether it can be closed now, and when it starts</label>
-            <div class="grid3">
-              <select id="r-v2" data-section="The roadmap" data-label="Gap 2 — how much it matters">
-                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-f2" data-section="The roadmap" data-label="Gap 2 — can it be closed now">
-                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-h2" data-section="The roadmap" data-label="Gap 2 — when it starts">
-                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="r-g3">Gap 3</label>
-            <input type="text" id="r-g3" data-section="The roadmap" data-label="Gap 3" placeholder="The capability that is missing, in one line">
-          </div>
-          <div class="field">
-            <label for="r-v3">Gap 3 — how much it matters, whether it can be closed now, and when it starts</label>
-            <div class="grid3">
-              <select id="r-v3" data-section="The roadmap" data-label="Gap 3 — how much it matters">
-                <option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-f3" data-section="The roadmap" data-label="Gap 3 — can it be closed now">
-                <option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option>
-              </select>
-              <select id="r-h3" data-section="The roadmap" data-label="Gap 3 — when it starts">
-                <option value="">When it starts —</option><option>Months 0–2</option><option>Months 2–4</option><option>Months 4–6</option><option>Beyond six months</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="r-first">What has to be true by the end of month two?</label>
-            <div class="hint">One sentence, measurable. A roadmap whose first checkpoint cannot be stated is a list of intentions with dates attached.</div>
-            <textarea id="r-first" data-section="The roadmap" data-label="The month-two checkpoint"></textarea>
-          </div>
+          <b>After the session — the Benchmarking Study</b>
+          <span>The follow-up is a separate instrument: one organisation or standard that already does this well and what it would take to do it here, then the six-month roadmap across the organisation's three largest capability gaps. It reads the tool you appraise here. <a href="benchmarking-study.html">Open the Benchmarking Study →</a></span>
         </div>
 
         <div class="readout" id="readout">
@@ -606,11 +496,11 @@ footer b{color:var(--gold-soft)}
           <input type="text" id="t-who" data-label="Appraised by" placeholder="Name, or the group">
         </div>
         <div class="btnrow">
-          <button type="button" class="primary" id="t-download">Download the appraisal</button>
+          <button type="button" class="primary" id="t-download">Download as PDF</button>
           <button type="button" class="ghost" id="t-copy">Copy as text</button>
           <button type="button" class="ghost" id="t-clear">Clear</button>
         </div>
-        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Download before closing the tab.</p>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Download the PDF before closing the tab.</p>
       </div>
     </div>
   </div>
@@ -652,233 +542,10 @@ footer b{color:var(--gold-soft)}
   </div>
 </footer>
 
+<script src="js/instrument.js"></script>
+<script src="js/tool-appraisal.js"></script>
 <script>
-(function(){
-  var root = document.getElementById('canvas');
-  if (!root) return;
-  var KEY = 'sorbonne-tool-appraisal-v1';
-  var who = document.getElementById('t-who');
-  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
-  var all = who ? fields.concat([who]) : fields;
-
-  var aiQ = document.getElementById('t-ai');
-  var layer = document.getElementById('ai-layer');
-  var gate = document.getElementById('ai-gate');
-
-  function syncLayer(){
-    var on = aiQ.value === 'yes' || aiQ.value === 'unsure';
-    layer.hidden = !on;
-    gate.hidden = on;
-  }
-
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
-  } catch (e) {}
-
-  function save(){
-    try {
-      var o = {};
-      all.forEach(function(f){ o[f.id] = f.value; });
-      localStorage.setItem(KEY, JSON.stringify(o));
-    } catch (e) {}
-  }
-
-  function flagged(id){
-    var el = document.getElementById(id);
-    return el && typeof el.value === 'string' && el.value.indexOf('flag-') === 0;
-  }
-  function sel(id){
-    var el = document.getElementById(id);
-    if (!el || !el.value) return '';
-    return el.options ? el.options[el.selectedIndex].text : el.value;
-  }
-
-  function readout(){
-    var out = [];
-    var term = document.getElementById('t-term').value;
-    var cClaim = document.getElementById('t-c').value.trim();
-
-    if (term === 'APC' && !cClaim) {
-      out.push('You claimed this moves <b>C</b> and left the defence blank. That is the one combination worth revisiting before the appraisal goes anywhere: name what the organisation will be able to do afterwards without the system, or drop the claim to A and P.');
-    } else if (term === 'APC' && cClaim) {
-      out.push('You claimed <b>C</b> and defended it. Hold that sentence — it is what the business case should be arguing, and it is usually the part that goes unwritten.');
-    } else if (term === 'A' || term === 'AP') {
-      out.push('You placed this in <b>' + (term === 'A' ? 'A' : 'A and P') + '</b>. That is a correctly identified purchase, not a weakness — but it means any competitor with the same budget can hold the same position, and the business case should be argued on that basis rather than on advantage.');
-    } else if (term === 'none') {
-      out.push('You could not place it in any term. Worth resolving before money moves.');
-    }
-
-    if (flagged('t-wip')) out.push('It makes work easier to start and does not cap what is in progress. By Little’s Law that lengthens lead time rather than shortening it — expect more in flight, not faster delivery.');
-    if (flagged('t-truth')) out.push('It adds another home for the same fact. That is a standing reconciliation cost, and it is the mechanism by which dashboards become negotiations.');
-    if (flagged('t-rep')) { /* reserved */ }
-    if (document.getElementById('t-replicate').value.indexOf('flag-') === 0) out.push('A competitor buys the same thing in months. Whatever advantage this produces has to come from something other than the tool.');
-
-    var ai = document.getElementById('t-ai').value;
-    if (ai === 'yes' || ai === 'unsure') {
-      var pillars = [];
-      if (flagged('p-hierarchy')) pillars.push('teleology');
-      if (flagged('p-uncertainty')) pillars.push('epistemology');
-      if (flagged('p-review')) pillars.push('ontology');
-      if (pillars.length) {
-        out.push('Unarticulated pillars: <b>' + pillars.join(', ') + '</b>. Not a judgement on the system — a statement that the assumption was never written down, and therefore cannot be audited or improved. This is debt in C arriving dressed as a purchase of A.');
-      }
-      if (ai === 'unsure') {
-        out.push('You cannot say what the AI in this tool does. Before anything else, that is the question to put to the vendor in writing.');
-      }
-      if (!document.getElementById('p-invalidate').value.trim()) {
-        out.push('You have not named what would invalidate its training data. Every model learns the conditions that produced its data; naming the event that ends those conditions is the cheapest safeguard available.');
-      }
-      if (!document.getElementById('p-missing').value.trim()) {
-        out.push('You have not named a variable the system cannot see. Either the representation is unusually complete, or nobody has looked — and the second is far more common.');
-      }
-
-    }
-
-    var NAMES = ['evidence base', 'technical capability in operation', 'workflow integration', 'translation into action', 'organisational outcome', 'net value'];
-    var firstBreak = -1, unmeasured = [], answered = 0;
-    for (var i = 0; i < 6; i++) {
-      var el = document.getElementById('k-' + i);
-      if (!el || !el.value) continue;
-      answered++;
-      if (el.value === 'flag-ku') { unmeasured.push(i + ' · ' + NAMES[i]); }
-      if (el.value.indexOf('flag-') === 0 && firstBreak === -1) { firstBreak = i; }
-    }
-    if (firstBreak === 0 || firstBreak === 1 || firstBreak === 4 || firstBreak === 5) {
-      out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b>. Conditions after it cannot compensate, so this is the one to resolve before anything downstream is argued.');
-    } else if (firstBreak === 2 || firstBreak === 3) {
-      out.push('The chain first stops being a clear yes at <b>condition ' + firstBreak + ' · ' + NAMES[firstBreak] + '</b> — one of the two organisational conditions. This is not a fault in the tool and no vendor can fix it: it is the capability the tool was supposed to be buying. It is also where the reviewed evidence says value is most often lost.');
-    }
-    if (unmeasured.length) {
-      out.push('Not measured at: <b>' + unmeasured.join('; ') + '</b>. An unobserved implementation is a more tractable problem than a failing one — the next step is to measure, not to spend.');
-    }
-    if (answered === 6 && firstBreak === -1 && !unmeasured.length) {
-      out.push('No break and no missing measure across all six conditions. That is rare; it is worth checking the answers against evidence somebody outside the project would accept.');
-    }
-    if (document.getElementById('k-valid').value.indexOf('flag-') === 0) {
-      out.push('Your evidence fails at least one of the three conditions on evidence quality. That does not make the tool wrong — it makes every answer above provisional, and it should be said in the business case rather than discovered later.');
-    }
-    var act = document.getElementById('k-3b');
-    if (act && !act.value.trim()) {
-      out.push('You have not written the action sentence: when the output says X, who does what, using what. Until that sentence exists, the project has identified a capability rather than a benefit.');
-    }
-
-    var VAL = {H:'high', M:'medium', L:'low'};
-    var seq = [];
-    for (var g = 1; g <= 3; g++) {
-    var name = (document.getElementById('r-g' + g).value || '').trim();
-    var v = document.getElementById('r-v' + g).value;
-    var f = document.getElementById('r-f' + g).value;
-    var h = document.getElementById('r-h' + g).value;
-    if (name || v || f || h) seq.push({n: name || 'Gap ' + g, v: v, f: f, h: h});
-    }
-    if (seq.length) {
-    var quickWins = seq.filter(function(x){ return x.v === 'H' && x.f === 'H'; });
-    var hard = seq.filter(function(x){ return x.v === 'H' && x.f === 'L'; });
-    var filler = seq.filter(function(x){ return x.v === 'L' && x.f === 'H'; });
-    if (quickWins.length) {
-      out.push('High value and high feasibility: <b>' + quickWins.map(function(x){return x.n;}).join('; ') + '</b>. These belong in the first two months — not because they are easy, but because an early demonstrated result is what buys the patience the harder items will need.');
-    }
-    if (hard.length) {
-      var early = hard.filter(function(x){ return x.h === 'Months 0–2'; });
-      if (early.length) {
-        out.push('<b>' + early.map(function(x){return x.n;}).join('; ') + '</b>: high value, low feasibility, scheduled in the first two months. That ordering is the commonest way a roadmap loses its sponsor. Either break it into a part that is feasible now, or move it later and say openly what has to change first.');
-      } else {
-        out.push('High value and low feasibility: <b>' + hard.map(function(x){return x.n;}).join('; ') + '</b>. Time compression diseconomies apply — this is accumulated, not purchased, so the honest plan states the condition that has to be built rather than the date it is wanted by.');
-      }
-    }
-    if (filler.length && !quickWins.length) {
-      out.push('Your most feasible items are also your least valuable. A roadmap made of these delivers visible activity and no change in position, which is the failure mode that is hardest to detect from inside.');
-    }
-    if (!document.getElementById('r-first').value.trim()) {
-      out.push('The month-two checkpoint is blank. A roadmap whose first verifiable outcome cannot be written in one sentence is a list of intentions with dates attached.');
-      }
-    }
-
-    if (flagged('b-howlong')) {
-      out.push('Nobody here knows how long the reference took. Until somebody does, you do not yet know what you are proposing to replicate — and a plan built on that gap is a budget problem disguised as a schedule.');
-    }
-    var bTerm = document.getElementById('b-term').value;
-    var bDec = document.getElementById('b-decision').value;
-    if (bTerm.indexOf('C —') === 0 && bDec.indexOf('Adopt') === 0) {
-      out.push('You are proposing to <b>adopt</b> something you classified as a <b>rule-in-use</b>. Rules-in-use are the part that does not transfer by observation — if the conditions really are already in place, say which ones; if not, this is an adapt, with time attached.');
-    }
-    if (bDec.indexOf('Discard') === 0) {
-      out.push('<b>Discard</b> is a finding, not a failure. Record why: the condition the practice depends on, and whether it is one you could accumulate if you decided to.');
-    }
-
-    var body = document.getElementById('readout-body');
-    if (!out.length) {
-      body.innerHTML = '<p class="none" style="margin:0">Fill the instrument in and this will summarise what you have just told it — it restates your own answers; it does not score them.</p>';
-    } else {
-      body.innerHTML = '<ul>' + out.map(function(s){ return '<li>' + s + '</li>'; }).join('') + '</ul>';
-    }
-  }
-
-  function onChange(){ save(); syncLayer(); readout(); }
-  all.forEach(function(f){
-    f.addEventListener('input', onChange);
-    f.addEventListener('change', onChange);
-  });
-  syncLayer();
-  readout();
-
-  function build(){
-    var out = ['# Digital Tool Appraisal', '', 'Module 3 — Methods, Tools and Operational Efficiency', 'Sorbonne Business School / IDGP Academy', ''];
-    out.push('**Appraised by:** ' + ((who && who.value.trim()) || '—'));
-    var aiOn = document.getElementById('t-ai').value === 'yes' || document.getElementById('t-ai').value === 'unsure';
-    var section = '';
-    var philo = ['Teleology', 'Epistemology', 'Ontology'];
-    fields.forEach(function(f){
-      var sec = f.getAttribute('data-section') || '';
-      if (!aiOn && philo.indexOf(sec) !== -1) return;
-      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
-      var v = f.options ? (f.value ? f.options[f.selectedIndex].text : '') : f.value;
-      out.push('- **' + f.getAttribute('data-label') + ':** ' + ((v || '').trim() || '—'));
-    });
-    var r = document.getElementById('readout-body').innerText.trim();
-    if (r && r.indexOf('Fill the instrument') !== 0) {
-      out.push('', '## What these answers say', '', r);
-    }
-    out.push('');
-    return out.join('\n');
-  }
-
-  function slug(){
-    var n = (document.getElementById('t-name').value.trim()) || 'tool';
-    return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'tool';
-  }
-
-  document.getElementById('t-download').addEventListener('click', function(){
-    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'tool-appraisal-' + slug() + '.md';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
-  });
-
-  document.getElementById('t-copy').addEventListener('click', function(){
-    var btn = this, text = build();
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){
-        var old = btn.textContent; btn.textContent = 'Copied';
-        setTimeout(function(){ btn.textContent = old; }, 2200);
-      }).catch(function(){ window.prompt('Copy the appraisal:', text); });
-    } else {
-      window.prompt('Copy the appraisal:', text);
-    }
-  });
-
-  document.getElementById('t-clear').addEventListener('click', function(){
-    if (!window.confirm('Clear every field?')) return;
-    all.forEach(function(f){ f.value = ''; });
-    onChange();
-  });
-})();
+ToolAppraisal.init('en');
 </script>
 
 </body>

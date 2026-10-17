@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas do Caso de Valor — Lean Six Sigma &amp; Continuous Improvement</title>
+<!-- share -->
+<meta name="description" content="Instrumento da atividade em grupo da manhã: a borda da disposição a pagar, o desperdício nomeado e o que o projeto constrói em A, P e C. Exporta em PDF.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IAE Paris — Sorbonne Business School · IDGP Academy">
+<meta property="og:title" content="Canvas do Caso de Valor">
+<meta property="og:description" content="Instrumento da atividade em grupo da manhã, em português. Exporta em PDF.">
+<meta property="og:url" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/canvas-caso-de-valor.html">
+<meta property="og:image" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /share -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2342; --ink:#04121F; --gold:#B8820F; --gold-soft:#F2DFB4;
+  --paper:#FBFAF7; --card:#FFFFFF; --body:#101B25;
+  --line:#B5C3D3; --line-soft:#DFE6EE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:58px 0 46px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.8vw,46px);line-height:1.1;max-width:19ch;margin-bottom:16px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch;margin-bottom:28px}
+.budget{display:flex;flex-wrap:wrap;border-top:1px solid rgba(242,223,180,.35)}
+.budget div{padding:14px 24px 6px 0;border-right:1px solid rgba(242,223,180,.18)}
+.budget div:last-child{border-right:none}
+.budget .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+.budget .v{font-size:15.5px;color:#F3F7FB;margin-top:2px}
+
+.partbar{background:var(--navy);color:#fff;padding:22px 0}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;margin-top:4px}
+
+section{padding:38px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:22px;font-weight:600;margin:30px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+td.n{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap}
+
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:24px 20px;margin:22px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:30px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:9px;font-family:'JetBrains Mono',monospace}
+
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.puzzle{background:var(--navy);color:#E6EDF6;border-radius:10px;padding:26px 28px;margin:22px 0;border-left:6px solid var(--gold)}
+.puzzle h4{color:#fff;margin-top:0;font-size:20px}
+.puzzle p{color:#C8D6E6}
+.puzzle .q{margin-top:16px;padding-top:15px;border-top:1px solid rgba(242,223,180,.3);color:var(--gold-soft);font-size:16.5px}
+
+/* Dark surfaces: strong and em must never inherit the near-black body colour */
+.puzzle strong,.eq strong,.cover strong,.partbar strong,.chain strong,footer strong,
+.house .roof strong,th strong{color:#FFFFFF}
+.puzzle em,.eq em,.cover em,.partbar em,footer em,.house .roof em{color:var(--gold-soft)}
+.puzzle .q strong{color:#FFFFFF}
+
+/* Bridge to project management */
+.bridge{background:#EAF1F8;border:1px solid #A9BFD8;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0}
+section:nth-of-type(even) .bridge{background:#EDF3F9}
+.bridge .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);display:block;margin-bottom:6px}
+.bridge p{font-size:16px;margin-bottom:8px}
+.bridge p:last-child{margin-bottom:0}
+
+/* Activity */
+.bridge .k{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7E5B0C;font-weight:700;margin-right:6px}
+.bridge ol,.bridge ul{margin:6px 0 8px 20px;font-size:16px}
+.activity{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:24px 0}
+.activity .ah{background:var(--navy);color:#fff;padding:14px 20px}
+.activity .ah b{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:#fff}
+.activity .ah span{display:block;font-size:14px;color:#C2D3E6;margin-top:2px}
+.activity .ab{padding:18px 20px;background:var(--card)}
+section:nth-of-type(even) .activity .ab{background:var(--paper)}
+.worksheet{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:14px 0}
+.worksheet .wl{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dotted #B6C5D6;font-size:15.5px}
+.worksheet .wl:last-child{border-bottom:none}
+.worksheet .wl b{color:var(--navy);font-weight:700}
+.worksheet .box{font-family:'JetBrains Mono',monospace;color:#6B7D92;white-space:nowrap}
+
+/* Fillable canvas */
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:64px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;
+  padding:12px 22px;border-radius:6px;border:2px solid var(--gold);
+}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:18px 20px}
+section:nth-of-type(even) .card{background:var(--paper)}
+.card h4{margin-top:0}
+.card p,.card li{font-size:15.5px}
+.card ul{margin-left:18px}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+ol.tight{margin:8px 0 14px 21px}
+ol.tight li{margin-bottom:8px}
+
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0;font-family:'JetBrains Mono',monospace;font-size:14px}
+.chain span{background:var(--navy);color:#fff;padding:8px 13px;border-radius:5px;white-space:nowrap}
+.chain span.end{background:var(--gold);color:var(--ink);font-weight:700}
+.chain i{color:var(--navy);font-style:normal;font-weight:700}
+
+.house{border:2px solid var(--navy);border-radius:9px;overflow:hidden;margin:20px 0}
+.house .roof{background:var(--navy);color:#fff;padding:12px 18px;text-align:center;font-family:'Fraunces',serif;font-size:17px}
+.house .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+.house .col{background:var(--card);padding:15px 16px}
+section:nth-of-type(even) .house .col{background:var(--paper)}
+.house .col.mid{background:#FEF8EA}
+.house .col h5{font-family:'Fraunces',serif;color:var(--navy);font-size:16px;margin-bottom:6px}
+.house .col p{font-size:14.5px;margin-bottom:0}
+.house .base{background:#E9EFF6;padding:12px 18px;text-align:center;font-size:15px;border-top:1px solid var(--line)}
+
+/* ---------- figures ---------- */
+.fig{margin:24px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px}
+section:nth-of-type(even) .fig{background:#FFFFFF}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{font-size:14.5px;color:#44566B;margin-top:12px;line-height:1.52;border-top:1px solid #DFE6EE;padding-top:10px}
+.fig figcaption b{color:var(--navy)}
+.sim .simhead{margin-bottom:14px}
+.sim .simhead b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.sim .simhead span{font-size:14.5px;color:#56687C;display:block;margin-top:3px}
+.simctl{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;align-items:center;
+  background:#F3F6FA;border:1px solid #C6D2DF;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.simctl label{font-size:14.5px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;gap:10px}
+.simctl output{font-family:'JetBrains Mono',monospace;color:#7E5B0C;font-weight:700}
+.simctl input[type=range]{width:100%;accent-color:#B8820F;height:26px}
+.simout{font-size:16px;color:var(--body);margin:14px 0 0;max-width:none;
+  border-left:5px solid var(--gold);background:#FEF8EA;padding:12px 16px}
+.simout b{color:var(--navy)}
+.simgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.simgrid div{background:#F3F6FA;border:1px solid #C6D2DF;border-radius:7px;padding:10px 12px}
+.simgrid div.hi{background:var(--ink);border-color:var(--ink)}
+.simgrid span{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#56687C;font-weight:700}
+.simgrid div.hi span{color:#9FB6CE}
+.simgrid b{font-family:'JetBrains Mono',monospace;font-size:19px;color:var(--navy)}
+.simgrid div.hi b{color:#F2DFB4}
+@media(max-width:700px){.simctl{grid-template-columns:1fr}.simgrid{grid-template-columns:repeat(2,1fr)}}
+.simpre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.simpre-l{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7E5B0C;font-weight:700;margin-right:4px}
+.simpre button{font-family:'Source Sans 3',sans-serif;font-size:14.5px;font-weight:600;color:var(--navy);background:#fff;border:1.5px solid #B5C3D3;border-radius:999px;padding:7px 14px;cursor:pointer}
+.simpre button:hover{border-color:var(--navy)}
+.simpre button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.simpre button:focus{outline:3px solid var(--gold);outline-offset:2px}
+.simcalc{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;background:var(--ink);color:#fff;border-radius:8px;padding:14px 18px;margin:0 0 14px;font-family:'JetBrains Mono',monospace}
+.simcalc.two{flex-direction:column;align-items:stretch;gap:6px;padding:10px 18px}
+.simcalc.two>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
+.simcalc .t{font-family:'Source Sans 3',sans-serif;font-weight:700;color:#F2DFB4;font-size:15px;min-width:86px}
+.simcalc .eq{color:#9FB6CE;font-size:18px}
+.simcalc .n{font-size:19px;color:#fff;display:inline-flex;flex-direction:column;line-height:1}
+.simcalc .n small{font-family:'Source Sans 3',sans-serif;font-size:11.5px;color:#9FB6CE;font-weight:400;letter-spacing:.04em}
+.simcalc .n.hi{color:#F2DFB4;font-weight:700;font-size:22px}
+.simcmp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.simcmp div{background:#F3F6FA;border:1px solid #C6D2DF;border-radius:7px;padding:10px 12px}
+.simcmp div.hi{background:#FEF8EA;border-color:var(--gold)}
+.simcmp span{display:block;font-size:13px;color:#56687C;font-weight:700}
+.simcmp b{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--navy);display:block;margin:3px 0}
+.simcmp small{font-size:12.5px;color:#56687C}
+.simtbl{margin:14px 0 0;font-size:15px}
+.simtbl td,.simtbl th{padding:7px 11px}
+.simtbl tr.cur td{background:#FEF8EA;font-weight:600}
+.simhow{margin-top:16px;border-top:1px solid #DFE6EE;padding-top:12px}
+.simhow b{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7E5B0C;display:block;margin-bottom:6px}
+.simhow ol{margin:0 0 0 20px;font-size:15.5px;color:#2E3F52}
+.simhow li{margin-bottom:5px}
+@media(max-width:700px){.simcmp{grid-template-columns:1fr}}
+
+
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:22px 0 4px}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+.btnrow button[disabled]{opacity:.6;cursor:wait}
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+
+@media(max-width:720px){.grid2,.house .cols{grid-template-columns:1fr}}
+@media print{.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact} section{padding:20px 0}}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Módulo 3</div>
+    <h1>O Canvas do Caso de Valor</h1>
+    <p class="sub">Um instrumento para avaliar um projeto autorizado pelo que o business case costuma deixar de fora: qual borda do valor ele move, qual desperdício nomeado ele remove, e se a organização termina mais capaz ou apenas mais bem equipada.</p>
+    <a class="back" href="index.html">← Voltar ao material de 17 de outubro</a>
+    <a class="back" href="value-case-canvas.html" style="margin-left:18px">English version</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">Um business case convencional responde a uma pergunta: o retorno supera o custo? A pergunta é necessária e não é suficiente, porque não diz nada sobre três coisas que decidem se o retorno sobrevive — e o canvas pergunta exatamente essas três.</p>
+    <p>É a atividade em grupo que fecha a sessão da manhã, <a href="session-1-lean-six-sigma.html">Lean Six Sigma &amp; Continuous Improvement</a>. É feita em grupos de três ou quatro sobre <strong>um projeto real</strong>, escolhido entre os que os membros trazem, e foi desenhada para ser preenchida sem o professor: a Parte Um traz as poucas ideias de que cada campo depende, a Parte Dois é o próprio canvas, e a Parte Três diz como ler o que sai dele.</p>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">UM</div><h2>O que você precisa para responder</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Cada campo do canvas usa uma ideia da manhã. Se alguma não for familiar, as notas de leitura a tratam por completo na parte indicada.</p>
+    <table>
+      <tr><th style="width:20%">Campo</th><th style="width:56%">A ideia em que se apoia</th><th style="width:24%">Nas notas de leitura</th></tr>
+      <tr><td class="k">2 · A borda da DAP</td><td>Valor é criado em apenas duas bordas: aumentar o que o cliente está <strong>disposto a pagar</strong> (DAP, ou WTP em inglês) ou reduzir o custo de atendê-lo. A DAP se move por quatro prioridades competitivas — custo, qualidade, velocidade de entrega, flexibilidade. Um <strong>ganhador de pedido</strong> cria preferência; um <strong>qualificador</strong> apenas evita a eliminação, e esforço acima do seu patamar não compra nada. Qualidade não é uma variável só: conformidade reduz custo, enquanto confiabilidade, durabilidade e facilidade de assistência aumentam a DAP.</td><td>Parte Dois</td></tr>
+      <tr><td class="k">3 · Mapear o fluxo</td><td><strong>Tempo de processo</strong> é o tempo em que alguém está de fato trabalhando na unidade; <strong>lead time</strong> é o tempo decorrido do primeiro ao último passo. A razão entre os dois é a eficiência de fluxo — em processos administrativos, geralmente entre dois e dez por cento. A diferença entre os dois números é fila, e é para lá que o projeto deve mirar.</td><td>Partes Três e Quatro</td></tr>
+      <tr><td class="k">4 · A borda do custo</td><td>Os oito desperdícios: superprodução (a raiz), espera, transporte, superprocessamento, estoque, movimentação, defeitos e talento não utilizado. "Reduz custos" é consequência, não desperdício. Uma economia que não pode ser nomeada como um dos oito é uma aspiração até que alguém a defina.</td><td>Parte Três</td></tr>
+      <tr><td class="k">5 · O que ele constrói</td><td><strong>V = C × (A + P)</strong>. A é o que a organização possui; P é como o trabalho flui sobre isso; C é a capacidade recorrente de melhorar P. A e P podem ser comprados por qualquer concorrente; C é o coeficiente. O teste para C é rigoroso: treinar pessoas para operar um sistema novo faz parte de entregar o ativo, não é capacidade.</td><td>Partes Dois e Oito</td></tr>
+      <tr><td class="k">6 · O veredito</td><td>Vantagem é uma comparação: <strong>VC = (DAP<sub>A</sub> − Custo<sub>A</sub>) − (DAP<sub>B</sub> − Custo<sub>B</sub>)</strong>. Se um concorrente pode fazer o mesmo movimento, os dois parênteses convergem e a vantagem volta a zero. Por isso o veredito pergunta quanto tempo a replicação levaria — e o que teria de ser acrescentado para o projeto construir C.</td><td>Parte Dois</td></tr>
+    </table>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">DOIS</div><h2>Preenchendo o canvas</h2></div></div>
+<section>
+  <div class="wrap">
+    <div class="note">
+      <span class="lbl">A matéria-prima</span>
+      <strong>Um projeto autorizado da sua própria organização</strong> — em andamento ou recém-aprovado — que você conheça bem o suficiente para defender. Não precisa ser grande, bem-sucedido, nem seu. O grupo escolhe um entre os que os membros propõem, e a escolha leva noventa segundos: escolham aquele sobre o qual o grupo discorda, não o que tem o melhor business case.
+    </div>
+
+    <h3>Por que esta avaliação é diferente de um business case comum</h3>
+    <ul class="tight">
+      <li><strong>Qual borda do valor isto move?</strong> Um projeto que só reduz custo compete na borda em que todo concorrente também está trabalhando. Um projeto que aumenta a disposição a pagar é mais difícil, mais raro, e costuma ser mal argumentado porque o número é mais difícil de produzir.</li>
+      <li><strong>A economia é um desperdício nomeado ou uma aspiração?</strong> "Melhora a eficiência em 15%" é uma meta. "Elimina as três reaprovações causadas por solicitações incompletas" é um desperdício com nome, e só o segundo pode ser verificado depois.</li>
+      <li><strong>A organização termina mais capaz, ou apenas mais bem equipada?</strong> Um projeto que entrega ativos e processos pode ser replicado por qualquer concorrente disposto a gastar o mesmo dinheiro. Um projeto que deixa a organização melhor em melhorar, não.</li>
+    </ul>
+    <p>As três perguntas são uma só, disfarçada, e o VC a enuncia: um projeto vale a pena ser defendido na medida em que alarga a diferença entre <em>(DAP − custo)</em> da sua empresa e a mesma quantidade do concorrente para quem você está de fato perdendo negócios. O campo 6 é onde isso se decide.</p>
+
+    <div class="activity">
+      <div class="ah">
+        <b>O Canvas do Caso de Valor</b>
+        <span>Grupos de três ou quatro · 15 minutos para preencher · 3 minutos para defender</span>
+      </div>
+      <div class="ab" id="canvas">
+        <p>O grupo escolhe <strong>um</strong> dos projetos trazidos pelos membros e preenche seis campos, um dos quais é um esboço curto do fluxo de valor. A discordância dentro do grupo é o objetivo — se todos concordarem nos três primeiros minutos, vocês escolheram um projeto fácil demais.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Preencham aqui. Uma pessoa por grupo digita; tudo fica salvo neste navegador à medida que vocês escrevem, e o botão no fim gera um PDF do canvas preenchido.</p>
+
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-project">1 · O projeto</label>
+            <div class="hint">O que é, quem patrocina e o que foi aprovado para alcançar.</div>
+            <input type="text" id="c-project" data-section="O projeto" data-label="O projeto" placeholder="Uma linha">
+          </div>
+        </div>
+
+        <h4>2 · A borda da DAP — o cliente percebe?</h4>
+        <p>Identifiquem se este projeto aumenta o que alguém estaria disposto a pagar, e sejam precisos sobre o mecanismo.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-priority">Prioridade competitiva afetada</label>
+            <div class="hint">As quatro coisas operacionais pelas quais um cliente pode estar pagando, da Parte Dois. Escolham a que este projeto mais move.</div>
+            <select id="c-priority" data-section="A borda da DAP" data-label="Prioridade competitiva">
+              <option value="">Selecione uma</option>
+              <option>Custo</option><option>Qualidade</option><option>Velocidade de entrega</option><option>Flexibilidade</option>
+              <option>Nenhuma — este projeto não move nenhuma delas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-garvin">Dimensão da qualidade, se houver</label>
+            <div class="hint">Conformidade reduz custo. Confiabilidade, durabilidade e facilidade de assistência aumentam a disposição a pagar.</div>
+            <select id="c-garvin" data-section="A borda da DAP" data-label="Dimensão da qualidade (Garvin)">
+              <option value="">Selecione uma, ou deixe em branco</option>
+              <option>Desempenho</option><option>Características</option><option>Confiabilidade</option><option>Conformidade</option>
+              <option>Durabilidade</option><option>Facilidade de assistência</option><option>Estética</option><option>Qualidade percebida</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-winner">Ganhador de pedido ou qualificador?</label>
+            <select id="c-winner" data-section="A borda da DAP" data-label="Ganhador ou qualificador">
+              <option value="">Selecione uma</option>
+              <option>Ganhador de pedido — gera preferência</option>
+              <option>Qualificador — sua ausência nos elimina, sua presença não atrai ninguém</option>
+              <option>Nenhum dos dois</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-customer">Quem é o cliente aqui — e ele perceberia?</label>
+            <div class="hint">Se a resposta honesta é que ninguém de fora perceberia, digam isso. Muitos projetos sólidos movem apenas a borda do custo.</div>
+            <input type="text" id="c-customer" data-section="A borda da DAP" data-label="O cliente, e se perceberia" placeholder="O cliente, e sim ou não">
+          </div>
+        </div>
+
+        <h4>3 · Mapear o fluxo — para onde o tempo realmente vai</h4>
+        <p>Esbocem o processo que o projeto toca, no nível de três a seis passos. Vocês não estão desenhando um mapa completo do fluxo de valor em dez minutos; estão produzindo os dois números que um mapa existe para produzir, e localizando a diferença entre eles.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-steps">Os passos, em sequência</label>
+            <div class="hint">De três a seis, cada um com quem o executa. Separem com setas: solicitação → triagem → aprovação → execução.</div>
+            <input type="text" id="c-steps" data-section="O fluxo de valor" data-label="Os passos em sequência" placeholder="passo (quem) → passo (quem) → passo (quem)">
+          </div>
+          <div class="field">
+            <label for="c-pt">Tempo de processo — o tempo em que alguém está de fato trabalhando nele</label>
+            <div class="hint">Somem o tempo de mão na massa ao longo dos passos, com a unidade (minutos, horas, dias). Uma estimativa que o grupo consiga defender é suficiente.</div>
+            <input type="text" id="c-pt" data-section="O fluxo de valor" data-label="Tempo de processo" placeholder="ex.: cerca de 4 horas">
+          </div>
+          <div class="field">
+            <label for="c-lt">Lead time — tempo decorrido do primeiro ao último passo</label>
+            <div class="hint">Tempo de calendário, não tempo de trabalho, com a unidade. A razão entre os dois é a eficiência de fluxo, e geralmente fica entre dois e dez por cento.</div>
+            <input type="text" id="c-lt" data-section="O fluxo de valor" data-label="Lead time" placeholder="ex.: cerca de 3 semanas">
+          </div>
+          <div class="field">
+            <label for="c-gap">Onde está a diferença</label>
+            <div class="hint">Nomeiem o lugar, ou os dois lugares, que guardam a maior parte do tempo decorrido. É para lá que o projeto deve mirar — e muitas vezes não é para lá que ele mira hoje.</div>
+            <input type="text" id="c-gap" data-section="O fluxo de valor" data-label="Onde está o tempo decorrido" placeholder="A fila, a aprovação, a passagem de bastão">
+          </div>
+        </div>
+
+        <h4>4 · A borda do custo — nomeiem o desperdício</h4>
+        <p>Agora digam qual dos desperdícios vive na diferença que vocês acabaram de localizar. Nomeiem a partir da lista; não troquem um desperdício por um benefício.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-waste">Desperdício principal removido</label>
+            <select id="c-waste" data-section="A borda do custo" data-label="Desperdício principal removido">
+              <option value="">Selecione um dos oito</option>
+              <option>Superprodução — o desperdício-raiz</option><option>Espera</option><option>Transporte</option>
+              <option>Superprocessamento</option><option>Estoque</option><option>Movimentação</option>
+              <option>Defeitos</option><option>Talento não utilizado</option>
+              <option>Nenhum dos oito — então o projeto não move a borda do custo, e o veredito deve dizer isso</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-where">Onde, no processo, ele ocorre hoje</label>
+            <input type="text" id="c-where" data-section="A borda do custo" data-label="Onde o desperdício ocorre" placeholder="O passo ou a fila">
+          </div>
+          <div class="field">
+            <label for="c-secondary">Desperdícios secundários afetados</label>
+            <div class="hint">Opcional.</div>
+            <input type="text" id="c-secondary" data-section="A borda do custo" data-label="Desperdícios secundários" placeholder="Opcional">
+          </div>
+          <div class="field">
+            <label for="c-magnitude">Ordem de grandeza, se conseguirem estimar</label>
+            <div class="hint">Dias, horas, porcentagem — o que conseguirem defender. Se ainda não há dado, escrevam como e quando vão medir.</div>
+            <input type="text" id="c-magnitude" data-section="A borda do custo" data-label="Ordem de grandeza" placeholder="Opcional">
+          </div>
+        </div>
+        <p style="font-size:15.5px"><strong>O teste:</strong> "reduz custos" e "aumenta a produtividade" não são desperdícios — são consequências. Se o grupo não consegue nomear um desperdício da lista, o projeto pode estar removendo algo real que ninguém ainda definiu, o que já é um achado. E se o desperdício removido for a <em>superprodução</em>, registrem: é o desperdício-raiz, e o projeto provavelmente vale mais do que o business case afirma.</p>
+
+        <h4>5 · O que o projeto de fato constrói</h4>
+        <p>Decomponham a entrega nos três termos. A maioria dos projetos toca mais de um; poucos tocam os três.</p>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-assets">A — Ativos</label>
+            <div class="hint">O que é comprado ou construído?</div>
+            <textarea id="c-assets" data-section="O que o projeto constrói" data-label="A — Ativos"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-processes">P — Processos</label>
+            <div class="hint">Que fluxo muda, e como?</div>
+            <textarea id="c-processes" data-section="O que o projeto constrói" data-label="P — Processos"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-capability">C — Capacidade</label>
+            <div class="hint">O que esta organização será capaz de fazer depois, que não conseguia antes — e que não depende do sistema novo? Um resultado (um tempo menor, uma nota maior) não é C.</div>
+            <textarea id="c-capability" data-section="O que o projeto constrói" data-label="C — Capacidade"></textarea>
+          </div>
+        </div>
+        <p style="font-size:15.5px"><strong>O teste para C é rigoroso.</strong> Treinar pessoas para operar o sistema novo não é capacidade — faz parte de entregar o ativo. Capacidade significa que a organização termina o projeto <em>melhor em melhorar processos do que era antes</em>: uma rotina que sobrevive, um padrão que agora tem dono, um grupo que consegue conduzir a próxima melhoria sem ajuda externa. A maioria dos projetos deixa C intocado, e essa é uma resposta legítima.</p>
+
+        <h4>6 · O veredito</h4>
+        <div class="worksheet">
+          <div class="field">
+            <label for="c-replicate">Quanto tempo até um concorrente conseguir replicar isto?</label>
+            <select id="c-replicate" data-section="O veredito" data-label="Tempo para replicar">
+              <option value="">Selecione uma</option>
+              <option>Meses</option><option>Um ou dois anos</option><option>Anos</option>
+              <option>Não conseguiriam — e o motivo está abaixo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-verdict">A decisão</label>
+            <select id="c-verdict" data-section="O veredito" data-label="Decisão">
+              <option value="">Selecione uma</option>
+              <option>Financiar</option><option>Financiar com condições</option><option>Não financiar</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-conditions">Se houver condições: o que teria de ser acrescentado para construir C? Se escolheram "não conseguiriam", digam aqui por quê.</label>
+            <input type="text" id="c-conditions" data-section="O veredito" data-label="Condições para construir C" placeholder="Uma linha">
+          </div>
+        </div>
+        <p style="font-size:15.5px">O grupo apresenta o campo 1 e o campo 6, com o raciocínio que os liga. Três minutos, um porta-voz.</p>
+
+        <div class="readout">
+          <h4>O que as respostas de vocês dizem</h4>
+          <div id="readout-body"></div>
+        </div>
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="c-group">Grupo</label>
+          <input type="text" id="c-group" data-label="Grupo" placeholder="Nomes, ou o número do grupo">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="c-download">Baixar em PDF</button>
+          <button type="button" class="ghost" id="c-copy">Copiar como texto</button>
+          <button type="button" class="ghost" id="c-clear">Limpar</button>
+        </div>
+        <p class="savenote">Salvo neste navegador à medida que vocês digitam — nada é enviado a lugar nenhum. Só quem digita guarda as respostas, então um redator por grupo, e baixem o PDF antes de fechar a aba.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">TRÊS</div><h2>Como ler o resultado</h2></div></div>
+<section>
+  <div class="wrap">
+    <h3>O que esperar</h3>
+    <p>Dois resultados são comuns o bastante para valer a pena nomeá-los antes, e nenhum deles é falha do projeto que vocês escolheram.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Só uma borda se move</h4>
+        <p style="margin-bottom:0">A maioria dos portfólios de projetos é feita quase só de projetos da borda do custo. Não é errado, mas é uma escolha — e geralmente não examinada. A pergunta que isso levanta: o que seria preciso para este mesmo projeto também mover a disposição a pagar — e isso custaria muito mais?</p>
+      </div>
+      <div class="card">
+        <h4>C está vazio</h4>
+        <p style="margin-bottom:0">Projetos entregam ativos e processos porque é isso que pode ser especificado, programado e aprovado. Capacidade resiste às três coisas. A pergunta que isso levanta: se A e P podem ser comprados por qualquer concorrente, o que neste portfólio está de fato construindo vantagem?</p>
+      </div>
+    </div>
+    <h3>Um exemplo preenchido</h3>
+    <p>O canvas preenchido sobre um caso documentado — a clínica de coluna do Virginia Mason — com as linhas em que um grupo costuma discordar marcadas, está em <a href="worked-examples.html#one">Worked examples</a> (em inglês). Leiam pela forma de responder, não pelas respostas.</p>
+
+    <h3>Depois da sessão</h3>
+    <p>Baixem o PDF do canvas antes de fechar a aba e levem para a sessão da tarde, <a href="session-2-digital-tools-benchmarking.html">Digital Tools &amp; Benchmarking</a>, que examina as ferramentas digitais de que o mesmo projeto depende com um segundo instrumento, a <a href="avaliacao-ferramenta-digital.html">Avaliação de Ferramenta Digital</a>. Guardem o PDF: o Módulo 3 se encerra com um Execution Optimization Challenge em grupo, e um projeto próprio já avaliado é o tipo de material de que ele se alimenta.</p>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">QUATRO</div><h2>Fontes</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Brandenburger, A. M., &amp; Stuart, H. W. (1996). Value-based business strategy. <em>Journal of Economics &amp; Management Strategy</em>, 5(1), 5–24.</li>
+      <li>Garvin, D. A. (1987). Competing on the eight dimensions of quality. <em>Harvard Business Review</em>, 65(6), 101–109.</li>
+      <li>Hill, T. (2000). <em>Manufacturing Strategy: Text and Cases</em> (3rd ed.). McGraw-Hill.</li>
+      <li>Lima, T. F. (2026). <em>Excelência Operacional: da Estratégia à Execução</em>. Atena Editora. Acesso aberto.</li>
+      <li>Ohno, T. (1988). <em>Toyota Production System: Beyond Large-Scale Production</em>. Productivity Press.</li>
+      <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Rother, M., &amp; Shook, J. (2003). <em>Learning to See</em>. Lean Enterprise Institute.</li>
+      <li>Van Mieghem, J. A., &amp; Allon, G. (2015). <em>Operations Strategy: Principles and Practice</em> (2nd ed.). Dynamic Ideas.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Módulo 3 — Methods, Tools, and Operational Efficiency · Instrumento da Sessão 1 · 17 de outubro de 2026<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+<script src="js/instrument.js"></script>
+<script src="js/value-case.js"></script>
+<script>
+ValueCase.init('pt');
+</script>
+
+</body>
+</html>

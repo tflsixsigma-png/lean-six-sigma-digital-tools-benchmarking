@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmarking Study — Digital Tools &amp; Benchmarking</title>
+<!-- share -->
+<meta name="description" content="The follow-up instrument: one benchmarking reference, decoded, and the six-month roadmap across three capability gaps. 17 October 2026.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IAE Paris — Sorbonne Business School · IDGP Academy">
+<meta property="og:title" content="Benchmarking Study — Digital Tools &amp; Benchmarking">
+<meta property="og:description" content="The follow-up instrument: one benchmarking reference, decoded, and the six-month roadmap across three capability gaps. 17 October 2026.">
+<meta property="og:url" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/benchmarking-study.html">
+<meta property="og:image" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /share -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#04121F;--gold:#B8820F;--gold-soft:#F2DFB4;--paper:#FBFAF7;--card:#FFFFFF;--body:#101B25;--line:#B5C3D3;--line-soft:#DFE6EE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:56px 0 44px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(29px,4.4vw,42px);line-height:1.12;max-width:20ch;margin-bottom:15px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+
+.partbar{background:var(--navy);color:#fff;padding:20px 0;margin-top:6px}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:25px;font-weight:600;margin-top:3px}
+section{padding:36px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:21px;font-weight:600;margin:26px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+
+.sixchain{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:22px 0 14px}
+.sixchain .st{background:var(--navy);color:#fff;border-radius:7px;padding:13px 11px;border-top:5px solid #8BA4C0}
+.sixchain .st.cap{background:var(--ink);border-top-color:var(--gold)}
+.sixchain .st .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-soft);font-weight:700;display:block}
+.sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
+.sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+.after{margin:30px 0 8px;padding:16px 20px;border-top:3px solid var(--gold);border-bottom:1px solid var(--line);background:#FEF8EA}
+.after b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.after span{display:block;font-size:15px;color:#4A5B70;margin-top:4px;line-height:1.5}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.grid3{grid-template-columns:1fr}}
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:22px;margin:20px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:27px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:8px;font-family:'JetBrains Mono',monospace}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+
+/* instrument */
+.inst{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:26px 0}
+.inst .ih{background:var(--navy);color:#fff;padding:16px 22px}
+.inst .ih b{font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+.inst .ih span{display:block;font-size:14.5px;color:#C2D3E6;margin-top:2px}
+.inst .ib{padding:20px 22px;background:var(--card)}
+.block{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:16px 0}
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:62px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.pillar{border-left:7px solid var(--gold);padding-left:18px;margin:22px 0 6px}
+.pillar h4{margin-top:0}
+.pillar .map{font-size:15px;color:#4A5B70;margin-bottom:4px}
+#ai-layer[hidden]{display:none}
+.gate{background:#EAF1F8;border:1px solid #A9BFD8;border-radius:8px;padding:16px 20px;margin:18px 0;font-size:16px}
+
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:20px 0}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;padding:12px 22px;border-radius:6px;border:2px solid var(--gold)}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button[disabled]{opacity:.6;cursor:wait}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}#ai-layer[hidden]{display:block}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Module 3</div>
+    <h1>Benchmarking Study</h1>
+    <p class="sub">The follow-up to the Digital Tool Appraisal: one organisation that already does it well, the routine that produces its result, what would have to be true for that routine to work here — and the six-month roadmap across the three capability gaps that most constrain performance.</p>
+    <a class="back" href="index.html">← Back to the 17 October material</a>
+    <a class="back" href="estudo-de-benchmarking.html" style="margin-left:18px">Versão em português</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">Benchmarking fails less often for lack of effort than for looking at the wrong thing. GM toured NUMMI for twenty years and copied everything that could be photographed; the other plants stayed where they were. This instrument asks the question a site visit skips: not <em>what is their number</em>, but <em>what routine produces it</em> — and what this organisation would have to accumulate before that routine could run here.</p>
+    <p>It is the module's follow-up assignment, done by the same group on the tool it appraised in the room, and it is better done with a week of thought than with ten minutes of room time. Part One sets out the ideas each field relies on, Part Two is the instrument, and Part Three says how to read what comes out. <strong>"Nobody here knows" is a legitimate answer</strong> — and usually the most useful one.</p>
+  </div>
+</section>
+
+<!-- 1 -->
+<div class="partbar"><div class="wrap"><div class="n">ONE</div><h2>What you need in order to answer</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Everything below is developed in Part Five of the afternoon's <a href="session-2-digital-tools-benchmarking.html">reading notes</a>. This page carries only what the fields depend on.</p>
+
+    <h3>The method, before the critique</h3>
+    <table>
+      <tr><th style="width:15%">Phase</th><th style="width:47%">What it requires</th><th>Where it is usually skipped</th></tr>
+      <tr><td class="k">1 · Plan</td><td>Decide what to benchmark — a process, not a department — choose a comparator, and settle how the measure will be defined before anybody goes looking.</td><td>The comparator is chosen for prestige rather than comparability.</td></tr>
+      <tr><td class="k">2 · Collect</td><td>Gather data on both sides with the same definition, and record the conditions under which each figure was produced.</td><td>Their figure comes from a published source; ours is calculated differently.</td></tr>
+      <tr><td class="k">3 · Analyse</td><td>Establish the size of the gap and — far more importantly — the practice that produces it.</td><td>The gap is quantified and the practice never identified. This is the fatal one.</td></tr>
+      <tr><td class="k">4 · Adapt</td><td>Set targets, change the practice, embed it, re-measure.</td><td>Targets are set from the gap with no change to the practice that would close it.</td></tr>
+    </table>
+    <p style="font-size:15.5px;color:#4A5B70">After Camp (1989), from the Xerox programme that made the practice general.</p>
+
+    <h3>Choosing the comparator</h3>
+    <p>Four kinds, in increasing order of difficulty and of payoff. <strong>Internal</strong> — another unit of the same organisation: easiest access, smallest ceiling. <strong>Competitive</strong> — a direct rival: the most wanted, the least available, and the one most likely to converge the industry. <strong>Functional</strong> — the same function in another industry. <strong>Generic</strong> — a structurally analogous process in an unrelated setting: Xerox fixed its warehouse by studying a catalogue retailer, and the distance is what made the practice visible.</p>
+
+    <h3>Why best practice resists transfer</h3>
+    <table>
+      <tr><th style="width:24%">Mechanism</th><th style="width:34%">What it predicts</th><th>What it changes in your study</th></tr>
+      <tr><td class="k">Internal stickiness<br><span style="font-weight:400;color:#4A5B70">Szulanski, 1996</span></td><td>Transfer fails for reasons of knowledge, not motivation — even between two units of the same firm.</td><td>Budget for absorption, not only acquisition. Who here can receive this, and what must they already know?</td></tr>
+      <tr><td class="k">Causal ambiguity<br><span style="font-weight:400;color:#4A5B70">Lippman &amp; Rumelt, 1982</span></td><td>Even the source may not know which elements produce its result.</td><td>Do not ask the reference what it does. Ask what it stopped doing, and what it would never give up.</td></tr>
+      <tr><td class="k">Interdependence<br><span style="font-weight:400;color:#4A5B70">Rivkin, 2000</span></td><td>A partial copy performs worse than no copy.</td><td>Identify the bundle, not the practice. If you cannot adopt the set, adopting one element may cost you.</td></tr>
+      <tr><td class="k">Time compression<br><span style="font-weight:400;color:#4A5B70">Dierickx &amp; Cool, 1989</span></td><td>Accumulated capability cannot be bought quickly at any price.</td><td>Ask how long the reference took. Plan for that order of magnitude, or change the objective.</td></tr>
+    </table>
+
+    <h3>What the visit sees, and the rule underneath</h3>
+    <p>Spear and Bowen's four rules are the decoding key — the tacit operating rules a site visit never surfaces unless the visitor arrives knowing they exist. Work is specified to content, sequence, timing and outcome; every connection between a customer and a supplier inside the organisation is direct and unambiguous; every pathway is pre-specified and single; and every improvement is a refutable hypothesis, mentored, at the lowest possible level. Where a visit sees standard forms, a ticketing platform, automated routing and monthly retrospectives, the study has to name the rule each one serves.</p>
+
+    <div class="note">
+      <span class="lbl">The strategic caveat</span>
+      Benchmarking is imitative by construction: practised well by everyone, it converges an industry onto one operating model, and competition collapses into price (Porter, 1996). That is not an argument against it — it is an argument for knowing which of two things you are doing. On a <strong>qualifier</strong>, convergence is precisely the goal. On an <strong>order winner</strong>, imitation is the wrong instrument.
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<div class="partbar"><div class="wrap"><div class="n">TWO</div><h2>The instrument</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Work on the tool the group appraised in the room. If you used the <a href="digital-tool-appraisal.html">Digital Tool Appraisal</a> in this browser, its name is carried over. Answer from what you can evidence; <strong>"nobody here knows"</strong> is a finding, not a gap in your answer.</p>
+
+    <div class="inst">
+      <div class="ih">
+        <b>Benchmarking Study</b>
+        <span>Three sections · the module's follow-up assignment · better with a week of thought</span>
+      </div>
+      <div class="ib" id="canvas">
+
+        <h4>1 · What is being benchmarked</h4>
+        <div class="block">
+          <div class="field">
+            <label for="s-tool">The tool or capability this study concerns</label>
+            <div class="hint">Usually the tool appraised in the room.</div>
+            <input type="text" id="s-tool" data-section="What is being benchmarked" data-label="Tool or capability" placeholder="What it is called">
+          </div>
+          <div class="field">
+            <label for="s-gap">The gap that made you look outside</label>
+            <div class="hint">The indicator or symptom, as precisely as you can: "approvals take three weeks", "our forecast error is twice the reference's". This is phase 1 — what is being compared, and how it is measured.</div>
+            <textarea id="s-gap" data-section="What is being benchmarked" data-label="The gap observed"></textarea>
+          </div>
+          <div class="field">
+            <label for="s-kind">Is the gap on a qualifier or on an order winner?</label>
+            <div class="hint">From the morning: a qualifier is a threshold — its absence eliminates you, its presence attracts nobody. An order winner is what makes a customer choose you.</div>
+            <select id="s-kind" data-section="What is being benchmarked" data-label="Qualifier or order winner">
+              <option value="">Select one</option>
+              <option value="q">Qualifier — reaching the threshold is the goal, and converging with others is fine</option>
+              <option value="flag-winner">Order winner — what we want is a difference, not parity</option>
+              <option value="flag-unsure">Not sure</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>2 · The reference — who already does this well</h4>
+        <p style="font-size:15.5px;color:#4A5B70">Pick one organisation, or one published standard, that does what this tool is meant to achieve better than you do. The question is not what their number is, but what routine produces it — and what you would have to build before that routine would work here.</p>
+        <div class="block">
+          <div class="field">
+            <label for="b-ref">The reference — which organisation, or which standard?</label>
+            <div class="hint">The most useful reference is often outside your industry.</div>
+            <input type="text" id="b-ref" data-section="The reference" data-label="The reference" placeholder="An organisation, or a published standard">
+          </div>
+          <div class="field">
+            <label for="b-type">What kind of comparator is it?</label>
+            <select id="b-type" data-section="The reference" data-label="Kind of comparator">
+              <option value="">Select one</option>
+              <option value="internal">Internal — another unit of our own organisation</option>
+              <option value="flag-competitive">Competitive — a direct rival</option>
+              <option value="functional">Functional — the same function in another industry</option>
+              <option value="generic">Generic — an analogous process in an unrelated setting</option>
+              <option value="standard">A published standard or survey</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-comparable">Are the two sets of numbers comparable?</label>
+            <div class="hint">Most benchmarking failures are arithmetic before they are strategic: the same process boundaries on both sides, normalised for scale and mix, with the conditions recorded. A survey percentile says whether a gap exists, not what produces it.</div>
+            <select id="b-comparable" data-section="The reference" data-label="Comparability of the figures">
+              <option value="">Select one</option>
+              <option value="yes">Yes — same definition and boundaries, normalised, conditions recorded</option>
+              <option value="partly">Partly — same definition, but scale, mix or conditions differ</option>
+              <option value="flag-comp">No — their figure is published, ours is calculated differently</option>
+              <option value="flag-ku">We have not checked</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-what">What does the reference do that you do not?</label>
+            <div class="hint">The practice, not the indicator. "They are 30% faster" is a number; "they review the representation quarterly with a named owner" is a practice. Ask what they stopped doing, and what they would never give up.</div>
+            <textarea id="b-what" data-section="The reference" data-label="What the reference does that we do not"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-term">Would you be copying an asset, a process, or a rule-in-use?</label>
+            <select id="b-term" data-section="The reference" data-label="What would be copied">
+              <option value="">Select one</option>
+              <option value="A">A — an asset we would buy</option>
+              <option value="P">P — a process we would document and copy</option>
+              <option value="C">C — a way of working that lives in people's habits, which we would have to build</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-bundle">What else does it depend on — the rest of the bundle?</label>
+            <div class="hint">The practices that make this one work at the reference. A partial copy can perform worse than no copy.</div>
+            <textarea id="b-bundle" data-section="The reference" data-label="The rest of the bundle"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-condition">What would have to be true here for that practice to work?</label>
+            <div class="hint">What would our people need to already know, or already be able to do? Practices fail to transfer for reasons of knowledge far more often than of motivation — including between two units of the same company.</div>
+            <textarea id="b-condition" data-section="The reference" data-label="Absorption condition"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-howlong">How long did the reference take to build it?</label>
+            <select id="b-howlong" data-section="The reference" data-label="Time the reference took">
+              <option value="">Select one</option>
+              <option>Months</option>
+              <option>A few years</option>
+              <option>A decade or more</option>
+              <option value="flag-howlong">Unknown — nobody here knows</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-decision">Adopt, adapt or discard</label>
+            <select id="b-decision" data-section="The reference" data-label="Adopt, adapt or discard">
+              <option value="">Select one</option>
+              <option value="adopt">Adopt — conditions are already in place</option>
+              <option value="adapt">Adapt — translate it to our context</option>
+              <option value="discard">Discard — it depends on conditions we do not have and cannot reasonably accumulate</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>3 · Capability gaps and the six-month roadmap</h4>
+        <p style="font-size:15.5px;color:#4A5B70">The reference concerns one practice. A roadmap concerns the organisation. Name the three capabilities whose absence most constrains performance — capabilities, not products: "a single authoritative home for schedule dates" rather than "a new PPM system" — then place each on the two axes that decide sequence. <strong>How much does closing it matter?</strong> High if it moves something customers choose you for, or removes a constraint that keeps recurring. <strong>Can it be closed with what exists today?</strong> High if the people, the data and the authority to change the process are already in hand. <strong>When would work on it start?</strong> — not finish: a roadmap is sequenced by starts.</p>
+        <div class="block">
+          <div class="field">
+            <label for="r-g1">Gap 1</label>
+            <input type="text" id="r-g1" data-section="The roadmap" data-label="Gap 1" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v1">Gap 1 — how much it matters, whether it can be closed now, and when it starts</label>
+            <div class="grid3">
+              <select id="r-v1" data-section="The roadmap" data-label="Gap 1 — how much it matters"><option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-f1" data-section="The roadmap" data-label="Gap 1 — can it be closed now"><option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-h1" data-section="The roadmap" data-label="Gap 1 — when it starts"><option value="">When it starts —</option><option value="0">Months 0–2</option><option value="2">Months 2–4</option><option value="4">Months 4–6</option><option value="6">Beyond six months</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g2">Gap 2</label>
+            <input type="text" id="r-g2" data-section="The roadmap" data-label="Gap 2" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v2">Gap 2 — how much it matters, whether it can be closed now, and when it starts</label>
+            <div class="grid3">
+              <select id="r-v2" data-section="The roadmap" data-label="Gap 2 — how much it matters"><option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-f2" data-section="The roadmap" data-label="Gap 2 — can it be closed now"><option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-h2" data-section="The roadmap" data-label="Gap 2 — when it starts"><option value="">When it starts —</option><option value="0">Months 0–2</option><option value="2">Months 2–4</option><option value="4">Months 4–6</option><option value="6">Beyond six months</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g3">Gap 3</label>
+            <input type="text" id="r-g3" data-section="The roadmap" data-label="Gap 3" placeholder="The capability that is missing, in one line">
+          </div>
+          <div class="field">
+            <label for="r-v3">Gap 3 — how much it matters, whether it can be closed now, and when it starts</label>
+            <div class="grid3">
+              <select id="r-v3" data-section="The roadmap" data-label="Gap 3 — how much it matters"><option value="">How much it matters —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-f3" data-section="The roadmap" data-label="Gap 3 — can it be closed now"><option value="">Can it be closed now? —</option><option value="H">High</option><option value="M">Medium</option><option value="L">Low</option></select>
+              <select id="r-h3" data-section="The roadmap" data-label="Gap 3 — when it starts"><option value="">When it starts —</option><option value="0">Months 0–2</option><option value="2">Months 2–4</option><option value="4">Months 4–6</option><option value="6">Beyond six months</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-first">What has to be true by the end of month two?</label>
+            <div class="hint">One sentence, measurable. A roadmap whose first checkpoint cannot be stated is a list of intentions with dates attached.</div>
+            <textarea id="r-first" data-section="The roadmap" data-label="The month-two checkpoint"></textarea>
+          </div>
+        </div>
+
+        <div class="readout" id="readout">
+          <h4>What your answers say</h4>
+          <div id="readout-body"></div>
+        </div>
+
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="s-who">Prepared by</label>
+          <input type="text" id="s-who" data-label="Prepared by" placeholder="Name, or the group">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="s-download">Download as PDF</button>
+          <button type="button" class="ghost" id="s-copy">Copy as text</button>
+          <button type="button" class="ghost" id="s-clear">Clear</button>
+        </div>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Download the PDF before closing the tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<div class="partbar"><div class="wrap"><div class="n">THREE</div><h2>Reading the result</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>The study has no score either. It produces three things worth looking at.</p>
+    <ul class="tight">
+      <li><strong>Whether you found a practice or only a number.</strong> If section 2 names an indicator and no routine, phase 3 of the method has not been done — and phase 3 is the one that matters.</li>
+      <li><strong>Whether what you would copy is A, P or C.</strong> Assets and documented processes travel. Rules-in-use do not travel by observation: they have to be built, and how long the reference took is the honest estimate of how long that takes.</li>
+      <li><strong>Whether the roadmap starts where it can win.</strong> High value and high feasibility belong in the first two months, because an early demonstrated result buys the patience the harder items will need. High value and low feasibility scheduled first is the commonest way a roadmap loses its sponsor.</li>
+    </ul>
+    <p>A filled-in example on Zillow Offers — the reference and the roadmap that follow its appraisal — is on the <a href="worked-examples.html#two">Worked examples</a> page.</p>
+  </div>
+</section>
+
+<!-- refs -->
+<div class="partbar"><div class="wrap"><div class="n">FOUR</div><h2>Sources</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Camp, R. C. (1989). <em>Benchmarking: The Search for Industry Best Practices That Lead to Superior Performance</em>. ASQC Quality Press.</li>
+      <li>Dierickx, I., &amp; Cool, K. (1989). Asset stock accumulation and sustainability of competitive advantage. <em>Management Science</em>, 35(12), 1504–1511.</li>
+      <li>Lippman, S. A., &amp; Rumelt, R. P. (1982). Uncertain imitability. <em>Bell Journal of Economics</em>, 13(2), 418–438.</li>
+      <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
+      <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
+      <li>Szulanski, G. (1996). Exploring internal stickiness. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
+      <li>Lima, T. F. (2026). <em>Excelência operacional: da estratégia à execução</em>. Atena Editora. Open access.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Module 3 — Methods, Tools, and Operational Efficiency · Benchmarking Study<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+<script src="js/instrument.js"></script>
+<script src="js/benchmarking.js"></script>
+<script>
+Benchmarking.init('en');
+</script>
+
+</body>
+</html>

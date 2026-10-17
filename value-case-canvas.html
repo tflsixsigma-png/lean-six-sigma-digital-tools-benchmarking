@@ -207,6 +207,12 @@ section:nth-of-type(even) .fig{background:#FFFFFF}
 @media(max-width:700px){.simcmp{grid-template-columns:1fr}}
 
 
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:22px 0 4px}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+.btnrow button[disabled]{opacity:.6;cursor:wait}
 .refs li{margin:0 0 7px 20px;font-size:15px}
 footer{background:var(--ink);color:#A3B7CD;padding:32px 0 40px;font-size:14.5px}
 footer b{color:var(--gold-soft)}
@@ -225,6 +231,7 @@ footer b{color:var(--gold-soft)}
     <h1>The Value Case Canvas</h1>
     <p class="sub">An instrument for appraising one authorised project by what a business case usually leaves out: which edge of value it moves, which named waste it removes, and whether the organisation ends up more capable or only better equipped.</p>
     <a class="back" href="index.html">← Back to the 17 October material</a>
+    <a class="back" href="canvas-caso-de-valor.html" style="margin-left:18px">Versão em português</a>
   </div>
 </header>
 
@@ -275,7 +282,7 @@ footer b{color:var(--gold-soft)}
       </div>
       <div class="ab" id="canvas">
         <p>The group picks <strong>one</strong> of the projects brought by its members and completes six fields, one of which is a short value stream sketch. Disagreement inside the group is the point — if you all agree in the first three minutes, you have chosen a project that is too easy.</p>
-        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the buttons at the end produce a file to send on.</p>
+        <p style="font-size:15.5px;color:#4A5B70">Fill this in here. One person per group types; everything is saved in that browser as you go, and the button at the end produces a PDF of the completed canvas.</p>
 
         <div class="worksheet">
           <div class="field">
@@ -420,7 +427,12 @@ footer b{color:var(--gold-soft)}
             <input type="text" id="c-conditions" data-section="The verdict" data-label="Conditions to build C" placeholder="One line">
           </div>
         </div>
-        <p style="margin-bottom:0;font-size:15.5px">The group presents field 1 and field 6, with the reasoning that connects them. Three minutes, one spokesperson.</p>
+        <p style="font-size:15.5px">The group presents field 1 and field 6, with the reasoning that connects them. Three minutes, one spokesperson.</p>
+
+        <div class="readout">
+          <h4>What your answers say</h4>
+          <div id="readout-body"></div>
+        </div>
       </div>
       <div class="exportbar">
         <div class="field">
@@ -428,11 +440,11 @@ footer b{color:var(--gold-soft)}
           <input type="text" id="c-group" data-label="Group" placeholder="Names, or a group number">
         </div>
         <div class="btnrow">
-          <button type="button" class="primary" id="c-download">Download the canvas</button>
+          <button type="button" class="primary" id="c-download">Download as PDF</button>
           <button type="button" class="ghost" id="c-copy">Copy as text</button>
           <button type="button" class="ghost" id="c-clear">Clear</button>
         </div>
-        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download before closing the tab.</p>
+        <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Only the person typing holds the answers, so one scribe per group, and download the PDF before closing the tab.</p>
       </div>
     </div>
   </div>
@@ -458,7 +470,7 @@ footer b{color:var(--gold-soft)}
     <p>The canvas filled in on a documented case — Virginia Mason's spine clinic — with the lines where a group typically disagrees marked: <a href="worked-examples.html#one">Worked examples</a>. Read it for the way of answering, not the answers; the case was chosen from a sector most participants do not work in for that reason.</p>
 
     <h3>After the session</h3>
-    <p>Download the canvas before closing the tab and bring it to the afternoon session, <a href="session-2-digital-tools-benchmarking.html">Digital Tools &amp; Benchmarking</a>, which examines the digital tooling the same project depends on with a second instrument, the <a href="digital-tool-appraisal.html">Digital Tool Appraisal</a>. Keep the export: Module 3 closes with a group Execution Optimization Challenge, and an appraised project of your own is the kind of material it draws on.</p>
+    <p>Download the canvas as a PDF before closing the tab and bring it to the afternoon session, <a href="session-2-digital-tools-benchmarking.html">Digital Tools &amp; Benchmarking</a>, which examines the digital tooling the same project depends on with a second instrument, the <a href="digital-tool-appraisal.html">Digital Tool Appraisal</a>. Keep the PDF: Module 3 closes with a group Execution Optimization Challenge, and an appraised project of your own is the kind of material it draws on.</p>
   </div>
 </section>
 
@@ -487,84 +499,10 @@ footer b{color:var(--gold-soft)}
   </div>
 </footer>
 
+<script src="js/instrument.js"></script>
+<script src="js/value-case.js"></script>
 <script>
-(function(){
-  var root = document.getElementById('canvas');
-  if (!root) return;
-  var KEY = 'sorbonne-value-case-v1';
-  var group = document.getElementById('c-group');
-  var fields = [].slice.call(root.querySelectorAll('[data-label]'));
-  var all = group ? fields.concat([group]) : fields;
-
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    all.forEach(function(f){ if (typeof saved[f.id] === 'string') f.value = saved[f.id]; });
-  } catch (e) {}
-
-  function save(){
-    try {
-      var o = {};
-      all.forEach(function(f){ o[f.id] = f.value; });
-      localStorage.setItem(KEY, JSON.stringify(o));
-    } catch (e) {}
-  }
-  all.forEach(function(f){
-    f.addEventListener('input', save);
-    f.addEventListener('change', save);
-  });
-
-  function build(){
-    var out = ['# The Value Case', '', 'Lean Six Sigma & Continuous Improvement — Module 3, Session 4', '17 October 2026 · Sorbonne Business School / IDGP Academy', ''];
-    out.push('**Group:** ' + ((group && group.value.trim()) || '—'));
-    var section = '';
-    fields.forEach(function(f){
-      var sec = f.getAttribute('data-section') || '';
-      if (sec && sec !== section) { section = sec; out.push('', '## ' + sec, ''); }
-      out.push('- **' + f.getAttribute('data-label') + ':** ' + (f.value.trim() || '—'));
-    });
-    out.push('');
-    return out.join('\n');
-  }
-
-  function slug(){
-    var g = (group && group.value.trim()) || 'group';
-    return g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'group';
-  }
-
-  function flash(btn, msg){
-    var old = btn.textContent;
-    btn.textContent = msg;
-    setTimeout(function(){ btn.textContent = old; }, 2200);
-  }
-
-  document.getElementById('c-download').addEventListener('click', function(){
-    var blob = new Blob([build()], { type: 'text/markdown;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'value-case-' + slug() + '.md';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
-  });
-
-  document.getElementById('c-copy').addEventListener('click', function(){
-    var btn = this, text = build();
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){ flash(btn, 'Copied'); })
-        .catch(function(){ window.prompt('Copy the canvas:', text); });
-    } else {
-      window.prompt('Copy the canvas:', text);
-    }
-  });
-
-  document.getElementById('c-clear').addEventListener('click', function(){
-    if (!window.confirm('Clear every field on this canvas?')) return;
-    all.forEach(function(f){ f.value = ''; });
-    save();
-  });
-})();
+ValueCase.init('en');
 </script>
 
 </body>

@@ -45,7 +45,7 @@ const parts = await page.evaluate(({ meta, tocnum }) => {
       ul.className = 'ap-opts';
       [...sel.options].forEach(o => {
         const t = (o.textContent || '').trim();
-        if (!t || t === '—' || /^select\b/i.test(t) || /—$/.test(t)) return;
+        if (!t || t === '—' || /^(select|selecione)\b/i.test(t) || /—$/.test(t)) return;
         const li = document.createElement('li');
         const b = document.createElement('span'); b.className = 'ap-box';
         const s = document.createElement('span'); s.textContent = t;

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudo de Benchmarking — Digital Tools &amp; Benchmarking</title>
+<!-- share -->
+<meta name="description" content="Instrumento de desdobramento, em português: uma referência de benchmarking, decodificada, e o roteiro de seis meses. Exporta em PDF.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IAE Paris — Sorbonne Business School · IDGP Academy">
+<meta property="og:title" content="Estudo de Benchmarking">
+<meta property="og:description" content="Instrumento de desdobramento, em português. Exporta em PDF.">
+<meta property="og:url" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/estudo-de-benchmarking.html">
+<meta property="og:image" content="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- /share -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#04121F;--gold:#B8820F;--gold-soft:#F2DFB4;--paper:#FBFAF7;--card:#FFFFFF;--body:#101B25;--line:#B5C3D3;--line-soft:#DFE6EE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--paper);color:var(--body);line-height:1.68;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px}
+p{margin-bottom:14px;max-width:78ch}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--navy)}
+
+.cover{background:var(--ink);color:#F3F7FB;padding:56px 0 44px;border-bottom:6px solid var(--gold)}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft);font-weight:700;margin-bottom:15px}
+.cover h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(29px,4.4vw,42px);line-height:1.12;max-width:20ch;margin-bottom:15px}
+.cover .sub{font-size:18px;color:#C6D4E4;max-width:62ch}
+.back{display:inline-block;margin-top:24px;font-size:15.5px;color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(242,223,180,.45);padding-bottom:2px}
+.back:hover{color:#fff;border-bottom-color:#fff}
+
+.partbar{background:var(--navy);color:#fff;padding:20px 0;margin-top:6px}
+.partbar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--gold-soft);font-weight:700}
+.partbar h2{font-family:'Fraunces',serif;font-size:25px;font-weight:600;margin-top:3px}
+section{padding:36px 0 20px}
+section:nth-of-type(even){background:var(--card)}
+h3{font-family:'Fraunces',serif;color:var(--navy);font-size:21px;font-weight:600;margin:26px 0 10px}
+h3:first-child{margin-top:0}
+h4{font-family:'Fraunces',serif;color:var(--navy);font-size:18px;font-weight:600;margin:22px 0 7px}
+.lead{font-size:18.5px;color:var(--ink);max-width:70ch;margin-bottom:16px}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:var(--card);border:1px solid var(--line)}
+section:nth-of-type(even) table{background:var(--paper)}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 13px;font-size:13.5px;font-weight:700}
+td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+
+.sixchain{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:22px 0 14px}
+.sixchain .st{background:var(--navy);color:#fff;border-radius:7px;padding:13px 11px;border-top:5px solid #8BA4C0}
+.sixchain .st.cap{background:var(--ink);border-top-color:var(--gold)}
+.sixchain .st .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-soft);font-weight:700;display:block}
+.sixchain .st .t{font-family:'Fraunces',serif;font-size:15.5px;line-height:1.18;display:block;margin-top:4px;color:#fff}
+.sixchain .st .r{font-size:11.5px;color:#C3D2E4;display:block;margin-top:7px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:820px){.sixchain{grid-template-columns:repeat(2,1fr)}}
+.after{margin:30px 0 8px;padding:16px 20px;border-top:3px solid var(--gold);border-bottom:1px solid var(--line);background:#FEF8EA}
+.after b{font-family:'Fraunces',serif;font-size:19px;color:var(--navy);font-weight:600;display:block}
+.after span{display:block;font-size:15px;color:#4A5B70;margin-top:4px;line-height:1.5}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.grid3{grid-template-columns:1fr}}
+.note{border-left:5px solid var(--gold);background:#FEF8EA;padding:17px 21px;margin:20px 0}
+.note .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#7E5B0C;display:block;margin-bottom:5px}
+.eq{background:var(--ink);color:#fff;border-radius:9px;padding:22px;margin:20px 0;text-align:center}
+.eq .f{font-family:'Fraunces',serif;font-size:27px;line-height:1.25}
+.eq .c{font-size:13.5px;color:#A8BBD1;margin-top:8px;font-family:'JetBrains Mono',monospace}
+ul.tight{margin:8px 0 14px 21px}
+ul.tight li{margin-bottom:6px}
+
+/* instrument */
+.inst{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:26px 0}
+.inst .ih{background:var(--navy);color:#fff;padding:16px 22px}
+.inst .ih b{font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+.inst .ih span{display:block;font-size:14.5px;color:#C2D3E6;margin-top:2px}
+.inst .ib{padding:20px 22px;background:var(--card)}
+.block{background:#F3F6FA;border:1px dashed #94A9C2;border-radius:7px;padding:16px 18px;margin:16px 0}
+.field{padding:13px 0;border-bottom:1px dotted #B6C5D6}
+.field:last-child{border-bottom:none}
+.field label{display:block;font-weight:700;color:var(--navy);font-size:16.5px;margin-bottom:3px}
+.field .hint{font-size:14.5px;color:#4A5B70;margin-bottom:8px;line-height:1.45}
+.field input[type=text],.field select,.field textarea{
+  font-family:'Source Sans 3',sans-serif;font-size:16px;width:100%;
+  padding:10px 12px;border:2px solid #B5C3D3;border-radius:6px;background:#FFFFFF;color:var(--ink)
+}
+.field textarea{min-height:62px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+.pillar{border-left:7px solid var(--gold);padding-left:18px;margin:22px 0 6px}
+.pillar h4{margin-top:0}
+.pillar .map{font-size:15px;color:#4A5B70;margin-bottom:4px}
+#ai-layer[hidden]{display:none}
+.gate{background:#EAF1F8;border:1px solid #A9BFD8;border-radius:8px;padding:16px 20px;margin:18px 0;font-size:16px}
+
+.readout{background:#EEF3F9;border:2px solid var(--navy);border-radius:8px;padding:20px 22px;margin:20px 0}
+.readout h4{margin-top:0}
+.readout ul{margin:8px 0 0 20px;font-size:16px}
+.readout li{margin-bottom:7px}
+.readout .none{color:#4A5B70;font-size:16px}
+
+.exportbar{background:var(--ink);border-radius:0 0 8px 8px;padding:22px 24px;margin-top:4px}
+.exportbar .field{border-bottom:none;padding-top:0}
+.exportbar .field label{color:var(--gold-soft)}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btnrow button{font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:700;cursor:pointer;padding:12px 22px;border-radius:6px;border:2px solid var(--gold)}
+.btnrow button.primary{background:var(--gold);color:var(--ink)}
+.btnrow button.ghost{background:transparent;color:var(--gold-soft)}
+.btnrow button:hover{background:#D9A32E;color:var(--ink)}
+.btnrow button[disabled]{opacity:.6;cursor:wait}
+.btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
+.savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+
+.refs li{margin:0 0 7px 20px;font-size:15px}
+footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px}
+footer b{color:var(--gold-soft)}
+@media print{.exportbar{display:none}.field input,.field select,.field textarea{border:1px solid #777}#ai-layer[hidden]{display:block}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="eyebrow">IAE Paris — Sorbonne Business School · IDGP Academy · Módulo 3</div>
+    <h1>Estudo de Benchmarking</h1>
+    <p class="sub">O desdobramento da Avaliação de Ferramenta Digital: uma organização que já faz isto bem, a rotina que produz o resultado dela, o que precisaria ser verdade para essa rotina funcionar aqui — e o roteiro de seis meses para as três lacunas de capacidade que mais limitam o desempenho.</p>
+    <a class="back" href="index.html">← Voltar ao material de 17 de outubro</a>
+    <a class="back" href="benchmarking-study.html" style="margin-left:18px">English version</a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="lead">O benchmarking falha menos por falta de esforço do que por olhar para a coisa errada. A GM visitou a NUMMI durante vinte anos e copiou tudo o que podia ser fotografado; as outras fábricas ficaram onde estavam. Este instrumento faz a pergunta que a visita pula: não <em>qual é o número deles</em>, e sim <em>que rotina o produz</em> — e o que esta organização teria de acumular antes que essa rotina pudesse funcionar aqui.</p>
+    <p>É a tarefa de desdobramento do módulo, feita pelo mesmo grupo sobre a ferramenta que avaliou em sala, e fica melhor com uma semana de reflexão do que com dez minutos de sala. A Parte Um traz as ideias de que cada campo depende, a Parte Dois é o instrumento, e a Parte Três diz como ler o que sai dele. <strong>"Ninguém aqui sabe" é uma resposta legítima</strong> — e normalmente a mais útil.</p>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">UM</div><h2>O que você precisa para responder</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Tudo o que vem abaixo é desenvolvido na Parte Cinco das <a href="session-2-digital-tools-benchmarking.html">notas de leitura</a> da tarde. Esta página traz só o que os campos usam.</p>
+
+    <h3>O método, antes da crítica</h3>
+    <table>
+      <tr><th style="width:15%">Fase</th><th style="width:47%">O que ela exige</th><th>Onde costuma ser pulada</th></tr>
+      <tr><td class="k">1 · Planejar</td><td>Decidir o que comparar — um processo, não um departamento — escolher um comparador, e fixar como a medida será definida antes de alguém sair procurando.</td><td>O comparador é escolhido pelo prestígio, não pela comparabilidade.</td></tr>
+      <tr><td class="k">2 · Coletar</td><td>Levantar os dados dos dois lados com a mesma definição, e registrar as condições em que cada número foi produzido.</td><td>O número deles vem de uma fonte publicada; o nosso é calculado de outro jeito.</td></tr>
+      <tr><td class="k">3 · Analisar</td><td>Estabelecer o tamanho da lacuna e — muito mais importante — a prática que a produz.</td><td>A lacuna é quantificada e a prática nunca é identificada. Esta é a fatal.</td></tr>
+      <tr><td class="k">4 · Adaptar</td><td>Fixar metas, mudar a prática, incorporá-la e medir de novo.</td><td>As metas saem da lacuna sem nenhuma mudança na prática que a fecharia.</td></tr>
+    </table>
+    <p style="font-size:15.5px;color:#4A5B70">Segundo Camp (1989), a partir do programa da Xerox que generalizou a prática.</p>
+
+    <h3>Escolhendo o comparador</h3>
+    <p>Quatro tipos, em ordem crescente de dificuldade e de retorno. <strong>Interno</strong> — outra unidade da mesma organização: acesso mais fácil, teto mais baixo. <strong>Competitivo</strong> — um concorrente direto: o mais desejado, o menos disponível, e o que mais tende a fazer o setor convergir. <strong>Funcional</strong> — a mesma função em outro setor. <strong>Genérico</strong> — um processo estruturalmente análogo num contexto sem relação: a Xerox consertou seu armazém estudando uma empresa de vendas por catálogo, e foi a distância que tornou a prática visível.</p>
+
+    <h3>Por que a melhor prática resiste à transferência</h3>
+    <table>
+      <tr><th style="width:24%">Mecanismo</th><th style="width:34%">O que ele prevê</th><th>O que muda no seu estudo</th></tr>
+      <tr><td class="k">Aderência interna<br><span style="font-weight:400;color:#4A5B70">Szulanski, 1996</span></td><td>A transferência falha por razões de conhecimento, não de motivação — mesmo entre duas unidades da mesma empresa.</td><td>Reservem orçamento para a absorção, não só para a aquisição. Quem aqui consegue receber isto, e o que essa pessoa já precisa saber?</td></tr>
+      <tr><td class="k">Ambiguidade causal<br><span style="font-weight:400;color:#4A5B70">Lippman &amp; Rumelt, 1982</span></td><td>Nem a própria fonte sabe quais elementos produzem o resultado.</td><td>Não perguntem à referência o que ela faz. Perguntem o que ela parou de fazer, e do que ela nunca abriria mão.</td></tr>
+      <tr><td class="k">Interdependência<br><span style="font-weight:400;color:#4A5B70">Rivkin, 2000</span></td><td>Uma cópia parcial rende menos do que nenhuma cópia.</td><td>Identifiquem o conjunto, não a prática. Se não puderem adotar o conjunto, adotar um elemento pode custar caro.</td></tr>
+      <tr><td class="k">Compressão de tempo<br><span style="font-weight:400;color:#4A5B70">Dierickx &amp; Cool, 1989</span></td><td>Capacidade acumulada não pode ser comprada depressa, a preço nenhum.</td><td>Perguntem quanto tempo a referência levou. Planejem para essa ordem de grandeza, ou mudem o objetivo.</td></tr>
+    </table>
+
+    <h3>O que a visita vê, e a regra por baixo</h3>
+    <p>As quatro regras de Spear e Bowen são a chave de decodificação — as regras operacionais tácitas que uma visita nunca revela, a menos que o visitante chegue sabendo que elas existem. O trabalho é especificado em conteúdo, sequência, tempo e resultado; toda conexão entre um cliente e um fornecedor dentro da organização é direta e sem ambiguidade; todo caminho é pré-definido e único; e toda melhoria é uma hipótese refutável, com mentoria, no nível mais baixo possível. Onde a visita vê formulários padrão, uma plataforma de chamados, roteamento automático e retrospectivas mensais, o estudo precisa nomear a regra a que cada um serve.</p>
+
+    <div class="note">
+      <span class="lbl">A ressalva estratégica</span>
+      O benchmarking é imitativo por construção: bem praticado por todos, faz o setor convergir para um único modelo de operação, e a competição desaba em preço (Porter, 1996). Não é um argumento contra ele — é um argumento para saber qual de duas coisas vocês estão fazendo. Num <strong>qualificador</strong>, convergir é exatamente o objetivo. Num <strong>ganhador de pedido</strong>, imitar é o instrumento errado.
+    </div>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">DOIS</div><h2>O instrumento</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>Trabalhem sobre a ferramenta que o grupo avaliou em sala. Se vocês usaram a <a href="avaliacao-ferramenta-digital.html">Avaliação de Ferramenta Digital</a> neste navegador, o nome dela é trazido automaticamente. Respondam a partir do que conseguem evidenciar; <strong>"ninguém aqui sabe"</strong> é um achado, não uma lacuna na resposta.</p>
+
+    <div class="inst">
+      <div class="ih">
+        <b>Estudo de Benchmarking</b>
+        <span>Três seções · a tarefa de desdobramento do módulo · melhor com uma semana de reflexão</span>
+      </div>
+      <div class="ib" id="canvas">
+
+        <h4>1 · O que está sendo comparado</h4>
+        <div class="block">
+          <div class="field">
+            <label for="s-tool">A ferramenta ou capacidade de que este estudo trata</label>
+            <div class="hint">Normalmente a ferramenta avaliada em sala.</div>
+            <input type="text" id="s-tool" data-section="O que está sendo comparado" data-label="Ferramenta ou capacidade" placeholder="Como ela se chama">
+          </div>
+          <div class="field">
+            <label for="s-gap">A lacuna que fez vocês olharem para fora</label>
+            <div class="hint">O indicador ou o sintoma, com a maior precisão possível: "as aprovações levam três semanas", "nosso erro de previsão é o dobro do da referência". Esta é a fase 1 — o que está sendo comparado, e como é medido.</div>
+            <textarea id="s-gap" data-section="O que está sendo comparado" data-label="A lacuna observada"></textarea>
+          </div>
+          <div class="field">
+            <label for="s-kind">A lacuna está num qualificador ou num ganhador de pedido?</label>
+            <div class="hint">Da manhã: um qualificador é um patamar — sua ausência elimina vocês, sua presença não atrai ninguém. Um ganhador de pedido é o que faz o cliente escolher vocês.</div>
+            <select id="s-kind" data-section="O que está sendo comparado" data-label="Qualificador ou ganhador de pedido">
+              <option value="">Selecione uma</option>
+              <option value="q">Qualificador — atingir o patamar é o objetivo, e convergir com os outros não tem problema</option>
+              <option value="flag-winner">Ganhador de pedido — o que queremos é diferença, não paridade</option>
+              <option value="flag-unsure">Não sei</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>2 · A referência — quem já faz isto bem</h4>
+        <p style="font-size:15.5px;color:#4A5B70">Escolham uma organização, ou um padrão publicado, que faz melhor do que vocês aquilo que esta ferramenta deveria alcançar. A pergunta não é qual é o número deles, e sim que rotina o produz — e o que vocês teriam de construir antes que essa rotina funcionasse aqui.</p>
+        <div class="block">
+          <div class="field">
+            <label for="b-ref">A referência — qual organização, ou qual padrão?</label>
+            <div class="hint">A referência mais útil muitas vezes está fora do seu setor.</div>
+            <input type="text" id="b-ref" data-section="A referência" data-label="A referência" placeholder="Uma organização, ou um padrão publicado">
+          </div>
+          <div class="field">
+            <label for="b-type">Que tipo de comparador é?</label>
+            <select id="b-type" data-section="A referência" data-label="Tipo de comparador">
+              <option value="">Selecione um</option>
+              <option value="internal">Interno — outra unidade da nossa própria organização</option>
+              <option value="flag-competitive">Competitivo — um concorrente direto</option>
+              <option value="functional">Funcional — a mesma função em outro setor</option>
+              <option value="generic">Genérico — um processo análogo num contexto sem relação</option>
+              <option value="standard">Um padrão ou pesquisa publicada</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-comparable">Os dois conjuntos de números são comparáveis?</label>
+            <div class="hint">A maioria das falhas de benchmarking é aritmética antes de ser estratégica: as mesmas fronteiras de processo dos dois lados, normalizadas por escala e mix, com as condições registradas. Um percentil de pesquisa diz se a lacuna existe, não o que a produz.</div>
+            <select id="b-comparable" data-section="A referência" data-label="Comparabilidade dos números">
+              <option value="">Selecione um</option>
+              <option value="yes">Sim — mesma definição e fronteiras, normalizados, condições registradas</option>
+              <option value="partly">Em parte — mesma definição, mas escala, mix ou condições diferem</option>
+              <option value="flag-comp">Não — o número deles é publicado, o nosso é calculado de outro jeito</option>
+              <option value="flag-ku">Não verificamos</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-what">O que a referência faz que vocês não fazem?</label>
+            <div class="hint">A prática, não o indicador. "Eles são 30% mais rápidos" é um número; "eles revisam a representação a cada trimestre com um responsável nomeado" é uma prática. Perguntem o que pararam de fazer, e do que nunca abririam mão.</div>
+            <textarea id="b-what" data-section="A referência" data-label="O que a referência faz e nós não"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-term">Vocês estariam copiando um ativo, um processo ou uma regra-em-uso?</label>
+            <select id="b-term" data-section="A referência" data-label="O que seria copiado">
+              <option value="">Selecione um</option>
+              <option value="A">A — um ativo que compraríamos</option>
+              <option value="P">P — um processo que documentaríamos e copiaríamos</option>
+              <option value="C">C — um modo de trabalhar que vive nos hábitos das pessoas, que teríamos de construir</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-bundle">Do que mais ela depende — o resto do conjunto?</label>
+            <div class="hint">As práticas que fazem esta funcionar na referência. Uma cópia parcial pode render menos do que nenhuma cópia.</div>
+            <textarea id="b-bundle" data-section="A referência" data-label="O resto do conjunto"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-condition">O que precisaria ser verdade aqui para essa prática funcionar?</label>
+            <div class="hint">O que nossas pessoas já precisariam saber, ou já ser capazes de fazer? Práticas deixam de se transferir muito mais por razões de conhecimento do que de motivação — inclusive entre duas unidades da mesma empresa.</div>
+            <textarea id="b-condition" data-section="A referência" data-label="Condição de absorção"></textarea>
+          </div>
+          <div class="field">
+            <label for="b-howlong">Quanto tempo a referência levou para construir isso?</label>
+            <select id="b-howlong" data-section="A referência" data-label="Tempo que a referência levou">
+              <option value="">Selecione um</option>
+              <option>Meses</option>
+              <option>Alguns anos</option>
+              <option>Uma década ou mais</option>
+              <option value="flag-howlong">Desconhecido — ninguém aqui sabe</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="b-decision">Adotar, adaptar ou descartar</label>
+            <select id="b-decision" data-section="A referência" data-label="Adotar, adaptar ou descartar">
+              <option value="">Selecione um</option>
+              <option value="adopt">Adotar — as condições já existem</option>
+              <option value="adapt">Adaptar — traduzir para o nosso contexto</option>
+              <option value="discard">Descartar — depende de condições que não temos e não conseguimos acumular razoavelmente</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>3 · Lacunas de capacidade e o roteiro de seis meses</h4>
+        <p style="font-size:15.5px;color:#4A5B70">A referência trata de uma prática. Um roteiro trata da organização. Nomeiem as três capacidades cuja ausência mais limita o desempenho — capacidades, não produtos: "um único lugar oficial para as datas do cronograma", e não "um novo sistema de PPM" — e posicionem cada uma nos dois eixos que decidem a sequência. <strong>Quanto importa fechá-la?</strong> Alto se mexe em algo pelo qual os clientes escolhem vocês, ou remove uma restrição que se repete. <strong>Dá para fechá-la com o que existe hoje?</strong> Alto se as pessoas, os dados e a autoridade para mudar o processo já estão em mãos. <strong>Quando o trabalho começaria?</strong> — não quando terminaria: um roteiro se ordena pelos inícios.</p>
+        <div class="block">
+          <div class="field">
+            <label for="r-g1">Lacuna 1</label>
+            <input type="text" id="r-g1" data-section="O roteiro" data-label="Lacuna 1" placeholder="A capacidade que falta, numa linha">
+          </div>
+          <div class="field">
+            <label for="r-v1">Lacuna 1 — quanto importa, se dá para fechar agora, e quando começa</label>
+            <div class="grid3">
+              <select id="r-v1" data-section="O roteiro" data-label="Lacuna 1 — quanto importa"><option value="">Quanto importa —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-f1" data-section="O roteiro" data-label="Lacuna 1 — dá para fechar agora"><option value="">Dá para fechar agora? —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-h1" data-section="O roteiro" data-label="Lacuna 1 — quando começa"><option value="">Quando começa —</option><option value="0">Meses 0–2</option><option value="2">Meses 2–4</option><option value="4">Meses 4–6</option><option value="6">Depois de seis meses</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g2">Lacuna 2</label>
+            <input type="text" id="r-g2" data-section="O roteiro" data-label="Lacuna 2" placeholder="A capacidade que falta, numa linha">
+          </div>
+          <div class="field">
+            <label for="r-v2">Lacuna 2 — quanto importa, se dá para fechar agora, e quando começa</label>
+            <div class="grid3">
+              <select id="r-v2" data-section="O roteiro" data-label="Lacuna 2 — quanto importa"><option value="">Quanto importa —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-f2" data-section="O roteiro" data-label="Lacuna 2 — dá para fechar agora"><option value="">Dá para fechar agora? —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-h2" data-section="O roteiro" data-label="Lacuna 2 — quando começa"><option value="">Quando começa —</option><option value="0">Meses 0–2</option><option value="2">Meses 2–4</option><option value="4">Meses 4–6</option><option value="6">Depois de seis meses</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-g3">Lacuna 3</label>
+            <input type="text" id="r-g3" data-section="O roteiro" data-label="Lacuna 3" placeholder="A capacidade que falta, numa linha">
+          </div>
+          <div class="field">
+            <label for="r-v3">Lacuna 3 — quanto importa, se dá para fechar agora, e quando começa</label>
+            <div class="grid3">
+              <select id="r-v3" data-section="O roteiro" data-label="Lacuna 3 — quanto importa"><option value="">Quanto importa —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-f3" data-section="O roteiro" data-label="Lacuna 3 — dá para fechar agora"><option value="">Dá para fechar agora? —</option><option value="H">Alto</option><option value="M">Médio</option><option value="L">Baixo</option></select>
+              <select id="r-h3" data-section="O roteiro" data-label="Lacuna 3 — quando começa"><option value="">Quando começa —</option><option value="0">Meses 0–2</option><option value="2">Meses 2–4</option><option value="4">Meses 4–6</option><option value="6">Depois de seis meses</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-first">O que precisa ser verdade até o fim do segundo mês?</label>
+            <div class="hint">Uma frase, mensurável. Um roteiro cujo primeiro marco não pode ser enunciado é uma lista de intenções com datas.</div>
+            <textarea id="r-first" data-section="O roteiro" data-label="O marco do segundo mês"></textarea>
+          </div>
+        </div>
+
+        <div class="readout" id="readout">
+          <h4>O que as respostas de vocês dizem</h4>
+          <div id="readout-body"></div>
+        </div>
+
+      </div>
+      <div class="exportbar">
+        <div class="field">
+          <label for="s-who">Elaborado por</label>
+          <input type="text" id="s-who" data-label="Elaborado por" placeholder="Nome, ou o grupo">
+        </div>
+        <div class="btnrow">
+          <button type="button" class="primary" id="s-download">Baixar em PDF</button>
+          <button type="button" class="ghost" id="s-copy">Copiar como texto</button>
+          <button type="button" class="ghost" id="s-clear">Limpar</button>
+        </div>
+        <p class="savenote">Salvo neste navegador à medida que vocês digitam — nada é enviado a lugar nenhum. Baixem o PDF antes de fechar a aba.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">TRÊS</div><h2>Lendo o resultado</h2></div></div>
+<section>
+  <div class="wrap">
+    <p>O estudo também não tem nota. Ele produz três coisas que valem a pena olhar.</p>
+    <ul class="tight">
+      <li><strong>Se vocês encontraram uma prática ou só um número.</strong> Se a seção 2 nomeia um indicador e nenhuma rotina, a fase 3 do método não foi feita — e a fase 3 é a que importa.</li>
+      <li><strong>Se o que vocês copiariam é A, P ou C.</strong> Ativos e processos documentados viajam. Regras-em-uso não viajam por observação: precisam ser construídas, e o tempo que a referência levou é a estimativa honesta de quanto isso leva.</li>
+      <li><strong>Se o roteiro começa por onde pode ganhar.</strong> Alto valor e alta viabilidade vão nos dois primeiros meses, porque um resultado demonstrado cedo compra a paciência de que os itens difíceis vão precisar. Alto valor e baixa viabilidade colocados primeiro é a forma mais comum de um roteiro perder o patrocinador.</li>
+    </ul>
+    <p>Um exemplo preenchido sobre a Zillow Offers — a referência e o roteiro que seguem a avaliação — está na página <a href="worked-examples.html#two">Worked examples</a> (em inglês).</p>
+  </div>
+</section>
+
+<div class="partbar"><div class="wrap"><div class="n">QUATRO</div><h2>Fontes</h2></div></div>
+<section>
+  <div class="wrap">
+    <ul class="refs">
+      <li>Camp, R. C. (1989). <em>Benchmarking: The Search for Industry Best Practices That Lead to Superior Performance</em>. ASQC Quality Press.</li>
+      <li>Dierickx, I., &amp; Cool, K. (1989). Asset stock accumulation and sustainability of competitive advantage. <em>Management Science</em>, 35(12), 1504–1511.</li>
+      <li>Lippman, S. A., &amp; Rumelt, R. P. (1982). Uncertain imitability. <em>Bell Journal of Economics</em>, 13(2), 418–438.</li>
+      <li>Porter, M. E. (1996). What is strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Rivkin, J. W. (2000). Imitation of complex strategies. <em>Management Science</em>, 46(6), 824–844.</li>
+      <li>Spear, S., &amp; Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <em>Harvard Business Review</em>, 77(5), 96–106.</li>
+      <li>Szulanski, G. (1996). Exploring internal stickiness. <em>Strategic Management Journal</em>, 17(S2), 27–43.</li>
+      <li>Lima, T. F. (2026). <em>Excelência operacional: da estratégia à execução</em>. Atena Editora. Acesso aberto.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>International Certificate in Project Management and Organizational Performance</b><br>
+    Módulo 3 — Methods, Tools, and Operational Efficiency · Estudo de Benchmarking<br>
+    Sorbonne Business School · IDGP Academy · Prof. Dr. Thiago Lima
+  </div>
+</footer>
+
+<script src="js/instrument.js"></script>
+<script src="js/benchmarking.js"></script>
+<script>
+Benchmarking.init('pt');
+</script>
+
+</body>
+</html>
