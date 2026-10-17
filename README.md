@@ -25,6 +25,10 @@ Printable versions live in [`pdf/`](pdf) — cover, contents with page numbers, 
 
 All the instruments are fillable in the page: answers persist in the browser as a group types, a readout restates what the answers say, and a button exports the completed instrument as a PDF for the Execution Optimization Challenge. Everything runs client-side; nothing is transmitted.
 
+## Memória das sessões
+
+After each session, a written record in Portuguese of what happened in the room — the concepts, the cases and the class's questions, with participants anonymised — is published in [`pdf/`](pdf): [`Memoria_Sessao_1_Lean_Six_Sigma.pdf`](pdf/Memoria_Sessao_1_Lean_Six_Sigma.pdf). The landing page lists them under *Memória*.
+
 ## Interactive concept maps
 
 Each session also has a web app built on the engine of [Cadeia Circular](https://tflsixsigma-png.github.io/Cadeia-Circular-Prof-Thiago-Lima/): slides, a force-directed concept map, the figures as vector SVG, a timeline, the theory frame, cases, Monday actions and references, all cross-linked.
