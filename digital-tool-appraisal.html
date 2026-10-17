@@ -111,6 +111,17 @@ ul.tight li{margin-bottom:6px}
 .btnrow button[disabled]{opacity:.6;cursor:wait}
 .btnrow button:focus{outline:3px solid #FFFFFF;outline-offset:2px}
 .savenote{font-size:14.5px;color:#9FB3C9;margin:12px 0 0;max-width:none}
+.pastebox{margin-top:16px;border-top:1px solid #2C4560;padding-top:14px}
+.pastebox label{display:block;color:var(--gold-soft);font-size:15px;margin-bottom:8px}
+.pastebox textarea{width:100%;box-sizing:border-box;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;padding:10px;border-radius:6px;border:1px solid #4A6582;background:#FFFFFF;color:#101B25}
+.pastemsg{color:#FFFFFF;font-size:15px;margin:10px 0 0;max-width:none}
+.coach{border:2px solid var(--gold);border-radius:8px;padding:20px 24px;margin:26px 0 6px;background:#FFFFFF}
+.coach h3{margin-top:0}
+.coach .dl{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 6px}
+.coach .dl a{display:inline-block;font-weight:700;text-decoration:none;padding:11px 18px;border-radius:6px;border:2px solid var(--navy,#0A2342);color:var(--navy,#0A2342)}
+.coach .dl a.p{background:var(--navy,#0A2342);color:#FFFFFF}
+.coach ol{margin:8px 0 0 20px;padding:0}
+.coach li{margin:4px 0}
 
 .refs li{margin:0 0 7px 20px;font-size:15px}
 footer{background:var(--ink);color:#A3B7CD;padding:30px 0 38px;font-size:14.5px}
@@ -135,6 +146,22 @@ footer b{color:var(--gold-soft)}
     <p class="lead">Three questions decide whether a digital investment returns anything. Does it change what the organisation <em>owns</em>, or what it is <em>able to do</em>? At which link does the chain from a working tool to an organisational result break — or go unmeasured? And, where the tool contains AI, what has the system been told to want, to know and to see?</p>
     <p>The instrument asks all three in the room, in about twenty minutes for one tool. The follow-up turns outward and is a separate instrument, the <a href="benchmarking-study.html">Benchmarking Study</a>: what a reference organisation does that you do not, and which capability gaps to close first over six months. It is designed to be filled in by the people who will live with the decision rather than by the people selling it, and <strong>"not documented" and "nobody knows" are its most useful answers.</strong></p>
     <p>A filled-in example on a documented case — Zillow Offers, 2018–2021 — is on the <a href="worked-examples.html#two">Worked examples</a> page, with the lines where a group typically disagrees marked.</p>
+
+    <div class="coach" id="ai-coach">
+      <h3>Work through it with an AI coach — Claude or Gemini</h3>
+      <p>A coach that takes you through sections 1 to 5 one field at a time, for a tool you know first-hand. It asks; you answer. It will not fill the form for you, will not invent facts about your organisation and gives no score — "not documented" is a good answer. At the end it hands you the appraisal as a text block that you paste into this page to get the same PDF as everyone else.</p>
+      <div class="dl">
+        <a class="p" href="skills/digital-tool-appraisal.zip" download>Claude skill (.zip)</a>
+        <a href="skills/Digital_Tool_Appraisal_Gemini.zip" download>Gemini Gem (.zip)</a>
+        <a href="skills/README.md">Installation guide</a>
+      </div>
+      <ol>
+        <li><strong>Claude:</strong> Settings → Capabilities, turn on code execution; then Customize → Skills → + → Upload a skill, and choose the .zip without unzipping it.</li>
+        <li><strong>Gemini:</strong> Gems → New Gem; paste <code>GEM_INSTRUCTIONS.md</code> into Instructions and upload the four other .md files as Knowledge.</li>
+        <li>Start a chat with <em>"I want to do a Digital Tool Appraisal of &lt;tool&gt;"</em>. When it ends, use <strong>Paste from the AI coach</strong> at the bottom of the instrument, then <strong>Download as PDF</strong>.</li>
+      </ol>
+      <p style="margin-bottom:0;font-size:15px">Anonymise organisation and vendor names before pasting anything confidential into an AI tool. The coach has seen the Zillow example and will only show it to you after you finish your own appraisal.</p>
+    </div>
   </div>
 </section>
 
@@ -499,6 +526,13 @@ footer b{color:var(--gold-soft)}
           <button type="button" class="primary" id="t-download">Download as PDF</button>
           <button type="button" class="ghost" id="t-copy">Copy as text</button>
           <button type="button" class="ghost" id="t-clear">Clear</button>
+          <button type="button" class="ghost" id="t-paste">Paste from the AI coach</button>
+        </div>
+        <div class="pastebox" id="pastebox" hidden>
+          <label for="t-pastetext">Paste the text block the AI coach gave you. The form fills itself and the readout is recomputed; then download the PDF.</label>
+          <textarea id="t-pastetext" rows="8" placeholder="DIGITAL TOOL APPRAISAL&#10;…&#10;THE TOOL&#10;  Tool or platform: …"></textarea>
+          <div class="btnrow"><button type="button" class="primary">Fill the form</button></div>
+          <p class="pastemsg" aria-live="polite"></p>
         </div>
         <p class="savenote">Saved in this browser as you type — nothing is sent anywhere. Download the PDF before closing the tab.</p>
       </div>

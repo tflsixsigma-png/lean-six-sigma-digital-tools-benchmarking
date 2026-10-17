@@ -15,10 +15,14 @@
     en: { notAnswered: 'not answered', readout: 'What these answers say', page: 'Page', of: 'of',
           generated: 'Exported', copied: 'Copied', clearAsk: 'Clear every field?', copyPrompt: 'Copy the text:',
           building: 'Preparing the PDF…', failed: 'The PDF could not be built in this browser. Use “Copy as text” instead.',
+          imported: function (n) { return 'Filled ' + n + ' field' + (n === 1 ? '' : 's') + '. Check them, then download the PDF.'; },
+          unplaced: 'Could not place — fill these in by hand:', nothing: 'Nothing recognised. Paste the whole text block the AI coach gave you.',
           months: ['January','February','March','April','May','June','July','August','September','October','November','December'] },
     pt: { notAnswered: 'sem resposta', readout: 'O que estas respostas dizem', page: 'Página', of: 'de',
           generated: 'Exportado em', copied: 'Copiado', clearAsk: 'Apagar todos os campos?', copyPrompt: 'Copie o texto:',
           building: 'Preparando o PDF…', failed: 'Não foi possível gerar o PDF neste navegador. Use “Copiar como texto”.',
+          imported: function (n) { return n + (n === 1 ? ' campo preenchido' : ' campos preenchidos') + '. Confiram e baixem o PDF.'; },
+          unplaced: 'Não foi possível encaixar — preencham à mão:', nothing: 'Nada reconhecido. Colem o bloco de texto inteiro que o coach de IA entregou.',
           months: ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'] }
   };
 
@@ -296,8 +300,66 @@
       onChange();
     });
 
+
+    // ---------- paste from the AI coach ----------
+    // Reads the plain-text format produced by "Copy as text" (and by the AI coach skill):
+    // one "Label: value" per line. Section titles and readout lines are ignored; the readout is recomputed.
+    function norm(t) {
+      return (t || '').replace(/[–‒―]/g, '—').replace(/\s*—\s*/g, ' — ')
+        .replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+    function importText(text) {
+      var targets = all.map(function (f) { return { f: f, label: f.getAttribute('data-label') || (f === who ? cfg.whoLabel : '') }; })
+        .filter(function (t) { return t.label; })
+        .sort(function (a, b) { return b.label.length - a.label.length; });
+      var filled = 0, unplaced = [];
+      (text || '').split(/\r?\n/).forEach(function (line) {
+        var t = line.replace(/\*\*/g, '').replace(/^\s*[-•*]\s+/, '').trim();
+        if (!t) return;
+        var low = norm(t);
+        for (var i = 0; i < targets.length; i++) {
+          var lab = norm(targets[i].label);
+          if (low.indexOf(lab + ':') !== 0) continue;
+          var f = targets[i].f, v = t.slice(t.indexOf(':', targets[i].label.length - 1) + 1).trim();
+          if (/^[—\-–]?$/.test(v)) v = '';
+          if (f.options) {
+            if (!v) { f.selectedIndex = 0; filled++; return; }
+            var nv = norm(v), hit = -1;
+            for (var k = 1; k < f.options.length && hit === -1; k++) if (norm(f.options[k].text) === nv) hit = k;
+            for (k = 1; k < f.options.length && hit === -1; k++) {
+              var o = norm(f.options[k].text);
+              if (nv.indexOf(o + ' —') === 0 || nv.indexOf(o + '.') === 0 || (nv.length > 12 && o.indexOf(nv) === 0)) hit = k;
+            }
+            if (hit === -1) { unplaced.push(targets[i].label + ': ' + v); return; }
+            f.selectedIndex = hit;
+          } else { f.value = v; }
+          filled++;
+          return;
+        }
+      });
+      onChange();
+      return { filled: filled, unplaced: unplaced };
+    }
+
+    var ps = cfg.buttons.paste && document.getElementById(cfg.buttons.paste);
+    var pbox = cfg.pasteBoxId && document.getElementById(cfg.pasteBoxId);
+    if (ps && pbox) {
+      var ta = pbox.querySelector('textarea'), go = pbox.querySelector('button'), msg = pbox.querySelector('.pastemsg');
+      ps.addEventListener('click', function () { pbox.hidden = !pbox.hidden; if (!pbox.hidden) ta.focus(); });
+      go.addEventListener('click', function () {
+        var r = importText(ta.value);
+        if (!r.filled) { msg.textContent = L.nothing; return; }
+        msg.innerHTML = '';
+        msg.appendChild(document.createTextNode(L.imported(r.filled)));
+        if (r.unplaced.length) {
+          msg.appendChild(document.createElement('br'));
+          msg.appendChild(document.createTextNode(L.unplaced + ' ' + r.unplaced.join(' · ')));
+        } else { ta.value = ''; }
+      });
+    }
+
     // exposed for testing
-    global.__instrument = { doc: docDefinition, text: buildText, load: loadPdfMake };
+    global.__instrument = { doc: docDefinition, text: buildText, load: loadPdfMake, importText: importText };
   }
 
   global.Instrument = { init: init };

@@ -144,7 +144,7 @@
         { label: L.hl[3], compute: function (api) { return api.txt('t-decision').split(' — ')[0]; } }
       ],
       readout: function (api) { return readout(L, api); },
-      buttons: { download: 't-download', copy: 't-copy', clear: 't-clear' }
+      buttons: { download: 't-download', copy: 't-copy', clear: 't-clear', paste: 't-paste' }, pasteBoxId: 'pastebox'
     });
   }
 
