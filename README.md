@@ -27,7 +27,7 @@ All the instruments are fillable in the page: answers persist in the browser as 
 
 ## Memória das sessões
 
-After each session, a written record in Portuguese of what happened in the room — the concepts, the cases and the class's questions, with participants anonymised — is published in [`pdf/`](pdf): [`Memoria_Sessao_1_Lean_Six_Sigma.pdf`](pdf/Memoria_Sessao_1_Lean_Six_Sigma.pdf). The landing page lists them under *Memória*.
+After each session, a written record in Portuguese of what happened in the room — the concepts, the cases and the class's questions, with participants anonymised — is published in [`pdf/`](pdf): [`Memoria_Sessao_1_Lean_Six_Sigma.pdf`](pdf/Memoria_Sessao_1_Lean_Six_Sigma.pdf) and [`Memoria_Sessao_2_Digital_Tools_Benchmarking.pdf`](pdf/Memoria_Sessao_2_Digital_Tools_Benchmarking.pdf). The landing page lists them under *Memória*.
 
 ## Interactive concept maps
 
