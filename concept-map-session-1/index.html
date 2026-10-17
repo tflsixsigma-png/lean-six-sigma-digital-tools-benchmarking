@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Interactive concept map, slides, figures, timeline, theory frame, cases and references for the Lean Six Sigma &amp; Continuous Improvement session — IAE Paris · Sorbonne Business School / IDGP Academy. Prof. Dr. Thiago Lima.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lean Six Sigma · Interactive Concept Map</title>
+<style>
+  :root{
+    --bg:#0b1418; --bg2:#0f1d23; --panel:#10222a; --panel2:#16303a;
+    --ink:#eaf4f2; --muted:#8fb0ad; --line:#23454f;
+    --core:#2dd4bf; --teoria:#a78bfa; --autor:#fbbf24; --pratica:#4ade80;
+    --tec:#60a5fa; --barreira:#fb923c; --lacuna:#f472b6;
+    --accent:#2dd4bf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 800px at 70% -10%,#13323b 0%,var(--bg) 55%);
+    color:var(--ink);overflow:hidden;
+  }
+  /* ---------- Top bar ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;height:62px;z-index:30;
+    display:flex;align-items:center;gap:18px;padding:0 22px;
+    background:linear-gradient(180deg,rgba(11,20,24,.95),rgba(11,20,24,.78));
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.3px;flex:none}
+  .brand>div{white-space:nowrap;line-height:1.18}
+  .brand .dot{width:13px;height:13px;border-radius:50%;background:var(--core);flex:none;
+    box-shadow:0 0 0 4px rgba(45,212,191,.18),0 0 18px rgba(45,212,191,.6)}
+  .brand small{display:block;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase}
+  nav{display:flex;gap:6px;margin-left:6px;overflow-x:auto;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav::-webkit-scrollbar{display:none}
+  nav button{
+    background:transparent;border:1px solid transparent;color:var(--muted);flex:none;white-space:nowrap;
+    padding:8px 15px;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;
+    transition:.15s;font-family:inherit;letter-spacing:.2px;
+  }
+  nav button:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+  nav button.active{color:#04231f;background:var(--core);border-color:var(--core)}
+  .vbadge{background:var(--core);color:#04231f;font-weight:700;font-size:11px;letter-spacing:.4px;
+    padding:4px 9px;border-radius:20px;white-space:nowrap}
+  .spacer{flex:1}
+  .searchbox{position:relative}
+  .searchbox input{
+    background:var(--panel);border:1px solid var(--line);color:var(--ink);
+    padding:8px 12px 8px 32px;border-radius:9px;font-size:13px;width:200px;font-family:inherit;outline:none;
+  }
+  .searchbox input:focus{border-color:var(--core)}
+  .searchbox svg{position:absolute;left:10px;top:9px;opacity:.5}
+  /* ---------- Views ---------- */
+  .view{position:fixed;inset:62px 0 0 0;display:none}
+  .view.active{display:block}
+  /* ---------- Map ---------- */
+  #stage{width:100%;height:100%;cursor:grab;display:block;touch-action:none}
+  #stage.grabbing{cursor:grabbing}
+  .legend{
+    position:absolute;left:18px;top:16px;z-index:10;background:rgba(16,34,42,.82);
+    border:1px solid var(--line);border-radius:13px;padding:13px 15px;backdrop-filter:blur(6px);max-width:230px;
+  }
+  .legend h4{margin:0 0 9px;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .legend .item{display:flex;align-items:center;gap:9px;font-size:13px;padding:4px 6px;border-radius:7px;cursor:pointer;transition:.12s;user-select:none}
+  .legend .item:hover{background:rgba(255,255,255,.05)}
+  .legend .item.off{opacity:.32}
+  .legend .swatch{width:12px;height:12px;border-radius:50%;flex:none}
+  .hint{position:absolute;left:18px;bottom:16px;z-index:10;font-size:12px;color:var(--muted);
+    background:rgba(16,34,42,.7);border:1px solid var(--line);border-radius:9px;padding:8px 12px;max-width:260px;line-height:1.5}
+  .ctrls{position:absolute;right:calc(18px + var(--panelw,0px));bottom:16px;z-index:10;display:flex;gap:8px;transition:right .25s}
+  .ctrls button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(16,34,42,.85);
+    color:var(--ink);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+  .ctrls button:hover{border-color:var(--core);color:var(--core)}
+  /* nodes */
+  .link{stroke:var(--line);stroke-width:1.4;transition:stroke .2s,stroke-width .2s,opacity .2s}
+  .link.hot{stroke:var(--core);stroke-width:2.4;opacity:1}
+  .node{cursor:pointer}
+  .node circle{stroke:var(--bg);stroke-width:2.5;transition:r .15s}
+  .node text{fill:var(--ink);font-size:11.5px;font-weight:600;pointer-events:none;paint-order:stroke;
+    stroke:var(--bg);stroke-width:3px;stroke-linejoin:round}
+  .node.dim{opacity:.16}
+  .link.dim{opacity:.06}
+  .node.sel circle{stroke:#fff;stroke-width:3.5}
+  /* ---------- Detail panel ---------- */
+  #panel{
+    position:fixed;top:62px;right:0;bottom:0;width:380px;z-index:25;
+    background:linear-gradient(180deg,var(--panel),var(--bg2));border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+  }
+  #panel.open{transform:translateX(0)}
+  .pclose{position:absolute;top:13px;right:14px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);cursor:pointer;font-size:17px}
+  .pclose:hover{color:var(--ink);border-color:var(--core)}
+  .pbody{padding:26px 26px 30px;overflow-y:auto}
+  .ptag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;
+    padding:5px 11px;border-radius:30px;margin-bottom:14px}
+  #panel h2{margin:0 0 4px;font-size:23px;line-height:1.2}
+  .pauthor{color:var(--core);font-size:13.5px;font-weight:600;margin-bottom:18px}
+  .pdesc{font-size:14.5px;line-height:1.62;color:#d6e7e4;margin-bottom:20px}
+  .pblock{margin-bottom:18px}
+  .pblock h5{margin:0 0 8px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pblock ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:#cfe4e1}
+  .pblock li{margin-bottom:5px}
+  .chip{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:20px;
+    padding:5px 12px;font-size:12px;margin:0 6px 7px 0;color:#cfe4e1}
+  .relnode{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:9px;padding:7px 11px;font-size:12.5px;margin:0 7px 7px 0;cursor:pointer;transition:.12s}
+  .relnode:hover{border-color:var(--core);transform:translateY(-1px)}
+  .relnode .sw{width:9px;height:9px;border-radius:50%;flex:none}
+  /* ---------- Content views (timeline/table/synth) ---------- */
+  .scroller{height:100%;overflow-y:auto;padding:46px 8vw 80px}
+  .scroller h1{font-size:30px;margin:0 0 6px;font-weight:800;letter-spacing:-.5px}
+  .scroller .sub{color:var(--muted);font-size:15px;margin-bottom:40px;max-width:680px;line-height:1.6}
+  /* timeline */
+  .tl{position:relative;max-width:880px}
+  .tl::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tlitem{position:relative;padding:0 0 30px 130px;cursor:pointer}
+  .tlitem .yr{position:absolute;left:0;top:-2px;width:72px;text-align:right;font-weight:800;font-size:19px;color:var(--autor)}
+  .tlitem .nub{position:absolute;left:81px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--autor);
+    border:3px solid var(--bg);box-shadow:0 0 0 3px rgba(251,191,36,.18)}
+  .tlcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 19px;transition:.15s}
+  .tlitem:hover .tlcard{border-color:var(--autor);transform:translateX(3px)}
+  .tlcard h3{margin:0 0 3px;font-size:17px}
+  .tlcard .who{color:var(--core);font-size:13px;font-weight:600;margin-bottom:8px}
+  .tlcard p{margin:0;font-size:13.5px;line-height:1.55;color:#cfe4e1}
+  /* table */
+  .ctable{width:100%;max-width:980px;border-collapse:separate;border-spacing:0;font-size:14px}
+  .ctable th,.ctable td{text-align:left;padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ctable thead th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ctable tbody tr{transition:.12s}
+  .ctable tbody tr:hover{background:rgba(45,212,191,.05)}
+  .ctable .nm{font-weight:700;font-size:15px}
+  .ctable .nm small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:3px;letter-spacing:.3px}
+  .scopebar{height:7px;border-radius:5px;background:linear-gradient(90deg,var(--core),var(--pratica));margin-top:9px}
+  /* synth */
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:920px;margin-bottom:46px}
+  .scard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden}
+  .scard .n{font-size:34px;font-weight:800;color:var(--core);opacity:.32;position:absolute;top:12px;right:18px}
+  .scard h3{margin:0 0 9px;font-size:16px;color:var(--core)}
+  .scard p{margin:0;font-size:14px;line-height:1.6;color:#d6e7e4}
+  .qbox{max-width:920px}
+  .qbox h2{font-size:21px;margin:0 0 18px}
+  .q{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px;margin-bottom:13px}
+  .q .qn{font-size:24px;font-weight:800;color:var(--lacuna);line-height:1;flex:none}
+  .q p{margin:0;font-size:15px;line-height:1.55}
+  .pullquote{max-width:820px;margin:8px 0 40px;font-size:21px;line-height:1.5;font-weight:600;
+    color:#eaf4f2;border-left:3px solid var(--lacuna);padding-left:22px;font-style:italic}
+  .pullquote cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:12px;font-weight:500}
+  /* cases */
+  .cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:20px;max-width:1120px}
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column}
+  .case .ch{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:3px}
+  .case h3{margin:0;font-size:18px}
+  .case .loc{font-size:11px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;text-transform:uppercase;flex:none}
+  .case .tag{font-size:14.5px;font-style:italic;color:var(--pratica);font-weight:600;margin:7px 0 13px}
+  .case p.cd{margin:0 0 16px;font-size:13.5px;line-height:1.58;color:#cfe4e1}
+  .case .row{display:flex;gap:12px;font-size:12.5px;padding:9px 0;border-top:1px solid var(--line)}
+  .case .row .k{flex:none;width:62px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:10px;padding-top:2px}
+  .case .row .v{color:#d9eae7;line-height:1.5}
+  .case .row .v b{color:var(--autor);font-weight:700}
+  .loop-chip{display:inline-block;font:700 11px/1 ui-monospace,monospace;color:#7FD3A6;background:rgba(127,211,166,.12);border:1px solid rgba(127,211,166,.34);border-radius:20px;padding:5px 11px;letter-spacing:.04em;text-transform:uppercase;margin:2px 0 4px}
+  .case .gomap{margin-top:16px;align-self:flex-start;background:transparent;border:1px solid var(--line);color:var(--core);
+    border-radius:9px;padding:8px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.13s}
+  .case .gomap:hover{border-color:var(--core);background:rgba(45,212,191,.08);transform:translateY(-1px)}
+  /* refs */
+  .refgroup{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--core);font-weight:700;margin:36px 0 6px;max-width:1000px}
+  .refrow{max-width:1000px;padding:13px 0 13px 30px;text-indent:-30px;border-bottom:1px solid var(--line);
+    font-size:14px;line-height:1.6;color:#d6e7e4}
+  .refrow i{color:#eaf4f2}
+  .refrow a{color:var(--core);text-decoration:none;font-size:13px;word-break:break-all}
+  .refrow a:hover{text-decoration:underline}
+  .refrow.hide{display:none}
+  .reffilter{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:9px;
+    font-size:13px;font-family:inherit;outline:none;margin-left:10px;width:240px}
+  .reffilter:focus{border-color:var(--core)}
+  /* shared "ver no mapa" button */
+  .gomap{margin-top:16px;align-self:flex-start;background:transparent;border:1px solid var(--line);color:var(--core);
+    border-radius:9px;padding:8px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.13s}
+  .gomap:hover{border-color:var(--core);background:rgba(45,212,191,.08);transform:translateY(-1px)}
+  /* quadro teórico */
+  .qtable{display:flex;flex-direction:column;gap:16px;max-width:1080px}
+  .qrow{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;transition:.13s}
+  .qrow:hover{border-color:var(--line)}
+  .qhead{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:6px}
+  .qdotwrap{position:relative;display:inline-flex;flex:none}
+  .qdot{width:15px;height:15px;border-radius:50%;cursor:help;flex:none;box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+  .qtip{position:absolute;left:24px;top:50%;transform:translateY(-50%);z-index:25;width:330px;max-width:72vw;
+    background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;
+    box-shadow:0 14px 34px rgba(0,0,0,.55);display:none;font-size:12.5px;line-height:1.5;color:#d6e7e4}
+  .qdotwrap:hover .qtip{display:block}
+  .qtip .c{display:block;font-weight:700;margin-bottom:7px;font-size:13.5px}
+  .qtip h6{margin:0 0 5px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .qconcept{font-weight:700;font-size:14.5px;padding:5px 13px;border-radius:30px;flex:none}
+  .qauthor{font-weight:700;font-size:15.5px}
+  .qpaper{font-style:italic;color:var(--muted);font-size:12.5px;margin-bottom:4px}
+  .qbody{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+  .qcol h6{margin:0 0 6px;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .qcol p{margin:0;font-size:13.5px;line-height:1.56;color:#d6e7e4}
+  /* intro / how-to-use modal */
+  .helpbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--core);
+    font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;flex:none}
+  .helpbtn:hover{border-color:var(--core)}
+  .introwrap{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;
+    background:rgba(5,12,15,.74);backdrop-filter:blur(7px)}
+  .introwrap.show{display:flex}
+  .introcard{position:relative;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:20px;max-width:580px;width:100%;padding:34px 36px;box-shadow:0 30px 80px rgba(0,0,0,.55);
+    max-height:88vh;overflow-y:auto}
+  .introcard .ptag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;
+    padding:5px 11px;border-radius:30px;margin-bottom:14px;background:rgba(45,212,191,.16);color:var(--core)}
+  .introcredit{font-size:12.5px;color:var(--core);font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px}
+  .introcard h2{margin:0 0 12px;font-size:25px;line-height:1.2}
+  .introcard .lead{font-size:15px;line-height:1.62;color:#d6e7e4;margin:0 0 22px}
+  .introsteps{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+  .introsteps .s{display:flex;gap:12px;font-size:13.5px;line-height:1.5;color:#cfe4e1}
+  .introsteps .s .sw{width:10px;height:10px;border-radius:50%;flex:none;margin-top:5px}
+  .introsteps .s b{color:var(--ink)}
+  .introgo{background:var(--core);color:#04231f;border:none;border-radius:11px;padding:12px 24px;font-size:14.5px;
+    font-weight:700;cursor:pointer;font-family:inherit}
+  .introgo:hover{filter:brightness(1.08)}
+  .introx{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);cursor:pointer;font-size:16px}
+  .introx:hover{color:var(--ink);border-color:var(--core)}
+  /* apresentação / viewer */
+  .apswrap{height:100%;display:flex;flex-direction:column;padding:22px 4vw 16px}
+  .apstop{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:13px;gap:14px;flex-wrap:wrap}
+  .apstop h1{font-size:22px;margin:0}
+  .apssub{color:var(--muted);font-size:12.5px;margin-top:3px}
+  .apsactions{display:flex;gap:8px}
+  .apsbtn{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 14px;
+    font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .apsbtn:hover{border-color:var(--core);color:var(--core)}
+  .apsstage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;
+    background:#0a0f12;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .apsstage img{max-width:100%;max-height:100%;object-fit:contain;display:block;cursor:pointer}
+  .apsmaplink{position:absolute;top:12px;right:12px;background:var(--core);color:#04231f;border:none;
+    border-radius:10px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;
+    box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .apsmaplink:hover{filter:brightness(1.08)}
+  .apsnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:rgba(16,34,42,.82);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .apsnav:hover{border-color:var(--core);color:var(--core)}
+  .apsprev{left:14px}.apsnext{right:14px}
+  .apscounter{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(11,20,24,.82);
+    border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-size:12.5px;color:var(--muted)}
+  .apsmeta{margin:13px 0 9px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .apsmeta .t{font-weight:700;font-size:15px}
+  .apschips{display:flex;flex-wrap:wrap;gap:7px}
+  .apschip{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;transition:.12s}
+  .apschip:hover{border-color:var(--core);transform:translateY(-1px)}
+  .apschip .sw{width:8px;height:8px;border-radius:50%;flex:none}
+  .apsthumbs{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 2px}
+  .apsthumb{flex:none;width:104px;height:58px;border-radius:7px;border:2px solid transparent;overflow:hidden;cursor:pointer;opacity:.5;background:#000;transition:.12s}
+  .apsthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .apsthumb.active{opacity:1;border-color:var(--core)}
+  .apsthumb:hover{opacity:1}
+  /* tela cheia */
+  .fswrap{position:fixed;inset:0;z-index:80;display:none;background:#000;align-items:center;justify-content:center}
+  .fswrap.show{display:flex}
+  .fswrap img{max-width:100vw;max-height:100vh;object-fit:contain}
+  .fsx{position:absolute;top:16px;right:18px;width:40px;height:40px;border-radius:9px;border:1px solid #333;
+    background:rgba(0,0,0,.5);color:#fff;font-size:17px;cursor:pointer}
+  .fsx:hover{border-color:var(--core);color:var(--core)}
+  .fsnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid #444;
+    background:rgba(0,0,0,.4);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+  .fsnav:hover{border-color:var(--core);color:var(--core)}
+  .fsprev{left:20px}.fsnext{right:20px}
+  .fscounter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#bbb;font-size:13px}
+  .fsmaplink{position:absolute;bottom:14px;right:20px;background:var(--core);color:#04231f;border:none;
+    border-radius:10px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
+    box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  .fsmaplink:hover{filter:brightness(1.08)}
+  .bfybox{max-width:1040px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+  .bfybox svg{width:100%;height:auto;display:block}
+  .bfyacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .bfyacts .gomap{margin-top:0;text-decoration:none}
+  .agh{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:var(--core);font-weight:700;margin:36px 0 14px}
+  #view-agenda .scard .gomap{margin-top:14px}
+  @media(max-width:760px){.qbody{grid-template-columns:1fr;gap:14px}.introcard{padding:26px 22px}
+    .apswrap{padding:16px 14px}.apsnav{width:36px;height:36px;font-size:18px}}
+  @media(max-width:760px){
+    .grid4{grid-template-columns:1fr}.scroller{padding:34px 22px 80px}
+    header{gap:10px;padding:0 12px}
+    nav{flex:1;margin-left:0}
+    nav button{padding:8px 11px;font-size:12.5px}
+    .searchbox{display:none}.vbadge{display:none}.spacer{display:none}
+    #panel{width:100%}.brand small{display:none}
+  }
+
+  /* ---- additions for this app ---- */
+  .figgrid{display:flex;flex-direction:column;gap:26px;max-width:1080px}
+  .figbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px 16px}
+  .figbox h3{margin:0 0 4px;font-size:17px}
+  .figbox .fsrc{color:var(--muted);font-size:12.5px;margin-bottom:12px}
+  .figbox .fwrap{background:#fff;border-radius:10px;padding:10px;overflow:hidden}
+  .figbox .fwrap svg,.figbox .fwrap img{width:100%;height:auto;display:block}
+  .figbox p.cap{margin:12px 0 0;font-size:13.5px;line-height:1.55;color:#cfe4e1}
+  .figbox .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .figbox .acts .gomap{margin-top:0;text-decoration:none}
+  .monday{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin-bottom:40px}
+  .mcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;position:relative}
+  .mcard .part{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
+  .mcard h3{margin:0 0 8px;font-size:16px;color:var(--lacuna)}
+  .mcard p{margin:0 0 8px;font-size:13.5px;line-height:1.58;color:#d6e7e4}
+  .mcard p b{color:#eaf4f2}
+  .mcard .do{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.3);border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.55;color:#eaf4f2}
+  .mcard .do b{color:var(--lacuna)}
+  .eqrow{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:1000px;margin-bottom:40px}
+  .eq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .eq .f{font:700 18px/1.35 ui-monospace,Menlo,monospace;color:var(--teoria);margin-bottom:8px;overflow-wrap:anywhere}
+  .eq .gomap{display:block;margin-top:10px}
+  .eq p{margin:0;font-size:13.5px;line-height:1.55;color:#d6e7e4}
+  .credit{position:fixed;left:18px;bottom:16px;z-index:9;font-size:11.5px;color:var(--muted);pointer-events:none}
+  @media(max-width:760px){.monday,.eqrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot"></span><div>Lean Six Sigma<small>Continuous Improvement · Module 3, Session 4</small></div></div>
+  <span class="vbadge">v1 · oct 2026</span>
+  <nav id="nav"><button data-view="apresentacao" class="active">Slides</button><button data-view="map">Concept Map</button><button data-view="diagrama">Figures</button><button data-view="timeline">Timeline</button><button data-view="cases">Cases</button><button data-view="quadro">Theory Frame</button><button data-view="agenda">On Monday</button><button data-view="refs">References</button></nav>
+  <div class="spacer"></div>
+  <button id="helpBtn" class="helpbtn" title="How to use / start here">?</button>
+  <div class="searchbox">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="search" placeholder="Search a concept or author…" autocomplete="off">
+  </div>
+</header>
+
+<!-- ============ MAP ============ -->
+<section class="view" id="view-map">
+  <svg id="stage"></svg>
+  <div class="legend">
+    <h4>Categories <span style="font-weight:500;text-transform:none;letter-spacing:0">(click to filter)</span></h4>
+    <div id="legendItems"></div>
+  </div>
+  <div class="hint">Click a node for details · drag to rearrange · mouse wheel to zoom</div>
+  <div class="ctrls" id="ctrls">
+    <button id="zin" title="Zoom in">+</button>
+    <button id="zout" title="Zoom out">−</button>
+    <button id="zfit" title="Centre" style="font-size:14px">⤢</button>
+  </div>
+</section>
+
+<!-- ============ SLIDES ============ -->
+<section class="view active" id="view-apresentacao">
+  <div class="apswrap">
+    <div class="apstop">
+      <div><h1>Session slides</h1><div class="apssub">Lean Six Sigma & Continuous Improvement · morning session, 17 October 2026 · Prof. Dr. Thiago Lima</div></div>
+      <div class="apsactions">
+        <button class="apsbtn" id="apsFull">⛶ Full screen</button>
+        <a class="apsbtn" id="apsDownload" download="Lean-Six-Sigma-Session-1.pdf">⤓ Download the deck (PDF)</a>
+      </div>
+    </div>
+    <div class="apsstage">
+      <button class="apsnav apsprev" id="apsPrev" aria-label="previous">‹</button>
+      <img id="apsImg" alt="Session slide">
+      <button class="apsnav apsnext" id="apsNext" aria-label="next">›</button>
+      <div class="apscounter" id="apsCounter"></div>
+      <button class="apsmaplink" id="apsMapLink">⊕ Explore on the map →</button>
+    </div>
+    <div class="apsmeta">
+      <span class="t" id="apsTitle"></span>
+      <span class="apschips" id="apsChips"></span>
+    </div>
+    <div class="apsthumbs" id="apsThumbs"></div>
+  </div>
+</section>
+
+<!-- ============ FIGURES ============ -->
+<section class="view" id="view-diagrama">
+  <div class="scroller">
+    <h1>The nine figures</h1>
+    <p class="sub">The figures that carry the morning's argument, from the reading notes: the value stream map, the efficiency frontier, a control chart, process capability against the tolerance, Little's Law for a portfolio, the ROIC tree, the worked return-on-capital scenario, the capability stock and the Lapré classification. Two of them are live simulators in the notes — open them to move the numbers.</p>
+    <div class="figgrid">
+<div class="figbox"><h3>Figure 1 · A value stream map of an administrative process</h3><div class="fsrc">Part Three · after Rother & Shook (1999)</div><div class="fwrap"><svg viewBox="0 0 1160 440" role="img" aria-label="Value stream map of a change-request process, showing four hours of process time across fifteen days of lead time">
+<rect fill="#FFFFFF"/>
+<text x="24.0" y="30.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">THE WORK, AND WHAT TRIGGERS EACH STEP</text>
+<rect x="24" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="24" y1="104" x2="192" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="108.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Request logged</text>
+<text x="108.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="108.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">15 min</text>
+<path d="M 202.0 142 L 244.0 142 L 223.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="223.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 198 96.0 L 248 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="254" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="254" y1="104" x2="422" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="338.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Triage</text>
+<text x="338.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="338.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">30 min</text>
+<path d="M 432.0 142 L 474.0 142 L 453.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="453.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 428 96.0 L 478 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="484" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="484" y1="104" x2="652" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="568.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Technical review</text>
+<text x="568.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="568.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">90 min</text>
+<path d="M 662.0 142 L 704.0 142 L 683.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="683.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 658 96.0 L 708 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="714" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="714" y1="104" x2="882" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="798.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Approval board</text>
+<text x="798.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="798.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">45 min</text>
+<path d="M 892.0 142 L 934.0 142 L 913.0 104 Z" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="913.0" y="136.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">wait</text>
+<path d="M 888 96.0 L 938 96.0" stroke="#A9BACB" stroke-width="1.6" stroke-dasharray="4 3"/>
+<rect x="944" y="64" width="168" height="92" rx="5" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="944" y1="104" x2="1112" y2="104" stroke="#2A5D9F" stroke-width="1.2" opacity=".45"/>
+<text x="1028.0" y="90.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="700">Implementation</text>
+<text x="1028.0" y="126.0" font-family="'JetBrains Mono',monospace" font-size="11" fill="#56687C" text-anchor="middle" font-weight="400">process time</text>
+<text x="1028.0" y="146.0" font-family="'JetBrains Mono',monospace" font-size="16" fill="#2A5D9F" text-anchor="middle" font-weight="700">60 min</text>
+<text x="24.0" y="240.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">THE TIMELINE — WORKED TIME BELOW, ELAPSED TIME ABOVE</text>
+<path d="M 24 322 L 192 322 L 192 272 L 254 272 L 254 322 L 422 322 L 422 272 L 484 272 L 484 322 L 652 322 L 652 272 L 714 272 L 714 322 L 882 322 L 882 272 L 944 272 L 944 322 L 1112 322" fill="none" stroke="#0A2342" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="108.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">15 min</text>
+<text x="338.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">30 min</text>
+<text x="568.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">90 min</text>
+<text x="798.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">45 min</text>
+<text x="1028.0" y="344.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#0A2342" text-anchor="middle" font-weight="700">60 min</text>
+<text x="223.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">2 days</text>
+<text x="453.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">6 days</text>
+<text x="683.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">1 day</text>
+<text x="913.0" y="260.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">6 days</text>
+<rect x="24" y="358" width="1112" height="60" rx="6" fill="#0A2342"/>
+<text x="46.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">PROCESS TIME</text>
+<text x="46.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">4 hours</text>
+<text x="324.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">LEAD TIME</text>
+<text x="324.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">15 working days</text>
+<line x1="302.0" y1="370" x2="302.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+<text x="602.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">FLOW EFFICIENCY</text>
+<text x="602.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#F2DFB4" text-anchor="start" font-weight="600">3.3%</text>
+<line x1="580.0" y1="370" x2="580.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+<text x="880.0" y="382.0" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#9FB6CE" text-anchor="start" font-weight="700" letter-spacing="1.4">WHERE IT SITS</text>
+<text x="880.0" y="404.0" font-family="'Fraunces',serif" font-size="17" fill="#FFFFFF" text-anchor="start" font-weight="600">two approval queues</text>
+<line x1="858.0" y1="370" x2="858.0" y2="406" stroke="#2C4766" stroke-width="1"/>
+</svg></div><p class="cap">A change request from arrival to implementation. The boxes carry the worked time, the triangles the waiting. Four hours of work spread across fifteen working days, with almost all of the elapsed time sitting in two approval queues.</p><div class="acts"><button class="gomap" data-go="vsm">See on the map →</button><button class="gomap" data-go="br_streams">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 2 · The efficiency matrix</h3><div class="fsrc">Part Four · after Modig & Åhlström (2012)</div><div class="fwrap"><svg viewBox="0 0 980 720" role="img" aria-label="Two-by-two matrix of resource efficiency against flow efficiency with the efficiency frontier">
+<rect fill="#FFFFFF"/>
+<rect x="120" y="50" width="810" height="450" fill="#EAF0F6" opacity=".45"/>
+<line x1="525.0" y1="50" x2="525.0" y2="500" stroke="#A9BACB" stroke-width="1" stroke-dasharray="5 4"/>
+<line x1="120" y1="275.0" x2="930" y2="275.0" stroke="#A9BACB" stroke-width="1" stroke-dasharray="5 4"/>
+<defs><marker id="arrH" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0A2342"/></marker></defs>
+<path d="M 120 203.0 A 534.6 297.0 0 0 1 654.6 500" fill="none" stroke="#B8820F" stroke-width="3" stroke-dasharray="8 5"/>
+<path d="M 120 81.5 A 753.3 418.5 0 0 1 873.3 500" fill="none" stroke="#2A5D9F" stroke-width="3"/>
+<path d="M 498.3 289.9 L 634.4 214.2" stroke="#0A2342" stroke-width="2.6" marker-end="url(#arrH)"/>
+<line x1="120" y1="500" x2="930" y2="500" stroke="#0A2342" stroke-width="2"/>
+<line x1="120" y1="50" x2="120" y2="500" stroke="#0A2342" stroke-width="2"/>
+<circle cx="920.0" cy="60.0" r="8" fill="#0A2342"/>
+<text x="142.0" y="444.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Wasteland</text>
+<text x="142.0" y="465.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">busy nobody, moves nothing</text>
+<text x="547.0" y="444.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Efficient islands</text>
+<text x="547.0" y="465.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">every unit busy, the work still waits</text>
+<text x="142.0" y="224.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">Efficient ocean</text>
+<text x="142.0" y="245.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">work flows, capacity deliberately spare</text>
+<text x="900.0" y="86.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="end" font-weight="600" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">The perfect state</text>
+<text x="900.0" y="107.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="end" font-weight="400" stroke="#FFFFFF" stroke-width="4.5" paint-order="stroke" stroke-linejoin="round">unreachable while variation is what it is</text>
+<text x="525.0" y="538.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Resource efficiency  →  how busy the people and machines are</text>
+<text transform="translate(72,275.0) rotate(-90)" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Flow efficiency  →  how little the work waits</text>
+<line x1="120" y1="576" x2="150" y2="576" stroke="#B8820F" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="160.0" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the frontier today</text>
+<line x1="286.2" y1="576" x2="316.2" y2="576" stroke="#2A5D9F" stroke-width="3"/>
+<text x="326.2" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the frontier once variation is removed</text>
+<path d="M 590.4 576 L 614.4 576" stroke="#0A2342" stroke-width="2.6" marker-end="url(#arrH)"/>
+<text x="630.4" y="581.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the one move that is not a trade-off</text>
+<rect x="120" y="610" width="810" height="120" rx="7" fill="#0A2342"/>
+<text x="144.0" y="642.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#F2DFB4" text-anchor="start" font-weight="700" letter-spacing="1.8">THE PARADOX</text>
+<text x="144.0" y="670.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#FFFFFF" text-anchor="start" font-weight="400">Every point on a frontier is a trade-off, so pushing one efficiency up pushes the other down and the argument</text>
+<text x="144.0" y="692.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#FFFFFF" text-anchor="start" font-weight="400">never ends. The one move that is not a trade-off is removing the variation that drew the curve in the first place.</text>
+<text x="144.0" y="714.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14.5" fill="#C6D4E4" text-anchor="start" font-weight="400">Most organisations sit bottom-right, call it productivity, and never notice they chose a point on a poor curve.</text>
+</svg></div><p class="cap">Resource efficiency and flow efficiency are not two names for the same thing, and the curve is why they trade off: with variation at its current level, the combinations beyond the frontier cannot be bought with effort. Removing variation moves the frontier towards the corner where both are high.</p><div class="acts"><button class="gomap" data-go="floweff">See on the map →</button><button class="gomap" data-go="leadtime">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 3 · A control chart</h3><div class="fsrc">Part Four · Shewhart (1931)</div><div class="fwrap"><svg viewBox="0 0 1160 440" role="img" aria-label="Control chart with centre line, three-sigma limits, one point beyond the upper limit and a run of seven below the centre">
+<rect fill="#FFFFFF"/>
+<rect x="90" y="123.5" width="1030" height="190.6" fill="#EAF0F6" opacity=".6"/>
+<line x1="90" y1="123.5" x2="1120" y2="123.5" stroke="#0A2342" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="80.0" y="128.5" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">UCL  +3σ</text>
+<line x1="90" y1="218.8" x2="1120" y2="218.8" stroke="#0A2342" stroke-width="2.2"/>
+<text x="80.0" y="223.8" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">centre line</text>
+<line x1="90" y1="314.1" x2="1120" y2="314.1" stroke="#0A2342" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="80.0" y="319.1" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="end" font-weight="700">LCL  −3σ</text>
+<line x1="90" y1="330" x2="1120" y2="330" stroke="#0A2342" stroke-width="2"/>
+<text x="605.0" y="364.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#56687C" text-anchor="middle" font-weight="400">successive measurements, in order</text>
+<path d="M 90.0 210.9 L 134.8 234.7 L 179.6 195.0 L 224.3 242.6 L 269.1 218.8 L 313.9 187.1 L 358.7 250.6 L 403.5 202.9 L 448.3 226.8 L 493.0 210.9 L 537.8 242.6 L 582.6 195.0 L 627.4 218.8 L 672.2 91.8 L 717.0 226.8 L 761.7 202.9 L 806.5 242.6 L 851.3 250.6 L 896.1 234.7 L 940.9 258.5 L 985.7 242.6 L 1030.4 250.6 L 1075.2 266.5 L 1120.0 210.9" fill="none" stroke="#2A5D9F" stroke-width="2"/>
+<circle cx="90.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="134.8" cy="234.7" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="179.6" cy="195.0" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="224.3" cy="242.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="269.1" cy="218.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="313.9" cy="187.1" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="358.7" cy="250.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="403.5" cy="202.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="448.3" cy="226.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="493.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="537.8" cy="242.6" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="582.6" cy="195.0" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="627.4" cy="218.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="672.2" cy="91.8" r="7" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="717.0" cy="226.8" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="761.7" cy="202.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="806.5" cy="242.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="851.3" cy="250.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="896.1" cy="234.7" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="940.9" cy="258.5" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="985.7" cy="242.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1030.4" cy="250.6" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1075.2" cy="266.5" r="5" fill="#B8820F" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="1120.0" cy="210.9" r="5" fill="#2A5D9F" stroke="#FFFFFF" stroke-width="2"/>
+<line x1="672.2" y1="77.8" x2="672.2" y2="46" stroke="#B8820F" stroke-width="1.8"/>
+<text x="664.2" y="40.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#7E5B0C" text-anchor="end" font-weight="700">one point beyond the limit — a special cause, and worth investigating</text>
+<rect x="794.5" y="376" width="292.7" height="4" fill="#B8820F"/>
+<text x="940.9" y="406.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">seven consecutive points below the centre line —</text>
+<text x="940.9" y="424.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="middle" font-weight="400">inside the limits, and still a special cause: the process has shifted</text>
+<text x="90.0" y="406.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="700">Everything in blue is common cause:</text>
+<text x="90.0" y="424.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">the process doing what it was built to do.</text>
+<text x="90.0" y="442.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Explaining these points one by one makes it worse.</text>
+</svg></div><p class="cap">Twenty-four measurements of the same process. The limits are calculated from the process itself, not from the target. Two signals are present and everything else is noise — and the costly managerial error is not missing the two signals, it is explaining the noise.</p><div class="acts"><button class="gomap" data-go="variation">See on the map →</button><button class="gomap" data-go="explainnoise">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 4 · Capability — identical spread, opposite fates</h3><div class="fsrc">Part Four · Cp and Cpk</div><div class="fwrap"><svg viewBox="0 0 1160 420" role="img" aria-label="Two normal distributions against the same tolerance limits, one centred and one shifted">
+<rect fill="#FFFFFF"/>
+<text x="20.0" y="38.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Centred on target</text>
+<rect x="138.0" y="80" width="304.0" height="220" fill="#EAF0F6" opacity=".75"/>
+<line x1="138.0" y1="78" x2="138.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="138.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">LSL</text>
+<line x1="442.0" y1="78" x2="442.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="442.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">USL</text>
+<path d="M 36 300.0 L 40 300.0 L 44 300.0 L 48 300.0 L 52 300.0 L 56 300.0 L 60 300.0 L 64 300.0 L 68 300.0 L 72 300.0 L 76 300.0 L 80 300.0 L 84 300.0 L 88 300.0 L 92 300.0 L 96 300.0 L 100 300.0 L 104 300.0 L 108 300.0 L 112 300.0 L 116 300.0 L 120 300.0 L 124 300.0 L 128 300.0 L 132 300.0 L 136 300.0 L 140 299.9 L 144 299.9 L 148 299.8 L 152 299.8 L 156 299.7 L 160 299.5 L 164 299.3 L 168 299.0 L 172 298.6 L 176 298.1 L 180 297.4 L 184 296.5 L 188 295.4 L 192 293.9 L 196 292.0 L 200 289.7 L 204 286.9 L 208 283.4 L 212 279.3 L 216 274.5 L 220 268.8 L 224 262.4 L 228 255.1 L 232 247.0 L 236 238.1 L 240 228.5 L 244 218.3 L 248 207.7 L 252 196.9 L 256 186.1 L 260 175.5 L 264 165.5 L 268 156.2 L 272 148.0 L 276 141.2 L 280 135.8 L 284 132.1 L 288 130.2 L 292 130.2 L 296 132.1 L 300 135.8 L 304 141.2 L 308 148.0 L 312 156.2 L 316 165.5 L 320 175.5 L 324 186.1 L 328 196.9 L 332 207.7 L 336 218.3 L 340 228.5 L 344 238.1 L 348 247.0 L 352 255.1 L 356 262.4 L 360 268.8 L 364 274.5 L 368 279.3 L 372 283.4 L 376 286.9 L 380 289.7 L 384 292.0 L 388 293.9 L 392 295.4 L 396 296.5 L 400 297.4 L 404 298.1 L 408 298.6 L 412 299.0 L 416 299.3 L 420 299.5 L 424 299.7 L 428 299.8 L 432 299.8 L 436 299.9 L 440 299.9 L 444 300.0 L 448 300.0 L 452 300.0 L 456 300.0 L 460 300.0 L 464 300.0 L 468 300.0 L 472 300.0 L 476 300.0 L 480 300.0 L 484 300.0 L 488 300.0 L 492 300.0 L 496 300.0 L 500 300.0 L 504 300.0 L 508 300.0 L 512 300.0 L 516 300.0 L 520 300.0 L 524 300.0 L 528 300.0 L 532 300.0 L 536 300.0 L 540 300.0 L 544 300.0" fill="none" stroke="#2A5D9F" stroke-width="2.6"/>
+<line x1="36" y1="300" x2="544" y2="300" stroke="#0A2342" stroke-width="2"/>
+<line x1="290.0" y1="122" x2="290.0" y2="300" stroke="#2A5D9F" stroke-width="1.6" stroke-dasharray="4 4"/>
+<text x="290.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#2A5D9F" text-anchor="middle" font-weight="700">process mean</text>
+<line x1="176.0" y1="322" x2="404.0" y2="322" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="176.0" y1="316" x2="176.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="404.0" y1="316" x2="404.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<text x="290.0" y="342.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#56687C" text-anchor="middle" font-weight="400">6σ — the voice of the process</text>
+<text x="20" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>p</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="150" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>pk</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="20.0" y="400.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">The spread fits the tolerance and sits where it should.</text>
+<text x="600.0" y="38.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Same spread, shifted mean</text>
+<rect x="642.0" y="80" width="304.0" height="220" fill="#EAF0F6" opacity=".75"/>
+<line x1="642.0" y1="78" x2="642.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="642.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">LSL</text>
+<line x1="946.0" y1="78" x2="946.0" y2="300" stroke="#0A2342" stroke-width="2.2"/>
+<text x="946.0" y="70.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#0A2342" text-anchor="middle" font-weight="700">USL</text>
+<path d="M 946 300 L 948 279.3 L 952 283.4 L 956 286.9 L 960 289.7 L 964 292.0 L 968 293.9 L 972 295.4 L 976 296.5 L 980 297.4 L 984 298.1 L 988 298.6 L 992 299.0 L 996 299.3 L 1000 299.5 L 1004 299.7 L 1008 299.8 L 1012 299.8 L 1016 299.9 L 1020 299.9 L 1024 300.0 L 1028 300.0 L 1032 300.0 L 1036 300.0 L 1040 300.0 L 1044 300.0 L 1048 300.0 L 1052 300.0 L 1056 300.0 L 1060 300.0 L 1064 300.0 L 1068 300.0 L 1072 300.0 L 1076 300.0 L 1080 300.0 L 1084 300.0 L 1088 300.0 L 1092 300.0 L 1096 300.0 L 1100 300.0 L 1104 300.0 L 1108 300.0 L 1112 300.0 L 1116 300.0 L 1120 300.0 L 1124 300.0 L 1124 300 Z" fill="#B8820F" opacity=".85"/>
+<path d="M 616 300.0 L 620 300.0 L 624 300.0 L 628 300.0 L 632 300.0 L 636 300.0 L 640 300.0 L 644 300.0 L 648 300.0 L 652 300.0 L 656 300.0 L 660 300.0 L 664 300.0 L 668 300.0 L 672 300.0 L 676 300.0 L 680 300.0 L 684 300.0 L 688 300.0 L 692 300.0 L 696 300.0 L 700 300.0 L 704 300.0 L 708 300.0 L 712 300.0 L 716 300.0 L 720 299.9 L 724 299.9 L 728 299.8 L 732 299.8 L 736 299.7 L 740 299.5 L 744 299.3 L 748 299.0 L 752 298.6 L 756 298.1 L 760 297.4 L 764 296.5 L 768 295.4 L 772 293.9 L 776 292.0 L 780 289.7 L 784 286.9 L 788 283.4 L 792 279.3 L 796 274.5 L 800 268.8 L 804 262.4 L 808 255.1 L 812 247.0 L 816 238.1 L 820 228.5 L 824 218.3 L 828 207.7 L 832 196.9 L 836 186.1 L 840 175.5 L 844 165.5 L 848 156.2 L 852 148.0 L 856 141.2 L 860 135.8 L 864 132.1 L 868 130.2 L 872 130.2 L 876 132.1 L 880 135.8 L 884 141.2 L 888 148.0 L 892 156.2 L 896 165.5 L 900 175.5 L 904 186.1 L 908 196.9 L 912 207.7 L 916 218.3 L 920 228.5 L 924 238.1 L 928 247.0 L 932 255.1 L 936 262.4 L 940 268.8 L 944 274.5 L 948 279.3 L 952 283.4 L 956 286.9 L 960 289.7 L 964 292.0 L 968 293.9 L 972 295.4 L 976 296.5 L 980 297.4 L 984 298.1 L 988 298.6 L 992 299.0 L 996 299.3 L 1000 299.5 L 1004 299.7 L 1008 299.8 L 1012 299.8 L 1016 299.9 L 1020 299.9 L 1024 300.0 L 1028 300.0 L 1032 300.0 L 1036 300.0 L 1040 300.0 L 1044 300.0 L 1048 300.0 L 1052 300.0 L 1056 300.0 L 1060 300.0 L 1064 300.0 L 1068 300.0 L 1072 300.0 L 1076 300.0 L 1080 300.0 L 1084 300.0 L 1088 300.0 L 1092 300.0 L 1096 300.0 L 1100 300.0 L 1104 300.0 L 1108 300.0 L 1112 300.0 L 1116 300.0 L 1120 300.0 L 1124 300.0" fill="none" stroke="#2A5D9F" stroke-width="2.6"/>
+<line x1="616" y1="300" x2="1124" y2="300" stroke="#0A2342" stroke-width="2"/>
+<line x1="870.0" y1="122" x2="870.0" y2="300" stroke="#2A5D9F" stroke-width="1.6" stroke-dasharray="4 4"/>
+<text x="870.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#2A5D9F" text-anchor="middle" font-weight="700">process mean</text>
+<line x1="756.0" y1="322" x2="984.0" y2="322" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="756.0" y1="316" x2="756.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<line x1="984.0" y1="316" x2="984.0" y2="328" stroke="#2A5D9F" stroke-width="2"/>
+<text x="870.0" y="342.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#56687C" text-anchor="middle" font-weight="400">6σ — the voice of the process</text>
+<text x="600" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0A2342" font-weight="700">C<tspan dy='4' font-size='11'>p</tspan><tspan dy='-4'> = 1.33</tspan></text>
+<text x="730" y="378" font-family="'JetBrains Mono',monospace" font-size="16" fill="#B8820F" font-weight="700">C<tspan dy='4' font-size='11'>pk</tspan><tspan dy='-4'> = 0.67</tspan></text>
+<text x="600.0" y="400.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Identically capable on paper. Reliably in the wrong place.</text>
+<line x1="570" y1="30" x2="570" y2="400" stroke="#D3DCE6" stroke-width="1.5"/>
+</svg></div><p class="cap">On the left the mean sits on target and the tolerance is comfortable. On the right nothing changed except the centring — Cp is unmoved, Cpk halves, and the shaded tail is the share of output the customer will reject. The average is a poor promise; the spread, read against the tolerance, is the real one.</p><div class="acts"><button class="gomap" data-go="cpk">See on the map →</button><button class="gomap" data-go="sigma">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 5 · Little's Law as a portfolio instrument</h3><div class="fsrc">Part Six · live simulator in the reading notes</div><div class="fwrap"><img src="fig5.png" alt="Little's Law: average months a project stays open against projects in flight"></div><p class="cap">For a given rate of completion, the time a project stays open grows in a straight line with the number in flight. The dot is your organisation — 36 in flight, 24 finished a year, eighteen months. Move it left by starting less, or flatten the line by finishing more. The live version lets you do both.</p><div class="acts"><button class="gomap" data-go="inflight">See on the map →</button><button class="gomap" data-go="little">See on the map →</button><a class="gomap" href="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/session-1-lean-six-sigma.html#sim-little" target="_blank" rel="noopener">Open the live simulator ↗</a></div></div>
+<div class="figbox"><h3>Figure 6 · Return on invested capital, decomposed</h3><div class="fsrc">Part Six</div><div class="fwrap"><svg viewBox="0 0 1160 470" role="img" aria-label="A DuPont-style tree decomposing ROIC into operating margin and capital turnover, with lean levers attached">
+<rect fill="#FFFFFF"/>
+<rect x="470" y="20" width="220" height="62" rx="6" fill="#0A2342" stroke="#0A2342" stroke-width="2"/>
+<text x="580.0" y="46.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">ROIC</text>
+<text x="580.0" y="68.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#9FB6CE" text-anchor="middle" font-weight="400">NOPAT / invested capital</text>
+<path d="M 580 82 L 580 106.0 L 320 106.0 L 320 130" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 580 82 L 580 106.0 L 840 106.0 L 840 130" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<text x="580.0" y="112.0" font-family="'Fraunces',serif" font-size="22" fill="#0A2342" text-anchor="middle" font-weight="700">×</text>
+<rect x="200" y="130" width="240" height="62" rx="6" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<text x="320.0" y="156.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Operating margin</text>
+<text x="320.0" y="178.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">NOPAT / revenue</text>
+<rect x="720" y="130" width="240" height="62" rx="6" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<text x="840.0" y="156.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Capital turnover</text>
+<text x="840.0" y="178.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">revenue / capital</text>
+<path d="M 320 192 L 320 221.0 L 190 221.0 L 190 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 320 192 L 320 221.0 L 450 221.0 L 450 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 840 192 L 840 221.0 L 710 221.0 L 710 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 840 192 L 840 221.0 L 970 221.0 L 970 250" fill="none" stroke="#A9BACB" stroke-width="2"/>
+<rect x="75" y="250" width="230" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="190.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Revenue</text>
+<text x="190.0" y="298.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">price × volume</text>
+<rect x="335" y="250" width="230" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="450.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Operating cost</text>
+<text x="450.0" y="298.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">rework · overtime · expediting</text>
+<rect x="595" y="250" width="230" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="710.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Working capital</text>
+<text x="710.0" y="298.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">inventory · WIP · receivables</text>
+<rect x="855" y="250" width="230" height="62" rx="6" fill="#FFFFFF" stroke="#A9BACB" stroke-width="2"/>
+<text x="970.0" y="276.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15.5" fill="#0A2342" text-anchor="middle" font-weight="700">Fixed assets</text>
+<text x="970.0" y="298.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">plant · equipment · systems</text>
+<rect x="20" y="350" width="1120" height="100" rx="7" fill="#F6E9CB" stroke="#B8820F" stroke-width="2"/>
+<text x="42.0" y="378.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#7E5B0C" text-anchor="start" font-weight="700" letter-spacing="1.6">WHERE THE MORNING'S LEVERS ATTACH</text>
+<text x="42.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Defects ↓</text>
+<text x="42.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">rework and scrap leave operating cost</text>
+<text x="322.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Lead time ↓</text>
+<text x="322.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">inventory and WIP leave invested capital</text>
+<text x="602.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Flow ↑</text>
+<text x="602.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">overtime and expediting stop being normal</text>
+<text x="882.0" y="408.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="700">Reliability ↑</text>
+<text x="882.0" y="430.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#5C4708" text-anchor="start" font-weight="400">the WTP edge, so revenue moves too</text>
+</svg></div><p class="cap">The identity has two branches and the morning's work lands on both: removing defects and expediting lifts the left branch, and removing lead time lifts the right one by taking capital out of the denominator. A programme argued only as cost saving is claiming half of what it does.</p><div class="acts"><button class="gomap" data-go="roic">See on the map →</button><button class="gomap" data-go="bothedges">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 7 · The same improvement, read as a return on capital</h3><div class="fsrc">Part Six · live simulator in the reading notes</div><div class="fwrap"><img src="fig7.png" alt="ROIC against the cost of capital for four scenarios"></div><p class="cap">Shortening lead time releases inventory, which leaves the denominator; removing rework lifts the margin, which raises the numerator. The grey bar is the starting position, where return exactly equals the cost of capital; the gold line is the only threshold that matters. Both levers clear it alone, and together they add more than the sum.</p><div class="acts"><button class="gomap" data-go="economicprofit">See on the map →</button><button class="gomap" data-go="roic">See on the map →</button><a class="gomap" href="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/session-1-lean-six-sigma.html#sim-roic" target="_blank" rel="noopener">Open the live simulator ↗</a></div></div>
+<div class="figbox"><h3>Figure 8 · Capability as a stock</h3><div class="fsrc">Part Eleven · after Dierickx & Cool (1989)</div><div class="fwrap"><svg viewBox="0 0 1160 400" role="img" aria-label="Stock and flow diagram of capability, with a valve on the inflow and an outflow of turnover and disuse">
+<rect fill="#FFFFFF"/>
+<rect x="420" y="120" width="320" height="140" rx="8" fill="#0A2342"/>
+<text x="580.0" y="170.0" font-family="'Fraunces',serif" font-size="36" fill="#FFFFFF" text-anchor="middle" font-weight="600">C</text>
+<text x="580.0" y="200.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#C6D4E4" text-anchor="middle" font-weight="400">the capability to improve</text>
+<text x="580.0" y="224.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#F2DFB4" text-anchor="middle" font-weight="700">a stock, not a state</text>
+<path d="M 60 170 L 400 170 L 400 210 L 60 210 Z" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<path d="M 360 178 L 392 190 L 360 202 Z" fill="#2A5D9F"/>
+<text x="60.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">INFLOW</text>
+<text x="60.0" y="136.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">improvement that produces</text>
+<text x="60.0" y="155.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">know-why and know-how together</text>
+<circle cx="220" cy="190" r="26" fill="#FFFFFF" stroke="#B8820F" stroke-width="3"/>
+<path d="M 206 178 L 234 202 M 206 202 L 234 178" stroke="#B8820F" stroke-width="3"/>
+<text x="220.0" y="240.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#7E5B0C" text-anchor="middle" font-weight="700">the valve</text>
+<text x="220.0" y="260.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">psychological safety</text>
+<text x="220.0" y="278.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">and credible promises</text>
+<text x="220.0" y="300.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">close it and the flow stops</text>
+<path d="M 760 170 L 1100 170 L 1100 210 L 760 210 Z" fill="#EAF0F6" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 1062 178 L 1094 190 L 1062 202 Z" fill="#56687C"/>
+<text x="760.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">OUTFLOW</text>
+<text x="760.0" y="136.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">turnover, disuse,</text>
+<text x="760.0" y="155.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">reorganisation</text>
+<rect x="60" y="326" width="1040" height="66" rx="6" fill="#EAF0F6" stroke="#A9BACB"/>
+<text x="580.0" y="352.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="middle" font-weight="400">A stock adjusts slowly and drains quietly. An organisation that was good at improving five years ago</text>
+<text x="580.0" y="374.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="middle" font-weight="400">may no longer be, and nothing on its balance sheet will say so.</text>
+<text x="580.0" y="60.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#56687C" text-anchor="middle" font-weight="400">Volume of improvement activity is not the inflow. Only the part that produces both kinds of knowledge is.</text>
+</svg></div><p class="cap">A stock with a regulated inflow and an unregulated outflow. The valve is the part most improvement programmes leave out: where surfacing a problem is costly, the measured performance improves and the real performance does not.</p><div class="acts"><button class="gomap" data-go="stock">See on the map →</button><button class="gomap" data-go="capability">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 9 · Know-why × know-how</h3><div class="fsrc">Part Eleven · after Lapré, Mukherjee & Van Wassenhove (2000)</div><div class="fwrap"><svg viewBox="0 0 980 620" role="img" aria-label="Two-by-two matrix of conceptual learning against operational learning with four project types">
+<rect fill="#FFFFFF"/>
+<rect x="120" y="40" width="810" height="430" fill="#EAF0F6" opacity=".45"/>
+<rect x="525.0" y="40" width="405.0" height="215.0" fill="#F6E9CB"/>
+<line x1="525.0" y1="40" x2="525.0" y2="470" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="255.0" x2="930" y2="255.0" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="470" x2="930" y2="470" stroke="#0A2342" stroke-width="2"/>
+<line x1="120" y1="40" x2="120" y2="470" stroke="#0A2342" stroke-width="2"/>
+<text x="148.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Firefighting</text>
+<text x="148.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">neither why nor how</text>
+<text x="148.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Artisan skills</text>
+<text x="553.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">how, without why</text>
+<text x="553.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="148.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Nonvalidated theories</text>
+<text x="148.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why, never tested in the work</text>
+<text x="148.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Operationally validated theories</text>
+<text x="553.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why and how, acquired together</text>
+<text x="553.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="start" font-weight="700">The only group that accelerated</text>
+<text x="525.0" y="508.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Operational learning  →  know-how: what actually works here</text>
+<text transform="translate(70,255.0) rotate(-90)" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Conceptual learning  →  know-why: the mechanism</text>
+<rect x="120" y="532" width="810" height="96" rx="6" fill="#0A2342"/>
+<text x="144.0" y="564.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#F2DFB4" text-anchor="start" font-weight="700" letter-spacing="1.8">THE FINDING</text>
+<text x="144.0" y="594.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">Across 62 improvement projects in one factory, only about a quarter accelerated waste reduction —</text>
+<text x="144.0" y="616.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">and they were the ones in the top-right cell. The rest slowed it, or did nothing at all.</text>
+</svg></div><p class="cap">Projects sorted by whether they produced an understanding of the mechanism and whether that understanding was validated in the work. Only the cell that produced both accelerated the reduction of waste.</p><div class="acts"><button class="gomap" data-go="learning">See on the map →</button><button class="gomap" data-go="lapre">See on the map →</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ON MONDAY ============ -->
+<section class="view" id="view-agenda">
+  <div class="scroller">
+    <h1>On Monday · bridges to project management</h1>
+    <p class="sub">The examples run through factories because that is where the ideas were tested; the mechanisms transfer exactly — queues are queues, variability is variability. Each part of the morning ends with a bridge to project management and one thing to do on Monday.</p>
+    <h3 class="agh">Four equations, one staircase</h3>
+    <div class="eqrow">
+      <div class="eq"><div class="f">Value created = WTP − SOC</div><p>Where value comes from, and the only two moves that create it.</p><button class="gomap" data-go="valuestick">See on the map →</button></div>
+      <div class="eq"><div class="f">VC = (WTP − C)<sub>A</sub> − (WTP − C)<sub>B</sub></div><p>Creating value is not having an advantage. Advantage is the difference — and a copyable improvement returns it to zero.</p><button class="gomap" data-go="vc">See on the map →</button></div>
+      <div class="eq"><div class="f">ROIC = margin × capital turnover</div><p>How the improvement reaches the people who fund it, through both levers at once.</p><button class="gomap" data-go="roic">See on the map →</button></div>
+      <div class="eq"><div class="f">V = C × (A + P)</div><p>Why two organisations with the same assets and processes get different results — and where the residue of advantage can live.</p><button class="gomap" data-go="vcap">See on the map →</button></div>
+    </div>
+
+    <h3 class="agh">Eight bridges to project management — and what to do on Monday</h3>
+    <div class="monday">
+      <div class="mcard"><div class="part">Part Two · Value</div><h3>Qualifiers are not winners</h3><p>Most portfolio scoring models add strategic fit, NPV, risk and resources on one scale — which assumes every criterion is a winner. Compliance projects are qualifiers.</p><div class="do"><b>On Monday</b> Split the list before scoring. Of every item ask: if we do not do this, do we lose a deal or do we lose the licence? Fund the second kind to the threshold and no further.</div><button class="gomap" data-go="br_scoring">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Three · Waste</div><h3>Map the stream, not the deliverable</h3><p>The streams worth mapping are administrative: change request to approved change, invoice to payment, defect reported to defect closed. The elapsed time lives in the handoffs around the work.</p><div class="do"><b>On Monday</b> Pick one of the three. Walk it with the people who perform each step. Write two numbers on one line: hours worked, days elapsed. The ratio is the conversation.</div><button class="gomap" data-go="br_streams">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Three · Mura & muri</div><h3>Over-allocation is muri</h3><p>A specialist at 120% across four projects produces the entire symptom set at once: defects, waiting, unused talent. The quarter-end peak is mura — a consequence of how work was released.</p><div class="do"><b>On Monday</b> List everyone allocated above 100% and count projects per person. Two is a working limit; four is a queue with a name. Then look at the release calendar for the peak.</div><button class="gomap" data-go="br_overalloc">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Four · Lead time</div><h3>The schedule is the buffer</h3><p>Variability must be absorbed somewhere: inventory (WIP), capacity (overtime, contractors) or time (contingency). A plan at 100% allocation has chosen time without saying so.</p><div class="do"><b>On Monday</b> Open the resource plan and find the allocation assumption. If it is 100%, the schedule is the buffer. Then find where contingency lives: if it is in every task, nobody will ever see it spent.</div><button class="gomap" data-go="br_buffers">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Five · The house</div><h3>The missing andon</h3><p>Heijunka is resource levelling, standardised work is the PMO's methodology, poka-yoke is the mandatory field. The andon cord has no comfortable equivalent — monthly status reporting is its opposite.</p><div class="do"><b>On Monday</b> Measure one lag: from the moment a problem is first known to someone on the team to the moment it reaches someone who can act. Then ask what happened, last time, to the person who reported red early.</div><button class="gomap" data-go="br_andon">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Six · Capital</div><h3>Starting less finishes more</h3><p>Projects in flight ÷ projects completed per year is the real average lead time, whatever the schedules say. Halve what is in flight and lead time halves, with the same people and budget.</p><div class="do"><b>On Monday</b> Two counts: everything authorised and not closed; everything closed in the last twelve months. Divide. Put the result beside the lead time your organisation believes it has.</div><button class="gomap" data-go="br_startless">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Seven · DMAIC</div><h3>The gate with no equivalent</h3><p>The charter is a charter, the tollgates are stage gates. The gate between Analyze and Improve — no solution until a cause is verified — is the one most governance frameworks lack, and the one that does the work.</p><div class="do"><b>On Monday</b> At the next approval, ask what the verified cause is. If the answer is a solution — "we need a new system", "we need more people" — the project is at Define, whatever the gate says.</div><button class="gomap" data-go="br_gates">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Eight · VCAP</div><h3>Three questions for the PMO</h3><p>Tools, platforms and dashboards are A; methodology, templates and certified staff are P — both available to every competitor. C is what is left.</p><div class="do"><b>On Monday</b> What do we deliver better this year than last, and how do we know? Which improvement survived its author leaving? What would remain if the tool were replaced tomorrow? The third answer is C.</div><button class="gomap" data-go="br_pmo">See on the map →</button></div>
+    </div>
+
+    <h3 class="agh">Three things that should survive six months</h3>
+    <div class="qbox">
+      <div class="q"><span class="qn">01</span><p><b>Count elapsed time, not effort.</b> Never "how long does this take to do" but "how long does it wait" — usually ninety per cent of the lead time.</p></div>
+      <div class="q"><span class="qn">02</span><p><b>Starting less finishes more.</b> In flight ÷ finished a year is your real lead time, and the one number on the slide nobody can argue with.</p></div>
+      <div class="q"><span class="qn">03</span><p><b>Buy the bracket, build the coefficient.</b> Every tool and method is available to a competitor at the same price. What is not is the repeated ability to find and fix your own problems — what Fremont changed, and what GM could not copy.</p></div>
+    </div>
+
+    <h3 class="agh">The group activity · the Value Case</h3>
+    <div class="grid4">
+      <div class="scard"><span class="n">1–6</span><h3>Six steps, fifteen minutes</h3><p>The project · the WTP edge · map the stream · the cost edge · what it builds (A, P, C) · the verdict. Pick the project the group disagrees about, not the one with the best business case. One spokesperson presents steps 1 and 6.</p><a class="gomap" href="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/value-case-canvas.html" target="_blank" rel="noopener">Open the fillable canvas ↗</a></div>
+      <div class="scard"><span class="n">?</span><h3>Two findings to expect</h3><p><b>Only one edge moves</b> — most portfolios are cost-edge projects; not wrong, but an unexamined choice. <b>C is empty</b> — projects deliver A and P because those can be specified and signed off. Neither is a failure of your project; both are findings. Keep the export for the afternoon.</p><button class="gomap" data-go="canvas">See on the map →</button></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="view" id="view-timeline">
+  <div class="scroller">
+    <h1>How the field was built</h1>
+    <p class="sub">From Shewhart's control chart and Toyoda's loom (1924) to the VCAP identity (2026): the two traditions — flow and variation — and the strategy and learning research that explains why the system beats the tools. Click an entry to open it on the map.</p>
+    <div class="tl" id="tl"></div>
+  </div>
+</section>
+
+<!-- ============ THEORY FRAME ============ -->
+<section class="view" id="view-quadro">
+  <div class="scroller">
+    <h1>Theory frame · from author to practice</h1>
+    <p class="sub">The works that carry the morning, read from theory to practice. Each row connects the author to the concept they introduced, the main contribution and the practice that follows from it. The colour follows the map legend — use “see on the map” to locate it in the network.</p>
+    <div class="qtable" id="quadroRows"></div>
+  </div>
+</section>
+
+<!-- ============ CASES ============ -->
+<section class="view" id="view-cases">
+  <div class="scroller">
+    <h1>Cases · from theory to practice</h1>
+    <p class="sub">Each case connects a practice to the theory that explains it and to the corresponding author. Use “see on the map” to open the related node and navigate its connections.</p>
+    <div class="cases" id="caseList"></div>
+  </div>
+</section>
+
+<!-- ============ REFERENCES ============ -->
+<section class="view" id="view-refs">
+  <div class="scroller">
+    <h1>References</h1>
+    <p class="sub"><span id="refCount"></span> works cited across the session, in APA 7. Click a DOI or link to open the source.
+      <input class="reffilter" id="refFilter" placeholder="filter by author, title…" autocomplete="off"></p>
+    <h3 class="refgroup">Operations and lean foundations</h3>
+    <div id="refsSem"></div>
+    <h3 class="refgroup">Six Sigma, quality and project practice</h3>
+    <div id="refsRev"></div>
+    <h3 class="refgroup">Strategy, learning and capability</h3>
+    <div id="refsRaizes"></div>
+  </div>
+</section>
+
+<!-- ============ INTRO / HOW TO USE ============ -->
+<div class="introwrap" id="intro">
+  <div class="introcard">
+    <button class="introx" id="introClose">✕</button>
+    <div class="introcredit">Material produced by Prof. Dr. Thiago Lima</div>
+    <div class="ptag">Start here · how to use</div>
+    <h2>What is Lean Six Sigma — as a system?</h2>
+    <p class="lead">Most organisations that adopt lean copy the tools. Few reproduce the results. This app organises the morning's argument — <b>efficiency is a consequence of what the customer values and of how work flows, not of how busy the resources are</b>, and the returns to everything an organisation buys are scaled by a capability it cannot buy — into the following complementary areas:</p>
+    <div class="introsteps">
+      <div class="s"><span class="sw" style="background:var(--core)"></span><div><b>Concept map</b> — click a node to open the concept with its explanation, the reference author and its connections. Each concept links to the slide where it is treated.</div></div>
+      <div class="s"><span class="sw" style="background:var(--pratica)"></span><div><b>Slides</b> — the session deck, navigable and in full screen; click a slide to jump to its concept on the map.</div></div>
+      <div class="s"><span class="sw" style="background:var(--core)"></span><div><b>Figures</b> — the nine figures from the reading notes — value stream map, efficiency frontier, control chart, capability, Little's Law, ROIC — with links to the live simulators.</div></div>
+      <div class="s"><span class="sw" style="background:var(--autor)"></span><div><b>Timeline</b> — how the field was built, from Shewhart (1924) to Lima (2026); each entry solves a problem the previous one left open.</div></div>
+      <div class="s"><span class="sw" style="background:var(--teoria)"></span><div><b>Theory frame</b> — author → work → key concept → contribution → practice, side by side.</div></div>
+      <div class="s"><span class="sw" style="background:var(--pratica)"></span><div><b>Cases</b> — NUMMI, Motorola & GE, Virginia Mason, Danaher, Embraer and the worked scenarios of the notes, linked back to the theory.</div></div>
+      <div class="s"><span class="sw" style="background:var(--lacuna)"></span><div><b>On Monday</b> — the four equations, the eight bridges to project management with their Monday actions, and the group activity.</div></div>
+      <div class="s"><span class="sw" style="background:var(--tec)"></span><div><b>References</b> — every work cited, in APA 7, with clickable DOI/link.</div></div>
+    </div>
+    <button class="introgo" id="introGo">Start exploring →</button>
+  </div>
+</div>
+
+<!-- ============ FULL SCREEN (slideshow) ============ -->
+<div class="fswrap" id="fs">
+  <button class="fsx" id="fsClose" aria-label="close">✕</button>
+  <button class="fsnav fsprev" id="fsPrev" aria-label="previous">‹</button>
+  <img id="fsImg" alt="Slide in full screen">
+  <button class="fsnav fsnext" id="fsNext" aria-label="next">›</button>
+  <div class="fscounter" id="fsCounter"></div>
+  <button class="fsmaplink" id="fsMapLink">⊕ Explore on the map →</button>
+</div>
+
+<!-- ============ DETAIL PANEL ============ -->
+<aside id="panel">
+  <button class="pclose" id="pclose">✕</button>
+  <div class="pbody" id="pbody"></div>
+</aside>
+
+<script>
+/* ====================== DATA · Lean Six Sigma & Continuous Improvement ====================== */
+const HUB = "lss";
+const CAT = {
+  core:    {name:"Core concepts",        color:"#2dd4bf"},
+  teoria:  {name:"Theory & equations",   color:"#a78bfa"},
+  autor:   {name:"Key authors",          color:"#fbbf24"},
+  pratica: {name:"Tools & practices",    color:"#4ade80"},
+  tec:     {name:"Metrics & finance",    color:"#60a5fa"},
+  barreira:{name:"Failure modes",        color:"#fb923c"},
+  lacuna:  {name:"Project bridges",      color:"#f472b6"},
+};
+const SHORT = {
+  "Lean Six Sigma":"Lean Six Sigma",
+  "Value, from the customer backwards":"Value",
+  "Order winners & qualifiers":"Winners & qualifiers",
+  "Eight dimensions of quality":"8 dimensions",
+  "Value stick · WTP − SOC":"Value stick",
+  "VC = (WTP − C)A − (WTP − C)B":"VC · advantage",
+  "VCAP · V = C × (A + P)":"VCAP",
+  "The eight wastes":"8 wastes",
+  "Value stream map":"VSM",
+  "Mura & muri":"Mura · muri",
+  "Resource vs flow efficiency":"Flow efficiency",
+  "Physics of lead time":"Lead time",
+  "Common vs special cause":"Common · special",
+  "Process capability · Cp / Cpk":"Cp / Cpk",
+  "Sigma levels & DPMO":"Sigma · DPMO",
+  "Rolled throughput yield":"Yield across chain",
+  "TPS house":"TPS house",
+  "Just-In-Time":"JIT",
+  "Pull & WIP limits":"Pull · WIP",
+  "Jidoka":"Jidoka",
+  "System of complementarities":"Complementarities",
+  "Little's Law":"Little's Law",
+  "Projects in flight ÷ completed":"In flight ÷ done",
+  "ROIC = margin × turnover":"ROIC",
+  "Economic profit · ROIC − WACC":"Economic profit",
+  "DMAIC":"DMAIC",
+  "Five whys & Pareto":"5 whys · Pareto",
+  "Know-why × know-how":"Know-why × how",
+  "Capability as a stock":"Capability stock",
+  "Value Case Canvas":"Value Case",
+  "Explaining the noise":"Explaining noise",
+  "Tools without the system":"Tools ≠ system",
+  "100% allocation":"100% allocation",
+  "Initiatives die in Analyze / Control":"Where DMAIC dies",
+  "Partial implementation":"Partial adoption",
+  "Qualifier scoring in portfolios":"Portfolio scoring",
+  "Map the administrative streams":"Admin streams",
+  "Over-allocation is muri":"Over-allocation",
+  "Buffers & critical chain":"Buffers",
+  "The missing andon":"Missing andon",
+  "Starting less finishes more":"Start less",
+  "DMAIC as stage gates":"Gates",
+  "Three questions for the PMO":"PMO questions",
+  "Van Mieghem & Allon · 2015":"Van Mieghem · 2015",
+  "Brandenburger & Stuart · 1996":"Brandenburger · 1996",
+  "Modig & Åhlström · 2012":"Modig · 2012",
+  "Hopp & Spearman · 2004":"Hopp & Spearman",
+  "Milgrom & Roberts · 1990":"Milgrom · 1990",
+  "Womack & Jones · 1996":"Womack & Jones",
+  "Spear & Bowen · 1999":"Spear & Bowen",
+  "Lapré et al. · 2000":"Lapré · 2000",
+  "Shah & Ward · 2007":"Shah & Ward",
+  "Rother & Shook · 1999":"Rother & Shook",
+};
+
+const NODES = [
+  // ---- core
+  {id:"lss", label:"Lean Six Sigma", cat:"core", r:34, author:"George, 2002 · Lima, 2026",
+   desc:"Two attacks on the same quantity. Lean removes the time the work spends not being worked on; Six Sigma narrows the dispersion that makes that time unpredictable. They are not alternative programmes — neither holds its gain without the other.",
+   bullets:["Lean: flow and waste — the enemy is waiting","Six Sigma: variation and defects — the enemy is dispersion","Integrated as a method by Michael George (2002)","The morning's claim: efficiency follows from value and flow, not from utilisation — and the returns to everything bought are scaled by a capability that cannot be bought"]},
+  {id:"value", label:"Value, from the customer backwards", cat:"core", r:24, author:"Ohno, 1988 · Womack & Jones, 1996",
+   desc:"Ohno's one sentence: look at the timeline from order to cash and shorten it by removing the non-value-added wastes. The unit of analysis is elapsed time, and the customer — not the accounting system — judges what counts as work.",
+   bullets:["Value-adding: the customer would knowingly pay for it — typically under 5% of elapsed time","Necessary non-value-adding: law, technology or contract requires it — 10–30%","Waste (muda): neither — the remainder","The first of the five principles; every other principle is meaningless until this one is answered"]},
+  {id:"waste", label:"The eight wastes", cat:"core", r:22, author:"Ohno, 1988",
+   desc:"Ohno's seven wastes plus unused talent. The list matters less than its structure: overproduction is the root, the others are symptoms it generates.",
+   bullets:["Overproduction → inventory → transport & motion → hidden defects → waiting","In knowledge work: reports nobody reads, approval queues, handoffs, sign-off chains, half-finished work packages, searching, rework loops, experts doing administration","Attack overproduction and the others shrink; attack the others individually and overproduction regenerates them"]},
+  {id:"vsm", label:"Value stream map", cat:"core", r:22, author:"Rother & Shook, 1999",
+   desc:"The instrument that locates the wastes in a specific process — the second principle made operational. Drawn by walking the process, not from what people say in a meeting, which is why the first draft contradicts the official procedure.",
+   bullets:["Three layers: the work (handoffs), the information (push or pull), the timeline (worked vs elapsed)","Process time ÷ lead time = flow efficiency — the number the map exists to produce","Administrative processes: typically 2–10% — the gap is queue, not idleness","Current state is diagnosis; the future state is the plan, and every difference must trace to a named change with an owner"]},
+  {id:"muramuri", label:"Mura & muri", cat:"core", r:18, author:"Toyota vocabulary",
+   desc:"Muda is the symptom; mura (unevenness) and muri (overburden) are the disease. Unevenness creates queues and the buffers that look like prudence; overburden creates defects, breakdowns and absence — which create more unevenness.",
+   bullets:["Why programmes plateau after year one: visible muda removed, its generators untouched","Chronic over-allocation is muri with a resource-management label","The quarter-end peak is mura, usually a consequence of how work was released"]},
+  {id:"floweff", label:"Resource vs flow efficiency", cat:"core", r:24, author:"Modig & Åhlström, 2012",
+   desc:"The efficiency paradox. Resource efficiency keeps every person and machine busy and destroys performance globally while every local unit looks efficient. Flow efficiency optimises the unit's journey — the share of elapsed time in which it is actually worked on.",
+   bullets:["'Doing more with less', taken literally, is the thing lean exists to correct","Flow efficiency is usually a shock the first time it is computed — the shock is the point","The frontier curve: with variation at its current level, both-high cannot be bought with effort; removing variation moves the frontier"]},
+  {id:"leadtime", label:"Physics of lead time", cat:"core", r:22, author:"Hopp & Spearman, 2011",
+   desc:"Queue time rises towards infinity as utilisation approaches 100%. The curve is flat until roughly 80% and then climbs violently. The instinct to keep every resource busy is the mechanical cause of the inventory it was meant to avoid.",
+   bullets:["Raising utilisation does not raise output; it raises the queue in front of the system","Variability must be absorbed by inventory, by capacity, or by time — every organisation chooses one, usually without deciding","Only time is invisible in the P&L, which is why it is the default choice"]},
+  {id:"variation", label:"Common vs special cause", cat:"core", r:24, author:"Shewhart, 1931",
+   desc:"Shewhart's distinction governs everything in the Six Sigma half. Common-cause variation is the ordinary scatter a stable process produces — no investigation of individual cases reduces it. Special-cause variation comes from something that was not there before, and can be found and removed.",
+   bullets:["Reacting to common cause as though it were special makes the process worse","The monthly meeting demanding an explanation for every variance is this error institutionalised","Control limits are calculated from the process, not from the target"]},
+  {id:"tps", label:"TPS house", cat:"core", r:26, author:"Toyota · Ohno, 1988",
+   desc:"The Toyota Production System is drawn as a house, and the drawing is an argument: a roof needs pillars, pillars need a foundation, and removing any element collapses the rest. The sequence is physics, not preference.",
+   bullets:["Goals: highest quality · lowest cost · shortest lead time · best safety · high morale","Pillars: Just-In-Time and Jidoka; centre: people, teamwork, kaizen — the multiplier","Foundation: heijunka, standardised work, 4M stability","Pull cannot run on an unstable base: it starves or floods — kanban on chaos is chaos with better visualisation"]},
+  {id:"jit", label:"Just-In-Time", cat:"core", r:20, author:"Ohno, 1988",
+   desc:"The left pillar. Continuous flow removes the interruptions that convert value-adding time into elapsed time; pull produces nothing until a downstream signal; SMED kills the changeover so the economic batch collapses towards one. Underneath all three sits heijunka.",
+   bullets:["Takt time — the pace of customer demand, the beat the whole line is set to","Pull is what stops overproduction, the root waste","Heijunka: level volume and mix so the pull signal is stable enough to follow"]},
+  {id:"jidoka", label:"Jidoka", cat:"core", r:20, author:"Toyota · Shingo",
+   desc:"The right pillar: quality built in at the source. Three mechanisms of increasing cost and decreasing frequency — poka-yoke, andon, stop-and-fix. A problem that stops the line gets solved; a problem that is worked around does not.",
+   bullets:["Poka-yoke: the mistake physically cannot be made","Andon: the abnormality is signalled the instant it occurs, not at the end of the shift","Stop-and-fix: the defect never travels downstream","The cost of stopping is visible and immediate; the cost of working around is invisible and permanent"]},
+  {id:"dmaic", label:"DMAIC", cat:"core", r:24, author:"Motorola, 1986 · GE, 1995",
+   desc:"Define · Measure · Analyze · Improve · Control. The method for getting from where you are to what good looks like — and, above all, a discipline for analysing a problem before paying to solve it. It exists so the experienced manager's hypothesis is written down before it is funded, and can be refuted while refutation is still cheap.",
+   bullets:["Define and Measure look like bureaucracy and are half the work","A phase is complete when its question has an answer somebody would stake a decision on","The gate between Analyze and Improve is the one with no equivalent in most governance frameworks","Does not apply to the exploratory front end: two regimes, exploring and exploiting"]},
+  {id:"capability", label:"Capability · the coefficient C", cat:"core", r:26, author:"Lima, 2026 · Van Mieghem & Allon, 2015",
+   desc:"The organisation's repeated ability to improve its processes. Assets and processes are additive and purchasable; capability is a coefficient — the one term nobody can invoice you for, and the only place where advantage can survive a rival's copy.",
+   bullets:["Barely visible, rarely imitable","What changed at Fremont — and what GM photographed for twenty years without reproducing","If C approaches zero, V approaches zero regardless of A and P"]},
+  {id:"puzzle", label:"The puzzle · Fremont, 1984", cat:"core", r:20, author:"NUMMI · GM × Toyota",
+   desc:"1982: GM closes Fremont — absenteeism near 20%, the most combative union local in the system, the worst quality in GM. 1984: reopens as NUMMI with Toyota. Substantially the same workforce, same building, same equipment. Within two years, quality and productivity lead the entire GM system.",
+   bullets:["Same assets. Same people. What changed — and where would it appear on a balance sheet?","GM had inside access for two decades. Why was it never replicated?","Answered in Part Eight: not A, not only P — C"]},
+  // ---- theory & equations
+  {id:"winners", label:"Order winners & qualifiers", cat:"teoria", r:20, author:"Hill, 2000",
+   desc:"Competitive priorities — cost, quality, speed, flexibility — are the operational determinants of willingness to pay. A qualifier is a threshold: its presence attracts nobody, its absence eliminates you. A winner is what makes a customer choose you once you are in the set.",
+   bullets:["Nobody selects a restaurant for its bathroom; plenty never return because it was dirty","Effort on qualifiers above the threshold consumes capacity and produces no preference","A firm mid-table on every attribute has made no choice at all"]},
+  {id:"garvin", label:"Eight dimensions of quality", cat:"teoria", r:17, author:"Garvin, 1987",
+   desc:"Quality is not one variable. Conformance lowers cost; reliability, durability and serviceability raise willingness to pay. The same quality effort therefore pays twice, on two different edges of value.",
+   bullets:["Performance · features · reliability · conformance · durability · serviceability · aesthetics · perceived quality"]},
+  {id:"valuestick", label:"Value stick · WTP − SOC", cat:"teoria", r:24, author:"Brandenburger & Stuart, 1996",
+   desc:"Value created = willingness to pay minus supplier opportunity cost. Between the two bounds sit customer surplus, firm margin and supplier surplus. Negotiating price moves value between parties; only two moves create it: push WTP up, or push SOC down.",
+   bullets:["Lean does both at once: removing waste lowers cost, and the same work raises reliability and speed","This is the whole strategic claim of the method"]},
+  {id:"vc", label:"VC = (WTP − C)A − (WTP − C)B", cat:"teoria", r:24, author:"After Brandenburger & Stuart · Porter, 1996",
+   desc:"Competitive advantage is the difference between the value two firms create — not the value one of them creates in isolation. The comparison form of the value stick.",
+   bullets:["The benchmark is a rival, not last year","Both terms can be attacked: improve A, or make B's advantage harder to sustain","Operational effectiveness erodes by construction: a copyable improvement converges the brackets and VC tends to zero — Porter's objection as arithmetic","The test for any project: when the competitor does this too, what is left?"]},
+  {id:"vcap", label:"VCAP · V = C × (A + P)", cat:"teoria", r:28, author:"Lima, 2026 · after Van Mieghem & Allon, 2015",
+   desc:"A is what the organisation owns; P is how work flows across it; C is its repeated ability to improve P. The form of the expression is the claim: assets and processes are additive and purchasable, capability is a coefficient.",
+   bullets:["Anything in the bracket is available to a competitor at roughly the same price","Only the coefficient resists — the residue of advantage can live nowhere else","The third equation of the morning, stated in Part Two and tested through Part Eight"]},
+  {id:"cpk", label:"Process capability · Cp / Cpk", cat:"teoria", r:20, author:"Six Sigma",
+   desc:"Cp = (USL − LSL) / 6σ: the width the customer allows over the width the process produces. Cpk removes the centring assumption and is the one that matters — a process can be admirably narrow and reliably in the wrong place.",
+   bullets:["Conventional threshold: Cpk ≥ 1.33","The average tells you almost nothing about what the customer will experience; the spread, against the tolerance, tells you everything","A 48-hour promise with an average of 30 and a spread reaching 90 breaks its promise regularly while reporting comfortable averages"]},
+  {id:"sigma", label:"Sigma levels & DPMO", cat:"teoria", r:18, author:"Motorola convention",
+   desc:"3σ: 66,807 defects per million (93.3% right first time) · 4σ: 6,210 (99.38%) · 5σ: 233 (99.977%) · 6σ: 3.4 (99.99966%). The figures assume a 1.5σ long-term drift of the mean — a convention, not a law.",
+   bullets:["3σ is typical of a process nobody has studied; it feels acceptable in isolation","5σ requires design changes, not vigilance"]},
+  {id:"rty", label:"Rolled throughput yield", cat:"teoria", r:18, author:"The arithmetic that makes the case",
+   desc:"Quality is argued at the step and experienced across the chain. Twenty steps each 99% right deliver a correct outcome 81.8% of the time; at 99.38% per step (4σ), 88.3%; at 99.9%, 98.0%.",
+   bullets:["'Our quality is already good' is usually true at the step and false at the outcome","Every handoff deleted is a term removed from the product — removing steps is a quality intervention, not only a cost one"]},
+  {id:"complement", label:"System of complementarities", cat:"teoria", r:24, author:"Milgrom & Roberts, 1990 · MacDuffie, 1995 · Shah & Ward, 2007",
+   desc:"The best-evidenced claim in the field, and the reason the house is drawn as a house rather than a menu: the return to any one practice rises with the adoption of the others. Partial adoption yields near-zero or negative returns.",
+   bullets:["Bundles of mutually reinforcing practices explain performance, not individual practices","The field's measurement instruments for lean were built exclusively on bundle logic","A partial implementation can leave an organisation worse off than none: costs without returns"]},
+  {id:"little", label:"Little's Law", cat:"teoria", r:26, author:"Little, 1961",
+   desc:"WIP = Throughput × Lead Time. An identity, not a model. Hold throughput constant and cutting lead time cuts work in process proportionally — and work in process is inventory, which is invested capital.",
+   bullets:["lead time ↓ → WIP ↓ → inventory ↓ → invested capital ↓ → ROIC ↑","Flow improvement is a balance-sheet intervention that happens to take place on a shop floor","Holds on averages, for a stable system where what starts eventually finishes"]},
+  {id:"roic", label:"ROIC = margin × turnover", cat:"teoria", r:24, author:"Finance identity",
+   desc:"Return on invested capital is NOPAT over invested capital, and it splits into two independent levers: margin (NOPAT ÷ revenue) and capital turnover (revenue ÷ invested capital). Lean moves both.",
+   bullets:["Margin: scrap, rework, yield, equipment effectiveness — where every standard business case is written","Turnover: inventory, footprint, capacity buffers, cash cycle — where nobody in the operations meeting is looking","A programme argued only as cost saving is claiming half of what it does"]},
+  {id:"learning", label:"Know-why × know-how", cat:"teoria", r:20, author:"Mukherjee et al., 1998 · Lapré et al., 2000",
+   desc:"Across 62 improvement projects in one factory, only about a quarter accelerated the reduction of waste — the ones that produced conceptual learning (know-why) and operational learning (know-how) simultaneously. The rest slowed it or had no effect.",
+   bullets:["Know-how without know-why: an action repeated without understanding","Know-why without know-how: a diagnosis nobody implemented","The empirical core of the DMAIC argument — Analyze is not a formality"]},
+  {id:"stock", label:"Capability as a stock", cat:"teoria", r:20, author:"Dierickx & Cool, 1989 · Argote & Epple, 1990",
+   desc:"Repetition alone does not accumulate capability. Organisations with comparable experience learn at different rates; the explanation lies in the deliberate component. Capability is a stock with a regulated inflow and an unregulated outflow.",
+   bullets:["Inflow: improvement activity producing causal understanding and validated action together","Condition: psychological safety — where surfacing a problem is costly, the measured performance improves and the real one does not","Outflow: turnover and disuse"]},
+  // ---- tools & practices
+  {id:"pull", label:"Pull & WIP limits", cat:"pratica", r:20, author:"Hopp & Spearman, 2004",
+   desc:"A pull system is a system that explicitly limits work in process — that is the definition. A push system releases work to an external schedule. Kanban is one mechanism for limiting WIP; CONWIP is another. Treating the cards as the essence of the system is the most common conceptual error in the boardroom.",bullets:[]},
+  {id:"smed", label:"SMED", cat:"pratica", r:15, author:"Shingo",
+   desc:"Single-minute exchange of die. Batch sizes exist because changeovers are expensive; make the changeover fast enough and small batches become economical — the economic batch collapses towards one.",bullets:[]},
+  {id:"heijunka", label:"Heijunka & standardised work", cat:"pratica", r:17, author:"TPS foundation",
+   desc:"Levelling volume and mix so the line sees a steady load; standardised work and 4M stability (man, machine, material, method) as the base the pillars stand on. In a project organisation: resource levelling, the methodology, templates and checklists the PMO maintains.",bullets:[]},
+  {id:"pokayoke", label:"Poka-yoke", cat:"pratica", r:16, author:"Shingo",
+   desc:"A device that makes the error physically impossible. In projects: the mandatory field that will not let the form be submitted incomplete. Appears in the Jidoka pillar and in DMAIC's Improve phase — Lean and Six Sigma share mechanisms.",bullets:[]},
+  {id:"andon", label:"Andon", cat:"pratica", r:18, author:"TPS",
+   desc:"The signal — a light or a cord — by which anyone halts the line on a problem, the instant it occurs. The one element of the house that has no comfortable equivalent in a project organisation.",bullets:[]},
+  {id:"controlchart", label:"Control chart", cat:"pratica", r:18, author:"Shewhart, 1924/1931",
+   desc:"Limits calculated from the process itself, not from the target. Separates the two signals from the noise — and the costly managerial error is not missing the signals, it is explaining the noise. Also the instrument of DMAIC's Control phase.",bullets:[]},
+  {id:"fivewhys", label:"Five whys & Pareto", cat:"pratica", r:18, author:"Analyze, in practice",
+   desc:"The simplest root-cause technique and the easiest to perform badly. Two rules: a cause attributed to a person is a restatement of the symptom — ask what in the process allows it unnoticed; and stop when you reach something somebody controls. Pareto then asks which few verified causes account for most of the effect.",
+   bullets:["The cause people name first is usually the third or fourth link — still a symptom"]},
+  {id:"tollgate", label:"Tollgates & sponsor", cat:"pratica", r:16, author:"DMAIC governance",
+   desc:"A gate at the end of each phase, chaired by the executive sponsor who owns the business result rather than by the specialist running the project. Whoever conducts the work is not whoever approves it — the cheapest safeguard against initiatives dying in Analyze or Control.",bullets:[]},
+  {id:"canvas", label:"Value Case Canvas", cat:"pratica", r:22, author:"Group activity · Part Nine",
+   desc:"One real, authorised project appraised through three lenses: where it moves willingness to pay, where it removes a named waste, and what it actually builds. Six steps, fifteen minutes; the group presents step 1 and step 6 and the reasoning between them.",
+   bullets:["1 The project · 2 The WTP edge · 3 Map the stream · 4 The cost edge · 5 What it builds (A, P, C) · 6 The verdict","Pick the project the group disagrees about, not the one with the best business case","Two findings to expect: only one edge moves; C is empty"]},
+  {id:"kaizen", label:"Kaizen & genchi genbutsu", cat:"pratica", r:17, author:"The centre of the house",
+   desc:"Continuous improvement by the people who do the work, and go-and-see-for-yourself at the place where the work happens. The centre of the house and the multiplier — the fifth principle, perfection, is the one that decides whether the first four survive.",bullets:[]},
+  // ---- metrics & finance
+  {id:"inflight", label:"Projects in flight ÷ completed", cat:"tec", r:22, author:"Little's Law, as a portfolio instrument",
+   desc:"Average project lead time = projects in flight ÷ projects completed per year. Twenty in flight, ten finished a year: a two-year average, whatever the schedules say. The one number on the slide nobody can argue with.",
+   bullets:["We do this calculation live: A = everything authorised and not closed (including the untouched); B = closed in the last twelve months; A ÷ B in years","The interesting number is the gap between the result and the lead time the organisation believes it has"]},
+  {id:"economicprofit", label:"Economic profit · ROIC − WACC", cat:"tec", r:20, author:"A worked scenario",
+   desc:"Lead time 20 → 8 days releases inventory 300 → 120 and invested capital 800 → 620; defect reduction lifts margin 8% → 10%. ROIC goes from 10.0% to 16.1% against a 10% cost of capital — economic profit from zero to 38, without one additional unit of revenue.",
+   bullets:["Margin improved 25%; capital turnover improved 29% — the denominator did more work","Flow only: 12.9% · cost only: 12.5% · both: 16.1% — the higher margin is earned on a smaller base"]},
+  {id:"bothedges", label:"Both pillars move both edges", cat:"tec", r:19, author:"Jidoka · JIT × cost · WTP",
+   desc:"Jidoka → cost: the cost of poor quality collapses. Jidoka → WTP: zero-defect delivery lets a B2B customer drop incoming inspection and safety stock. JIT → cost: less inventory, handling, expediting, footprint. JIT → WTP: customers pay for speed and predictability because short lead times cut their own forecasting risk.",
+   bullets:["A cost-only business case is undersold twice: on the WTP edge and on the denominator"]},
+  // ---- failure modes
+  {id:"explainnoise", label:"Explaining the noise", cat:"barreira", r:18, author:"The dashboard misuse",
+   desc:"Demanding an explanation for every variance against target, favourable or adverse, treats common-cause variation as special cause. Each reaction is an unplanned adjustment to a stable system, and the process gets worse. The single most common misuse of a performance dashboard.",bullets:[]},
+  {id:"toolsnotsystem", label:"Tools without the system", cat:"barreira", r:20, author:"Why tool-led lean fails",
+   desc:"Kanban boards on chaotic processes, andon lights without the right to stop, standard work sheets without the routine that rewrites them. The tools were the visible content; the system of complementarities was what made them work. The strongest available explanation for the failure rate of lean programmes.",bullets:[]},
+  {id:"partial", label:"Partial implementation", cat:"barreira", r:17, author:"Milgrom & Roberts, 1990",
+   desc:"A practice adopted without its complements imposes its costs without delivering its returns — which is why a partial implementation can leave an organisation worse off than no implementation at all.",bullets:[]},
+  {id:"alloc100", label:"100% allocation", cat:"barreira", r:18, author:"The schedule as buffer",
+   desc:"A plan that allocates people at 100% has decided, without saying so, that every illness, late approval and changed requirement will be absorbed by the schedule. The resulting delay is the planning assumption working exactly as specified.",bullets:[]},
+  {id:"dmaicdies", label:"Initiatives die in Analyze / Control", cat:"barreira", r:19, author:"Two failure modes",
+   desc:"In Analyze: the team arrives with its preferred solution and uses the phase to justify it — the root cause turns out to be whatever someone already wanted to buy. In Control: the gain exists as long as the team exists; once it disperses, the process regresses within months because nobody inherited the standard.",bullets:[]},
+  {id:"plateau", label:"The year-one plateau", cat:"barreira", r:16, author:"Mura & muri untouched",
+   desc:"The first wave removes visible muda and produces real gains. Then the gains stop, because the unevenness and overburden that generate muda were never touched, and they regenerate it.",bullets:[]},
+  // ---- project bridges
+  {id:"br_scoring", label:"Qualifier scoring in portfolios", cat:"lacuna", r:18, author:"In project terms · Part Two",
+   desc:"Most portfolio scoring models add strategic fit, NPV, risk and resource availability on one scale — which assumes every criterion is a winner. Compliance projects are qualifiers: they buy no advantage and not doing them ends the business. Split the list before scoring: if we do not do this, do we lose a deal or the licence?",bullets:[]},
+  {id:"br_streams", label:"Map the administrative streams", cat:"lacuna", r:18, author:"In project terms · Part Three",
+   desc:"The streams worth mapping repeat and can be timed: change request to approved change, invoice to payment, defect reported to defect closed. The characteristic finding: four hours of work across fifteen working days, sitting in two approval queues that exist because of an authority limit nobody has revisited.",bullets:[]},
+  {id:"br_overalloc", label:"Over-allocation is muri", cat:"lacuna", r:17, author:"In project terms · Part Three",
+   desc:"A specialist at 120% across four projects produces the entire symptom set at once: defects, waiting, unused talent. List everyone above 100% and count projects per person — two is a working limit; four is a queue with a name.",bullets:[]},
+  {id:"br_buffers", label:"Buffers & critical chain", cat:"lacuna", r:18, author:"In project terms · Part Four · Goldratt",
+   desc:"The three buffers have exact project equivalents: inventory is work in progress, capacity is overtime and contractors, time is schedule contingency. Critical chain is the argument that they should be sized deliberately and placed where they protect the whole project — not hidden in every task estimate, where they are consumed silently.",bullets:[]},
+  {id:"br_andon", label:"The missing andon", cat:"lacuna", r:19, author:"In project terms · Part Five",
+   desc:"Most of the Toyota house exists in a project organisation under other names. The andon cord does not: monthly status reporting is its opposite — it aggregates upward on a cycle, and a red status costs the reporter more than it costs the organisation. Measure the lag from first known to someone who can act, and ask what happened to the last person who reported red early.",bullets:[]},
+  {id:"br_startless", label:"Starting less finishes more", cat:"lacuna", r:20, author:"In project terms · Part Six",
+   desc:"Halve the number in flight and lead time halves, with the same people and the same budget — and throughput usually rises because context switching disappears. The counter-intuitive law every steering committee eventually rediscovers at cost. Start less is a decision; finish more is a budget.",bullets:[]},
+  {id:"br_gates", label:"DMAIC as stage gates", cat:"lacuna", r:17, author:"In project terms · Part Seven",
+   desc:"The charter is a project charter, the tollgates are stage gates, the sponsor is the sponsor. Control maps onto benefits realisation and handover to operations — the phase every methodology describes and few perform. At the next approval, ask what the verified cause is; if the answer is a solution, the project is at Define.",bullets:[]},
+  {id:"br_pmo", label:"Three questions for the PMO", cat:"lacuna", r:18, author:"In project terms · Part Eight",
+   desc:"Tools, platforms and dashboards are A; methodology, templates, gate model and certified staff are P — both purchasable by any competitor. C is what is left. What do we deliver better this year than last, and how do we know? Which improvement survived its author leaving? What would remain if the tool were replaced tomorrow?",bullets:[]},
+  // ---- authors
+  {id:"ohno", label:"Ohno · 1988", cat:"autor", r:17, author:"Toyota Production System: Beyond Large-Scale Production",
+   desc:"Architect of the Toyota Production System. One sentence for the whole method: shorten the timeline from order to cash by removing the non-value-added wastes. Catalogued the seven wastes and named overproduction as the root.",bullets:[]},
+  {id:"womackjones", label:"Womack & Jones · 1996", cat:"autor", r:17, author:"Lean Thinking",
+   desc:"Reduced the method to five principles in sequence — value, value stream, flow, pull, perfection — after The Machine That Changed the World (1990) had taken Toyota's system global under the name 'lean'.",bullets:[]},
+  {id:"shewhart", label:"Shewhart · 1931", cat:"autor", r:16, author:"Economic Control of Quality of Manufactured Product",
+   desc:"Bell Labs, 1924: the control chart, and with it the distinction between common and special causes that governs the whole Six Sigma half of the method.",bullets:[]},
+  {id:"hill", label:"Hill · 2000", cat:"autor", r:15, author:"Manufacturing Strategy",
+   desc:"Order winners and order qualifiers — the distinction that sorts competitive priorities by function and makes 'what the customer would pay for' operational.",bullets:[]},
+  {id:"garvin_a", label:"Garvin · 1987", cat:"autor", r:15, author:"Competing on the eight dimensions of quality · HBR",
+   desc:"Quality is eight variables, not one. Conformance lowers cost; reliability, durability and serviceability raise willingness to pay.",bullets:[]},
+  {id:"brandenburger", label:"Brandenburger & Stuart · 1996", cat:"autor", r:16, author:"Value-based business strategy",
+   desc:"Formalised where value comes from: willingness to pay minus supplier opportunity cost. The value stick, and the basis of the comparison form VC.",bullets:[]},
+  {id:"hoppspearman", label:"Hopp & Spearman · 2004", cat:"autor", r:16, author:"To pull or not to pull · Factory Physics",
+   desc:"The definition that clears the boardroom's commonest error: a pull system is one that explicitly limits WIP; kanban is merely one mechanism. Factory Physics (2011) carries the utilisation–queue relationship.",bullets:[]},
+  {id:"modig", label:"Modig & Åhlström · 2012", cat:"autor", r:16, author:"This Is Lean: Resolving the Efficiency Paradox",
+   desc:"Resource efficiency versus flow efficiency, and the efficiency matrix whose frontier is set by variation.",bullets:[]},
+  {id:"little_a", label:"Little · 1961", cat:"autor", r:15, author:"A proof for the queuing formula L = λW",
+   desc:"The identity WIP = throughput × lead time — the translation of flow into capital, and the portfolio instrument of the session.",bullets:[]},
+  {id:"milgrom", label:"Milgrom & Roberts · 1990", cat:"autor", r:16, author:"The economics of modern manufacturing · AER",
+   desc:"Modern manufacturing as a system of complementarities: the return to any one practice rises with the adoption of the others; partial adoption yields near-zero or negative returns.",bullets:[]},
+  {id:"macduffie", label:"MacDuffie · 1995", cat:"autor", r:15, author:"Human resource bundles and manufacturing performance",
+   desc:"Across assembly plants worldwide, bundles of mutually reinforcing practices explain performance — not individual practices.",bullets:[]},
+  {id:"shahward", label:"Shah & Ward · 2007", cat:"autor", r:15, author:"Defining and developing measures of lean production",
+   desc:"Built the field's measurement instruments for lean exclusively on bundle logic.",bullets:[]},
+  {id:"spearbowen", label:"Spear & Bowen · 1999", cat:"autor", r:16, author:"Decoding the DNA of the Toyota Production System · HBR",
+   desc:"What distinguishes Toyota is not its tools but its rules-in-use: tacit rules on how work, connections and pathways are specified, and how every improvement is run as a controlled experiment. Observable, and still not transferred.",bullets:[]},
+  {id:"lapre", label:"Lapré et al. · 2000", cat:"autor", r:15, author:"Behind the learning curve · Management Science",
+   desc:"Linked learning activity in 62 improvement projects to a factory's actual waste rate: only the projects producing know-why and know-how together accelerated the reduction of waste.",bullets:[]},
+  {id:"vanmieghem", label:"Van Mieghem & Allon · 2015", cat:"autor", r:15, author:"Operations Strategy: Principles and Practice",
+   desc:"An operation described through four linked elements — value, capabilities, assets and processes. The source of the VCAP identity, given its multiplicative form in Lima (2026).",bullets:[]},
+  {id:"lima", label:"Lima · 2026", cat:"autor", r:16, author:"Excelência Operacional: da Estratégia à Execução · Atena Editora",
+   desc:"The published source of the VCAP framework (Ch. 1) and of the reading of improvement through Kata and Cynefin. Open access. The argument of both sessions: operational efficiency follows from strategic choice and flow, not from utilisation, and the returns to assets and processes are proportional to a capability that cannot be purchased.",bullets:[]},
+  {id:"george", label:"George · 2002", cat:"autor", r:15, author:"Lean Six Sigma: Combining Six Sigma Quality with Lean Speed",
+   desc:"Gave the combined method its name: Six Sigma quality with lean speed — two attacks on the same quantity.",bullets:[]},
+  {id:"rothershook", label:"Rother & Shook · 1999", cat:"autor", r:15, author:"Learning to See",
+   desc:"The value stream map as taught: walk the process, draw current state, then future state, and make every difference traceable to a named change.",bullets:[]},
+];
+
+const LINKS = [
+  ["lss","value","principle 1"],["lss","floweff","the paradox"],["lss","variation","the other half"],["lss","tps","the system"],
+  ["lss","dmaic","the method"],["lss","capability","the coefficient"],["lss","puzzle","opens on"],["lss","george","named by"],["lss","lima","course source"],
+  ["value","winners","decomposes into"],["value","garvin","quality is eight variables"],["value","valuestick","formalised as"],["value","waste","everything else is"],["value","ohno","one sentence"],["value","womackjones","five principles"],
+  ["winners","hill","author"],["winners","br_scoring","in projects"],["garvin","garvin_a","author"],
+  ["valuestick","brandenburger","author"],["valuestick","vc","comparison form"],["vc","vcap","where the residue lives"],["vcap","capability","the coefficient"],["vcap","vanmieghem","after"],["vcap","lima","Ch. 1"],["vcap","br_pmo","sort the PMO"],
+  ["waste","vsm","made visible by"],["waste","muramuri","generated by"],["waste","ohno","catalogued"],["waste","jit","pull stops the root"],
+  ["vsm","rothershook","as taught"],["vsm","floweff","produces the ratio"],["vsm","br_streams","in projects"],["vsm","rty","complete & accurate"],
+  ["muramuri","plateau","why programmes plateau"],["muramuri","br_overalloc","in projects"],["muramuri","heijunka","levelling"],
+  ["floweff","leadtime","the physics"],["floweff","modig","author"],["leadtime","hoppspearman","Factory Physics"],["leadtime","br_buffers","three buffers"],["leadtime","alloc100","the default buffer"],["leadtime","little","the identity"],
+  ["variation","shewhart","author"],["variation","controlchart","instrument"],["variation","explainnoise","the error"],["variation","cpk","capability"],["cpk","sigma","levels"],["sigma","rty","across the chain"],["variation","leadtime","dispersion makes lead time unpredictable"],
+  ["tps","jit","left pillar"],["tps","jidoka","right pillar"],["tps","heijunka","foundation"],["tps","kaizen","centre"],["tps","complement","why a house"],["tps","br_andon","in projects"],["tps","toolsnotsystem","copied as tools"],
+  ["jit","pull","mechanism"],["jit","smed","mechanism"],["pull","hoppspearman","definition"],["jidoka","pokayoke","mechanism"],["jidoka","andon","mechanism"],["andon","br_andon","missing in projects"],
+  ["complement","milgrom","author"],["complement","macduffie","author"],["complement","shahward","author"],["complement","partial","consequence"],["complement","toolsnotsystem","explains"],
+  ["little","little_a","author"],["little","inflight","portfolio form"],["little","roic","reaches capital"],["inflight","br_startless","the law rediscovered"],
+  ["roic","economicprofit","worked scenario"],["roic","bothedges","both levers"],["bothedges","valuestick","both edges"],
+  ["dmaic","fivewhys","Analyze"],["dmaic","tollgate","governance"],["dmaic","dmaicdies","where it dies"],["dmaic","br_gates","as a project"],["dmaic","controlchart","Control"],["dmaic","pokayoke","Improve"],["dmaic","learning","why Analyze matters"],
+  ["capability","puzzle","answers"],["capability","spearbowen","rules-in-use"],["capability","stock","accumulates as"],["capability","learning","inflow requires"],["stock","lapre","evidence"],["learning","lapre","author"],
+  ["puzzle","toolsnotsystem","GM copied the bracket"],["kaizen","stock","the inflow"],
+];
+
+const TIMELINE = [
+  {yr:"1924",node:"shewhart",t:"The control chart",who:"Walter Shewhart · Bell Labs",d:"Common and special causes separated for the first time. The year Sakichi Toyoda's loom also learned to stop itself — the two roots of the method, planted together."},
+  {yr:"1950s",node:"ohno",t:"The Toyota Production System takes shape",who:"Taiichi Ohno · Toyota",d:"Pull and kanban, inspired by the American supermarket; the seven wastes; the timeline from order to cash as the unit of analysis."},
+  {yr:"1961",node:"little_a",t:"Little's Law",who:"John D. C. Little",d:"L = λW. The identity that later translates flow into inventory, and inventory into invested capital."},
+  {yr:"1984",node:"puzzle",t:"NUMMI opens at Fremont",who:"GM × Toyota",d:"Same plant, substantially the same people, opposite result — the puzzle the morning opens on and Part Eight answers."},
+  {yr:"1986",node:"dmaic",t:"Six Sigma at Motorola",who:"Bill Smith · Motorola",d:"After 'our quality stinks' (1979): a defect target for every process, and the discipline that became DMAIC. GE makes it a management system in 1995."},
+  {yr:"1987",node:"garvin_a",t:"Eight dimensions of quality",who:"David Garvin · HBR",d:"Quality pays twice — conformance on the cost edge, reliability and serviceability on the willingness-to-pay edge."},
+  {yr:"1988",node:"ohno",t:"Ohno in English",who:"Taiichi Ohno",d:"Toyota Production System: Beyond Large-Scale Production. The same year John Krafcik coins 'lean' at MIT."},
+  {yr:"1990",node:"milgrom",t:"Complementarities",who:"Milgrom & Roberts · AER",d:"Modern manufacturing as a system: the return to one practice rises with the others, and partial adoption can be negative. The Machine That Changed the World is published the same year."},
+  {yr:"1995",node:"macduffie",t:"Bundles explain performance",who:"John Paul MacDuffie",d:"Across assembly plants worldwide, bundles of reinforcing practices — not individual tools — explain productivity and quality."},
+  {yr:"1996",node:"womackjones",t:"Lean Thinking · the value stick",who:"Womack & Jones · Brandenburger & Stuart",d:"Five principles in sequence; and, the same year, value created = WTP − SOC — with Porter's 'What is strategy?' warning that operational effectiveness is imitable."},
+  {yr:"1999",node:"spearbowen",t:"Decoding the DNA of TPS",who:"Spear & Bowen · HBR",d:"Toyota's advantage is its rules-in-use, not its tools. Rother & Shook's Learning to See makes value stream mapping teachable."},
+  {yr:"2000",node:"lapre",t:"Behind the learning curve",who:"Lapré, Mukherjee & Van Wassenhove",d:"Only projects producing know-why and know-how together accelerate waste reduction. Terry Hill's order winners and qualifiers reach their third edition."},
+  {yr:"2002",node:"george",t:"Lean Six Sigma",who:"Michael George",d:"The two traditions named as one method: Six Sigma quality with lean speed."},
+  {yr:"2004",node:"hoppspearman",t:"To pull or not to pull",who:"Hopp & Spearman",d:"A pull system limits WIP — kanban is one mechanism among others. The boardroom's commonest conceptual error corrected."},
+  {yr:"2007",node:"shahward",t:"Measuring lean as bundles",who:"Shah & Ward",d:"The field's measurement instruments for lean built on bundle logic."},
+  {yr:"2012",node:"modig",t:"The efficiency paradox",who:"Modig & Åhlström",d:"Resource efficiency versus flow efficiency, and the frontier set by variation."},
+  {yr:"2015",node:"vanmieghem",t:"Value, capabilities, assets, processes",who:"Van Mieghem & Allon",d:"An operation described through four linked elements — the source of the VCAP identity."},
+  {yr:"2026",node:"lima",t:"Excelência Operacional",who:"Thiago Lima · Atena Editora",d:"V = C × (A + P) in its multiplicative form; improvement read through Kata and Cynefin; the argument of both sessions."},
+];
+
+const CASES = [
+  {title:"NUMMI · Fremont, California", loc:"Automotive · 1984", loop:"The puzzle",
+   tag:"Same plant, same people, opposite result.",
+   desc:"GM closed Fremont in 1982 with absenteeism near 20% and the worst quality in its system. Reopened in 1984 as a joint venture with Toyota, with substantially the same workforce, the plant reached Toyota-level quality and productivity within roughly two years — and GM, with inside access for two decades, never reproduced the result elsewhere.",
+   practice:"Standardised work · andon · pull · improvement run as experiment by the people doing the work",
+   theory:"<b>VCAP</b> — not A (same equipment), not only P (GM copied the processes): what changed was <b>C</b> · <b>Spear & Bowen</b>: rules-in-use are observable and still not transferred",
+   author:"Spear & Bowen (1999) · Lima (2026)", node:"puzzle"},
+  {title:"The change request", loc:"Administrative process · Figure 1", loop:"Value stream map",
+   tag:"Four hours of work inside fifteen working days.",
+   desc:"A change request from arrival to implementation, mapped by walking the process: the boxes carry the worked time, the triangles the waiting. Almost all of the elapsed time sits in two approval queues that exist because of an authority limit nobody has revisited since it was set.",
+   practice:"Current-state map · process time vs lead time on one line · flow efficiency",
+   theory:"<b>Value stream</b> (principle 2) — the elapsed time lives in the handoffs around the work, not in the work · <b>Waiting</b> as the dominant waste in knowledge work",
+   author:"Rother & Shook (1999) · Ohno (1988)", node:"vsm"},
+  {title:"A portfolio of 36 projects", loc:"Project organisation · Figure 5", loop:"Little's Law",
+   tag:"Eighteen months, whatever the schedules say.",
+   desc:"Thirty-six projects in flight and twenty-four finished a year give an average lead time of eighteen months. Cutting what is in flight to 22 brings it to eleven; adding 20% capacity instead brings it only to fifteen. The first lever is a decision somebody takes every week; the second is a budget.",
+   practice:"Two counts — in flight, closed in twelve months — and one division · WIP cap on the portfolio",
+   theory:"<b>Little's Law</b> as an identity, not a model · <b>Starting less finishes more</b>",
+   author:"Little (1961) · Hopp & Spearman (2004)", node:"inflight"},
+  {title:"The worked ROIC scenario", loc:"Stylised business · Figure 7", loop:"Capital",
+   tag:"Economic profit from zero to 38 without one unit of new revenue.",
+   desc:"Revenue 1,000, fixed assets 500, each day of lead time tying up 15 of inventory, cost of capital 10%. Lead time 20 → 8 days takes 180 out of invested capital; defect reduction lifts margin 8% → 10%. ROIC rises from 10.0% to 16.1%; the denominator did more work than the numerator.",
+   practice:"Business case argued on both levers — margin and capital turnover",
+   theory:"<b>ROIC = margin × turnover</b> · <b>Little's Law</b> turns lead time into capital · a cost-only case claims half of what lean does",
+   author:"Little (1961) · Lima (2026)", node:"economicprofit"},
+  {title:"Motorola and General Electric", loc:"Electronics · 1979–1998", loop:"Six Sigma",
+   tag:"From 'our quality stinks' to a management system.",
+   desc:"In 1979 a Motorola executive told the board that the company's real problem was its quality; in 1986 engineer Bill Smith introduced Six Sigma — a defect target for every process. In 1995 Jack Welch made it central to GE's strategy, with Belts, tollgates and DMAIC as the operating discipline, and GE reported some $350 million in savings by 1998.",
+   practice:"DMAIC · Belt structure · tollgates chaired by sponsors · DPMO as the common metric",
+   theory:"<b>Common vs special cause</b> · <b>Process capability</b> · the discipline matters more to a senior manager than the statistical ambition",
+   author:"Shewhart (1931) · Linderman et al. (2003)", node:"dmaic"},
+  {title:"Virginia Mason Medical Center", loc:"Healthcare · Seattle, from 2002", loop:"TPS outside manufacturing",
+   tag:"A hospital that adopted the Toyota system as its management method.",
+   desc:"Virginia Mason adopted the Toyota Production System as its management system from 2002 — the Virginia Mason Production System — with value stream mapping of patient flows, standard work, and a patient safety alert system that lets any member of staff stop the line. Widely studied as the reference case for lean in services.",
+   practice:"Value stream mapping of patient flows · standard work · andon as a patient safety alert",
+   theory:"<b>TPS house</b> as a system, not a menu · <b>Jidoka</b> — stop-and-fix in a service setting · queues are queues, variability is variability",
+   author:"Womack & Jones (1996) · Spear & Bowen (1999)", node:"tps"},
+  {title:"Danaher Business System", loc:"Industrial conglomerate · since the 1980s", loop:"Capability as a stock",
+   tag:"The improvement routine as the thing that is actually owned.",
+   desc:"Danaher built its operating model — the Danaher Business System — on Toyota's methods from the late 1980s and applied it across every acquired business. The companies it buys are the assets; the system that improves them is the coefficient, and it is the part competitors have found hardest to reproduce.",
+   practice:"Kaizen events · policy deployment · standard work applied to acquired businesses",
+   theory:"<b>VCAP</b> — A is bought, C is what multiplies it · <b>Capability as a stock</b> with a deliberate inflow",
+   author:"Dierickx & Cool (1989) · Lima (2026)", node:"capability"},
+  {title:"Embraer P3E", loc:"Aerospace · Brazil, from 2007", loop:"Lean in a project business",
+   tag:"Lean applied to an engineering and programme organisation.",
+   desc:"Embraer's Programa de Excelência Empresarial (P3E), launched in 2007, took lean beyond the shop floor into engineering, programme management and support — an organisation whose work is projects. The relevant lesson for this programme is the bridge: approval queues, handoffs and over-allocation are the factory's wastes under other names.",
+   practice:"Value stream mapping of engineering flows · levelling of releases · standard work in programme management",
+   theory:"<b>The eight wastes</b> in project and knowledge work · <b>Mura & muri</b> as the disease behind the symptoms",
+   author:"Ohno (1988) · Modig & Åhlström (2012)", node:"waste"},
+];
+
+const APS_PDF = "slides/deck.pdf";
+const APS_IMG = Array.from({length:55},(_,i)=>`slides/s-${String(i+1).padStart(2,"0")}.jpg`);
+const APS_META = [
+  {t:"Lean Six Sigma & Continuous Improvement — cover", nodes:["lss"]},
+  {t:"Summary — one claim, three hours", nodes:["lss","vcap"]},
+  {t:"What the session asks of you", nodes:["br_streams","inflight","canvas"]},
+  {t:"Part One — The puzzle", nodes:["puzzle"]},
+  {t:"Fremont, California", nodes:["puzzle"]},
+  {t:"Write your hypothesis down", nodes:["puzzle","capability"]},
+  {t:"Part Two — Value, seen from the customer backwards", nodes:["value"]},
+  {t:"Three kinds of activity", nodes:["value","waste"]},
+  {t:"What the customer is actually choosing", nodes:["winners","garvin"]},
+  {t:"The value stick", nodes:["valuestick"]},
+  {t:"From value created to advantage", nodes:["vc"]},
+  {t:"Where the residue can live", nodes:["vcap","capability"]},
+  {t:"The five principles — and where each one is treated", nodes:["womackjones","value"]},
+  {t:"Part Three — The anatomy of waste", nodes:["waste"]},
+  {t:"The eight wastes — factory and project", nodes:["waste"]},
+  {t:"Muda is the symptom; mura and muri are the disease", nodes:["muramuri","br_overalloc"]},
+  {t:"Making it visible — the value stream map", nodes:["vsm"]},
+  {t:"Map the stream, not the deliverable", nodes:["br_streams","vsm"]},
+  {t:"Part Four — The efficiency paradox", nodes:["floweff"]},
+  {t:"Resource efficiency versus flow efficiency", nodes:["floweff","leadtime"]},
+  {t:"The efficiency matrix", nodes:["floweff","modig"]},
+  {t:"The other half of the method — variation", nodes:["variation","controlchart"]},
+  {t:"Capability — the promise is the spread, not the average", nodes:["cpk"]},
+  {t:"What a sigma level actually says", nodes:["sigma","rty"]},
+  {t:"Why the two halves need each other", nodes:["lss","br_buffers"]},
+  {t:"Part Five — The Toyota Production System, as a system", nodes:["tps"]},
+  {t:"The house", nodes:["tps","heijunka","kaizen"]},
+  {t:"The two pillars", nodes:["jit","jidoka","pull"]},
+  {t:"Why the system beats the tools", nodes:["complement","partial"]},
+  {t:"The house, in a project organisation", nodes:["br_andon","andon"]},
+  {t:"Part Six — Lean in the language of capital", nodes:["little"]},
+  {t:"Little's Law", nodes:["little"]},
+  {t:"We do this calculation live", nodes:["inflight","br_startless"]},
+  {t:"Where lean shows up in return on invested capital", nodes:["roic"]},
+  {t:"A worked scenario — the denominator does more work", nodes:["economicprofit"]},
+  {t:"Both pillars move both edges of value", nodes:["bothedges"]},
+  {t:"Part Seven — DMAIC", nodes:["dmaic"]},
+  {t:"The failure mode it exists to prevent", nodes:["dmaic"]},
+  {t:"The five phases", nodes:["dmaic","tollgate"]},
+  {t:"Analyze, in practice — and where initiatives die", nodes:["fivewhys","dmaicdies"]},
+  {t:"DMAIC as a project — and where it does not apply", nodes:["br_gates"]},
+  {t:"Part Eight — The third equation", nodes:["vcap"]},
+  {t:"V = C × (A + P)", nodes:["vcap","capability","br_pmo"]},
+  {t:"The puzzle, answered", nodes:["puzzle","capability","spearbowen"]},
+  {t:"The equations, in one place", nodes:["valuestick","vc","roic","vcap"]},
+  {t:"Part Nine — Group activity: the Value Case", nodes:["canvas"]},
+  {t:"Why this appraisal differs from a business case", nodes:["canvas","vc"]},
+  {t:"The Value Case Canvas — six steps", nodes:["canvas"]},
+  {t:"What to expect", nodes:["canvas","capability"]},
+  {t:"Part Ten — Where the morning ends", nodes:["lss"]},
+  {t:"The argument, in five moves", nodes:["value","waste","floweff","variation","roic"]},
+  {t:"Four equations, one staircase", nodes:["valuestick","vc","roic","vcap"]},
+  {t:"What should survive six months", nodes:["br_streams","br_startless","capability"]},
+  {t:"What the afternoon tests", nodes:["vcap","capability"]},
+  {t:"Closing", nodes:[]},
+];
+const NODE2SLIDE = {lss:2, value:8, waste:15, vsm:17, muramuri:16, floweff:20, leadtime:20, variation:22, tps:27, jit:28, jidoka:28, dmaic:38, capability:43, puzzle:5,
+  winners:9, garvin:9, valuestick:10, vc:11, vcap:43, cpk:23, sigma:24, rty:24, complement:29, little:32, roic:34, learning:40, stock:43,
+  pull:28, smed:28, heijunka:27, pokayoke:28, andon:30, controlchart:22, fivewhys:40, tollgate:39, canvas:48, kaizen:27,
+  inflight:33, economicprofit:35, bothedges:36, explainnoise:22, toolsnotsystem:29, partial:29, alloc100:25, dmaicdies:40, plateau:16,
+  br_scoring:9, br_streams:18, br_overalloc:16, br_buffers:25, br_andon:30, br_startless:33, br_gates:41, br_pmo:43,
+  ohno:8, womackjones:13, shewhart:22, hill:9, garvin_a:9, brandenburger:10, hoppspearman:28, modig:21, little_a:32, milgrom:29, macduffie:29, shahward:29, spearbowen:44, lapre:40, vanmieghem:12, lima:12, george:25, rothershook:17};
+
+const QUADRO = [
+  {concept:"Value from the customer backwards", cat:"core", author:"Ohno, T. (1988)", paper:"Toyota Production System: Beyond Large-Scale Production. (Productivity Press)",
+   contribution:"The unit of analysis is elapsed time from order to cash, and the customer judges what counts as work. Seven wastes, with overproduction as the root.", practice:"Value stream mapping; attacking overproduction first through pull; the sentence the whole method fits in.", node:"value"},
+  {concept:"Five principles", cat:"core", author:"Womack, J. P., & Jones, D. T. (1996)", paper:"Lean Thinking. (Simon & Schuster)",
+   contribution:"Value, value stream, flow, pull, perfection — in sequence, because every principle after the first is meaningless until the first is answered.", practice:"The order of the morning: define value, map the stream, make it flow, release by pull, repeat with the standard rewritten.", node:"womackjones"},
+  {concept:"Order winners & qualifiers", cat:"teoria", author:"Hill, T. (2000)", paper:"Manufacturing Strategy: Text and Cases (3rd ed.). (McGraw-Hill)",
+   contribution:"Competitive priorities sorted by function: a qualifier's absence eliminates you, a winner creates preference. Effort on qualifiers above the threshold produces nothing.", practice:"Split the portfolio before scoring; fund compliance to the threshold and let only winners compete for the rest.", node:"winners"},
+  {concept:"Eight dimensions of quality", cat:"teoria", author:"Garvin, D. A. (1987)", paper:"Competing on the eight dimensions of quality. (Harvard Business Review)",
+   contribution:"Quality is not one variable; conformance lowers cost while reliability, durability and serviceability raise willingness to pay.", practice:"Argue quality programmes on both edges of value, not only on cost of poor quality.", node:"garvin"},
+  {concept:"Value stick", cat:"teoria", author:"Brandenburger, A. M., & Stuart, H. W. (1996)", paper:"Value-based business strategy. (Journal of Economics & Management Strategy)",
+   contribution:"Value created = WTP − SOC. Only two moves create value; everything else redistributes it.", practice:"Lean's strategic claim: the same waste removal lowers cost and raises what the customer will pay. The comparison form VC is the test for any project.", node:"valuestick"},
+  {concept:"VCAP identity", cat:"teoria", author:"Lima, T. F. (2026) · Van Mieghem & Allon (2015)", paper:"Excelência Operacional: da Estratégia à Execução, Ch. 1. (Atena Editora) · Operations Strategy (Dynamic Ideas)",
+   contribution:"V = C × (A + P): assets and processes additive and purchasable, capability a coefficient. Where the residue of advantage can survive a rival's copy.", practice:"Sort what a PMO owns by the three terms; the Value Case Canvas step 5; the three questions for the PMO.", node:"vcap"},
+  {concept:"Pull = WIP limit", cat:"pratica", author:"Hopp, W. J., & Spearman, M. L. (2004)", paper:"To pull or not to pull: what is the question? (M&SOM)",
+   contribution:"A pull system is one that explicitly limits work in process; kanban and CONWIP are mechanisms, not the essence.", practice:"Cap the portfolio; treat kanban boards as a means of limiting WIP, never as the system itself.", node:"pull"},
+  {concept:"Flow efficiency", cat:"core", author:"Modig, N., & Åhlström, P. (2012)", paper:"This Is Lean: Resolving the Efficiency Paradox. (Rheologica)",
+   contribution:"Resource efficiency and flow efficiency trade off along a frontier set by variation; 'doing more with less' optimises the wrong one.", practice:"Compute process time over lead time for one stream; report flow efficiency beside utilisation.", node:"floweff"},
+  {concept:"Common vs special cause", cat:"core", author:"Shewhart, W. A. (1931)", paper:"Economic Control of Quality of Manufactured Product. (Van Nostrand)",
+   contribution:"Two kinds of variation, only one of which is a problem to be solved case by case. Reacting to common cause as special makes the process worse.", practice:"Control charts with limits from the process; stop demanding explanations for every variance on the dashboard.", node:"variation"},
+  {concept:"Little's Law", cat:"teoria", author:"Little, J. D. C. (1961)", paper:"A proof for the queuing formula L = λW. (Operations Research)",
+   contribution:"WIP = throughput × lead time, an identity that links flow to inventory and inventory to invested capital.", practice:"Projects in flight ÷ projects completed per year = real lead time; starting less finishes more.", node:"little"},
+  {concept:"Complementarities", cat:"teoria", author:"Milgrom, P., & Roberts, J. (1990)", paper:"The economics of modern manufacturing. (American Economic Review)",
+   contribution:"The return to any one practice rises with the adoption of the others; partial adoption yields near-zero or negative returns.", practice:"Adopt the bundle or do not adopt; a partial implementation can cost more than none.", node:"complement"},
+  {concept:"Bundles, not practices", cat:"teoria", author:"MacDuffie, J. P. (1995) · Shah, R., & Ward, P. T. (2007)", paper:"Human resource bundles and manufacturing performance (ILR Review) · Defining and developing measures of lean production (JOM)",
+   contribution:"Empirically, bundles of mutually reinforcing practices explain performance — and lean is measured as bundles.", practice:"Why the Toyota house is drawn as a house and not as a menu of tools.", node:"complement"},
+  {concept:"Rules-in-use", cat:"autor", author:"Spear, S., & Bowen, H. K. (1999)", paper:"Decoding the DNA of the Toyota Production System. (Harvard Business Review)",
+   contribution:"Toyota's advantage is four tacit rules on specifying work, connections, pathways and improvement as experiment — observable and still not transferred.", practice:"Why GM's twenty years of NUMMI tours copied the bracket and missed the coefficient; the decoding key for the afternoon's benchmarking.", node:"spearbowen"},
+  {concept:"Know-why × know-how", cat:"teoria", author:"Lapré, M. A., Mukherjee, A. S., & Van Wassenhove, L. N. (2000)", paper:"Behind the learning curve: Linking learning activities to waste reduction. (Management Science)",
+   contribution:"Only improvement projects producing conceptual and operational learning together accelerate waste reduction; the rest slow it or do nothing.", practice:"Analyze is not a formality; retrospectives count only if their output changes the standard.", node:"learning"},
+  {concept:"Lean Six Sigma", cat:"core", author:"George, M. L. (2002)", paper:"Lean Six Sigma: Combining Six Sigma Quality with Lean Speed. (McGraw-Hill)",
+   contribution:"The two traditions named as one method: lean removes waiting, Six Sigma narrows spread, and neither holds its gain alone.", practice:"Run improvement on both enemies at once — flow and variation — with DMAIC as the conducting discipline.", node:"lss"},
+  {concept:"Value stream mapping", cat:"pratica", author:"Rother, M., & Shook, J. (1999)", paper:"Learning to See. (Lean Enterprise Institute)",
+   contribution:"The map as the instrument: walk the process, draw current state, draw future state, make every difference traceable to a named change.", practice:"Map one administrative stream; write hours worked and days elapsed on one line.", node:"vsm"},
+];
+
+const REFS_SEM = [
+  {apa:"Brandenburger, A. M., & Stuart, H. W. (1996). Value-based business strategy. <i>Journal of Economics & Management Strategy, 5</i>(1), 5–24.", doi:"https://doi.org/10.1111/j.1430-9134.1996.00005.x"},
+  {apa:"Garvin, D. A. (1987). Competing on the eight dimensions of quality. <i>Harvard Business Review, 65</i>(6), 101–109.", doi:""},
+  {apa:"George, M. L. (2002). <i>Lean Six Sigma: Combining Six Sigma quality with lean speed</i>. McGraw-Hill.", doi:""},
+  {apa:"Hill, T. (2000). <i>Manufacturing strategy: Text and cases</i> (3rd ed.). McGraw-Hill.", doi:""},
+  {apa:"Hopp, W. J., & Spearman, M. L. (2004). To pull or not to pull: What is the question? <i>Manufacturing & Service Operations Management, 6</i>(2), 133–148.", doi:"https://doi.org/10.1287/msom.1030.0028"},
+  {apa:"Hopp, W. J., & Spearman, M. L. (2011). <i>Factory physics</i> (3rd ed.). Waveland Press.", doi:""},
+  {apa:"Lima, T. F. (2026). <i>Excelência operacional: Da estratégia à execução</i>. Atena Editora. Open access.", doi:"https://atenaeditora.com.br/catalogo/ebook/excelencia-operacional-da-estrategia-a-execucao-operacoes-servicos-melhoria-continua-e-inteligencia-artificial"},
+  {apa:"Little, J. D. C. (1961). A proof for the queuing formula L = λW. <i>Operations Research, 9</i>(3), 383–387.", doi:"https://doi.org/10.1287/opre.9.3.383"},
+  {apa:"Modig, N., & Åhlström, P. (2012). <i>This is lean: Resolving the efficiency paradox</i>. Rheologica.", doi:""},
+  {apa:"Ohno, T. (1988). <i>Toyota production system: Beyond large-scale production</i>. Productivity Press.", doi:""},
+  {apa:"Rother, M., & Shook, J. (1999). <i>Learning to see: Value stream mapping to add value and eliminate muda</i>. Lean Enterprise Institute.", doi:""},
+  {apa:"Van Mieghem, J. A., & Allon, G. (2015). <i>Operations strategy: Principles and practice</i> (2nd ed.). Dynamic Ideas.", doi:""},
+  {apa:"Womack, J. P., & Jones, D. T. (1996). <i>Lean thinking: Banish waste and create wealth in your corporation</i>. Simon & Schuster.", doi:""},
+];
+const REFS_REV = [
+  {apa:"Linderman, K., Schroeder, R. G., Zaheer, S., & Choo, A. S. (2003). Six Sigma: A goal-theoretic perspective. <i>Journal of Operations Management, 21</i>(2), 193–203.", doi:"https://doi.org/10.1016/S0272-6963(02)00087-6"},
+  {apa:"Repenning, N. P., & Sterman, J. D. (2001). Nobody ever gets credit for fixing problems that never happened. <i>California Management Review, 43</i>(4), 64–88.", doi:"https://doi.org/10.2307/41166101"},
+  {apa:"Schroeder, R. G., Linderman, K., Liedtke, C., & Choo, A. S. (2008). Six Sigma: Definition and underlying theory. <i>Journal of Operations Management, 26</i>(4), 536–554.", doi:"https://doi.org/10.1016/j.jom.2007.06.007"},
+  {apa:"Serra, C. E. M., & Kunc, M. (2015). Benefits realisation management and its influence on project success and on the execution of business strategies. <i>International Journal of Project Management, 33</i>(1), 53–66.", doi:"https://doi.org/10.1016/j.ijproman.2014.03.011"},
+  {apa:"Shewhart, W. A. (1931). <i>Economic control of quality of manufactured product</i>. Van Nostrand.", doi:""},
+  {apa:"Whyte, J., Stasis, A., & Lindkvist, C. (2016). Managing information and control in digitalised project environments. <i>Production Planning & Control, 27</i>(16), 1345–1354.", doi:""},
+];
+const REFS_RAIZES = [
+  {apa:"Argote, L., & Epple, D. (1990). Learning curves in manufacturing. <i>Science, 247</i>(4945), 920–924.", doi:"https://doi.org/10.1126/science.247.4945.920"},
+  {apa:"Lapré, M. A., Mukherjee, A. S., & Van Wassenhove, L. N. (2000). Behind the learning curve: Linking learning activities to waste reduction. <i>Management Science, 46</i>(5), 597–611.", doi:"https://doi.org/10.1287/mnsc.46.5.597.12049"},
+  {apa:"Lima, T. F. (manuscript in preparation). <i>O que não se copia: Capacidade, práticas e desempenho em operações</i>.", doi:""},
+  {apa:"MacDuffie, J. P. (1995). Human resource bundles and manufacturing performance. <i>ILR Review, 48</i>(2), 197–221.", doi:"https://doi.org/10.1177/001979399504800201"},
+  {apa:"Milgrom, P., & Roberts, J. (1990). The economics of modern manufacturing: Technology, strategy, and organization. <i>American Economic Review, 80</i>(3), 511–528.", doi:""},
+  {apa:"Mukherjee, A. S., Lapré, M. A., & Van Wassenhove, L. N. (1998). Knowledge driven quality improvement. <i>Management Science, 44</i>(11, part 2), S35–S49.", doi:"https://doi.org/10.1287/mnsc.44.11.S35"},
+  {apa:"Pisano, G. P. (1994). Knowledge, integration, and the locus of learning: An empirical analysis of process development. <i>Strategic Management Journal, 15</i>(S1), 85–100.", doi:"https://doi.org/10.1002/smj.4250150907"},
+  {apa:"Shah, R., & Ward, P. T. (2007). Defining and developing measures of lean production. <i>Journal of Operations Management, 25</i>(4), 785–805.", doi:"https://doi.org/10.1016/j.jom.2007.01.019"},
+  {apa:"Spear, S., & Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <i>Harvard Business Review, 77</i>(5), 96–106.", doi:""},
+];
+
+/* ====================== MAP RENDER (force layout) ====================== */
+const NS="http://www.w3.org/2000/svg";
+const stage=document.getElementById("stage");
+const nodeById=Object.fromEntries(NODES.map(n=>[n.id,n]));
+const adj={}; NODES.forEach(n=>adj[n.id]=new Set());
+LINKS.forEach(([a,b])=>{adj[a].add(b);adj[b].add(a)});
+
+let W=innerWidth,H=innerHeight-62;
+// initial positions: spread on a circle, core in middle
+NODES.forEach((n,i)=>{
+  if(n.id==="cscm"){n.x=W/2;n.y=H/2;}
+  else{const a=i/NODES.length*Math.PI*2; n.x=W/2+Math.cos(a)*Math.min(W,H)*0.34; n.y=H/2+Math.sin(a)*Math.min(W,H)*0.34;}
+  n.vx=0;n.vy=0;
+});
+
+const vp=document.createElementNS(NS,"g"); stage.appendChild(vp);
+const linkLayer=document.createElementNS(NS,"g"); vp.appendChild(linkLayer);
+const nodeLayer=document.createElementNS(NS,"g"); vp.appendChild(nodeLayer);
+
+const linkEls=LINKS.map(l=>{
+  const el=document.createElementNS(NS,"line"); el.setAttribute("class","link");
+  el._a=l[0];el._b=l[1]; linkLayer.appendChild(el); return el;
+});
+const nodeEls=NODES.map(n=>{
+  const g=document.createElementNS(NS,"g"); g.setAttribute("class","node"); g._n=n;
+  const c=document.createElementNS(NS,"circle");
+  c.setAttribute("r",n.r); c.setAttribute("fill",CAT[n.cat].color);
+  const t=document.createElementNS(NS,"text");
+  t.setAttribute("text-anchor","middle"); t.setAttribute("dy",n.r+15);
+  t.textContent=SHORT[n.label]||n.label;
+  g.appendChild(c); g.appendChild(t); nodeLayer.appendChild(g);
+  n._g=g;n._c=c;n._t=t; return g;
+});
+
+/* physics */
+let alpha=1;
+function tick(){
+  if(alpha<0.005){return;}
+  alpha*=0.985;
+  const k=alpha;
+  // repulsion
+  for(let i=0;i<NODES.length;i++){
+    const a=NODES[i];
+    for(let j=i+1;j<NODES.length;j++){
+      const b=NODES[j];
+      let dx=a.x-b.x,dy=a.y-b.y; let d2=dx*dx+dy*dy||0.01;
+      let d=Math.sqrt(d2);
+      const minD=a.r+b.r+72;
+      let force=(22000)/d2;
+      if(d<minD) force+= (minD-d)*1.2/d; // collision
+      const fx=dx/d*force*k, fy=dy/d*force*k;
+      if(!a._fix){a.vx+=fx;a.vy+=fy;}
+      if(!b._fix){b.vx-=fx;b.vy-=fy;}
+    }
+  }
+  // springs
+  LINKS.forEach(l=>{
+    const a=nodeById[l[0]],b=nodeById[l[1]];
+    let dx=b.x-a.x,dy=b.y-a.y; let d=Math.sqrt(dx*dx+dy*dy)||0.01;
+    const target=a.id===HUB||b.id===HUB?210:185;
+    const f=(d-target)*0.045*k;
+    const fx=dx/d*f,fy=dy/d*f;
+    if(!a._fix){a.vx+=fx;a.vy+=fy;}
+    if(!b._fix){b.vx-=fx;b.vy-=fy;}
+  });
+  // gravity to center
+  NODES.forEach(n=>{
+    if(n._fix)return;
+    n.vx+=(W/2-n.x)*0.0035*k; n.vy+=(H/2-n.y)*0.0035*k;
+    n.vx*=0.86; n.vy*=0.86;
+    n.x+=n.vx; n.y+=n.vy;
+  });
+  render();
+  requestAnimationFrame(tick);
+}
+function render(){
+  linkEls.forEach(el=>{
+    const a=nodeById[el._a],b=nodeById[el._b];
+    el.setAttribute("x1",a.x);el.setAttribute("y1",a.y);
+    el.setAttribute("x2",b.x);el.setAttribute("y2",b.y);
+  });
+  nodeEls.forEach(g=>{const n=g._n; g.setAttribute("transform",`translate(${n.x},${n.y})`)});
+}
+function reheat(v){alpha=Math.max(alpha,v||0.6);requestAnimationFrame(tick);}
+
+/* zoom & pan */
+let tx=0,ty=0,scale=1;
+function applyVP(){vp.setAttribute("transform",`translate(${tx},${ty}) scale(${scale})`)}
+stage.addEventListener("wheel",e=>{
+  e.preventDefault();
+  const r=stage.getBoundingClientRect();
+  const mx=e.clientX-r.left,my=e.clientY-r.top;
+  const ds=e.deltaY<0?1.12:0.893;
+  const ns=Math.min(2.6,Math.max(0.3,scale*ds));
+  tx=mx-(mx-tx)*(ns/scale); ty=my-(my-ty)*(ns/scale); scale=ns; applyVP();
+},{passive:false});
+
+let panning=false,sx,sy,stx,sty,dragNode=null,downNode=null,downX=0,downY=0;
+stage.addEventListener("pointerdown",e=>{
+  downX=e.clientX;downY=e.clientY;
+  const g=e.target.closest(".node");
+  if(g){downNode=g._n;dragNode=g._n;dragNode._fix=true;stage.setPointerCapture(e.pointerId);}
+  else{downNode=null;panning=true;stage.classList.add("grabbing");sx=e.clientX;sy=e.clientY;stx=tx;sty=ty;stage.setPointerCapture(e.pointerId);}
+});
+stage.addEventListener("pointermove",e=>{
+  if(dragNode){
+    const r=stage.getBoundingClientRect();
+    dragNode.x=(e.clientX-r.left-tx)/scale; dragNode.y=(e.clientY-r.top-ty)/scale;
+    reheat(0.25); render();
+  }else if(panning){tx=stx+(e.clientX-sx);ty=sty+(e.clientY-sy);applyVP();}
+});
+stage.addEventListener("pointerup",e=>{
+  const movedDist=Math.hypot(e.clientX-downX,e.clientY-downY);
+  if(dragNode){dragNode._fix=false;}
+  if(movedDist<6){                       // clique (não arraste): abre nó ou fecha painel
+    if(downNode) openPanel(downNode.id);
+    else closePanel();
+  }
+  if(dragNode){dragNode=null;reheat(0.3);}
+  downNode=null;panning=false;stage.classList.remove("grabbing");
+});
+
+/* interactions: hover + click */
+let selected=null;
+function neighbors(id){const s=new Set(adj[id]);s.add(id);return s;}
+function highlight(id){
+  const set=id?neighbors(id):null;
+  nodeEls.forEach(g=>{
+    const on=!set||set.has(g._n.id);
+    g.classList.toggle("dim",!on && !legendOff.has(g._n.cat)?!on:!on);
+  });
+  linkEls.forEach(el=>{
+    const hot=set&&(set.has(el._a)&&set.has(el._b)&&(el._a===id||el._b===id));
+    const on=!set||(set.has(el._a)&&set.has(el._b));
+    el.classList.toggle("hot",!!hot);
+    el.classList.toggle("dim",set&&!on);
+  });
+}
+nodeEls.forEach(g=>{
+  g.addEventListener("pointerenter",()=>{if(!selected)highlight(g._n.id)});
+  g.addEventListener("pointerleave",()=>{if(!selected)highlight(null)});
+});
+
+/* legend filter */
+const legendOff=new Set();
+const li=document.getElementById("legendItems");
+Object.entries(CAT).forEach(([k,v])=>{
+  const d=document.createElement("div"); d.className="item"; d.dataset.cat=k;
+  d.innerHTML=`<span class="swatch" style="background:${v.color}"></span>${v.name}`;
+  d.addEventListener("click",()=>{
+    if(legendOff.has(k)){legendOff.delete(k);d.classList.remove("off");}
+    else{legendOff.add(k);d.classList.add("off");}
+    applyFilter();
+  });
+  li.appendChild(d);
+});
+function applyFilter(){
+  nodeEls.forEach(g=>{g.style.display=legendOff.has(g._n.cat)?"none":""});
+  linkEls.forEach(el=>{
+    const off=legendOff.has(nodeById[el._a].cat)||legendOff.has(nodeById[el._b].cat);
+    el.style.display=off?"none":"";
+  });
+}
+
+/* zoom buttons */
+function zoomBy(f){
+  const ns=Math.min(2.6,Math.max(0.3,scale*f));
+  tx=W/2-(W/2-tx)*(ns/scale);ty=H/2-(H/2-ty)*(ns/scale);scale=ns;applyVP();
+}
+document.getElementById("zin").onclick=()=>zoomBy(1.2);
+document.getElementById("zout").onclick=()=>zoomBy(0.83);
+document.getElementById("zfit").onclick=()=>{tx=0;ty=0;scale=1;applyVP();reheat(0.5)};
+
+/* ====================== DETAIL PANEL ====================== */
+const panel=document.getElementById("panel");
+const pbody=document.getElementById("pbody");
+function openPanel(id){
+  const n=nodeById[id]; selected=id;
+  nodeEls.forEach(g=>g.classList.toggle("sel",g._n.id===id));
+  highlight(id);
+  const col=CAT[n.cat].color;
+  const rels=[...adj[id]].map(rid=>{const m=nodeById[rid];
+    return `<span class="relnode" data-go="${rid}"><span class="sw" style="background:${CAT[m.cat].color}"></span>${m.label}</span>`}).join("");
+  pbody.innerHTML=`
+    <div class="ptag" style="background:${hex2rgba(col,.16)};color:${col}">${CAT[n.cat].name}</div>
+    <h2>${n.label}</h2>
+    <div class="pauthor" style="color:${col}">${n.author||""}</div>
+    <div class="pdesc">${n.desc}</div>
+    ${n.bullets&&n.bullets.length?`<div class="pblock"><h5>In detail</h5><ul>${n.bullets.map(b=>`<li>${b}</li>`).join("")}</ul></div>`:""}
+    <div class="pblock"><h5>Connections (${adj[id].size})</h5>${rels}</div>
+    ${NODE2SLIDE[id]?`<button class="gomap" data-slide="${NODE2SLIDE[id]}">▣ See slide ${NODE2SLIDE[id]} of the deck →</button>`:""}
+  `;
+  pbody.querySelectorAll("[data-go]").forEach(el=>el.onclick=()=>openPanel(el.dataset.go));
+  const sb=pbody.querySelector("[data-slide]"); if(sb)sb.onclick=()=>{closePanel();switchView("apresentacao");setTimeout(()=>apsGo(+sb.dataset.slide-1),60)};
+  panel.classList.add("open");
+  document.documentElement.style.setProperty("--panelw","380px");
+}
+function closePanel(){
+  panel.classList.remove("open");selected=null;
+  nodeEls.forEach(g=>g.classList.remove("sel"));highlight(null);
+  document.documentElement.style.setProperty("--panelw","0px");
+}
+document.getElementById("pclose").onclick=closePanel;
+function hex2rgba(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`}
+
+/* ====================== TIMELINE / TABLE / SYNTH ====================== */
+document.getElementById("tl").innerHTML=TIMELINE.map(t=>`
+  <div class="tlitem" data-go="${t.node}">
+    <div class="yr">${t.yr}</div><div class="nub"></div>
+    <div class="tlcard"><h3>${t.t}</h3><div class="who">${t.who}</div><p>${t.d}</p></div>
+  </div>`).join("");
+document.querySelectorAll("#tl .tlitem").forEach(el=>el.onclick=()=>{switchView("map");setTimeout(()=>openPanel(el.dataset.go),60)});
+
+// ---- Casos práticos
+document.getElementById("caseList").innerHTML=CASES.map(c=>`
+  <div class="case">
+    <div class="ch"><h3>${c.title}</h3><span class="loc">${c.loc}</span></div>
+    ${c.loop?'<span class="loop-chip">'+c.loop+'</span>':''}
+    <div class="tag">${c.tag}</div>
+    <p class="cd">${c.desc}</p>
+    <div class="row"><span class="k">Practice</span><span class="v">${c.practice}</span></div>
+    <div class="row"><span class="k">Theory</span><span class="v">${c.theory}</span></div>
+    <div class="row"><span class="k">Author</span><span class="v"><b>${c.author}</b></span></div>
+    <button class="gomap" data-go="${c.node}">See on the map →</button>
+  </div>`).join("");
+document.querySelectorAll("#caseList .gomap").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+
+// ---- Quadro teórico
+document.getElementById("quadroRows").innerHTML=QUADRO.map(q=>{
+  const col=CAT[q.cat].color;
+  return `<div class="qrow">
+    <div class="qhead">
+      <span class="qdotwrap"><span class="qdot" style="background:${col}"></span>
+        <span class="qtip"><span class="c" style="color:${col}">${q.concept}</span><h6>Main contribution</h6>${q.contribution}</span>
+      </span>
+      <span class="qconcept" style="background:${hex2rgba(col,.16)};color:${col}">${q.concept}</span>
+      <span class="qauthor">${q.author}</span>
+    </div>
+    <div class="qpaper">${q.paper}</div>
+    <div class="qbody">
+      <div class="qcol"><h6>Main contribution</h6><p>${q.contribution}</p></div>
+      <div class="qcol"><h6>Associated practice</h6><p>${q.practice}</p></div>
+    </div>
+    <button class="gomap" data-go="${q.node}">See on the map →</button>
+  </div>`;
+}).join("");
+document.querySelectorAll("#quadroRows .gomap").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+
+// ---- Referências
+function refRow(r){
+  const txt=(r.apa+' '+(r.doi||'')).replace(/<[^>]+>/g,'').replace(/"/g,'').toLowerCase();
+  const link=r.doi?` <a href="${r.doi}" target="_blank" rel="noopener">${r.doi}</a>`:"";
+  return `<div class="refrow" data-txt="${txt}">${r.apa}${link}</div>`;
+}
+document.getElementById("refsSem").innerHTML=REFS_SEM.map(refRow).join("");
+document.getElementById("refsRev").innerHTML=REFS_REV.map(refRow).join("");
+document.getElementById("refsRaizes").innerHTML=REFS_RAIZES.map(refRow).join("");
+document.getElementById("refCount").textContent=REFS_SEM.length+REFS_REV.length+REFS_RAIZES.length;
+document.getElementById("refFilter").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".refrow").forEach(r=>r.classList.toggle("hide",q&&!r.dataset.txt.includes(q)));
+});
+
+/* ====================== NAV / SEARCH ====================== */
+function switchView(v){
+  document.querySelectorAll(".view").forEach(s=>s.classList.toggle("active",s.id==="view-"+v));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  document.getElementById("ctrls").style.display=v==="map"?"flex":"none";
+  if(v==="map"){W=innerWidth;H=innerHeight-62;reheat(0.4);}
+}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+
+const search=document.getElementById("search");
+search.addEventListener("input",()=>{
+  const q=search.value.trim().toLowerCase();
+  if(!q){nodeEls.forEach(g=>g.classList.remove("dim"));return;}
+  let hit=null;
+  nodeEls.forEach(g=>{
+    const m=(g._n.label+" "+g._n.author+" "+g._n.desc).toLowerCase().includes(q);
+    g.classList.toggle("dim",!m); if(m&&!hit)hit=g._n;
+  });
+});
+search.addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    const q=search.value.trim().toLowerCase();
+    const hit=NODES.find(n=>(n.label+" "+n.author).toLowerCase().includes(q));
+    if(hit){switchView("map");openPanel(hit.id);
+      tx=W/2-hit.x*scale;ty=H/2-hit.y*scale;applyVP();}
+  }
+});
+
+/* ---- Intro / Como usar ---- */
+const intro=document.getElementById("intro");
+function showIntro(){intro.classList.add("show")}
+function hideIntro(){intro.classList.remove("show")}
+document.getElementById("introClose").onclick=hideIntro;
+document.getElementById("introGo").onclick=hideIntro;
+document.getElementById("helpBtn").onclick=showIntro;
+intro.addEventListener("click",e=>{if(e.target===intro)hideIntro()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")hideIntro()});
+showIntro(); // opens the guide on load
+
+/* ---- Apresentação: viewer ---- */
+const fs=document.getElementById("fs");
+let apsI=0;
+document.getElementById("apsThumbs").innerHTML=APS_IMG.map((src,i)=>`<div class="apsthumb" data-i="${i}"><img src="${src}" alt="slide ${i+1}"></div>`).join("");
+document.getElementById("apsDownload").href=APS_PDF;
+function apsRender(){
+  const m=APS_META[apsI];
+  document.getElementById("apsImg").src=APS_IMG[apsI];
+  document.getElementById("apsCounter").textContent=(apsI+1)+" / "+APS_IMG.length;
+  document.getElementById("apsTitle").textContent=m.t;
+  document.getElementById("apsChips").innerHTML=(m.nodes||[]).map(id=>{const n=nodeById[id];
+    return n?`<span class="apschip" data-go="${id}"><span class="sw" style="background:${CAT[n.cat].color}"></span>${n.label}</span>`:""}).join("");
+  document.querySelectorAll("#apsChips .apschip").forEach(c=>c.onclick=()=>{switchView("map");setTimeout(()=>openPanel(c.dataset.go),60)});
+  document.querySelectorAll("#apsThumbs .apsthumb").forEach((t,i)=>t.classList.toggle("active",i===apsI));
+  const mlTxt=(m.nodes&&m.nodes.length)?"⊕ Explore on the map →":"⊕ See references →";
+  document.getElementById("apsMapLink").textContent=mlTxt;
+  document.getElementById("fsMapLink").textContent=mlTxt;
+  if(fs.classList.contains("show")){document.getElementById("fsImg").src=APS_IMG[apsI];document.getElementById("fsCounter").textContent=(apsI+1)+" / "+APS_IMG.length;}
+}
+function apsToMap(){const m=APS_META[apsI];
+  if(m.nodes&&m.nodes.length){switchView("map");setTimeout(()=>openPanel(m.nodes[0]),60);}
+  else{switchView("refs");}}
+function apsGo(i){apsI=(i+APS_IMG.length)%APS_IMG.length;apsRender();}
+document.querySelectorAll("#apsThumbs .apsthumb").forEach(t=>t.onclick=()=>apsGo(+t.dataset.i));
+document.getElementById("apsPrev").onclick=()=>apsGo(apsI-1);
+document.getElementById("apsNext").onclick=()=>apsGo(apsI+1);
+document.getElementById("apsImg").onclick=apsToMap;
+document.getElementById("apsMapLink").onclick=apsToMap;
+document.querySelectorAll("#view-diagrama [data-go]").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+document.querySelectorAll("#view-agenda [data-go]").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+document.getElementById("apsFull").onclick=()=>{fs.classList.add("show");apsRender();};
+document.getElementById("fsClose").onclick=()=>fs.classList.remove("show");
+document.getElementById("fsMapLink").onclick=()=>{fs.classList.remove("show");apsToMap();};
+document.getElementById("fsPrev").onclick=()=>apsGo(apsI-1);
+document.getElementById("fsNext").onclick=()=>apsGo(apsI+1);
+document.addEventListener("keydown",e=>{
+  if(fs.classList.contains("show")){
+    if(e.key==="ArrowRight")apsGo(apsI+1); else if(e.key==="ArrowLeft")apsGo(apsI-1); else if(e.key==="Escape")fs.classList.remove("show");
+    return;
+  }
+  if(document.getElementById("view-apresentacao").classList.contains("active")){
+    if(e.key==="ArrowRight")apsGo(apsI+1); else if(e.key==="ArrowLeft")apsGo(apsI-1);
+  }
+});
+apsRender();
+
+window.addEventListener("resize",()=>{W=innerWidth;H=innerHeight-62;});
+applyVP(); render(); reheat(1);
+
+</script>
+</body>
+</html>

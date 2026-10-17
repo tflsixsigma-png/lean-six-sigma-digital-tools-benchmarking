@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Interactive concept map, slides, figures, timeline, theory frame, cases and references for the Digital Tools &amp; Benchmarking session — IAE Paris · Sorbonne Business School / IDGP Academy. Prof. Dr. Thiago Lima.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Tools & Benchmarking · Interactive Concept Map</title>
+<style>
+  :root{
+    --bg:#0b1418; --bg2:#0f1d23; --panel:#10222a; --panel2:#16303a;
+    --ink:#eaf4f2; --muted:#8fb0ad; --line:#23454f;
+    --core:#2dd4bf; --teoria:#a78bfa; --autor:#fbbf24; --pratica:#4ade80;
+    --tec:#60a5fa; --barreira:#fb923c; --lacuna:#f472b6;
+    --accent:#2dd4bf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 800px at 70% -10%,#13323b 0%,var(--bg) 55%);
+    color:var(--ink);overflow:hidden;
+  }
+  /* ---------- Top bar ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;height:62px;z-index:30;
+    display:flex;align-items:center;gap:18px;padding:0 22px;
+    background:linear-gradient(180deg,rgba(11,20,24,.95),rgba(11,20,24,.78));
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.3px;flex:none}
+  .brand>div{white-space:nowrap;line-height:1.18}
+  .brand .dot{width:13px;height:13px;border-radius:50%;background:var(--core);flex:none;
+    box-shadow:0 0 0 4px rgba(45,212,191,.18),0 0 18px rgba(45,212,191,.6)}
+  .brand small{display:block;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase}
+  nav{display:flex;gap:6px;margin-left:6px;overflow-x:auto;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav::-webkit-scrollbar{display:none}
+  nav button{
+    background:transparent;border:1px solid transparent;color:var(--muted);flex:none;white-space:nowrap;
+    padding:8px 15px;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;
+    transition:.15s;font-family:inherit;letter-spacing:.2px;
+  }
+  nav button:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+  nav button.active{color:#04231f;background:var(--core);border-color:var(--core)}
+  .vbadge{background:var(--core);color:#04231f;font-weight:700;font-size:11px;letter-spacing:.4px;
+    padding:4px 9px;border-radius:20px;white-space:nowrap}
+  .spacer{flex:1}
+  .searchbox{position:relative}
+  .searchbox input{
+    background:var(--panel);border:1px solid var(--line);color:var(--ink);
+    padding:8px 12px 8px 32px;border-radius:9px;font-size:13px;width:200px;font-family:inherit;outline:none;
+  }
+  .searchbox input:focus{border-color:var(--core)}
+  .searchbox svg{position:absolute;left:10px;top:9px;opacity:.5}
+  /* ---------- Views ---------- */
+  .view{position:fixed;inset:62px 0 0 0;display:none}
+  .view.active{display:block}
+  /* ---------- Map ---------- */
+  #stage{width:100%;height:100%;cursor:grab;display:block;touch-action:none}
+  #stage.grabbing{cursor:grabbing}
+  .legend{
+    position:absolute;left:18px;top:16px;z-index:10;background:rgba(16,34,42,.82);
+    border:1px solid var(--line);border-radius:13px;padding:13px 15px;backdrop-filter:blur(6px);max-width:230px;
+  }
+  .legend h4{margin:0 0 9px;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .legend .item{display:flex;align-items:center;gap:9px;font-size:13px;padding:4px 6px;border-radius:7px;cursor:pointer;transition:.12s;user-select:none}
+  .legend .item:hover{background:rgba(255,255,255,.05)}
+  .legend .item.off{opacity:.32}
+  .legend .swatch{width:12px;height:12px;border-radius:50%;flex:none}
+  .hint{position:absolute;left:18px;bottom:16px;z-index:10;font-size:12px;color:var(--muted);
+    background:rgba(16,34,42,.7);border:1px solid var(--line);border-radius:9px;padding:8px 12px;max-width:260px;line-height:1.5}
+  .ctrls{position:absolute;right:calc(18px + var(--panelw,0px));bottom:16px;z-index:10;display:flex;gap:8px;transition:right .25s}
+  .ctrls button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(16,34,42,.85);
+    color:var(--ink);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+  .ctrls button:hover{border-color:var(--core);color:var(--core)}
+  /* nodes */
+  .link{stroke:var(--line);stroke-width:1.4;transition:stroke .2s,stroke-width .2s,opacity .2s}
+  .link.hot{stroke:var(--core);stroke-width:2.4;opacity:1}
+  .node{cursor:pointer}
+  .node circle{stroke:var(--bg);stroke-width:2.5;transition:r .15s}
+  .node text{fill:var(--ink);font-size:11.5px;font-weight:600;pointer-events:none;paint-order:stroke;
+    stroke:var(--bg);stroke-width:3px;stroke-linejoin:round}
+  .node.dim{opacity:.16}
+  .link.dim{opacity:.06}
+  .node.sel circle{stroke:#fff;stroke-width:3.5}
+  /* ---------- Detail panel ---------- */
+  #panel{
+    position:fixed;top:62px;right:0;bottom:0;width:380px;z-index:25;
+    background:linear-gradient(180deg,var(--panel),var(--bg2));border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+  }
+  #panel.open{transform:translateX(0)}
+  .pclose{position:absolute;top:13px;right:14px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);cursor:pointer;font-size:17px}
+  .pclose:hover{color:var(--ink);border-color:var(--core)}
+  .pbody{padding:26px 26px 30px;overflow-y:auto}
+  .ptag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;
+    padding:5px 11px;border-radius:30px;margin-bottom:14px}
+  #panel h2{margin:0 0 4px;font-size:23px;line-height:1.2}
+  .pauthor{color:var(--core);font-size:13.5px;font-weight:600;margin-bottom:18px}
+  .pdesc{font-size:14.5px;line-height:1.62;color:#d6e7e4;margin-bottom:20px}
+  .pblock{margin-bottom:18px}
+  .pblock h5{margin:0 0 8px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .pblock ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:#cfe4e1}
+  .pblock li{margin-bottom:5px}
+  .chip{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:20px;
+    padding:5px 12px;font-size:12px;margin:0 6px 7px 0;color:#cfe4e1}
+  .relnode{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:9px;padding:7px 11px;font-size:12.5px;margin:0 7px 7px 0;cursor:pointer;transition:.12s}
+  .relnode:hover{border-color:var(--core);transform:translateY(-1px)}
+  .relnode .sw{width:9px;height:9px;border-radius:50%;flex:none}
+  /* ---------- Content views (timeline/table/synth) ---------- */
+  .scroller{height:100%;overflow-y:auto;padding:46px 8vw 80px}
+  .scroller h1{font-size:30px;margin:0 0 6px;font-weight:800;letter-spacing:-.5px}
+  .scroller .sub{color:var(--muted);font-size:15px;margin-bottom:40px;max-width:680px;line-height:1.6}
+  /* timeline */
+  .tl{position:relative;max-width:880px}
+  .tl::before{content:"";position:absolute;left:88px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tlitem{position:relative;padding:0 0 30px 130px;cursor:pointer}
+  .tlitem .yr{position:absolute;left:0;top:-2px;width:72px;text-align:right;font-weight:800;font-size:19px;color:var(--autor)}
+  .tlitem .nub{position:absolute;left:81px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--autor);
+    border:3px solid var(--bg);box-shadow:0 0 0 3px rgba(251,191,36,.18)}
+  .tlcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 19px;transition:.15s}
+  .tlitem:hover .tlcard{border-color:var(--autor);transform:translateX(3px)}
+  .tlcard h3{margin:0 0 3px;font-size:17px}
+  .tlcard .who{color:var(--core);font-size:13px;font-weight:600;margin-bottom:8px}
+  .tlcard p{margin:0;font-size:13.5px;line-height:1.55;color:#cfe4e1}
+  /* table */
+  .ctable{width:100%;max-width:980px;border-collapse:separate;border-spacing:0;font-size:14px}
+  .ctable th,.ctable td{text-align:left;padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ctable thead th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ctable tbody tr{transition:.12s}
+  .ctable tbody tr:hover{background:rgba(45,212,191,.05)}
+  .ctable .nm{font-weight:700;font-size:15px}
+  .ctable .nm small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:3px;letter-spacing:.3px}
+  .scopebar{height:7px;border-radius:5px;background:linear-gradient(90deg,var(--core),var(--pratica));margin-top:9px}
+  /* synth */
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:920px;margin-bottom:46px}
+  .scard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden}
+  .scard .n{font-size:34px;font-weight:800;color:var(--core);opacity:.32;position:absolute;top:12px;right:18px}
+  .scard h3{margin:0 0 9px;font-size:16px;color:var(--core)}
+  .scard p{margin:0;font-size:14px;line-height:1.6;color:#d6e7e4}
+  .qbox{max-width:920px}
+  .qbox h2{font-size:21px;margin:0 0 18px}
+  .q{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px;margin-bottom:13px}
+  .q .qn{font-size:24px;font-weight:800;color:var(--lacuna);line-height:1;flex:none}
+  .q p{margin:0;font-size:15px;line-height:1.55}
+  .pullquote{max-width:820px;margin:8px 0 40px;font-size:21px;line-height:1.5;font-weight:600;
+    color:#eaf4f2;border-left:3px solid var(--lacuna);padding-left:22px;font-style:italic}
+  .pullquote cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:12px;font-weight:500}
+  /* cases */
+  .cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:20px;max-width:1120px}
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column}
+  .case .ch{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:3px}
+  .case h3{margin:0;font-size:18px}
+  .case .loc{font-size:11px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;text-transform:uppercase;flex:none}
+  .case .tag{font-size:14.5px;font-style:italic;color:var(--pratica);font-weight:600;margin:7px 0 13px}
+  .case p.cd{margin:0 0 16px;font-size:13.5px;line-height:1.58;color:#cfe4e1}
+  .case .row{display:flex;gap:12px;font-size:12.5px;padding:9px 0;border-top:1px solid var(--line)}
+  .case .row .k{flex:none;width:62px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-size:10px;padding-top:2px}
+  .case .row .v{color:#d9eae7;line-height:1.5}
+  .case .row .v b{color:var(--autor);font-weight:700}
+  .loop-chip{display:inline-block;font:700 11px/1 ui-monospace,monospace;color:#7FD3A6;background:rgba(127,211,166,.12);border:1px solid rgba(127,211,166,.34);border-radius:20px;padding:5px 11px;letter-spacing:.04em;text-transform:uppercase;margin:2px 0 4px}
+  .case .gomap{margin-top:16px;align-self:flex-start;background:transparent;border:1px solid var(--line);color:var(--core);
+    border-radius:9px;padding:8px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.13s}
+  .case .gomap:hover{border-color:var(--core);background:rgba(45,212,191,.08);transform:translateY(-1px)}
+  /* refs */
+  .refgroup{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--core);font-weight:700;margin:36px 0 6px;max-width:1000px}
+  .refrow{max-width:1000px;padding:13px 0 13px 30px;text-indent:-30px;border-bottom:1px solid var(--line);
+    font-size:14px;line-height:1.6;color:#d6e7e4}
+  .refrow i{color:#eaf4f2}
+  .refrow a{color:var(--core);text-decoration:none;font-size:13px;word-break:break-all}
+  .refrow a:hover{text-decoration:underline}
+  .refrow.hide{display:none}
+  .reffilter{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:7px 12px;border-radius:9px;
+    font-size:13px;font-family:inherit;outline:none;margin-left:10px;width:240px}
+  .reffilter:focus{border-color:var(--core)}
+  /* shared "ver no mapa" button */
+  .gomap{margin-top:16px;align-self:flex-start;background:transparent;border:1px solid var(--line);color:var(--core);
+    border-radius:9px;padding:8px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.13s}
+  .gomap:hover{border-color:var(--core);background:rgba(45,212,191,.08);transform:translateY(-1px)}
+  /* quadro teórico */
+  .qtable{display:flex;flex-direction:column;gap:16px;max-width:1080px}
+  .qrow{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;transition:.13s}
+  .qrow:hover{border-color:var(--line)}
+  .qhead{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:6px}
+  .qdotwrap{position:relative;display:inline-flex;flex:none}
+  .qdot{width:15px;height:15px;border-radius:50%;cursor:help;flex:none;box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+  .qtip{position:absolute;left:24px;top:50%;transform:translateY(-50%);z-index:25;width:330px;max-width:72vw;
+    background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;
+    box-shadow:0 14px 34px rgba(0,0,0,.55);display:none;font-size:12.5px;line-height:1.5;color:#d6e7e4}
+  .qdotwrap:hover .qtip{display:block}
+  .qtip .c{display:block;font-weight:700;margin-bottom:7px;font-size:13.5px}
+  .qtip h6{margin:0 0 5px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .qconcept{font-weight:700;font-size:14.5px;padding:5px 13px;border-radius:30px;flex:none}
+  .qauthor{font-weight:700;font-size:15.5px}
+  .qpaper{font-style:italic;color:var(--muted);font-size:12.5px;margin-bottom:4px}
+  .qbody{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+  .qcol h6{margin:0 0 6px;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .qcol p{margin:0;font-size:13.5px;line-height:1.56;color:#d6e7e4}
+  /* intro / how-to-use modal */
+  .helpbtn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--core);
+    font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;flex:none}
+  .helpbtn:hover{border-color:var(--core)}
+  .introwrap{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;
+    background:rgba(5,12,15,.74);backdrop-filter:blur(7px)}
+  .introwrap.show{display:flex}
+  .introcard{position:relative;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:20px;max-width:580px;width:100%;padding:34px 36px;box-shadow:0 30px 80px rgba(0,0,0,.55);
+    max-height:88vh;overflow-y:auto}
+  .introcard .ptag{display:inline-block;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;
+    padding:5px 11px;border-radius:30px;margin-bottom:14px;background:rgba(45,212,191,.16);color:var(--core)}
+  .introcredit{font-size:12.5px;color:var(--core);font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px}
+  .introcard h2{margin:0 0 12px;font-size:25px;line-height:1.2}
+  .introcard .lead{font-size:15px;line-height:1.62;color:#d6e7e4;margin:0 0 22px}
+  .introsteps{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+  .introsteps .s{display:flex;gap:12px;font-size:13.5px;line-height:1.5;color:#cfe4e1}
+  .introsteps .s .sw{width:10px;height:10px;border-radius:50%;flex:none;margin-top:5px}
+  .introsteps .s b{color:var(--ink)}
+  .introgo{background:var(--core);color:#04231f;border:none;border-radius:11px;padding:12px 24px;font-size:14.5px;
+    font-weight:700;cursor:pointer;font-family:inherit}
+  .introgo:hover{filter:brightness(1.08)}
+  .introx{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);cursor:pointer;font-size:16px}
+  .introx:hover{color:var(--ink);border-color:var(--core)}
+  /* apresentação / viewer */
+  .apswrap{height:100%;display:flex;flex-direction:column;padding:22px 4vw 16px}
+  .apstop{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:13px;gap:14px;flex-wrap:wrap}
+  .apstop h1{font-size:22px;margin:0}
+  .apssub{color:var(--muted);font-size:12.5px;margin-top:3px}
+  .apsactions{display:flex;gap:8px}
+  .apsbtn{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 14px;
+    font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .apsbtn:hover{border-color:var(--core);color:var(--core)}
+  .apsstage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;
+    background:#0a0f12;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .apsstage img{max-width:100%;max-height:100%;object-fit:contain;display:block;cursor:pointer}
+  .apsmaplink{position:absolute;top:12px;right:12px;background:var(--core);color:#04231f;border:none;
+    border-radius:10px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;
+    box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .apsmaplink:hover{filter:brightness(1.08)}
+  .apsnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:rgba(16,34,42,.82);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .apsnav:hover{border-color:var(--core);color:var(--core)}
+  .apsprev{left:14px}.apsnext{right:14px}
+  .apscounter{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(11,20,24,.82);
+    border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-size:12.5px;color:var(--muted)}
+  .apsmeta{margin:13px 0 9px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .apsmeta .t{font-weight:700;font-size:15px}
+  .apschips{display:flex;flex-wrap:wrap;gap:7px}
+  .apschip{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;transition:.12s}
+  .apschip:hover{border-color:var(--core);transform:translateY(-1px)}
+  .apschip .sw{width:8px;height:8px;border-radius:50%;flex:none}
+  .apsthumbs{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 2px}
+  .apsthumb{flex:none;width:104px;height:58px;border-radius:7px;border:2px solid transparent;overflow:hidden;cursor:pointer;opacity:.5;background:#000;transition:.12s}
+  .apsthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .apsthumb.active{opacity:1;border-color:var(--core)}
+  .apsthumb:hover{opacity:1}
+  /* tela cheia */
+  .fswrap{position:fixed;inset:0;z-index:80;display:none;background:#000;align-items:center;justify-content:center}
+  .fswrap.show{display:flex}
+  .fswrap img{max-width:100vw;max-height:100vh;object-fit:contain}
+  .fsx{position:absolute;top:16px;right:18px;width:40px;height:40px;border-radius:9px;border:1px solid #333;
+    background:rgba(0,0,0,.5);color:#fff;font-size:17px;cursor:pointer}
+  .fsx:hover{border-color:var(--core);color:var(--core)}
+  .fsnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid #444;
+    background:rgba(0,0,0,.4);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+  .fsnav:hover{border-color:var(--core);color:var(--core)}
+  .fsprev{left:20px}.fsnext{right:20px}
+  .fscounter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#bbb;font-size:13px}
+  .fsmaplink{position:absolute;bottom:14px;right:20px;background:var(--core);color:#04231f;border:none;
+    border-radius:10px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
+    box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  .fsmaplink:hover{filter:brightness(1.08)}
+  .bfybox{max-width:1040px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+  .bfybox svg{width:100%;height:auto;display:block}
+  .bfyacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .bfyacts .gomap{margin-top:0;text-decoration:none}
+  .agh{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:var(--core);font-weight:700;margin:36px 0 14px}
+  #view-agenda .scard .gomap{margin-top:14px}
+  @media(max-width:760px){.qbody{grid-template-columns:1fr;gap:14px}.introcard{padding:26px 22px}
+    .apswrap{padding:16px 14px}.apsnav{width:36px;height:36px;font-size:18px}}
+  @media(max-width:760px){
+    .grid4{grid-template-columns:1fr}.scroller{padding:34px 22px 80px}
+    header{gap:10px;padding:0 12px}
+    nav{flex:1;margin-left:0}
+    nav button{padding:8px 11px;font-size:12.5px}
+    .searchbox{display:none}.vbadge{display:none}.spacer{display:none}
+    #panel{width:100%}.brand small{display:none}
+  }
+
+  /* ---- additions for this app ---- */
+  .figgrid{display:flex;flex-direction:column;gap:26px;max-width:1080px}
+  .figbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px 16px}
+  .figbox h3{margin:0 0 4px;font-size:17px}
+  .figbox .fsrc{color:var(--muted);font-size:12.5px;margin-bottom:12px}
+  .figbox .fwrap{background:#fff;border-radius:10px;padding:10px;overflow:hidden}
+  .figbox .fwrap svg,.figbox .fwrap img{width:100%;height:auto;display:block}
+  .figbox p.cap{margin:12px 0 0;font-size:13.5px;line-height:1.55;color:#cfe4e1}
+  .figbox .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .figbox .acts .gomap{margin-top:0;text-decoration:none}
+  .monday{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1000px;margin-bottom:40px}
+  .mcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;position:relative}
+  .mcard .part{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
+  .mcard h3{margin:0 0 8px;font-size:16px;color:var(--lacuna)}
+  .mcard p{margin:0 0 8px;font-size:13.5px;line-height:1.58;color:#d6e7e4}
+  .mcard p b{color:#eaf4f2}
+  .mcard .do{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.3);border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.55;color:#eaf4f2}
+  .mcard .do b{color:var(--lacuna)}
+  .eqrow{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:1000px;margin-bottom:40px}
+  .eq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .eq .f{font:700 18px/1.35 ui-monospace,Menlo,monospace;color:var(--teoria);margin-bottom:8px;overflow-wrap:anywhere}
+  .eq .gomap{display:block;margin-top:10px}
+  .eq p{margin:0;font-size:13.5px;line-height:1.55;color:#d6e7e4}
+  .credit{position:fixed;left:18px;bottom:16px;z-index:9;font-size:11.5px;color:var(--muted);pointer-events:none}
+  @media(max-width:760px){.monday,.eqrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot"></span><div>Digital Tools & Benchmarking<small>Integration of platforms and best practices · Module 3, Session 4</small></div></div>
+  <span class="vbadge">v1 · oct 2026</span>
+  <nav id="nav"><button data-view="apresentacao" class="active">Slides</button><button data-view="map">Concept Map</button><button data-view="diagrama">Figures</button><button data-view="timeline">Timeline</button><button data-view="cases">Cases</button><button data-view="quadro">Theory Frame</button><button data-view="agenda">On Monday</button><button data-view="refs">References</button></nav>
+  <div class="spacer"></div>
+  <button id="helpBtn" class="helpbtn" title="How to use / start here">?</button>
+  <div class="searchbox">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="search" placeholder="Search a concept or author…" autocomplete="off">
+  </div>
+</header>
+
+<!-- ============ MAP ============ -->
+<section class="view" id="view-map">
+  <svg id="stage"></svg>
+  <div class="legend">
+    <h4>Categories <span style="font-weight:500;text-transform:none;letter-spacing:0">(click to filter)</span></h4>
+    <div id="legendItems"></div>
+  </div>
+  <div class="hint">Click a node for details · drag to rearrange · mouse wheel to zoom</div>
+  <div class="ctrls" id="ctrls">
+    <button id="zin" title="Zoom in">+</button>
+    <button id="zout" title="Zoom out">−</button>
+    <button id="zfit" title="Centre" style="font-size:14px">⤢</button>
+  </div>
+</section>
+
+<!-- ============ SLIDES ============ -->
+<section class="view active" id="view-apresentacao">
+  <div class="apswrap">
+    <div class="apstop">
+      <div><h1>Session slides</h1><div class="apssub">Digital Tools & Benchmarking · afternoon session, 17 October 2026 · Prof. Dr. Thiago Lima</div></div>
+      <div class="apsactions">
+        <button class="apsbtn" id="apsFull">⛶ Full screen</button>
+        <a class="apsbtn" id="apsDownload" download="Digital-Tools-Benchmarking-Session-2.pdf">⤓ Download the deck (PDF)</a>
+      </div>
+    </div>
+    <div class="apsstage">
+      <button class="apsnav apsprev" id="apsPrev" aria-label="previous">‹</button>
+      <img id="apsImg" alt="Session slide">
+      <button class="apsnav apsnext" id="apsNext" aria-label="next">›</button>
+      <div class="apscounter" id="apsCounter"></div>
+      <button class="apsmaplink" id="apsMapLink">⊕ Explore on the map →</button>
+    </div>
+    <div class="apsmeta">
+      <span class="t" id="apsTitle"></span>
+      <span class="apschips" id="apsChips"></span>
+    </div>
+    <div class="apsthumbs" id="apsThumbs"></div>
+  </div>
+</section>
+
+<!-- ============ FIGURES ============ -->
+<section class="view" id="view-diagrama">
+  <div class="scroller">
+    <h1>The figures</h1>
+    <p class="sub">The structures that carry the afternoon: the VCAP triage, the six-condition chain from a working model to an organisational result, Cynefin, the Kata routine, and — from the close of the day — capability as a stock and the know-why × know-how classification.</p>
+    <div class="figgrid">
+<div class="figbox"><h3>Figure 1 · The triage, applied to a tool</h3><div class="fsrc">Part Two · V = C × (A + P)</div><div class="fwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 360"><rect width="1160" height="360" fill="#fff"/><text x="20" y="30" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="700">THE TRIAGE, APPLIED TO A TOOL — V = C × (A + P)</text><text x="300" y="52" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">WHAT THE TOOL CONTRIBUTES</text><text x="720" y="52" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">THE TEST</text><rect x="20" y="65" width="260" height="76" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="36" y="111" font-family="system-ui,sans-serif" font-size="20" fill="#2A5D9F" text-anchor="start" font-weight="700">A — Assets</text><text x="300" y="95" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">Licences, infrastructure, models, dashboards. The</text><text x="300" y="114" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">organisation owns something it did not own before.</text><text x="720" y="95" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Could a competitor with the same budget hold this</text><text x="720" y="114" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">position in six months? Usually yes.</text><rect x="20" y="153" width="260" height="76" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="36" y="199" font-family="system-ui,sans-serif" font-size="20" fill="#2A5D9F" text-anchor="start" font-weight="700">P — Processes</text><text x="300" y="183" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">Approvals route differently, handoffs disappear, a queue</text><text x="300" y="202" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">is capped.</text><text x="720" y="183" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Would the new flow survive if the tool were replaced</text><text x="720" y="202" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">by a different vendor's?</text><rect x="20" y="241" width="260" height="76" rx="10" fill="#F6E9CB" stroke="#B8820F" stroke-width="2.2"/><text x="36" y="287" font-family="system-ui,sans-serif" font-size="20" fill="#B8820F" text-anchor="start" font-weight="700">C — Capability</text><text x="300" y="271" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">The organisation ends up better at improving its processes</text><text x="300" y="290" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">than before.</text><text x="720" y="271" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">What can it now do that it could not do before —</text><text x="720" y="290" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">that does not depend on the new system?</text><text x="20" y="348" font-family="system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="start" font-weight="400">Training people to operate the new system is not capability: it is part of delivering the asset, and it ends when the people who were trained leave.</text></svg></div><p class="cap">Almost every platform is an A decision; some are also P; very few are C. The error that destroys the business case is not buying A — it is booking the benefit as though C had moved.</p><div class="acts"><button class="gomap" data-go="triage">See on the map →</button><button class="gomap" data-go="bookedC">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 2 · The six-condition chain</h3><div class="fsrc">Part Four · from the author's systematic review (PRISMA 2020)</div><div class="fwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 330"><rect width="1160" height="330" fill="#fff"/><text x="20" y="30" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="700">FROM A WORKING MODEL TO AN ORGANISATIONAL RESULT — SIX CONDITIONS, EACH NECESSARY, NONE SUFFICIENT</text><rect x="20" y="70" width="170" height="126" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="34" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">0</text><text x="34" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Evidence base</text><text x="34" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">the tool</text><path d="M192 130 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="210" y="70" width="170" height="126" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="224" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">1</text><text x="224" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Technical</text><text x="224" y="148" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">capability in</text><text x="224" y="168" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">in operation</text><text x="224" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">the tool</text><path d="M382 130 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="400" y="70" width="170" height="126" rx="10" fill="#F6E9CB" stroke="#B8820F" stroke-width="2.2"/><text x="414" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#B8820F" text-anchor="start" font-weight="700">2</text><text x="414" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Workflow</text><text x="414" y="148" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">integration</text><text x="414" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">capability</text><path d="M572 130 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="590" y="70" width="170" height="126" rx="10" fill="#F6E9CB" stroke="#B8820F" stroke-width="2.2"/><text x="604" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#B8820F" text-anchor="start" font-weight="700">3</text><text x="604" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Translation into</text><text x="604" y="148" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">action</text><text x="604" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">capability</text><path d="M762 130 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="780" y="70" width="170" height="126" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="794" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">4</text><text x="794" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Organisational</text><text x="794" y="148" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">outcome</text><text x="794" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">the result</text><path d="M952 130 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="970" y="70" width="170" height="126" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="984" y="100" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">5</text><text x="984" y="128" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Net value</text><text x="984" y="184" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="400">the result</text><rect x="392" y="56" width="376" height="150" rx="14" fill="none" stroke="#B8820F" stroke-width="1.5" stroke-dasharray="6 5"/><text x="580.0" y="232" font-family="system-ui,sans-serif" font-size="13" fill="#B8820F" text-anchor="middle" font-weight="700">The two organisational capabilities — this is C, made measurable</text><text x="20" y="275" font-family="system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="start" font-weight="400">A break at any link stops the effect, however good the preceding links were. Used before adoption: a checklist of conditions the organisation controls.</text><text x="20" y="297" font-family="system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="start" font-weight="400">Used after: it locates the link where the implementation failed — a more useful question than whether the model was accurate.</text></svg></div><p class="cap">Organisational value is the end of a chain. Conditions 2 and 3 — whether the output reaches whoever decides while the decision is still open, and whether anyone can act — are not properties of the tool. They are capabilities of the organisation that bought it, and where the evidence says value is most often lost.</p><div class="acts"><button class="gomap" data-go="chain">See on the map →</button><button class="gomap" data-go="cond23">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 3 · Cynefin — the domain decides the method</h3><div class="fsrc">Part Six · after Snowden & Boone (2007)</div><div class="fwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 420"><rect width="1160" height="420" fill="#fff"/><text x="20" y="30" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="700">CYNEFIN — THE DOMAIN DECIDES THE METHOD (AFTER SNOWDEN & BOONE, 2007)</text><rect x="20" y="55" width="265" height="300" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="36" y="90" font-family="system-ui,sans-serif" font-size="22" fill="#2A5D9F" text-anchor="start" font-weight="700">Simple</text><text x="36" y="118" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Sense → Categorise → Respond</text><text x="36" y="150" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">Cause and effect obvious to</text><text x="36" y="169" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">everyone</text><text x="36" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">THE TRAP</text><text x="36" y="226" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Rigidity; blindness to a</text><text x="36" y="245" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">change of context</text><rect x="305" y="55" width="265" height="300" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="321" y="90" font-family="system-ui,sans-serif" font-size="22" fill="#2A5D9F" text-anchor="start" font-weight="700">Complicated</text><text x="321" y="118" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Sense → Analyse → Respond</text><text x="321" y="150" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">Requires expertise; several</text><text x="321" y="169" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">right answers</text><text x="321" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">THE TRAP</text><text x="321" y="226" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Paralysis by analysis;</text><text x="321" y="245" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">dependence on specialists</text><rect x="590" y="55" width="265" height="300" rx="10" fill="#F6E9CB" stroke="#B8820F" stroke-width="2.2"/><text x="606" y="90" font-family="system-ui,sans-serif" font-size="22" fill="#B8820F" text-anchor="start" font-weight="700">Complex</text><text x="606" y="118" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Probe → Sense → Respond</text><text x="606" y="150" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">Cause and effect visible only</text><text x="606" y="169" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">in hindsight. Digital</text><text x="606" y="188" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">transformation lives here</text><text x="606" y="225" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">THE TRAP</text><text x="606" y="245" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Wanting control before acting;</text><text x="606" y="264" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">planning what can only be</text><text x="606" y="283" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">discovered</text><rect x="875" y="55" width="265" height="300" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="891" y="90" font-family="system-ui,sans-serif" font-size="22" fill="#2A5D9F" text-anchor="start" font-weight="700">Chaotic</text><text x="891" y="118" font-family="system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="600">Act → Sense → Respond</text><text x="891" y="150" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">No perceptible causal</text><text x="891" y="169" font-family="system-ui,sans-serif" font-size="13.5" fill="#0A2342" text-anchor="start" font-weight="400">relation; speed over precision</text><text x="891" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#56687C" text-anchor="start" font-weight="700">THE TRAP</text><text x="891" y="226" font-family="system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">Analysis during a crisis</text><text x="580" y="392" font-family="system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">Confusion — not knowing which domain you are in — is the most dangerous state: break the problem up and reclassify each part.</text></svg></div><p class="cap">Most leaders are trained for the Complicated domain. Digital transformation is Complex, and applying Complicated methods there manufactures a sense of control that delays experimentation and penalises learning. Benchmarking is a Simple-and-Complicated instrument.</p><div class="acts"><button class="gomap" data-go="cynefin">See on the map →</button><button class="gomap" data-go="planvshyp">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 4 · Toyota Kata — the routine</h3><div class="fsrc">Part Six · Rother (2009)</div><div class="fwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 300"><rect width="1160" height="300" fill="#fff"/><text x="20" y="30" font-family="system-ui,sans-serif" font-size="12" fill="#56687C" text-anchor="start" font-weight="700">TOYOTA KATA — THE ROUTINE THAT MAKES PROBE–SENSE–RESPOND REPEATABLE (ROTHER, 2009)</text><rect x="20" y="60" width="210" height="110" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="34" y="92" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">1</text><text x="70" y="88" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Direction or</text><text x="70" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">challenge</text><text x="34" y="152" font-family="system-ui,sans-serif" font-size="12.5" fill="#56687C" text-anchor="start" font-weight="400">1–3 years</text><path d="M232 115 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="250" y="60" width="210" height="110" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="264" y="92" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">2</text><text x="300" y="88" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Grasp the current</text><text x="300" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">condition</text><text x="264" y="152" font-family="system-ui,sans-serif" font-size="12.5" fill="#56687C" text-anchor="start" font-weight="400">continuous</text><path d="M462 115 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="480" y="60" width="210" height="110" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="494" y="92" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">3</text><text x="530" y="88" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Set the target</text><text x="530" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">condition</text><text x="494" y="152" font-family="system-ui,sans-serif" font-size="12.5" fill="#56687C" text-anchor="start" font-weight="400">up to 3 months</text><path d="M692 115 l14 0 m-5 -5 l5 5 l-5 5" fill="none" stroke="#0A2342" stroke-width="2"/><rect x="710" y="60" width="210" height="110" rx="10" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="1.5"/><text x="724" y="92" font-family="system-ui,sans-serif" font-size="26" fill="#2A5D9F" text-anchor="start" font-weight="700">4</text><text x="760" y="88" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">Run experiments —</text><text x="760" y="108" font-family="system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="start" font-weight="600">PDCA</text><text x="724" y="152" font-family="system-ui,sans-serif" font-size="12.5" fill="#56687C" text-anchor="start" font-weight="400">weekly / daily</text><path d="M920 172 L920 205 q0 15 -15 15 L55 220 q-15 0 -15 -15 L40 178" fill="none" stroke="#B8820F" stroke-width="2" stroke-dasharray="6 5"/><path d="M40 172 l-6 10 l12 0 z" fill="#B8820F"/><rect x="950" y="60" width="190" height="110" rx="10" fill="#F6E9CB" stroke="#B8820F" stroke-width="1.5"/><text x="964" y="88" font-family="system-ui,sans-serif" font-size="14" fill="#B8820F" text-anchor="start" font-weight="700">The coaching routine</text><text x="964" y="110" font-family="system-ui,sans-serif" font-size="12.5" fill="#0A2342" text-anchor="start" font-weight="400">Target condition? Current</text><text x="964" y="127" font-family="system-ui,sans-serif" font-size="12.5" fill="#0A2342" text-anchor="start" font-weight="400">condition? Obstacles — which</text><text x="964" y="144" font-family="system-ui,sans-serif" font-size="12.5" fill="#0A2342" text-anchor="start" font-weight="400">one now? Next step and</text><text x="964" y="161" font-family="system-ui,sans-serif" font-size="12.5" fill="#0A2342" text-anchor="start" font-weight="400">expectation? When can we see?</text><text x="580" y="262" font-family="system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">The point is not to solve the problem. It is to produce people who solve problems — the only form in which capability survives the person who had it.</text></svg></div><p class="cap">Probe → sense → respond is a logic, not a practice. Kata is the routine: a direction, the current condition, a target condition within three months, and daily experiments towards it — with a coach asking the same five questions every cycle.</p><div class="acts"><button class="gomap" data-go="kata">See on the map →</button><button class="gomap" data-go="fivequestions">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 5 · Capability as a stock</h3><div class="fsrc">Part Eight · after Dierickx & Cool (1989)</div><div class="fwrap"><svg viewBox="0 0 1160 400" role="img" aria-label="Stock and flow diagram of capability, with a valve on the inflow and an outflow of turnover and disuse">
+<rect width="1160" height="400" fill="#FFFFFF"/>
+<rect x="420" y="120" width="320" height="140" rx="8" fill="#0A2342"/>
+<text x="580.0" y="170.0" font-family="'Fraunces',serif" font-size="36" fill="#FFFFFF" text-anchor="middle" font-weight="600">C</text>
+<text x="580.0" y="200.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#C6D4E4" text-anchor="middle" font-weight="400">the capability to improve</text>
+<text x="580.0" y="224.0" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#F2DFB4" text-anchor="middle" font-weight="700">a stock, not a state</text>
+<path d="M 60 170 L 400 170 L 400 210 L 60 210 Z" fill="#EAF0F6" stroke="#2A5D9F" stroke-width="2"/>
+<path d="M 360 178 L 392 190 L 360 202 Z" fill="#2A5D9F"/>
+<text x="60.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">INFLOW</text>
+<text x="60.0" y="136.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">improvement that produces</text>
+<text x="60.0" y="155.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">know-why and know-how together</text>
+<circle cx="220" cy="190" r="26" fill="#FFFFFF" stroke="#B8820F" stroke-width="3"/>
+<path d="M 206 178 L 234 202 M 206 202 L 234 178" stroke="#B8820F" stroke-width="3"/>
+<text x="220.0" y="240.0" font-family="'JetBrains Mono',monospace" font-size="13" fill="#7E5B0C" text-anchor="middle" font-weight="700">the valve</text>
+<text x="220.0" y="260.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">psychological safety</text>
+<text x="220.0" y="278.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13" fill="#56687C" text-anchor="middle" font-weight="400">and credible promises</text>
+<text x="220.0" y="300.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="12.5" fill="#7E5B0C" text-anchor="middle" font-weight="700">close it and the flow stops</text>
+<path d="M 760 170 L 1100 170 L 1100 210 L 760 210 Z" fill="#EAF0F6" stroke="#A9BACB" stroke-width="2"/>
+<path d="M 1062 178 L 1094 190 L 1062 202 Z" fill="#56687C"/>
+<text x="760.0" y="112.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#56687C" text-anchor="start" font-weight="700" letter-spacing="1.6">OUTFLOW</text>
+<text x="760.0" y="136.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">turnover, disuse,</text>
+<text x="760.0" y="155.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="start" font-weight="400">reorganisation</text>
+<rect x="60" y="326" width="1040" height="66" rx="6" fill="#EAF0F6" stroke="#A9BACB"/>
+<text x="580.0" y="352.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="middle" font-weight="400">A stock adjusts slowly and drains quietly. An organisation that was good at improving five years ago</text>
+<text x="580.0" y="374.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#0A2342" text-anchor="middle" font-weight="400">may no longer be, and nothing on its balance sheet will say so.</text>
+<text x="580.0" y="60.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="14" fill="#56687C" text-anchor="middle" font-weight="400">Volume of improvement activity is not the inflow. Only the part that produces both kinds of knowledge is.</text>
+</svg></div><p class="cap">A stock with a regulated inflow and an unregulated outflow. The valve is psychological safety and the credibility of management's commitments: where surfacing a problem is costly, the measured performance improves and the real performance does not.</p><div class="acts"><button class="gomap" data-go="stock">See on the map →</button><button class="gomap" data-go="multiplier">See on the map →</button></div></div>
+<div class="figbox"><h3>Figure 6 · Know-why × know-how</h3><div class="fsrc">Part Eight · after Lapré, Mukherjee & Van Wassenhove (2000)</div><div class="fwrap"><svg viewBox="0 0 980 620" role="img" aria-label="Two-by-two matrix of conceptual learning against operational learning with four project types">
+<rect width="980" height="620" fill="#FFFFFF"/>
+<rect x="120" y="40" width="810" height="430" fill="#EAF0F6" opacity=".45"/>
+<rect x="525.0" y="40" width="405.0" height="215.0" fill="#F6E9CB"/>
+<line x1="525.0" y1="40" x2="525.0" y2="470" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="255.0" x2="930" y2="255.0" stroke="#A9BACB" stroke-width="1.5"/>
+<line x1="120" y1="470" x2="930" y2="470" stroke="#0A2342" stroke-width="2"/>
+<line x1="120" y1="40" x2="120" y2="470" stroke="#0A2342" stroke-width="2"/>
+<text x="148.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Firefighting</text>
+<text x="148.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">neither why nor how</text>
+<text x="148.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="305.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Artisan skills</text>
+<text x="553.0" y="329.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">how, without why</text>
+<text x="553.0" y="363.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="148.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Nonvalidated theories</text>
+<text x="148.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why, never tested in the work</text>
+<text x="148.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">No acceleration</text>
+<text x="553.0" y="90.0" font-family="'Fraunces',serif" font-size="18" fill="#0A2342" text-anchor="start" font-weight="600">Operationally validated theories</text>
+<text x="553.0" y="114.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="13.5" fill="#56687C" text-anchor="start" font-weight="400">why and how, acquired together</text>
+<text x="553.0" y="148.0" font-family="'JetBrains Mono',monospace" font-size="13.5" fill="#7E5B0C" text-anchor="start" font-weight="700">The only group that accelerated</text>
+<text x="525.0" y="508.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Operational learning  →  know-how: what actually works here</text>
+<text transform="translate(70,255.0) rotate(-90)" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#0A2342" text-anchor="middle" font-weight="600">Conceptual learning  →  know-why: the mechanism</text>
+<rect x="120" y="532" width="810" height="96" rx="6" fill="#0A2342"/>
+<text x="144.0" y="564.0" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#F2DFB4" text-anchor="start" font-weight="700" letter-spacing="1.8">THE FINDING</text>
+<text x="144.0" y="594.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">Across 62 improvement projects in one factory, only about a quarter accelerated waste reduction —</text>
+<text x="144.0" y="616.0" font-family="'Source Sans 3',system-ui,sans-serif" font-size="15" fill="#FFFFFF" text-anchor="start" font-weight="400">and they were the ones in the top-right cell. The rest slowed it, or did nothing at all.</text>
+</svg></div><p class="cap">Only the improvement projects that produced an understanding of the mechanism and validated it in the work accelerated the reduction of waste. Volume of projects is not the measure.</p><div class="acts"><button class="gomap" data-go="learning">See on the map →</button><button class="gomap" data-go="br_retro">See on the map →</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ON MONDAY ============ -->
+<section class="view" id="view-agenda">
+  <div class="scroller">
+    <h1>On Monday · bridges to project management</h1>
+    <p class="sub">The afternoon tests the morning's identity against the two things organisations buy when they cannot build capability: technology and other people's practices. Each part ends with a bridge to project management and one thing to do on Monday.</p>
+    <h3 class="agh">The equations of the afternoon</h3>
+    <div class="eqrow">
+      <div class="eq"><div class="f">V = C × (A + P)</div><p>A platform enters the bracket; the coefficient is bought separately, or not at all. A is bought · P is copied · C is the only term you have to build.</p><button class="gomap" data-go="vcap">See on the map →</button></div>
+      <div class="eq"><div class="f">V<sub>rival</sub> = C<sub>weak</sub> × (A<sub>bought</sub> + P<sub>copied</sub>) ≈ 0</div><p>The arithmetic of failed benchmarking: GM copied the bracket at NUMMI for twenty years and could not import the coefficient.</p><button class="gomap" data-go="vrival">See on the map →</button></div>
+      <div class="eq"><div class="f">VC = (WTP − C)<sub>A</sub> − (WTP − C)<sub>B</sub></div><p>A successful imitation pulls the second bracket up towards the first. Benchmarking practised well by everyone converges an industry on one operating model — Porter's caveat.</p><button class="gomap" data-go="porter">See on the map →</button></div>
+      <div class="eq"><div class="f">OpEx = Design(VCAP) × Culture</div><p>What the organisation specified, multiplied by whether it is lived. A reminder, not a measurement — the product form forbids the claim that a strong design offsets a weak practice.</p><button class="gomap" data-go="culture">See on the map →</button></div>
+    </div>
+
+    <h3 class="agh">Bridges to project management — and what to do on Monday</h3>
+    <div class="monday">
+      <div class="mcard"><div class="part">Part Two · What a platform buys</div><h3>Every fact has one home</h3><p>A tool used as the working record by 40% of the people it was bought for delivers close to none of a single-source benefit. A date, a risk or a cost that lives in two systems imposes a permanent reconciliation tax and turns the dashboard into a negotiation.</p><div class="do"><b>On Monday</b> List the five facts leadership asks about most; for each, write where the authoritative version lives. If any has two homes, that is the first project — and it is not a software project. Put change management on the same budget line as licences.</div><button class="gomap" data-go="br_onehome">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Three · Philosophy eats AI</div><h3>The question for the next steering committee</h3><p>Before granting any system autonomy, technical safeguards are necessary and not sufficient. Three philosophical questions decide whether autonomy is efficiency or risk in costume.</p><div class="do"><b>On Monday</b> Teleology: is the hierarchy of purposes documented, including what to do when cost, quality and sustainability conflict? Epistemology: does it know when it does not know, and escalate? Ontology: can it recognise a supplier or a context it has never seen?</div><button class="gomap" data-go="agentic">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Four · The chain</div><h3>Conditions 2 and 3 are almost never in scope</h3><p>The system is delivered, and the decision it enters and the capacity to act on it are left to change management after go-live. Condition 4 is benefits realisation — associated with project success, rarely performed.</p><div class="do"><b>On Monday</b> For the digital project closest to go-live, write down who receives the output, at which decision, and who acts on it with what resources. If any answer is "not defined", that is the gap — and it is the organisation's, not the vendor's.</div><button class="gomap" data-go="br_benefits">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Five · Benchmarking</div><h3>Benchmark the routine, not the number</h3><p>Do not ask the reference what it does; ask what it stopped doing and what it would never give up. Then ask what your organisation would have to accumulate to run that routine — and how long the reference took.</p><div class="do"><b>On Monday</b> Take one benchmark figure your organisation quotes. Check whether the process boundaries and the conditions are the same on both sides; then name the practice that produces the gap. If nobody can, the figure is a datum, not a target.</div><button class="gomap" data-go="ambiguity">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Six · Cynefin & Kata</div><h3>A gate asks for a plan; a Complex problem can only supply a hypothesis</h3><p>So the plan gets written anyway, and the organisation manages the plan instead of the problem — holding people to dates that were never knowledge, only politeness.</p><div class="do"><b>On Monday</b> Rewrite one gate deliverable in this form: "By day 90, this measure will read this value; here is what the last four weeks showed." If the sponsor will not accept that in place of a plan, the problem is being governed as Complicated, and the next quarter will prove it.</div><button class="gomap" data-go="br_gates">See on the map →</button></div>
+      <div class="mcard"><div class="part">Part Eight · Building the multiplier</div><h3>Retrospectives that change the standard</h3><p>The retrospective is guided experimentation if its output changes the standard, and nothing if it does not. The lessons-learned repository stores what can be written down — the part that was never the constraint.</p><div class="do"><b>On Monday</b> Open the last three retrospectives and look for one line in a template, a checklist or a gate criterion that changed because of them. If there is none, they produced know-why without know-how, and the stock did not move.</div><button class="gomap" data-go="br_retro">See on the map →</button></div>
+    </div>
+
+    <h3 class="agh">The dilemma · a competitor cuts cost by 30% with generative AI</h3>
+    <div class="qbox">
+      <div class="q"><span class="qn">01</span><p><b>Cynefin.</b> Is this Simple — copy the technology — or Complex — discover how AI could create value specific to your customer?</p></div>
+      <div class="q"><span class="qn">02</span><p><b>Lean.</b> Is human contact a driver of willingness to pay in your segment? If it is, automating it cuts cost and destroys revenue at the same time.</p></div>
+      <div class="q"><span class="qn">03</span><p><b>Kata.</b> Set a ninety-day target condition and run controlled experiments towards it, rather than approving a programme whose benefits nobody can yet state.</p></div>
+    </div>
+
+    <h3 class="agh">The group activity · the Digital Tool Appraisal</h3>
+    <div class="grid4">
+      <div class="scard"><span class="n">1–5</span><h3>In the room, twenty minutes</h3><p>The tool · the VCAP triage · the six conditions · the AI audit where it applies · the verdict. Sections 6 and 7 — the reference and the six-month roadmap on three capability gaps — are the follow-up assignment, better done with a week of thought.</p><a class="gomap" href="https://tflsixsigma-png.github.io/lean-six-sigma-digital-tools-benchmarking/digital-tool-appraisal.html" target="_blank" rel="noopener">Open the fillable appraisal ↗</a></div>
+      <div class="scard"><span class="n">?</span><h3>What to expect</h3><p><b>"Not documented"</b> will be the honest answer on what the system optimises for. <b>Most tools land on A, or A and P</b> — a correctly identified purchase, so argue the case on that basis. And the six conditions will be answered <b>"not measured"</b> more often than "no": an unobserved implementation, not a failing one — a more tractable problem.</p><button class="gomap" data-go="notdocumented">See on the map →</button></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="view" id="view-timeline">
+  <div class="scroller">
+    <h1>How the field was built</h1>
+    <p class="sub">From Polanyi's tacit dimension (1966) to Philosophy eats AI (2025) and the six-condition chain (2026): why best practice resists transfer, which domain a transformation lives in, and what a routine has to look like to accumulate capability. Click an entry to open it on the map.</p>
+    <div class="tl" id="tl"></div>
+  </div>
+</section>
+
+<!-- ============ THEORY FRAME ============ -->
+<section class="view" id="view-quadro">
+  <div class="scroller">
+    <h1>Theory frame · from author to practice</h1>
+    <p class="sub">The works that carry the afternoon, read from theory to practice. Each row connects the author to the concept they introduced, the main contribution and the practice that follows from it. The colour follows the map legend — use “see on the map” to locate it in the network.</p>
+    <div class="qtable" id="quadroRows"></div>
+  </div>
+</section>
+
+<!-- ============ CASES ============ -->
+<section class="view" id="view-cases">
+  <div class="scroller">
+    <h1>Cases · from theory to practice</h1>
+    <p class="sub">Each case connects a practice to the theory that explains it and to the corresponding author. Use “see on the map” to open the related node and navigate its connections.</p>
+    <div class="cases" id="caseList"></div>
+  </div>
+</section>
+
+<!-- ============ REFERENCES ============ -->
+<section class="view" id="view-refs">
+  <div class="scroller">
+    <h1>References</h1>
+    <p class="sub"><span id="refCount"></span> works cited across the session, in APA 7. Click a DOI or link to open the source.
+      <input class="reffilter" id="refFilter" placeholder="filter by author, title…" autocomplete="off"></p>
+    <h3 class="refgroup">Digital tools, AI and project practice</h3>
+    <div id="refsSem"></div>
+    <h3 class="refgroup">Benchmarking, imitation and capability</h3>
+    <div id="refsRev"></div>
+    <h3 class="refgroup">Method, learning and the morning's foundations</h3>
+    <div id="refsRaizes"></div>
+  </div>
+</section>
+
+<!-- ============ INTRO / HOW TO USE ============ -->
+<div class="introwrap" id="intro">
+  <div class="introcard">
+    <button class="introx" id="introClose">✕</button>
+    <div class="introcredit">Material produced by Prof. Dr. Thiago Lima</div>
+    <div class="ptag">Start here · how to use</div>
+    <h2>What does a digital investment actually buy?</h2>
+    <p class="lead">The morning ended on a claim: value is not the sum of what an organisation owns and how it works, but that sum scaled by its capacity to improve. The afternoon tests it against <b>technology</b> and <b>other people's practices</b> — and then asks what does build the coefficient. This app organises that argument into the following complementary areas:</p>
+    <div class="introsteps">
+      <div class="s"><span class="sw" style="background:var(--core)"></span><div><b>Concept map</b> — click a node to open the concept with its explanation, the reference author and its connections. Each concept links to the slide where it is treated.</div></div>
+      <div class="s"><span class="sw" style="background:var(--pratica)"></span><div><b>Slides</b> — the session deck, navigable and in full screen; click a slide to jump to its concept on the map.</div></div>
+      <div class="s"><span class="sw" style="background:var(--core)"></span><div><b>Figures</b> — the VCAP triage, the six-condition chain, Cynefin, the Kata routine, and capability as a stock — redrawn and linked to the map.</div></div>
+      <div class="s"><span class="sw" style="background:var(--autor)"></span><div><b>Timeline</b> — how the field was built, from Polanyi (1966) to Schrage & Kiron (2025) and the six-condition chain (2026).</div></div>
+      <div class="s"><span class="sw" style="background:var(--teoria)"></span><div><b>Theory frame</b> — author → work → key concept → contribution → practice, side by side.</div></div>
+      <div class="s"><span class="sw" style="background:var(--pratica)"></span><div><b>Cases</b> — GM's twenty years at NUMMI, Xerox, Netflix vs Blockbuster, Heathrow T5, the demand models in 2020 and the stylised cases of the notes, linked back to the theory.</div></div>
+      <div class="s"><span class="sw" style="background:var(--lacuna)"></span><div><b>On Monday</b> — the four equations, the bridges to project management with their Monday actions, the AI dilemma and the Digital Tool Appraisal.</div></div>
+      <div class="s"><span class="sw" style="background:var(--tec)"></span><div><b>References</b> — every work cited, in APA 7, with clickable DOI/link.</div></div>
+    </div>
+    <button class="introgo" id="introGo">Start exploring →</button>
+  </div>
+</div>
+
+<!-- ============ FULL SCREEN (slideshow) ============ -->
+<div class="fswrap" id="fs">
+  <button class="fsx" id="fsClose" aria-label="close">✕</button>
+  <button class="fsnav fsprev" id="fsPrev" aria-label="previous">‹</button>
+  <img id="fsImg" alt="Slide in full screen">
+  <button class="fsnav fsnext" id="fsNext" aria-label="next">›</button>
+  <div class="fscounter" id="fsCounter"></div>
+  <button class="fsmaplink" id="fsMapLink">⊕ Explore on the map →</button>
+</div>
+
+<!-- ============ DETAIL PANEL ============ -->
+<aside id="panel">
+  <button class="pclose" id="pclose">✕</button>
+  <div class="pbody" id="pbody"></div>
+</aside>
+
+<script>
+/* ====================== DATA · Digital Tools & Benchmarking ====================== */
+const HUB = "dtb";
+const CAT = {
+  core:    {name:"Core concepts",          color:"#2dd4bf"},
+  teoria:  {name:"Theory & equations",     color:"#a78bfa"},
+  autor:   {name:"Key authors",            color:"#fbbf24"},
+  pratica: {name:"Instruments & routines", color:"#4ade80"},
+  tec:     {name:"Digital tools & AI",     color:"#60a5fa"},
+  barreira:{name:"Failure modes",          color:"#fb923c"},
+  lacuna:  {name:"Project bridges",        color:"#f472b6"},
+};
+const SHORT = {
+  "Digital Tools & Benchmarking":"Digital Tools & Benchmarking",
+  "The digital puzzle · two firms, one platform":"Digital puzzle",
+  "VCAP triage · A, P or C?":"VCAP triage",
+  "VCAP · V = C × (A + P)":"VCAP",
+  "Philosophy eats AI":"Philosophy eats AI",
+  "Philosophical debt":"Philosophical debt",
+  "Six-condition chain":"Six conditions",
+  "Conditions 2 & 3 · C made measurable":"Conditions 2 & 3",
+  "Benchmarking · Camp's four phases":"Benchmarking method",
+  "Choosing the comparator":"Comparator",
+  "Making numbers comparable":"Comparability",
+  "V(rival) = C(weak) × (A bought + P copied) ≈ 0":"V(rival) ≈ 0",
+  "Internal stickiness":"Stickiness",
+  "Causal ambiguity":"Causal ambiguity",
+  "Interdependence · partial copies":"Partial copies",
+  "Time compression diseconomies":"Time compression",
+  "Porter's caveat · convergence":"Porter's caveat",
+  "Spear & Bowen's four rules":"Four rules",
+  "Cynefin · the domain decides the method":"Cynefin",
+  "Toyota Kata":"Kata",
+  "The coaching routine · five questions":"Five questions",
+  "Digital Tool Appraisal":"Tool Appraisal",
+  "Capability as a stock":"Capability stock",
+  "Know-why × know-how":"Know-why × how",
+  "OpEx = Design(VCAP) × Culture":"Design × Culture",
+  "The six categories of tools":"Six categories",
+  "Integration & the data layer":"Data layer",
+  "Dashboards report variation":"Dashboards",
+  "Productivity paradox":"Productivity paradox",
+  "The trap that looks like speed":"Trap of speed",
+  "Predictive → agentic":"Predictive → agentic",
+  "Benchmarking as tourism":"Benchmarking tourism",
+  "Explaining the noise":"Explaining noise",
+  "Plan where only a hypothesis is honest":"Plan vs hypothesis",
+  "Every fact has one home":"One home per fact",
+  "Change management on the licence line":"Change on the budget line",
+  "Benefits realisation · condition 4":"Benefits realisation",
+  "Gates receive target conditions":"Gates · target condition",
+  "Retrospectives that change the standard":"Retrospectives",
+  "Schrage & Kiron · 2025":"Schrage & Kiron",
+  "Cohen & Levinthal · 1990":"Cohen & Levinthal",
+  "Lippman & Rumelt · 1982":"Lippman & Rumelt",
+  "Dierickx & Cool · 1989":"Dierickx & Cool",
+  "Snowden & Boone · 2007":"Snowden & Boone",
+  "Spear & Bowen · 1999":"Spear & Bowen",
+  "Nelson & Winter · 1982":"Nelson & Winter",
+  "Serra & Kunc · 2015":"Serra & Kunc",
+  "Lapré et al. · 2000":"Lapré · 2000",
+};
+
+const NODES = [
+  // ---- core
+  {id:"dtb", label:"Digital Tools & Benchmarking", cat:"core", r:34, author:"Lima, 2026 · afternoon session",
+   desc:"The morning ended on a claim: value is not the sum of what an organisation owns and how it works, but that sum scaled by its capacity to improve. The afternoon tests the claim against the two things organisations buy when they want that capacity and cannot build it — technology, and other people's practices.",
+   bullets:["Digital platforms first: the most expensive item and the easiest to mistake for capability","AI next: the extreme case of the same error","Benchmarking last: the only one that looks like it should work","Then from diagnosis to method: Cynefin, Kata, and how the multiplier is actually built"]},
+  {id:"puzzle", label:"The digital puzzle · two firms, one platform", cat:"core", r:22, author:"Part One",
+   desc:"Two organisations in the same industry buy the same enterprise platform from the same vendor in the same year — same modules, same implementation partner, comparable budgets; one also deploys the same forecasting model. Three years later one has shorter lead times and a forecast its planners trust; the other has the platform, the licences, the dashboards, and a planning process that works around all three.",
+   bullets:["Nothing in the purchase differed. Where did the difference come from, and why was it invisible in both business cases?","Fremont with better software: the assets are more expensive, the vendors more persuasive, the arithmetic unchanged"]},
+  {id:"triage", label:"VCAP triage · A, P or C?", cat:"core", r:26, author:"Part Two",
+   desc:"Almost every platform is an A decision. Some are also a P decision. Very few are a C decision — and the error that destroys the business case is not buying A, it is booking the benefit as though C had moved.",
+   bullets:["A: licences, infrastructure, models, dashboards — could a competitor with the same budget hold this position in six months? Usually yes","P: approvals route differently, handoffs disappear, a queue is capped — would the new flow survive a change of vendor?","C: the organisation is better at improving its processes — what can it now do that does not depend on the new system?","Training people to operate the system is part of delivering the asset, not capability"]},
+  {id:"philo", label:"Philosophy eats AI", cat:"core", r:26, author:"Schrage & Kiron, 2025",
+   desc:"The binding constraint on sustainable value from AI is not technical but philosophical. Organisations invest in algorithms, data and talent while never articulating what their systems should value, how they should know, and what they should represent about reality. Unwritten assumptions do not stay harmless — they are executed, at scale, continuously.",
+   bullets:["Three pillars: teleology, epistemology, ontology","Each has an exact counterpart in the morning: winners & qualifiers, the andon, causal ambiguity"]},
+  {id:"teleology", label:"Teleology · what the system is told to want", cat:"core", r:20, author:"Schrage & Kiron, 2025",
+   desc:"The objectives and the hierarchy among them. The most critical pillar and the most frequently skipped: a single objective is easy to state; a ranking of conflicting objectives requires a decision nobody wants in writing. A forecast optimised to minimise inventory will underestimate seasonal peaks; a credit system optimised against default will exclude profitable segments.",
+   bullets:["Where you have met this: order winners and qualifiers — purposes never ranked"]},
+  {id:"epistemology", label:"Epistemology · what it may count as knowing", cat:"core", r:20, author:"Schrage & Kiron, 2025",
+   desc:"How the system acquires knowledge, validates it, and expresses certainty. Systems that confuse correlation with causation, do not quantify uncertainty, or treat historical patterns as permanent are fragile: the pandemic invalidated the data behind practically every demand model at once, and the models kept reporting confidence.",
+   bullets:["Where you have met this: the andon — a system that knows when it does not know, and escalates, signals at the source; one that always answers is aggregated reporting with a faster clock"]},
+  {id:"ontology", label:"Ontology · what it is able to see", cat:"core", r:20, author:"Schrage & Kiron, 2025 · Korzybski",
+   desc:"Which entities it recognises, which relations it models, which variables exist for it at all. Companies say they want loyal customers and hand the system recency, frequency, monetary value, churn and NPS — proxies that were never loyalty. The map is not the territory.",
+   bullets:["The question for any system: what has it been given as a stand-in for the thing you actually care about?","Where you have met this: causal ambiguity — benchmarking the indicator instead of the practice that produces it"]},
+  {id:"debt", label:"Philosophical debt", cat:"core", r:24, author:"Lima, 2026, Ch. 5 · after Schrage & Kiron",
+   desc:"Unarticulated assumptions about purpose, knowledge and reality, embedded in the models, compounding silently until the damage is hard to reverse. Technical debt is a compromise somebody made and could document; philosophical debt is the absence of the documentation.",
+   bullets:["Technical debt accumulates in A and P; philosophical debt accumulates where C should be","An organisation that cannot say what its system optimises for has no object on which to run an improvement routine","The term is the course's name for what Schrage & Kiron describe; it is not in the article"]},
+  {id:"chain", label:"Six-condition chain", cat:"core", r:28, author:"Lima, manuscript in preparation · PRISMA 2020 review",
+   desc:"Organisational value is the end of a chain, and a break at any link stops the effect however good the preceding links were. 0 Evidence base · 1 Technical capability in operation · 2 Workflow integration · 3 Translation into action · 4 Organisational outcome · 5 Net value.",
+   bullets:["Of 1,271 records screened, only 37 had both an implementation and a comparison","Where there was no effect, predictive performance stayed high wherever it was measured — accuracy does not separate success from failure","Before adoption: a checklist of conditions the organisation controls. After: locates the link where it failed","Evidence base is hospital implementations; the general organisational form is an extension, not a finding"]},
+  {id:"cond23", label:"Conditions 2 & 3 · C made measurable", cat:"core", r:22, author:"The organisation's, not the vendor's",
+   desc:"Does the output reach whoever decides, while the decision is still open? When it arrives, is there an owner able to act, with the resources that action requires? Neither is a property of the tool. They are capabilities of the organisation that bought it — and where the reviewed evidence says value is most often lost.",
+   bullets:["Adopting AI is a process-design decision, not a technology purchase"]},
+  {id:"benchmarking", label:"Benchmarking · Camp's four phases", cat:"core", r:26, author:"Camp, 1989 · Xerox",
+   desc:"Plan (what to benchmark — a process, not a department — and how the measure is defined), Collect (same definition on both sides, conditions recorded), Analyse (the size of the gap and, far more importantly, the practice that produces it), Adapt (change the practice, embed it, re-measure).",
+   bullets:["Where phase 3 is skipped: the gap is quantified and the practice never identified — the fatal one","The critique that follows is of how benchmarking is practised, not of the method"]},
+  {id:"cynefin", label:"Cynefin · the domain decides the method", cat:"core", r:26, author:"Snowden & Boone, 2007",
+   desc:"Simple: sense → categorise → respond. Complicated: sense → analyse → respond. Complex: probe → sense → respond, with safe-to-fail experiments. Chaotic: act → sense → respond. The characteristic leadership error is not a bad decision but a decision made with the method of the wrong domain.",
+   bullets:["Digital transformation is Complex: cause and effect visible only in hindsight","Applying Complicated methods there manufactures a sense of control that delays experimentation and penalises learning","Benchmarking is a Simple-and-Complicated instrument; pointed at a Complex problem it imports a confident answer to somebody else's question"]},
+  {id:"kata", label:"Toyota Kata", cat:"core", r:26, author:"Rother, 2009 · Lima, 2026, Ch. III",
+   desc:"Probe → sense → respond is a logic, not a practice; without a routine it is improvisation and decays when the urgency passes. Kata is a routine of scientific thinking applied daily: it does not prescribe what to do, it prescribes how to think.",
+   bullets:["1 Direction or challenge (1–3 years) · 2 Grasp the current condition · 3 Set the target condition (up to 3 months) · 4 Run experiments, daily","The commonest failure of lean programmes explained: the tools were the visible content, the routine was the form that sustained them","Organisations have excellent principles and poor routines — routines determine the real culture"]},
+  {id:"multiplier", label:"Building the multiplier", cat:"core", r:24, author:"Part Eight",
+   desc:"The day has been an argument by elimination: assets can be bought, processes documented and taught, benchmarking transfers the second and purchases the first — and neither moves the term that multiplies them. One question is left: how is C actually built?",
+   bullets:["Guided experimentation at the point of execution — improvement as a hypothesis, under a coach","Team learning — capability lives in coordinated routines, not individuals","Credibility — above all the promise not to convert improvement gains into redundancies; break it once and the inflow stops"]},
+  // ---- theory
+  {id:"vcap", label:"VCAP · V = C × (A + P)", cat:"teoria", r:28, author:"Lima, 2026 · after Van Mieghem & Allon, 2015",
+   desc:"A platform enters the bracket; the coefficient is bought separately, or not at all. The identity that frames both sessions: assets and processes additive and purchasable, capability a coefficient.",
+   bullets:["Where the day ends: A is bought · P is copied · C is the only term you have to build"]},
+  {id:"vrival", label:"V(rival) = C(weak) × (A bought + P copied) ≈ 0", cat:"teoria", r:24, author:"The arithmetic of failed benchmarking",
+   desc:"GM copied assets and documented processes at NUMMI for twenty years. It could not observe, let alone import, the tacit capabilities and the rules-in-use. With a weak coefficient, the bracket — however well bought and copied — returns almost nothing.",bullets:[]},
+  {id:"vc", label:"VC = (WTP − C)A − (WTP − C)B", cat:"teoria", r:22, author:"The morning's comparison form",
+   desc:"A successful imitation is exactly the event that pulls the second bracket up towards the first. Benchmarking is the one improvement activity whose logical endpoint, when both sides practise it well, is VC equal to zero for everyone in the industry.",bullets:[]},
+  {id:"stickiness", label:"Internal stickiness", cat:"teoria", r:22, author:"Szulanski, 1996 · Cohen & Levinthal, 1990",
+   desc:"Transfer of best practice stalls even between units of the same firm — no competitive barrier, shared incentives, cooperative intent. The obstacles are not motivational but of knowledge: ambiguity about why the practice works, and limited absorptive capacity in the receiving unit.",
+   bullets:["If a practice will not travel between two plants of one company, assuming it travels from a competitor through a site visit is heroic","Budget for absorption, not only acquisition: who here can receive this, and what must they already know?"]},
+  {id:"ambiguity", label:"Causal ambiguity", cat:"teoria", r:22, author:"Lippman & Rumelt, 1982 · Nelson & Winter, 1982 · Polanyi, 1966",
+   desc:"Organisational knowledge lives in routines that are largely tacit. Even the firm that owns a superior practice may not know which elements produce the result — so it cannot reliably teach it, and a rival cannot reliably copy it. GM's visitors were looking at the only things that could be looked at.",
+   bullets:["Do not ask the reference what it does. Ask what it stopped doing, and what it would never give up"]},
+  {id:"interdependence", label:"Interdependence · partial copies", cat:"teoria", r:22, author:"Rivkin, 2000",
+   desc:"Where a strategy is a system of interdependent choices, a rival who gets most elements right and a few wrong typically performs worse than one who copies nothing — the mismatched elements work against each other. The morning's complementarity argument in formal dress.",
+   bullets:["Identify the bundle, not the practice. If you cannot adopt the set, adopting one element may cost you"]},
+  {id:"timecomp", label:"Time compression diseconomies", cat:"teoria", r:22, author:"Dierickx & Cool, 1989 · Winter, 2003",
+   desc:"Building in one year what a rival built in five costs disproportionately more and often cannot be done at any price. Flows adjust instantly; stocks do not. Winter's distinction: an operational capability is how the firm earns its living today; a dynamic one is its capacity to change the operational ones — P and C, respectively.",
+   bullets:["Ask how long the reference took. Then plan for that order of magnitude, or change the objective"]},
+  {id:"porter", label:"Porter's caveat · convergence", cat:"teoria", r:20, author:"Porter, 1996",
+   desc:"Benchmarking is by construction imitative: it moves the organisation towards a frontier others already occupy. Practised well across an industry it converges competitors onto the same operating model, and competition collapses into price. Not an argument against benchmarking — an argument for being explicit about closing a gap on a qualifier versus building an order winner.",bullets:[]},
+  {id:"fourrules", label:"Spear & Bowen's four rules", cat:"teoria", r:22, author:"Spear & Bowen, 1999",
+   desc:"The decoding key — the tacit operating rules a site visit never surfaces unless the visitor arrives knowing they exist. 1 Work specified to content, sequence, timing and outcome; variance treated as a testable problem. 2 Every customer–supplier connection direct and unambiguous. 3 Every pathway pre-specified and single. 4 Every improvement a refutable hypothesis, mentored, at the lowest possible level.",
+   bullets:["Naive benchmarking sees SOPs, a ticketing platform, automated routing and retrospectives; rigorous benchmarking decodes the rule behind each"]},
+  {id:"stock", label:"Capability as a stock", cat:"teoria", r:22, author:"Dierickx & Cool, 1989",
+   desc:"Three separate questions: what flows in (deliberate improvement activity producing causal understanding and validated action together), what regulates it (psychological safety and the credibility of management's commitments), what flows out (turnover and disuse). An organisation good at improving five years ago may no longer be, and nothing on its balance sheet will say so.",bullets:[]},
+  {id:"learning", label:"Know-why × know-how", cat:"teoria", r:20, author:"Lapré et al., 2000",
+   desc:"Only about a quarter of improvement projects accelerated the reduction of waste — the ones producing know-why and know-how simultaneously. Volume of improvement projects is not the measure; projects that produce only one of the two do not accumulate anything.",bullets:[]},
+  {id:"culture", label:"OpEx = Design(VCAP) × Culture", cat:"teoria", r:24, author:"Lima, 2026 — the author's adaptation",
+   desc:"Design is the deliberate configuration — the chosen capability, the assets acquired, the processes written: presentable, certifiable, copyable. Culture is the substrate: what the organisation does when the auditor has left. The form is multiplicative to forbid an addition — excellent processes plus indifferent practice do not yield moderate excellence; they yield binders.",
+   bullets:["C is inside the design; Culture is whether the design is real","A didactic relation, not an instrument: Culture has no unit here and no score","Fremont read through it: the design changed, and so did the substrate it ran on"]},
+  // ---- digital tools & AI
+  {id:"landscape", label:"The six categories of tools", cat:"tec", r:22, author:"Part Two · examples only",
+   desc:"Collaboration & work management (visibility: A, P if the flow is redesigned) · Scheduling & portfolio (A, occasionally P) · Analytics & dashboards (A — see the caution) · Integration & the data layer (frequently the only genuine P) · Automation & workflow (P and A) · AI & assistive (A — and Parts Three and Four are about why).",
+   bullets:["The market changes faster than any syllabus; the category tells you what a tool does, the VCAP term what it is worth"]},
+  {id:"datalayer", label:"Integration & the data layer", cat:"tec", r:19, author:"The least visible category",
+   desc:"Where the authoritative version of each fact lives. The category that most often carries the real process change, and the hardest to put in a business case because it demonstrates nothing on a screen.",bullets:[]},
+  {id:"dashboards", label:"Dashboards report variation", cat:"tec", r:19, author:"A caution carried over from the morning",
+   desc:"A dashboard changes what is seen without changing what is done, unless somebody also changes the decision it feeds. It reports variation and does not distinguish the two kinds; a routine demanding an explanation for every movement treats common cause as special and makes the process worse. The routine is a P decision that never appears in the tooling business case.",bullets:[]},
+  {id:"paradox", label:"Productivity paradox", cat:"tec", r:21, author:"Decades of IT investment research",
+   desc:"The returns to technology appear where complementary organisational practices exist, and are close to nil where they do not. The pattern survived decades of changing technology because it was never about the technology — the complementarity argument of the morning, in a different literature. A platform is a practice that arrives with an invoice attached.",bullets:[]},
+  {id:"trap", label:"The trap that looks like speed", cat:"tec", r:20, author:"Little's Law does not stop at the screen",
+   desc:"A platform that makes work easier to start and does not cap what is in progress lengthens lead time rather than shortening it. The tool delivers exactly what it promised — frictionless initiation — and the organisation experiences it as delay. The tool is not underperforming; nobody capped the queue.",bullets:[]},
+  {id:"agentic", label:"Predictive → agentic", cat:"tec", r:20, author:"Why the stakes change",
+   desc:"Predictive AI analyses or recommends and a human decides. Agentic systems plan and act without a human in each step. Along all three pillars, what was documentation becomes a control surface: the hierarchy of purposes stops being a statement of intent and becomes where the boundary of autonomy is set.",
+   bullets:["Before granting autonomy: is the hierarchy of purposes documented, including conflicts? Does it know when it does not know, and escalate? Can it recognise a context it has never seen?","Without those three, autonomy is risk wearing the costume of efficiency"]},
+  // ---- instruments & routines
+  {id:"appraisal", label:"Digital Tool Appraisal", cat:"pratica", r:24, author:"Group activity · Part Seven",
+   desc:"Of the digital tooling a project depends on, what is actually being bought — and what is being left undone? Four layers in one instrument: VCAP triage, philosophical debt audit (where AI is involved), the six conditions as a maturity read, and the reference; then a six-month roadmap on three capability gaps.",
+   bullets:["Sections 1–5 in the room, twenty minutes; 6–7 as the follow-up assignment","No composite maturity score: a single figure would conceal where the chain stops","A tool can pass the pillars and fail the chain, or pass the chain and fail the pillars — the second is the more dangerous"]},
+  {id:"comparator", label:"Choosing the comparator", cat:"pratica", r:19, author:"Four kinds, in increasing payoff",
+   desc:"Internal (easiest, smallest ceiling) · Competitive (most wanted, least available, most likely to converge the industry) · Functional (same function, different industry) · Generic (structurally analogous process in an unrelated setting — Xerox fixed its warehouse by studying a catalogue retailer, and the distance is what made the practice visible).",bullets:[]},
+  {id:"comparability", label:"Making numbers comparable", cat:"pratica", r:18, author:"Most benchmarking failures are arithmetic first",
+   desc:"Define the process boundaries identically on both sides (most on-time-delivery disputes are about when the clock starts); normalise for scale and mix; record the conditions. International comparators establish whether a gap exists and roughly how large — they report distributions, not practices, and a percentile is not an objective.",bullets:[]},
+  {id:"fivequestions", label:"The coaching routine · five questions", cat:"pratica", r:20, author:"Rother, 2009",
+   desc:"What is the target condition? What is the current condition? What obstacles are in the way, and which one are you addressing now? What is your next step, and what do you expect to happen? When can we see what you learned? The point is not to solve the problem — it is to produce people who solve problems, the only form in which capability survives the person who had it.",bullets:[]},
+  {id:"dilemma", label:"The dilemma · a competitor cuts cost 30% with AI", cat:"pratica", r:21, author:"Part Six",
+   desc:"What do you do? 1 Cynefin: is this Simple — copy the technology — or Complex — discover how AI could create value specific to your customer? 2 Lean: is human contact a driver of willingness to pay in your segment? If so, automating it cuts cost and destroys revenue at once. 3 Kata: a ninety-day target condition and controlled experiments, not a programme whose benefits nobody can yet state.",
+   bullets:["The reflex to copy reproduces operational effectiveness without differentiated advantage — VC stays where it was"]},
+  {id:"roadmap", label:"Maturity read & six-month roadmap", cat:"pratica", r:19, author:"The fifth layer",
+   desc:"Read across, the six conditions are a maturity statement about the organisation: which it satisfies and can demonstrate, which it satisfies without evidence, which it has never observed. The roadmap sequences the three largest gaps by strategic value against feasibility — the output the module's assignment asks for.",bullets:[]},
+  // ---- failure modes
+  {id:"tourism", label:"Benchmarking as tourism", cat:"barreira", r:20, author:"Why the copy-paste approach guarantees mediocrity",
+   desc:"Visiting high-performing firms, photographing their tools, buying their software, pasting their org charts. GM toured NUMMI for twenty years and copied everything that could be photographed; the other plants remained unproductive and combative.",bullets:[]},
+  {id:"bookedC", label:"Booking the benefit as if C had moved", cat:"barreira", r:20, author:"The error that destroys the business case",
+   desc:"Buying A is not the mistake. Booking the benefit as though the organisation had become more capable — when it has become better equipped — is. Most honest triage answers are A, or A and P, and recording that truthfully is what makes the appraisal useful.",bullets:[]},
+  {id:"notdocumented", label:"'Not documented' · 'not measured'", cat:"barreira", r:20, author:"What to expect from the appraisal",
+   desc:"Most groups find nobody can say what the system optimises for when objectives conflict; and the six conditions are answered 'not measured' more often than 'no'. Neither is a failure of the exercise: an organisation that cannot say whether the output reached the decision in time has an unobserved implementation, not a failing one — a more tractable problem.",bullets:[]},
+  {id:"planvshyp", label:"Plan where only a hypothesis is honest", cat:"barreira", r:19, author:"Governing Complex as Complicated",
+   desc:"A gate asks for a plan; a Complex problem can only honestly supply a hypothesis. So the plan gets written anyway, and the organisation manages the plan instead of the problem — holding people to dates that were never knowledge, only politeness.",bullets:[]},
+  {id:"netflix", label:"Netflix vs Blockbuster, 2007", cat:"barreira", r:19, author:"Two readings of the same domain",
+   desc:"No best practice existed to establish whether consumers would pay for streaming. Netflix treated the problem as Complex — streaming as a free benefit for DVD subscribers (probe), observed adoption (sense), then pivoted (respond). Blockbuster treated the same question as Simple and applied historical best practice. One of the two was gone by 2010.",bullets:[]},
+  // ---- project bridges
+  {id:"br_onehome", label:"Every fact has one home", cat:"lacuna", r:19, author:"In project terms · Part Two",
+   desc:"A tool used as the working record by 40% of the people it was bought for delivers close to none of a single-source benefit, because every figure still has to be reconciled. A date, a risk or a cost that lives in two systems imposes a permanent reconciliation tax and turns the dashboard into a negotiation.",bullets:[]},
+  {id:"br_change", label:"Change management on the licence line", cat:"lacuna", r:18, author:"On Monday · Part Two",
+   desc:"List the five facts leadership asks about most; for each, write where the authoritative version lives. If any has two homes, that is the first project — and it is not a software project. Then put change management on the same budget line as licences, because the arithmetic will punish you if it is not.",bullets:[]},
+  {id:"br_benefits", label:"Benefits realisation · condition 4", cat:"lacuna", r:19, author:"Serra & Kunc, 2015",
+   desc:"Condition 4 — which indicator should move, from which source, against which baseline — is benefits realisation management, associated with project success and the execution of strategy rather than the delivery of outputs. Conditions 2 and 3 are almost never in a digital project's scope: delivered at go-live, left to change management.",bullets:[]},
+  {id:"br_gates", label:"Gates receive target conditions", cat:"lacuna", r:19, author:"On Monday · Part Six",
+   desc:"Rewrite one gate deliverable in this form: 'By day 90, this measure will read this value; here is what the last four weeks showed.' If the sponsor will not accept that in place of a plan, the problem is being governed as Complicated, and the next quarter will prove it.",bullets:[]},
+  {id:"br_retro", label:"Retrospectives that change the standard", cat:"lacuna", r:19, author:"On Monday · Part Eight",
+   desc:"The retrospective is guided experimentation if its output changes the standard, and nothing if it does not. The lessons-learned repository stores what can be written down — the part that was never the constraint. Open the last three retrospectives and look for one line in a template, checklist or gate criterion that changed because of them.",bullets:[]},
+  // ---- authors
+  {id:"schrage", label:"Schrage & Kiron · 2025", cat:"autor", r:17, author:"Philosophy eats AI · MIT Sloan Management Review",
+   desc:"The binding constraint on value from AI is philosophical: teleology, epistemology, ontology. Tacit, unarticulated principles reign where a deliberate framework should — 'teleological chaos'. The 2024 MIT IDE piece is the shorter precursor.",bullets:[]},
+  {id:"camp", label:"Camp · 1989", cat:"autor", r:15, author:"Benchmarking: The Search for Industry Best Practices",
+   desc:"The Xerox programme that made the practice general, in four movements: plan, collect, analyse, adapt.",bullets:[]},
+  {id:"szulanski", label:"Szulanski · 1996", cat:"autor", r:15, author:"Exploring internal stickiness · SMJ",
+   desc:"Best practice stalls even inside one firm, for reasons of knowledge rather than motivation: causal ambiguity and the recipient's absorptive capacity.",bullets:[]},
+  {id:"cohen", label:"Cohen & Levinthal · 1990", cat:"autor", r:15, author:"Absorptive capacity · ASQ",
+   desc:"The ability to recognise, assimilate and apply external knowledge depends on prior related knowledge — why the receiving unit matters as much as the source.",bullets:[]},
+  {id:"lippman", label:"Lippman & Rumelt · 1982", cat:"autor", r:15, author:"Uncertain imitability · Bell Journal of Economics",
+   desc:"Under causal ambiguity even the firm that owns a superior practice may not know which elements produce the result.",bullets:[]},
+  {id:"nelsonwinter", label:"Nelson & Winter · 1982", cat:"autor", r:14, author:"An Evolutionary Theory of Economic Change",
+   desc:"Organisational knowledge lives in routines that are largely tacit and that no document fully specifies — after Polanyi's tacit dimension (1966).",bullets:[]},
+  {id:"rivkin", label:"Rivkin · 2000", cat:"autor", r:15, author:"Imitation of complex strategies · Management Science",
+   desc:"A rival who copies most elements of an interdependent strategy and gets a few wrong typically performs worse than one who copies nothing.",bullets:[]},
+  {id:"dierickx", label:"Dierickx & Cool · 1989", cat:"autor", r:15, author:"Asset stock accumulation · Management Science",
+   desc:"Capability is a stock accumulated over time; time compression diseconomies mean it cannot be bought quickly at any price.",bullets:[]},
+  {id:"winter", label:"Winter · 2003", cat:"autor", r:14, author:"Understanding dynamic capabilities · SMJ",
+   desc:"Operational capabilities are how the firm earns its living today; dynamic capabilities are its capacity to change them — P and C.",bullets:[]},
+  {id:"porter_a", label:"Porter · 1996", cat:"autor", r:15, author:"What is strategy? · HBR",
+   desc:"Operational effectiveness is necessary and imitable; its gains compete away. Strategy-grade advantage must live somewhere harder to copy.",bullets:[]},
+  {id:"spearbowen", label:"Spear & Bowen · 1999", cat:"autor", r:16, author:"Decoding the DNA of the Toyota Production System · HBR",
+   desc:"Four tacit rules on how work, connections, pathways and improvement are specified — the decoding key for any site visit.",bullets:[]},
+  {id:"snowden", label:"Snowden & Boone · 2007", cat:"autor", r:15, author:"A leader's framework for decision making · HBR",
+   desc:"Cynefin: simple, complicated, complex, chaotic, and the disorder of not knowing which you are in.",bullets:[]},
+  {id:"rother", label:"Rother · 2009", cat:"autor", r:15, author:"Toyota Kata",
+   desc:"The improvement kata and the coaching kata: a routine of scientific thinking applied daily, and the five coaching questions.",bullets:[]},
+  {id:"lapre", label:"Lapré et al. · 2000", cat:"autor", r:14, author:"Behind the learning curve · Management Science",
+   desc:"Only projects producing know-why and know-how together accelerated waste reduction — the empirical core of what the inflow requires.",bullets:[]},
+  {id:"serra", label:"Serra & Kunc · 2015", cat:"autor", r:14, author:"Benefits realisation management · IJPM",
+   desc:"Benefits realisation is associated with project success and the execution of strategy rather than with the delivery of outputs — condition 4 of the chain.",bullets:[]},
+  {id:"lima", label:"Lima · 2026", cat:"autor", r:16, author:"Excelência Operacional: da Estratégia à Execução · Atena Editora",
+   desc:"VCAP (Ch. 1), Cynefin and Kata read as one system (Ch. III), philosophical debt (Ch. 5), and the author's adaptation OpEx = Design(VCAP) × Culture. The six-condition chain comes from the author's systematic review of AI implementations (manuscript in preparation).",bullets:[]},
+];
+
+const LINKS = [
+  ["dtb","puzzle","opens on"],["dtb","triage","what a platform buys"],["dtb","philo","the extreme case"],["dtb","chain","what was never measured"],["dtb","benchmarking","the one that looks like it should work"],["dtb","cynefin","the method"],["dtb","kata","the routine"],["dtb","multiplier","where the day ends"],["dtb","lima","course source"],["dtb","vcap","the identity"],
+  ["puzzle","triage","the answer"],["puzzle","vrival","same mechanism"],
+  ["triage","vcap","the identity"],["triage","landscape","by category"],["triage","bookedC","the error"],["triage","appraisal","layer 1"],["triage","paradox","complementarities"],
+  ["landscape","datalayer","the only genuine P"],["landscape","dashboards","the caution"],["landscape","agentic","AI category"],["datalayer","br_onehome","one home per fact"],["br_onehome","br_change","on Monday"],["paradox","trap","Little's Law"],["trap","br_onehome","in projects"],
+  ["philo","teleology","pillar 1"],["philo","epistemology","pillar 2"],["philo","ontology","pillar 3"],["philo","debt","accumulates as"],["philo","schrage","authors"],["philo","agentic","why the stakes change"],["philo","appraisal","layer 2"],
+  ["teleology","chain","conditions 4 & 5"],["epistemology","cond23","condition 2"],["ontology","ambiguity","same error"],["debt","vcap","where C should be"],["debt","notdocumented","the honest answer"],
+  ["chain","cond23","the organisation's"],["chain","appraisal","layer 3"],["chain","br_benefits","condition 4"],["chain","roadmap","maturity read"],["chain","lima","source"],["cond23","vcap","C made measurable"],["cond23","notdocumented","not measured"],
+  ["benchmarking","camp","author"],["benchmarking","comparator","phase 1"],["benchmarking","comparability","phase 2"],["benchmarking","tourism","how it is practised"],["benchmarking","fourrules","where to look"],["benchmarking","appraisal","layer 4"],["benchmarking","porter","the caveat"],
+  ["tourism","vrival","arithmetic"],["vrival","vcap","form"],["tourism","stickiness","evidence 1"],["tourism","ambiguity","evidence 2"],["tourism","interdependence","evidence 3"],["tourism","timecomp","evidence 4"],
+  ["stickiness","szulanski","author"],["stickiness","cohen","absorptive capacity"],["ambiguity","lippman","author"],["ambiguity","nelsonwinter","tacit routines"],["interdependence","rivkin","author"],["timecomp","dierickx","author"],["timecomp","winter","dynamic capabilities"],["porter","porter_a","author"],["porter","vc","the arithmetic"],["fourrules","spearbowen","authors"],
+  ["cynefin","snowden","authors"],["cynefin","netflix","two readings"],["cynefin","planvshyp","the failure"],["cynefin","kata","executes probe–sense–respond"],["cynefin","dilemma","step 1"],["cynefin","benchmarking","a Simple–Complicated instrument"],
+  ["kata","rother","author"],["kata","fivequestions","coaching routine"],["kata","br_gates","gates"],["kata","dilemma","step 3"],["kata","multiplier","guided experimentation"],["planvshyp","br_gates","on Monday"],
+  ["multiplier","stock","a stock, not a state"],["multiplier","learning","what the inflow requires"],["multiplier","culture","design is not practice"],["multiplier","br_retro","in projects"],["stock","dierickx","author"],["learning","lapre","author"],["culture","vcap","multiplies"],["culture","lima","author's adaptation"],
+  ["appraisal","roadmap","layers 5"],["appraisal","notdocumented","what to expect"],["br_benefits","serra","author"],["vcap","lima","Ch. 1"],
+];
+
+const TIMELINE = [
+  {yr:"1966",node:"nelsonwinter",t:"The tacit dimension",who:"Michael Polanyi",d:"We know more than we can tell. The root of why a site visit sees the tools and misses the rules."},
+  {yr:"1982",node:"lippman",t:"Uncertain imitability · evolutionary routines",who:"Lippman & Rumelt · Nelson & Winter",d:"Under causal ambiguity even the source may not know what produces its result; organisational knowledge lives in tacit routines."},
+  {yr:"1984",node:"tourism",t:"NUMMI opens — and GM starts touring",who:"GM × Toyota",d:"Twenty years of visits, photographs and copied layouts; the other plants stay the same. The puzzle the afternoon explains."},
+  {yr:"1989",node:"camp",t:"Benchmarking made general · asset stocks",who:"Camp · Dierickx & Cool",d:"The Xerox method in four phases; and, the same year, capability as a stock with time compression diseconomies."},
+  {yr:"1990",node:"cohen",t:"Absorptive capacity",who:"Cohen & Levinthal",d:"The receiving unit's prior knowledge decides whether a practice can be absorbed at all."},
+  {yr:"1996",node:"szulanski",t:"Internal stickiness · What is strategy?",who:"Szulanski · Porter",d:"Best practice stalls inside the same firm, for knowledge reasons; and operational effectiveness, being imitable, competes away."},
+  {yr:"1999",node:"spearbowen",t:"Decoding the DNA of TPS",who:"Spear & Bowen",d:"Four tacit rules — the decoding key for any benchmarking visit."},
+  {yr:"2000",node:"rivkin",t:"Imitation of complex strategies · the learning curve",who:"Rivkin · Lapré et al.",d:"Partial copies underperform no copy; only projects producing know-why and know-how together accumulate capability."},
+  {yr:"2003",node:"winter",t:"Dynamic capabilities",who:"Sidney Winter",d:"Operational capabilities earn today's living; dynamic ones change them — P and C."},
+  {yr:"2007",node:"snowden",t:"Cynefin for leaders · Netflix launches streaming",who:"Snowden & Boone",d:"The domain decides the method. The same year, Netflix probes streaming as a free benefit while Blockbuster applies best practice."},
+  {yr:"2009",node:"rother",t:"Toyota Kata",who:"Mike Rother",d:"The improvement and coaching routines that make probe–sense–respond repeatable."},
+  {yr:"2015",node:"serra",t:"Benefits realisation",who:"Serra & Kunc",d:"Associated with project success and the execution of strategy rather than the delivery of outputs — condition 4."},
+  {yr:"2025",node:"schrage",t:"Philosophy eats AI",who:"Schrage & Kiron · MIT SMR",d:"Teleology, epistemology, ontology: the binding constraint on value from AI is philosophical, not technical."},
+  {yr:"2026",node:"lima",t:"Excelência Operacional · the six-condition chain",who:"Thiago Lima",d:"VCAP, philosophical debt, Cynefin and Kata as one system, Design × Culture; and the chain from a working model to an organisational result."},
+];
+
+const CASES = [
+  {title:"Two firms, one platform", loc:"The digital puzzle · Part One", loop:"Puzzle",
+   tag:"Nothing in the purchase differed.",
+   desc:"Same enterprise platform, same vendor, same year, same implementation partner, comparable budgets — and one also deploys the same forecasting model. Three years later one has shorter lead times and a forecast its planners trust; the other has licences, dashboards and a planning process that works around all three.",
+   practice:"VCAP triage before purchase · conditions 2 and 3 in scope · a capped queue",
+   theory:"<b>V = C × (A + P)</b> — the platform enters the bracket; the coefficient is bought separately or not at all · <b>Productivity paradox</b>",
+   author:"Lima (2026)", node:"puzzle"},
+  {title:"GM tours NUMMI for twenty years", loc:"Automotive · 1984–2004", loop:"Benchmarking as tourism",
+   tag:"They copied everything that could be photographed.",
+   desc:"Kanban boards, andon lights, physical workstations replicated across GM's other plants. The plants remained unproductive and combative. GM copied assets and documented processes; it could not observe, let alone import, the tacit capabilities and the rules-in-use.",
+   practice:"Decode the rules-in-use (Spear & Bowen) · identify the bundle, not the practice · budget for absorption",
+   theory:"<b>V(rival) = C(weak) × (A bought + P copied) ≈ 0</b> · <b>Causal ambiguity</b> · <b>Interdependence</b>",
+   author:"Spear & Bowen (1999) · Rivkin (2000)", node:"tourism"},
+  {title:"Xerox and the catalogue retailer", loc:"Office equipment · 1980s", loop:"Generic benchmarking",
+   tag:"The distance is what made the practice visible.",
+   desc:"Xerox, where Robert Camp's method took shape, fixed its warehouse operations by studying a catalogue retailer rather than a competitor — a structurally analogous process in an unrelated industry. Far enough away that the practice, not the industry's conventions, was what the visitors saw.",
+   practice:"Generic comparator · process boundaries defined identically · the practice identified, not only the gap",
+   theory:"<b>Camp's four phases</b> — phase 3 done properly · <b>Choosing the comparator</b>: payoff rises with distance",
+   author:"Camp (1989)", node:"comparator"},
+  {title:"Netflix vs Blockbuster, 2007", loc:"Home entertainment · 2007–2010", loop:"Cynefin",
+   tag:"Two opposite readings of the same domain.",
+   desc:"No best practice existed to establish whether consumers would pay for streaming. Netflix operated the problem as Complex: streaming as a free benefit for DVD subscribers (probe), adoption observed (sense), the business model pivoted (respond). Blockbuster treated the question as Simple and applied historical best practice. One of the two was gone by 2010.",
+   practice:"Safe-to-fail probe · sense before committing · target condition rather than plan",
+   theory:"<b>Cynefin</b> — the characteristic error is a decision made with the method of the wrong domain · <b>Benchmarking</b> as a Simple-and-Complicated instrument",
+   author:"Snowden & Boone (2007)", node:"netflix"},
+  {title:"The demand models and the pandemic", loc:"Forecasting · 2020", loop:"Epistemology",
+   tag:"The models kept reporting confidence throughout.",
+   desc:"The pandemic invalidated the historical data behind practically every demand model in operation simultaneously. Systems that did not quantify uncertainty or treat historical patterns as provisional went on making high-confidence recommendations in conditions that no longer resembled the ones that generated the training data.",
+   practice:"A confidence threshold with escalation below it · the andon test for a model",
+   theory:"<b>Epistemology</b> — a system that knows when it does not know · <b>Condition 2</b>: does the output reach a decision while it is still open?",
+   author:"Schrage & Kiron (2025)", node:"epistemology"},
+  {title:"The sourcing system that excluded a strategy", loc:"Procurement · stylised", loop:"Teleology & ontology",
+   tag:"Adding a column does not resolve it.",
+   desc:"A sourcing system optimised for cost and delivery which, two years on, has systematically excluded suppliers in the regions the firm's own strategy prioritised. The fault is not in the model and the correction is not technical: the hierarchy of objectives was never articulated, so the trade-off was decided by default, and a technical fix simply creates a new debt in the opposite direction.",
+   practice:"Write the hierarchy of purposes down, including what to do when cost, quality and sustainability conflict",
+   theory:"<b>Philosophical debt</b> — an absence in the organisation, not a shortcut in the artefact · <b>Ontology</b>: what stands in for the thing you care about",
+   author:"Lima (2026), Ch. 5", node:"debt"},
+  {title:"Heathrow Terminal 5", loc:"Airport operations · March 2008", loop:"Conditions 2 & 3",
+   tag:"A working system, delivered into an organisation not ready to act on it.",
+   desc:"T5 opened on 27 March 2008 after years of construction praised for its project management. In the first days the baggage system and staff processes failed together — staff could not get to their positions or operate unfamiliar systems, bags piled up, and hundreds of flights were cancelled. The technology largely worked; the workflow integration and the capacity to act around it did not.",
+   practice:"Workflow integration and translation into action inside the project's scope, not left to go-live",
+   theory:"<b>Six-condition chain</b> — a break at link 2 or 3 stops the effect however good the preceding links · <b>Adopting a system is a process-design decision</b>",
+   author:"Lima (manuscript) · Serra & Kunc (2015)", node:"cond23"},
+  {title:"The analytics-enabled PMO", loc:"Project organisation · pattern", loop:"Dashboards",
+   tag:"A dashboard that changed what was seen, not what was done.",
+   desc:"A portfolio dashboard installed on top of two systems of record — the PPM platform and the spreadsheets teams actually use. Every figure has two homes, every review becomes a reconciliation, and the monthly routine demands an explanation for every movement against target. The instrument is not the problem; the routine attached to it is.",
+   practice:"One home per fact · a routine that separates signal from noise · the decision the dashboard feeds redesigned",
+   theory:"<b>Dashboards report variation</b> — the routine is a P decision never in the tooling business case · <b>Common vs special cause</b>, carried over from the morning",
+   author:"Lima (2026) · Shewhart (1931)", node:"dashboards"},
+];
+
+const APS_PDF = "slides/deck.pdf";
+const APS_IMG = Array.from({length:39},(_,i)=>`slides/s-${String(i+1).padStart(2,"0")}.jpg`);
+const APS_META = [
+  {t:"Digital Tools & Benchmarking — cover", nodes:["dtb"]},
+  {t:"Summary", nodes:["dtb"]},
+  {t:"The claim the afternoon tests", nodes:["vcap","triage"]},
+  {t:"Part One — The digital puzzle", nodes:["puzzle"]},
+  {t:"Two firms, one platform", nodes:["puzzle"]},
+  {t:"Part Two — What a digital investment actually buys", nodes:["triage"]},
+  {t:"The landscape, in six categories — examples only", nodes:["landscape","datalayer","dashboards"]},
+  {t:"The triage, applied to a tool", nodes:["triage","bookedC"]},
+  {t:"The productivity paradox — and the trap that looks like speed", nodes:["paradox","trap","br_onehome"]},
+  {t:"Part Three — Philosophy eats AI", nodes:["philo"]},
+  {t:"The binding constraint is not technical", nodes:["philo","teleology","epistemology"]},
+  {t:"The map is not the territory", nodes:["ontology"]},
+  {t:"Philosophical debt", nodes:["debt"]},
+  {t:"The question for the next steering committee", nodes:["agentic"]},
+  {t:"Part Four — From a working model to an organisational result", nodes:["chain"]},
+  {t:"Where the framework comes from", nodes:["chain","lima"]},
+  {t:"Six conditions — each necessary, none sufficient", nodes:["chain"]},
+  {t:"The two middle conditions are the organisation's", nodes:["cond23","br_benefits"]},
+  {t:"Part Five — Benchmarking: decoding the rules-in-use", nodes:["benchmarking"]},
+  {t:"The method, before the critique — Camp's four phases", nodes:["benchmarking","camp"]},
+  {t:"Choosing the comparator", nodes:["comparator","comparability"]},
+  {t:"Why the copy-paste approach guarantees mediocrity", nodes:["tourism","vrival"]},
+  {t:"Why best practice resists transfer — the evidence", nodes:["stickiness","ambiguity","interdependence","timecomp"]},
+  {t:"The strategic caveat — Porter", nodes:["porter","vc"]},
+  {t:"Spear & Bowen's four rules — the decoding key", nodes:["fourrules"]},
+  {t:"Part Six — The transformation vector", nodes:["cynefin"]},
+  {t:"The domain decides the method — Cynefin", nodes:["cynefin","planvshyp"]},
+  {t:"Netflix and Blockbuster, 2007", nodes:["netflix"]},
+  {t:"Kata — the routine that makes probe–sense–respond repeatable", nodes:["kata","fivequestions"]},
+  {t:"A competitor cuts cost by 30% with generative AI. What do you do?", nodes:["dilemma","br_gates"]},
+  {t:"Part Seven — Structured activity: the Digital Tool Appraisal", nodes:["appraisal"]},
+  {t:"Four layers, and why they are one instrument", nodes:["appraisal","roadmap"]},
+  {t:"What to expect — and where the verdict leads", nodes:["notdocumented","appraisal"]},
+  {t:"Part Eight — Building the multiplier", nodes:["multiplier"]},
+  {t:"Capability is a stock, not a state", nodes:["stock","learning"]},
+  {t:"The inflow, in a project organisation", nodes:["br_retro","multiplier"]},
+  {t:"Design is not the same as practice", nodes:["culture"]},
+  {t:"Where the day ends", nodes:["vcap","multiplier"]},
+  {t:"Closing", nodes:[]},
+];
+const NODE2SLIDE = {dtb:2, puzzle:5, triage:8, philo:11, teleology:11, epistemology:11, ontology:12, debt:13, chain:17, cond23:18, benchmarking:20, cynefin:27, kata:29, multiplier:35,
+  vcap:3, vrival:22, vc:24, stickiness:23, ambiguity:23, interdependence:23, timecomp:23, porter:24, fourrules:25, stock:35, learning:35, culture:37,
+  landscape:7, datalayer:7, dashboards:7, paradox:9, trap:9, agentic:14,
+  appraisal:32, comparator:21, comparability:21, fivequestions:29, dilemma:30, roadmap:32,
+  tourism:22, bookedC:8, notdocumented:33, planvshyp:27, netflix:28,
+  br_onehome:9, br_change:9, br_benefits:18, br_gates:30, br_retro:36,
+  schrage:11, camp:20, szulanski:23, cohen:23, lippman:23, nelsonwinter:23, rivkin:23, dierickx:23, winter:23, porter_a:24, spearbowen:25, snowden:27, rother:29, lapre:35, serra:18, lima:16};
+
+const QUADRO = [
+  {concept:"VCAP triage", cat:"teoria", author:"Lima, T. F. (2026) · Van Mieghem & Allon (2015)", paper:"Excelência Operacional, Ch. 1 (Atena Editora) · Operations Strategy (Dynamic Ideas)",
+   contribution:"V = C × (A + P): a platform enters the bracket; the coefficient is bought separately or not at all.", practice:"Before any digital purchase, record truthfully whether it changes what we own, how work flows, or what we can improve. Most honest answers are A, or A and P.", node:"triage"},
+  {concept:"Three pillars", cat:"core", author:"Schrage, M., & Kiron, D. (2025)", paper:"Philosophy eats AI. (MIT Sloan Management Review)",
+   contribution:"The binding constraint on sustainable value from AI is philosophical: what the system should want (teleology), how it may know (epistemology), what it can see (ontology).", practice:"The philosophical debt audit in the Digital Tool Appraisal — is the hierarchy of purposes written down? does it escalate below a confidence threshold? what stands in for the thing you care about?", node:"philo"},
+  {concept:"Six-condition chain", cat:"core", author:"Lima, T. F. (manuscript in preparation)", paper:"AI adoption and organisational outcomes: a systematic review and an analytical framework. (PRISMA 2020)",
+   contribution:"Of 1,271 records only 37 measured an implementation against a comparison; where there was no effect, model accuracy stayed high. Value is the end of a chain: evidence, technical capability, workflow integration, translation into action, outcome, net value.", practice:"Before adoption, a checklist of conditions the organisation controls; after, the link where it failed. Conditions 2 and 3 are C made measurable.", node:"chain"},
+  {concept:"Benchmarking method", cat:"pratica", author:"Camp, R. C. (1989)", paper:"Benchmarking: The Search for Industry Best Practices That Lead to Superior Performance. (ASQC Quality Press)",
+   contribution:"Plan, collect, analyse, adapt — with the practice that produces the gap identified, not only the gap quantified.", practice:"Choose the comparator for comparability, define boundaries identically, record conditions; treat a survey percentile as a datum, never as an objective.", node:"benchmarking"},
+  {concept:"Internal stickiness", cat:"teoria", author:"Szulanski, G. (1996) · Cohen & Levinthal (1990)", paper:"Exploring internal stickiness (SMJ) · Absorptive capacity (ASQ)",
+   contribution:"Transfer of best practice stalls even inside the same firm, for reasons of knowledge — causal ambiguity and the recipient's absorptive capacity — not motivation.", practice:"Budget for absorption, not only acquisition: who here can receive this, and what must they already know?", node:"stickiness"},
+  {concept:"Causal ambiguity", cat:"teoria", author:"Lippman, S. A., & Rumelt, R. P. (1982)", paper:"Uncertain imitability. (Bell Journal of Economics)",
+   contribution:"Even the firm that owns a superior practice may not know which elements produce the result, so it cannot reliably teach it and a rival cannot reliably copy it.", practice:"Do not ask the reference what it does. Ask what it stopped doing, and what it would never give up.", node:"ambiguity"},
+  {concept:"Interdependence", cat:"teoria", author:"Rivkin, J. W. (2000)", paper:"Imitation of complex strategies. (Management Science)",
+   contribution:"A rival who copies most elements of an interdependent strategy and gets a few wrong typically performs worse than one who copies nothing.", practice:"Identify the bundle, not the practice; if the set cannot be adopted, one element may cost you.", node:"interdependence"},
+  {concept:"Time compression", cat:"teoria", author:"Dierickx, I., & Cool, K. (1989) · Winter, S. G. (2003)", paper:"Asset stock accumulation (Management Science) · Understanding dynamic capabilities (SMJ)",
+   contribution:"Capability is a stock; building in one year what took five costs disproportionately more or cannot be done at any price. Dynamic capabilities change operational ones — C and P.", practice:"Ask how long the reference took; plan for that order of magnitude or change the objective.", node:"timecomp"},
+  {concept:"Porter's caveat", cat:"teoria", author:"Porter, M. E. (1996)", paper:"What is strategy? (Harvard Business Review)",
+   contribution:"Operational effectiveness is imitable; benchmarking practised well by everyone converges an industry onto one operating model and competition collapses into price.", practice:"Be explicit: closing a gap on a qualifier (convergence is the goal) or building an order winner (imitation is the wrong instrument).", node:"porter"},
+  {concept:"Four rules", cat:"teoria", author:"Spear, S., & Bowen, H. K. (1999)", paper:"Decoding the DNA of the Toyota Production System. (Harvard Business Review)",
+   contribution:"Work, connections, pathways and improvement specified by tacit rules; every improvement a refutable hypothesis at the lowest possible level.", practice:"Arrive at the site visit knowing the rules exist; decode the rule behind the SOP, the ticketing platform, the routing and the retrospective.", node:"fourrules"},
+  {concept:"Cynefin", cat:"core", author:"Snowden, D. J., & Boone, M. E. (2007)", paper:"A leader's framework for decision making. (Harvard Business Review)",
+   contribution:"Different contexts require different styles of decision; the characteristic error is the method of the wrong domain. Digital transformation is Complex: probe, sense, respond.", practice:"Classify before deciding; where the problem is Complex, replace the plan with a target condition and safe-to-fail experiments.", node:"cynefin"},
+  {concept:"Kata", cat:"core", author:"Rother, M. (2009)", paper:"Toyota Kata: Managing People for Improvement, Adaptiveness and Superior Results. (McGraw-Hill)",
+   contribution:"A daily routine of scientific thinking — direction, current condition, target condition, experiments — and a coaching routine of five questions.", practice:"Ninety-day target conditions; the five questions at every coaching cycle; people who solve problems as the output.", node:"kata"},
+  {concept:"Benefits realisation", cat:"lacuna", author:"Serra, C. E. M., & Kunc, M. (2015)", paper:"Benefits realisation management and its influence on project success. (IJPM)",
+   contribution:"Benefits realisation is associated with project success and the execution of strategy rather than the delivery of outputs.", practice:"Condition 4 of the chain: which indicator, from which source, against which baseline — inside the project's scope.", node:"br_benefits"},
+  {concept:"Know-why × know-how", cat:"teoria", author:"Lapré, M. A., Mukherjee, A. S., & Van Wassenhove, L. N. (2000)", paper:"Behind the learning curve. (Management Science)",
+   contribution:"Only improvement projects producing conceptual and operational learning together accelerate waste reduction.", practice:"Retrospectives count only if their output changes a template, a checklist or a gate criterion.", node:"learning"},
+  {concept:"Design × Culture", cat:"teoria", author:"Lima, T. F. (2026)", paper:"Excelência Operacional — the author's adaptation",
+   contribution:"Operational Excellence = Design(VCAP) × Culture: a designed configuration multiplied by whether it is lived. Multiplicative to forbid the claim that a strong design offsets a weak practice.", practice:"A reminder, not a measurement: where the standard is followed when inconvenient and the andon pulled when embarrassing, the design is real.", node:"culture"},
+];
+
+const REFS_SEM = [
+  {apa:"Lima, T. F. (2026). <i>Excelência operacional: Da estratégia à execução</i>. Atena Editora. Open access.", doi:"https://atenaeditora.com.br/catalogo/ebook/excelencia-operacional-da-estrategia-a-execucao-operacoes-servicos-melhoria-continua-e-inteligencia-artificial"},
+  {apa:"Lima, T. F. (manuscript in preparation). Artificial intelligence adoption and organisational outcomes: A systematic review and an analytical framework for appraising implementations. Source of the six-condition chain.", doi:""},
+  {apa:"Project Management Institute. (2021). <i>Pulse of the profession: The power of digital PM</i>. PMI.", doi:""},
+  {apa:"Schrage, M., & Kiron, D. (2024). <i>Is philosophy the next LLM training frontier?</i> MIT Initiative on the Digital Economy.", doi:"https://ide.mit.edu/insights/is-philosophy-the-next-llm-training-frontier"},
+  {apa:"Schrage, M., & Kiron, D. (2025, January 16). Philosophy eats AI. <i>MIT Sloan Management Review</i>, reprint 66311.", doi:"https://sloanreview.mit.edu/article/philosophy-eats-ai/"},
+  {apa:"Serra, C. E. M., & Kunc, M. (2015). Benefits realisation management and its influence on project success and on the execution of business strategies. <i>International Journal of Project Management, 33</i>(1), 53–66.", doi:"https://doi.org/10.1016/j.ijproman.2014.03.011"},
+  {apa:"Veillard, J., Champagne, F., Klazinga, N., Kazandjian, V., Arah, O. A., & Guisset, A.-L. (2005). A performance assessment framework for hospitals: The WHO Regional Office for Europe PATH project. <i>International Journal for Quality in Health Care, 17</i>(6), 487–496.", doi:"https://doi.org/10.1093/intqhc/mzi072"},
+  {apa:"Westerman, G., Bonnet, D., & McAfee, A. (2014). <i>Leading digital: Turning technology into business transformation</i>. Harvard Business Review Press.", doi:""},
+  {apa:"Whyte, J., Stasis, A., & Lindkvist, C. (2016). Managing information and control in digitalised project environments. <i>Production Planning & Control, 27</i>(16), 1345–1354.", doi:""},
+];
+const REFS_REV = [
+  {apa:"Camp, R. C. (1989). <i>Benchmarking: The search for industry best practices that lead to superior performance</i>. ASQC Quality Press.", doi:""},
+  {apa:"Cohen, W. M., & Levinthal, D. A. (1990). Absorptive capacity: A new perspective on learning and innovation. <i>Administrative Science Quarterly, 35</i>(1), 128–152.", doi:"https://doi.org/10.2307/2393553"},
+  {apa:"Dierickx, I., & Cool, K. (1989). Asset stock accumulation and sustainability of competitive advantage. <i>Management Science, 35</i>(12), 1504–1511.", doi:"https://doi.org/10.1287/mnsc.35.12.1504"},
+  {apa:"Lippman, S. A., & Rumelt, R. P. (1982). Uncertain imitability: An analysis of interfirm differences in efficiency under competition. <i>Bell Journal of Economics, 13</i>(2), 418–438.", doi:"https://doi.org/10.2307/3003464"},
+  {apa:"Nelson, R. R., & Winter, S. G. (1982). <i>An evolutionary theory of economic change</i>. Harvard University Press.", doi:""},
+  {apa:"Polanyi, M. (1966). <i>The tacit dimension</i>. Doubleday.", doi:""},
+  {apa:"Porter, M. E. (1996). What is strategy? <i>Harvard Business Review, 74</i>(6), 61–78.", doi:""},
+  {apa:"Rivkin, J. W. (2000). Imitation of complex strategies. <i>Management Science, 46</i>(6), 824–844.", doi:"https://doi.org/10.1287/mnsc.46.6.824.11940"},
+  {apa:"Spear, S., & Bowen, H. K. (1999). Decoding the DNA of the Toyota Production System. <i>Harvard Business Review, 77</i>(5), 96–106.", doi:""},
+  {apa:"Szulanski, G. (1996). Exploring internal stickiness: Impediments to the transfer of best practice within the firm. <i>Strategic Management Journal, 17</i>(S2), 27–43.", doi:"https://doi.org/10.1002/smj.4250171105"},
+  {apa:"Winter, S. G. (2003). Understanding dynamic capabilities. <i>Strategic Management Journal, 24</i>(10), 991–995.", doi:"https://doi.org/10.1002/smj.318"},
+];
+const REFS_RAIZES = [
+  {apa:"Argote, L., & Epple, D. (1990). Learning curves in manufacturing. <i>Science, 247</i>(4945), 920–924.", doi:"https://doi.org/10.1126/science.247.4945.920"},
+  {apa:"Lapré, M. A., Mukherjee, A. S., & Van Wassenhove, L. N. (2000). Behind the learning curve: Linking learning activities to waste reduction. <i>Management Science, 46</i>(5), 597–611.", doi:"https://doi.org/10.1287/mnsc.46.5.597.12049"},
+  {apa:"Lima, T. F. (manuscript in preparation). <i>O que não se copia: Capacidade, práticas e desempenho em operações</i>.", doi:""},
+  {apa:"Little, J. D. C. (1961). A proof for the queuing formula L = λW. <i>Operations Research, 9</i>(3), 383–387.", doi:"https://doi.org/10.1287/opre.9.3.383"},
+  {apa:"Rother, M. (2009). <i>Toyota Kata: Managing people for improvement, adaptiveness and superior results</i>. McGraw-Hill.", doi:""},
+  {apa:"Snowden, D. J., & Boone, M. E. (2007). A leader's framework for decision making. <i>Harvard Business Review, 85</i>(11), 68–76.", doi:""},
+  {apa:"Van Mieghem, J. A., & Allon, G. (2015). <i>Operations strategy: Principles and practice</i> (2nd ed.). Dynamic Ideas.", doi:""},
+];
+
+/* ====================== MAP RENDER (force layout) ====================== */
+const NS="http://www.w3.org/2000/svg";
+const stage=document.getElementById("stage");
+const nodeById=Object.fromEntries(NODES.map(n=>[n.id,n]));
+const adj={}; NODES.forEach(n=>adj[n.id]=new Set());
+LINKS.forEach(([a,b])=>{adj[a].add(b);adj[b].add(a)});
+
+let W=innerWidth,H=innerHeight-62;
+// initial positions: spread on a circle, core in middle
+NODES.forEach((n,i)=>{
+  if(n.id==="cscm"){n.x=W/2;n.y=H/2;}
+  else{const a=i/NODES.length*Math.PI*2; n.x=W/2+Math.cos(a)*Math.min(W,H)*0.34; n.y=H/2+Math.sin(a)*Math.min(W,H)*0.34;}
+  n.vx=0;n.vy=0;
+});
+
+const vp=document.createElementNS(NS,"g"); stage.appendChild(vp);
+const linkLayer=document.createElementNS(NS,"g"); vp.appendChild(linkLayer);
+const nodeLayer=document.createElementNS(NS,"g"); vp.appendChild(nodeLayer);
+
+const linkEls=LINKS.map(l=>{
+  const el=document.createElementNS(NS,"line"); el.setAttribute("class","link");
+  el._a=l[0];el._b=l[1]; linkLayer.appendChild(el); return el;
+});
+const nodeEls=NODES.map(n=>{
+  const g=document.createElementNS(NS,"g"); g.setAttribute("class","node"); g._n=n;
+  const c=document.createElementNS(NS,"circle");
+  c.setAttribute("r",n.r); c.setAttribute("fill",CAT[n.cat].color);
+  const t=document.createElementNS(NS,"text");
+  t.setAttribute("text-anchor","middle"); t.setAttribute("dy",n.r+15);
+  t.textContent=SHORT[n.label]||n.label;
+  g.appendChild(c); g.appendChild(t); nodeLayer.appendChild(g);
+  n._g=g;n._c=c;n._t=t; return g;
+});
+
+/* physics */
+let alpha=1;
+function tick(){
+  if(alpha<0.005){return;}
+  alpha*=0.985;
+  const k=alpha;
+  // repulsion
+  for(let i=0;i<NODES.length;i++){
+    const a=NODES[i];
+    for(let j=i+1;j<NODES.length;j++){
+      const b=NODES[j];
+      let dx=a.x-b.x,dy=a.y-b.y; let d2=dx*dx+dy*dy||0.01;
+      let d=Math.sqrt(d2);
+      const minD=a.r+b.r+72;
+      let force=(22000)/d2;
+      if(d<minD) force+= (minD-d)*1.2/d; // collision
+      const fx=dx/d*force*k, fy=dy/d*force*k;
+      if(!a._fix){a.vx+=fx;a.vy+=fy;}
+      if(!b._fix){b.vx-=fx;b.vy-=fy;}
+    }
+  }
+  // springs
+  LINKS.forEach(l=>{
+    const a=nodeById[l[0]],b=nodeById[l[1]];
+    let dx=b.x-a.x,dy=b.y-a.y; let d=Math.sqrt(dx*dx+dy*dy)||0.01;
+    const target=a.id===HUB||b.id===HUB?210:185;
+    const f=(d-target)*0.045*k;
+    const fx=dx/d*f,fy=dy/d*f;
+    if(!a._fix){a.vx+=fx;a.vy+=fy;}
+    if(!b._fix){b.vx-=fx;b.vy-=fy;}
+  });
+  // gravity to center
+  NODES.forEach(n=>{
+    if(n._fix)return;
+    n.vx+=(W/2-n.x)*0.0035*k; n.vy+=(H/2-n.y)*0.0035*k;
+    n.vx*=0.86; n.vy*=0.86;
+    n.x+=n.vx; n.y+=n.vy;
+  });
+  render();
+  requestAnimationFrame(tick);
+}
+function render(){
+  linkEls.forEach(el=>{
+    const a=nodeById[el._a],b=nodeById[el._b];
+    el.setAttribute("x1",a.x);el.setAttribute("y1",a.y);
+    el.setAttribute("x2",b.x);el.setAttribute("y2",b.y);
+  });
+  nodeEls.forEach(g=>{const n=g._n; g.setAttribute("transform",`translate(${n.x},${n.y})`)});
+}
+function reheat(v){alpha=Math.max(alpha,v||0.6);requestAnimationFrame(tick);}
+
+/* zoom & pan */
+let tx=0,ty=0,scale=1;
+function applyVP(){vp.setAttribute("transform",`translate(${tx},${ty}) scale(${scale})`)}
+stage.addEventListener("wheel",e=>{
+  e.preventDefault();
+  const r=stage.getBoundingClientRect();
+  const mx=e.clientX-r.left,my=e.clientY-r.top;
+  const ds=e.deltaY<0?1.12:0.893;
+  const ns=Math.min(2.6,Math.max(0.3,scale*ds));
+  tx=mx-(mx-tx)*(ns/scale); ty=my-(my-ty)*(ns/scale); scale=ns; applyVP();
+},{passive:false});
+
+let panning=false,sx,sy,stx,sty,dragNode=null,downNode=null,downX=0,downY=0;
+stage.addEventListener("pointerdown",e=>{
+  downX=e.clientX;downY=e.clientY;
+  const g=e.target.closest(".node");
+  if(g){downNode=g._n;dragNode=g._n;dragNode._fix=true;stage.setPointerCapture(e.pointerId);}
+  else{downNode=null;panning=true;stage.classList.add("grabbing");sx=e.clientX;sy=e.clientY;stx=tx;sty=ty;stage.setPointerCapture(e.pointerId);}
+});
+stage.addEventListener("pointermove",e=>{
+  if(dragNode){
+    const r=stage.getBoundingClientRect();
+    dragNode.x=(e.clientX-r.left-tx)/scale; dragNode.y=(e.clientY-r.top-ty)/scale;
+    reheat(0.25); render();
+  }else if(panning){tx=stx+(e.clientX-sx);ty=sty+(e.clientY-sy);applyVP();}
+});
+stage.addEventListener("pointerup",e=>{
+  const movedDist=Math.hypot(e.clientX-downX,e.clientY-downY);
+  if(dragNode){dragNode._fix=false;}
+  if(movedDist<6){                       // clique (não arraste): abre nó ou fecha painel
+    if(downNode) openPanel(downNode.id);
+    else closePanel();
+  }
+  if(dragNode){dragNode=null;reheat(0.3);}
+  downNode=null;panning=false;stage.classList.remove("grabbing");
+});
+
+/* interactions: hover + click */
+let selected=null;
+function neighbors(id){const s=new Set(adj[id]);s.add(id);return s;}
+function highlight(id){
+  const set=id?neighbors(id):null;
+  nodeEls.forEach(g=>{
+    const on=!set||set.has(g._n.id);
+    g.classList.toggle("dim",!on && !legendOff.has(g._n.cat)?!on:!on);
+  });
+  linkEls.forEach(el=>{
+    const hot=set&&(set.has(el._a)&&set.has(el._b)&&(el._a===id||el._b===id));
+    const on=!set||(set.has(el._a)&&set.has(el._b));
+    el.classList.toggle("hot",!!hot);
+    el.classList.toggle("dim",set&&!on);
+  });
+}
+nodeEls.forEach(g=>{
+  g.addEventListener("pointerenter",()=>{if(!selected)highlight(g._n.id)});
+  g.addEventListener("pointerleave",()=>{if(!selected)highlight(null)});
+});
+
+/* legend filter */
+const legendOff=new Set();
+const li=document.getElementById("legendItems");
+Object.entries(CAT).forEach(([k,v])=>{
+  const d=document.createElement("div"); d.className="item"; d.dataset.cat=k;
+  d.innerHTML=`<span class="swatch" style="background:${v.color}"></span>${v.name}`;
+  d.addEventListener("click",()=>{
+    if(legendOff.has(k)){legendOff.delete(k);d.classList.remove("off");}
+    else{legendOff.add(k);d.classList.add("off");}
+    applyFilter();
+  });
+  li.appendChild(d);
+});
+function applyFilter(){
+  nodeEls.forEach(g=>{g.style.display=legendOff.has(g._n.cat)?"none":""});
+  linkEls.forEach(el=>{
+    const off=legendOff.has(nodeById[el._a].cat)||legendOff.has(nodeById[el._b].cat);
+    el.style.display=off?"none":"";
+  });
+}
+
+/* zoom buttons */
+function zoomBy(f){
+  const ns=Math.min(2.6,Math.max(0.3,scale*f));
+  tx=W/2-(W/2-tx)*(ns/scale);ty=H/2-(H/2-ty)*(ns/scale);scale=ns;applyVP();
+}
+document.getElementById("zin").onclick=()=>zoomBy(1.2);
+document.getElementById("zout").onclick=()=>zoomBy(0.83);
+document.getElementById("zfit").onclick=()=>{tx=0;ty=0;scale=1;applyVP();reheat(0.5)};
+
+/* ====================== DETAIL PANEL ====================== */
+const panel=document.getElementById("panel");
+const pbody=document.getElementById("pbody");
+function openPanel(id){
+  const n=nodeById[id]; selected=id;
+  nodeEls.forEach(g=>g.classList.toggle("sel",g._n.id===id));
+  highlight(id);
+  const col=CAT[n.cat].color;
+  const rels=[...adj[id]].map(rid=>{const m=nodeById[rid];
+    return `<span class="relnode" data-go="${rid}"><span class="sw" style="background:${CAT[m.cat].color}"></span>${m.label}</span>`}).join("");
+  pbody.innerHTML=`
+    <div class="ptag" style="background:${hex2rgba(col,.16)};color:${col}">${CAT[n.cat].name}</div>
+    <h2>${n.label}</h2>
+    <div class="pauthor" style="color:${col}">${n.author||""}</div>
+    <div class="pdesc">${n.desc}</div>
+    ${n.bullets&&n.bullets.length?`<div class="pblock"><h5>In detail</h5><ul>${n.bullets.map(b=>`<li>${b}</li>`).join("")}</ul></div>`:""}
+    <div class="pblock"><h5>Connections (${adj[id].size})</h5>${rels}</div>
+    ${NODE2SLIDE[id]?`<button class="gomap" data-slide="${NODE2SLIDE[id]}">▣ See slide ${NODE2SLIDE[id]} of the deck →</button>`:""}
+  `;
+  pbody.querySelectorAll("[data-go]").forEach(el=>el.onclick=()=>openPanel(el.dataset.go));
+  const sb=pbody.querySelector("[data-slide]"); if(sb)sb.onclick=()=>{closePanel();switchView("apresentacao");setTimeout(()=>apsGo(+sb.dataset.slide-1),60)};
+  panel.classList.add("open");
+  document.documentElement.style.setProperty("--panelw","380px");
+}
+function closePanel(){
+  panel.classList.remove("open");selected=null;
+  nodeEls.forEach(g=>g.classList.remove("sel"));highlight(null);
+  document.documentElement.style.setProperty("--panelw","0px");
+}
+document.getElementById("pclose").onclick=closePanel;
+function hex2rgba(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`}
+
+/* ====================== TIMELINE / TABLE / SYNTH ====================== */
+document.getElementById("tl").innerHTML=TIMELINE.map(t=>`
+  <div class="tlitem" data-go="${t.node}">
+    <div class="yr">${t.yr}</div><div class="nub"></div>
+    <div class="tlcard"><h3>${t.t}</h3><div class="who">${t.who}</div><p>${t.d}</p></div>
+  </div>`).join("");
+document.querySelectorAll("#tl .tlitem").forEach(el=>el.onclick=()=>{switchView("map");setTimeout(()=>openPanel(el.dataset.go),60)});
+
+// ---- Casos práticos
+document.getElementById("caseList").innerHTML=CASES.map(c=>`
+  <div class="case">
+    <div class="ch"><h3>${c.title}</h3><span class="loc">${c.loc}</span></div>
+    ${c.loop?'<span class="loop-chip">'+c.loop+'</span>':''}
+    <div class="tag">${c.tag}</div>
+    <p class="cd">${c.desc}</p>
+    <div class="row"><span class="k">Practice</span><span class="v">${c.practice}</span></div>
+    <div class="row"><span class="k">Theory</span><span class="v">${c.theory}</span></div>
+    <div class="row"><span class="k">Author</span><span class="v"><b>${c.author}</b></span></div>
+    <button class="gomap" data-go="${c.node}">See on the map →</button>
+  </div>`).join("");
+document.querySelectorAll("#caseList .gomap").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+
+// ---- Quadro teórico
+document.getElementById("quadroRows").innerHTML=QUADRO.map(q=>{
+  const col=CAT[q.cat].color;
+  return `<div class="qrow">
+    <div class="qhead">
+      <span class="qdotwrap"><span class="qdot" style="background:${col}"></span>
+        <span class="qtip"><span class="c" style="color:${col}">${q.concept}</span><h6>Main contribution</h6>${q.contribution}</span>
+      </span>
+      <span class="qconcept" style="background:${hex2rgba(col,.16)};color:${col}">${q.concept}</span>
+      <span class="qauthor">${q.author}</span>
+    </div>
+    <div class="qpaper">${q.paper}</div>
+    <div class="qbody">
+      <div class="qcol"><h6>Main contribution</h6><p>${q.contribution}</p></div>
+      <div class="qcol"><h6>Associated practice</h6><p>${q.practice}</p></div>
+    </div>
+    <button class="gomap" data-go="${q.node}">See on the map →</button>
+  </div>`;
+}).join("");
+document.querySelectorAll("#quadroRows .gomap").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+
+// ---- Referências
+function refRow(r){
+  const txt=(r.apa+' '+(r.doi||'')).replace(/<[^>]+>/g,'').replace(/"/g,'').toLowerCase();
+  const link=r.doi?` <a href="${r.doi}" target="_blank" rel="noopener">${r.doi}</a>`:"";
+  return `<div class="refrow" data-txt="${txt}">${r.apa}${link}</div>`;
+}
+document.getElementById("refsSem").innerHTML=REFS_SEM.map(refRow).join("");
+document.getElementById("refsRev").innerHTML=REFS_REV.map(refRow).join("");
+document.getElementById("refsRaizes").innerHTML=REFS_RAIZES.map(refRow).join("");
+document.getElementById("refCount").textContent=REFS_SEM.length+REFS_REV.length+REFS_RAIZES.length;
+document.getElementById("refFilter").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".refrow").forEach(r=>r.classList.toggle("hide",q&&!r.dataset.txt.includes(q)));
+});
+
+/* ====================== NAV / SEARCH ====================== */
+function switchView(v){
+  document.querySelectorAll(".view").forEach(s=>s.classList.toggle("active",s.id==="view-"+v));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  document.getElementById("ctrls").style.display=v==="map"?"flex":"none";
+  if(v==="map"){W=innerWidth;H=innerHeight-62;reheat(0.4);}
+}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+
+const search=document.getElementById("search");
+search.addEventListener("input",()=>{
+  const q=search.value.trim().toLowerCase();
+  if(!q){nodeEls.forEach(g=>g.classList.remove("dim"));return;}
+  let hit=null;
+  nodeEls.forEach(g=>{
+    const m=(g._n.label+" "+g._n.author+" "+g._n.desc).toLowerCase().includes(q);
+    g.classList.toggle("dim",!m); if(m&&!hit)hit=g._n;
+  });
+});
+search.addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    const q=search.value.trim().toLowerCase();
+    const hit=NODES.find(n=>(n.label+" "+n.author).toLowerCase().includes(q));
+    if(hit){switchView("map");openPanel(hit.id);
+      tx=W/2-hit.x*scale;ty=H/2-hit.y*scale;applyVP();}
+  }
+});
+
+/* ---- Intro / Como usar ---- */
+const intro=document.getElementById("intro");
+function showIntro(){intro.classList.add("show")}
+function hideIntro(){intro.classList.remove("show")}
+document.getElementById("introClose").onclick=hideIntro;
+document.getElementById("introGo").onclick=hideIntro;
+document.getElementById("helpBtn").onclick=showIntro;
+intro.addEventListener("click",e=>{if(e.target===intro)hideIntro()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")hideIntro()});
+showIntro(); // opens the guide on load
+
+/* ---- Apresentação: viewer ---- */
+const fs=document.getElementById("fs");
+let apsI=0;
+document.getElementById("apsThumbs").innerHTML=APS_IMG.map((src,i)=>`<div class="apsthumb" data-i="${i}"><img src="${src}" alt="slide ${i+1}"></div>`).join("");
+document.getElementById("apsDownload").href=APS_PDF;
+function apsRender(){
+  const m=APS_META[apsI];
+  document.getElementById("apsImg").src=APS_IMG[apsI];
+  document.getElementById("apsCounter").textContent=(apsI+1)+" / "+APS_IMG.length;
+  document.getElementById("apsTitle").textContent=m.t;
+  document.getElementById("apsChips").innerHTML=(m.nodes||[]).map(id=>{const n=nodeById[id];
+    return n?`<span class="apschip" data-go="${id}"><span class="sw" style="background:${CAT[n.cat].color}"></span>${n.label}</span>`:""}).join("");
+  document.querySelectorAll("#apsChips .apschip").forEach(c=>c.onclick=()=>{switchView("map");setTimeout(()=>openPanel(c.dataset.go),60)});
+  document.querySelectorAll("#apsThumbs .apsthumb").forEach((t,i)=>t.classList.toggle("active",i===apsI));
+  const mlTxt=(m.nodes&&m.nodes.length)?"⊕ Explore on the map →":"⊕ See references →";
+  document.getElementById("apsMapLink").textContent=mlTxt;
+  document.getElementById("fsMapLink").textContent=mlTxt;
+  if(fs.classList.contains("show")){document.getElementById("fsImg").src=APS_IMG[apsI];document.getElementById("fsCounter").textContent=(apsI+1)+" / "+APS_IMG.length;}
+}
+function apsToMap(){const m=APS_META[apsI];
+  if(m.nodes&&m.nodes.length){switchView("map");setTimeout(()=>openPanel(m.nodes[0]),60);}
+  else{switchView("refs");}}
+function apsGo(i){apsI=(i+APS_IMG.length)%APS_IMG.length;apsRender();}
+document.querySelectorAll("#apsThumbs .apsthumb").forEach(t=>t.onclick=()=>apsGo(+t.dataset.i));
+document.getElementById("apsPrev").onclick=()=>apsGo(apsI-1);
+document.getElementById("apsNext").onclick=()=>apsGo(apsI+1);
+document.getElementById("apsImg").onclick=apsToMap;
+document.getElementById("apsMapLink").onclick=apsToMap;
+document.querySelectorAll("#view-diagrama [data-go]").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+document.querySelectorAll("#view-agenda [data-go]").forEach(b=>b.onclick=()=>{switchView("map");setTimeout(()=>openPanel(b.dataset.go),60)});
+document.getElementById("apsFull").onclick=()=>{fs.classList.add("show");apsRender();};
+document.getElementById("fsClose").onclick=()=>fs.classList.remove("show");
+document.getElementById("fsMapLink").onclick=()=>{fs.classList.remove("show");apsToMap();};
+document.getElementById("fsPrev").onclick=()=>apsGo(apsI-1);
+document.getElementById("fsNext").onclick=()=>apsGo(apsI+1);
+document.addEventListener("keydown",e=>{
+  if(fs.classList.contains("show")){
+    if(e.key==="ArrowRight")apsGo(apsI+1); else if(e.key==="ArrowLeft")apsGo(apsI-1); else if(e.key==="Escape")fs.classList.remove("show");
+    return;
+  }
+  if(document.getElementById("view-apresentacao").classList.contains("active")){
+    if(e.key==="ArrowRight")apsGo(apsI+1); else if(e.key==="ArrowLeft")apsGo(apsI-1);
+  }
+});
+apsRender();
+
+window.addEventListener("resize",()=>{W=innerWidth;H=innerHeight-62;});
+applyVP(); render(); reheat(1);
+
+</script>
+</body>
+</html>

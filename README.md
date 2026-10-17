@@ -23,6 +23,15 @@ Printable versions live in [`pdf/`](pdf) — cover, contents with page numbers, 
 
 Both group activities are fillable in the page: the canvases are forms, answers persist in the browser as a group types, and a button exports the completed canvas as Markdown for the Execution Optimization Challenge. Everything runs client-side; nothing is transmitted.
 
+## Interactive concept maps
+
+Each session also has a web app built on the engine of [Cadeia Circular](https://tflsixsigma-png.github.io/Cadeia-Circular-Prof-Thiago-Lima/): slides, a force-directed concept map, the figures as vector SVG, a timeline, the theory frame, cases, Monday actions and references, all cross-linked.
+
+| Session | App |
+|---|---|
+| Lean Six Sigma &amp; Continuous Improvement | [`concept-map-session-1/`](concept-map-session-1/) |
+| Digital Tools &amp; Benchmarking | [`concept-map-session-2/`](concept-map-session-2/) |
+
 ## Further reading
 
 | Text | Status |
